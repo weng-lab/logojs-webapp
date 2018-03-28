@@ -1,6 +1,6 @@
 export const logLikelihood = ( alphabetSize ) => ( r ) => {
     let sum = 0.0;
-    r.map( x => { sum += x === 0 ? 0 : x * Math.log2(x * alphabetSize); } );
+    r.map( x => ( sum += x === 0 ? 0 : x * Math.log2(x * alphabetSize) ) );
     return r.map( x => x * sum );
 };
 
@@ -16,5 +16,5 @@ export const xrange = ( n ) => (
 );
 
 export const onehot = ( l ) => ( x ) => (
-    xrange(l).map( (_, i) => i == x ? 1 : 0 )
+    xrange(l).map( (_, i) => i === x ? 1 : 0 )
 );

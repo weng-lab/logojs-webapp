@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { logLikelihood, sortedIndices } from '../../common/utils';
 import GlyphStack from './glyphstack';
@@ -7,10 +6,6 @@ import XAxis from './xaxis';
 import YAxis from './yaxis';
 
 class Logo extends React.Component {
-
-    constructor(props) {
-	super(props);
-    }
     
     _position(lv, transform, width, height, key) {
 	let indices = sortedIndices(lv); // tallest on top
