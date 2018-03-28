@@ -11,7 +11,7 @@ class XAxis extends React.Component {
 	        <g transform="rotate(-90)">
 		    {numbers.map( n => (
 		      <text x="0" y={this.props.glyphWidth * (n + 0.66)}
-		        textAnchor="end">{n + 1}</text>
+		        textAnchor="end" key={n}>{n + 1}</text>
 		    ))}
 		</g>
    	    </g>
