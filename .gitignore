@@ -1,3 +1,6 @@
 \#*\#
 *~
-/node_modules
+/package/node_modules
+/package/lib
+/webapp/node_modules
+/webapp/build
