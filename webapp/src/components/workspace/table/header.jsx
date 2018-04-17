@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TableHeader = () => (
-    <tr style={{ height: "5%", background: "#e0e0e0" }}>
+    <tr style={{ height: "5%", background: "#d0d0d0" }}>
       <td width={3} className="maintable">
         <h1>Settings</h1>
       </td>

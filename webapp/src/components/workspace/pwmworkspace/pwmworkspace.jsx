@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon, Menu } from 'semantic-ui-react';
 import { DNALogo, RNALogo, AALogo, Logo,
-	 INFORMATION_CONTENT } from 'logoz-alpha';
+	 INFORMATION_CONTENT } from 'logos-to-go-react';
 
 import { SVGDownloadButton, SVGCopyButton } from '../../svgdownload/index';
 import { TableHeader, TableContent } from '../table/index';

@@ -4356,8 +4356,9 @@ loglevel@^1.4.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.6.1.tgz#e0fc95133b6ef276cdc8887cdaf24aa6f156f8fa"
 
-logoz-alpha@../package/:
-  version "0.0.1"
+logos-to-go-react@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/logos-to-go-react/-/logos-to-go-react-0.0.2.tgz#7539e7236614c52531222f0f2b1405df45a518cc"
   dependencies:
     babel-cli "^6.26.0"
     babel-preset-react "^6.24.1"
