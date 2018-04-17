@@ -5,8 +5,8 @@ body {
 }
 
 .maintable {
-    border: 2px solid;
-    border-color: #d0d0d0;
+    border: 1px solid;
+    border-color: rgb(34,36,38);
     border-collapse: collapse;
 }
 
