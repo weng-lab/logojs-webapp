@@ -4,3 +4,4 @@
 /package/lib
 /webapp/node_modules
 /webapp/build
+/webapp/yarn-error.log
