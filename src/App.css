@@ -26,3 +26,28 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.ui.inverted.header {
+    margin-top: 3em;
+    font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
+
+.ui.inverted.header h1 {
+    font-size: 48pt;
+    font-weight: 400;
+}
+
+.ui.inverted.header h2 {
+    font-size: 21pt;
+    font-weight: 400;
+}
+
+.ui.vertical.stripe {
+    padding-top: 6em;
+    padding-bottom: 6em;
+}
+
+.ui.vertical.stripe p {
+    font-size: 14pt;
+}
