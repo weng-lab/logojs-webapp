@@ -1,13 +1,12 @@
 import React from 'react';
-import { Icon, Menu } from 'semantic-ui-react';
 import { DNALogo, RNALogo, AALogo, Logo,
 	 INFORMATION_CONTENT } from 'logos-to-go-react';
 
-import { SVGDownloadButton, SVGCopyButton } from '../../svgdownload/index';
-import { TableHeader, TableContent } from '../table/index';
+import { TableHeader, TableContent, MainTable } from '../table/index';
 import { PWMEditor } from '../../editor/index';
 import { isArrayOfArrays } from '../../../common/utils';
 
+import PWMLogoMenu from './menu';
 import PWMSettingsPanel from './settings';
 import ContentPanel from './content';
 
@@ -88,49 +87,34 @@ class PWMWorkspace extends React.Component {
     render() {
 	let C = LOGOCOMPONENTS[this.state.logocomponent].component;
 	return (
-            <table className="maintable">
-	      <tbody>
-		<TableHeader />
-		<TableContent dimensions={{ height: 95, width: 82 }}>
-		  <PWMSettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
-				    onScaleChange={this._scaleChange.bind(this)}
-				    onStartPosChange={this._startPosChange.bind(this)}
-				    onModeChange={this._modeChange.bind(this)}
-				    logodefault={this.state.logocomponent}
-				    scaledefault={this.state.scale}
-				    startposdefault={this.state.startpos}
-				    modedefault={this.state.mode} />
-		  <ContentPanel topheight={50}>
-		    <PWMEditor
-		      height="100%" width="100%"
-		      text={this.state.pwm.text}
-		      onChange={this._pwmChange.bind(this)} />
-		    <React.Fragment>
-		      <Menu style={{ width: '100%', background: '#d0d0d0' }}>
-			<Menu.Item link>
-			  <SVGDownloadButton svgref={this.logo} filename="logo.svg">
-			    <Icon className="download" style={{ color: "#000", fontSize: "16pt" }} /><br />
-			    <div style={{ fontSize: '10pt', color: "#000" }}>Save</div>
-			  </SVGDownloadButton>
-			</Menu.Item>
-			<Menu.Item link>
-			  <SVGCopyButton svgref={this.logo}>
-			    <Icon className="code" style={{ color: "#000", fontSize: "16pt" }} /><br />
-			    <div style={{ fontSize: '10pt', color: "#000" }}>Copy SVG</div>
-			  </SVGCopyButton>
-			</Menu.Item>
-		      </Menu>
-		      <div ref={ c => { this.logo = c; } }>
-			<C pwm={this.state.pwm.parsed}
-			   scale={this.state.scale}
-			   startpos={this.state.startpos}
-			   mode={this.state.mode} />
-		      </div>
-		    </React.Fragment>
-		  </ContentPanel>
-		</TableContent>
-	      </tbody>
-	    </table>
+	    <MainTable>
+	      <TableHeader />
+	      <TableContent dimensions={{ height: 95, width: 82 }}>
+		<PWMSettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
+				  onScaleChange={this._scaleChange.bind(this)}
+				  onStartPosChange={this._startPosChange.bind(this)}
+				  onModeChange={this._modeChange.bind(this)}
+				  logodefault={this.state.logocomponent}
+				  scaledefault={this.state.scale}
+				  startposdefault={this.state.startpos}
+				  modedefault={this.state.mode} />
+		<ContentPanel topheight={50}>
+		  <PWMEditor
+		    height="100%" width="100%"
+		    text={this.state.pwm.text}
+		    onChange={this._pwmChange.bind(this)} />
+		  <React.Fragment>
+		    <PWMLogoMenu svgref={this.logo} />
+		    <div ref={ c => { this.logo = c; } }>
+		      <C pwm={this.state.pwm.parsed}
+			 scale={this.state.scale}
+			 startpos={this.state.startpos}
+			 mode={this.state.mode} />
+		    </div>
+		  </React.Fragment>
+		</ContentPanel>
+	      </TableContent>
+	    </MainTable>
 	);
     }
     
