@@ -19,3 +19,7 @@ td.maintable {
     border-bottom: 0px;
     border-top: 0px;
 }
+
+.maintable td {
+    text-align: center;
+}
