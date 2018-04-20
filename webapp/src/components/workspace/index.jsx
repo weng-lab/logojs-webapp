@@ -1,2 +1,4 @@
 import { PWMWorkspace } from './pwmworkspace/index';
-export { PWMWorkspace };
+import { FastaWorkspace } from './fastaworkspace/index';
+
+export { PWMWorkspace, FastaWorkspace };
