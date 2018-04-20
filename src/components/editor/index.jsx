@@ -1,2 +1,4 @@
 import PWMEditor from './pwmeditor';
-export { PWMEditor };
+import FastaEditor from './fastaeditor';
+
+export { PWMEditor, FastaEditor };
