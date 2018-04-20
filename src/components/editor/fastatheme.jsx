@@ -19,8 +19,6 @@ export const CUSTOMIZABLE_CLASS_NAMES = [
     ".ace_entity.ace_name.ace_type",
     ".ace_entity.ace_name.ace_tag",
     ".ace_entity.ace_name.ace_section",
-    ".ace_entity.ace_otehr.inherited-class",
-    ".ace_entity.ace_other.attribute-name",
     ".ace_invalid.ace_illegal",
     ".ace_invalid.ace_deprecated",
     ".ace_keyword.ace_control",
