@@ -5,3 +5,6 @@
 /webapp/node_modules
 /webapp/build
 /webapp/yarn-error.log
+/server/node_modules
+/server/lib
+/server/yarn-error.log

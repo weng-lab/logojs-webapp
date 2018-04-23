@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ContentPanel = ({ children, topheight }) => (
+const ContentPanel = ({ children, topheight, tref }) => (
     <table style={{ height: "100%", width: "100%" }}>
       <tbody>
 	<tr style={{ height: topheight + '%' }}>

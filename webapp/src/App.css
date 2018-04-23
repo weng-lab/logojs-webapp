@@ -51,3 +51,7 @@
 .ui.vertical.stripe p {
     font-size: 14pt;
 }
+
+.ui.page.modals.transition.visible {
+    display: flex !important;
+}

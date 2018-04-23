@@ -4,7 +4,7 @@ import { DNALogo, RNALogo, AALogo, Logo,
 
 import { TableHeader, TableContent, MainTable } from '../table/index';
 import { PWMEditor } from '../../editor/index';
-import { isArrayOfArrays } from '../../../common/utils';
+import { apiUrls, isArrayOfArrays, TYPEID } from '../../../common/utils';
 
 import PWMLogoMenu from './menu';
 import PWMSettingsPanel from './settings';
@@ -23,6 +23,7 @@ class PWMWorkspace extends React.Component {
 
     constructor(props) {
 	super(props);
+	this.logoPostUrl = apiUrls(props.config.apiserver).logo("");
 	this.state = {
 	    pwm: {
 		text: DEFAULTPWM,
@@ -43,6 +44,16 @@ class PWMWorkspace extends React.Component {
 	});
     }
 
+    _format_logoinfo(state) {
+	return {
+	    pwm: state.pwm.parsed,
+	    typeid: TYPEID[state.logocomponent],
+	    scale: state.scale,
+	    isfreq: state.mode !== INFORMATION_CONTENT,
+	    firstbase: state.startpos
+	};
+    }
+    
     _pwmChange(pwm) {
 	if (isArrayOfArrays(pwm.parsed)) {
 	    this.setState({
@@ -104,7 +115,8 @@ class PWMWorkspace extends React.Component {
 		    text={this.state.pwm.text}
 		    onChange={this._pwmChange.bind(this)} />
 		  <React.Fragment>
-		    <PWMLogoMenu svgref={this.logo} />
+		    <PWMLogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
+				 logoinfo={this._format_logoinfo(this.state)} />
 		    <div ref={ c => { this.logo = c; } }>
 		      <C pwm={this.state.pwm.parsed}
 			 scale={this.state.scale}
