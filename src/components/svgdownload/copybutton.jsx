@@ -1,17 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { copySVG } from './utils';
-
-const _docopy = ( svgref ) => {
-    const svgroot = ReactDOM.findDOMNode(svgref).getElementsByTagName('svg')[0];
-    if (!svgroot) { return; }
-    copySVG(svgroot);
-};
+import { _svgdata } from './utils';
 
 const SVGCopyButton = ({ children, svgref }) => (
-    <a onClick={ () => _docopy(svgref) }>
-      {children}
-    </a>
+    <CopyToClipboard text={_svgdata(ReactDOM.findDOMNode(svgref))}>
+      <a>
+	{children}
+      </a>
+    </CopyToClipboard>
 );
 export default SVGCopyButton;

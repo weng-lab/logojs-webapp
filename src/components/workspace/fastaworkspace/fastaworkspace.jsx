@@ -5,6 +5,7 @@ import { DNALogo, RNALogo, AALogo, Logo, DNAGlyphmap, RNAGlyphmap, AAGlyphmap,
 
 import { TableHeader, TableContent, MainTable } from '../table/index';
 import { FastaEditor } from '../../editor/index';
+import { apiUrls, TYPEID } from '../../../common/utils';
 
 import FastaLogoMenu from './menu';
 import FastaSettingsPanel from './settings';
@@ -61,9 +62,8 @@ const GLYPHMAPS = {
 };
 
 const fastaToPWM = (fasta, lookupmap) => {
-    let nsymbols = Object.keys(lookupmap).length;
     let sequences = [];
-    fasta.split(os.EOL).map( x => x[0] != '>' && x !== '' && sequences.push(x) );
+    fasta.split(os.EOL).map( x => x[0] !== '>' && x !== '' && sequences.push(x) );
     if (sequences.length === 0) { return [[0.0]]; }
     let minlength = Math.min(...sequences.map(x => x.length));
     let pwm = xrange(minlength).map(i => Object.keys(lookupmap).map(x => 0));
@@ -78,6 +78,7 @@ class FastaWorkspace extends React.Component {
 
     constructor(props) {
 	super(props);
+	this.logoPostUrl = apiUrls(props.config.apiserver).logo("");
 	this.state = {
 	    fasta: DNADEFAULT,
 	    logocomponent: "DNA",
@@ -95,6 +96,16 @@ class FastaWorkspace extends React.Component {
 	});
     }
 
+    _format_logoinfo(state, pwm) {
+	return {
+	    pwm,
+	    typeid: TYPEID[state.logocomponent],
+	    scale: state.scale,
+	    isfreq: state.mode !== INFORMATION_CONTENT,
+	    firstbase: state.startpos
+	};
+    }
+    
     _fastaChange(fasta) {
 	this.setState({
 	    fasta: fasta.toUpperCase()
@@ -128,6 +139,7 @@ class FastaWorkspace extends React.Component {
     
     render() {
 	let C = LOGOCOMPONENTS[this.state.logocomponent].component;
+	let pwm = fastaToPWM(this.state.fasta, GLYPHMAPS[this.state.logocomponent].lookup);
 	return (
 	    <MainTable>
 	      <TableHeader />
@@ -147,9 +159,10 @@ class FastaWorkspace extends React.Component {
 		    onChange={this._fastaChange.bind(this)}
 		    id="fastamain" glyphmap={GLYPHMAPS[this.state.logocomponent].raw} />
 		  <React.Fragment>
-		    <FastaLogoMenu svgref={this.logo} />
+		    <FastaLogoMenu svgref={this.logo} logoinfo={this._format_logoinfo(this.state, pwm)}
+				   apiurl={this.logoPostUrl} />
 		    <div ref={ c => { this.logo = c; } }>
-                      <C pwm={fastaToPWM(this.state.fasta, GLYPHMAPS[this.state.logocomponent].lookup)}
+                      <C pwm={pwm}
 			 scale={this.state.scale}
 			 startpos={this.state.startpos}
 			 mode={this.state.mode} />

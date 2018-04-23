@@ -1,5 +1,4 @@
 import React from 'react';
-import ace from 'brace';
 import AceEditor from 'react-ace';
 
 import applyFastaTheme from './fastatheme';

@@ -1,5 +1,9 @@
+import { textToClipboard } from '../../common/utils';
+
 /* extract SVG data from DOM node, remove formatting from source code */
-const _svgdata = _svg => {
+export const _svgdata = _svgnode => {
+    if (!_svgnode) { return ''; }
+    let _svg = _svgnode.getElementsByTagName('svg')[0];
     let svg = _svg.cloneNode(true);
     svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     let preface = '<?xml version="1.0" standalone="no"?>';
@@ -17,11 +21,6 @@ export const downloadSVG = (_svg, filename) => {
     document.body.removeChild(downloadLink);
 };
 
-export const copySVG = (_svg) => {
-    const el = document.createElement('textarea');
-    el.value = _svgdata(_svg);
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-};
+export const copySVG = (_svg) => (
+    textToClipboard(_svgdata(_svg))
+);
