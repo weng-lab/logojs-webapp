@@ -1,46 +1,12 @@
 import React from 'react';
-import { Icon, Menu } from 'semantic-ui-react';
+import { Menu } from 'semantic-ui-react';
 
-import { AJAXPOSTButton } from '../../ajaxbutton/index';
-import PermalinkModal from './permalinkmodal';
+import { CopyTextButton } from './copytextmodal/index';
 
-class PermalinkButton extends React.Component {
-
-    constructor(props) {
-	super(props);
-	this.state = {
-	    modalshown: false,
-	    permalinkurl: ''
-	};
-    }
-
-    _modalClosed() {
-	this.setState({
-	    modalshown: false
-	});
-    }
-
-    _showModal(data) {
-	this.setState({
-	    permalinkurl: this.props.url + data.uuid,
-	    modalshown: true
-	});
-    }
-
-    render() {
-	return (
-	    <Menu.Item link>
-	      <AJAXPOSTButton url={this.props.url} options={ { body: JSON.stringify(this.props.logoinfo) } }
-			      success={ data => data.json().then(this._showModal.bind(this)) }
- 	                      error={console.log}>
-		<Icon className="linkify" style={{ color: "#000", fontSize: this.props.iconsize }} /><br />
-		<div style={{ fontSize: this.props.labelsize, color: "#000" }}>{this.props.labeltext}</div>
-		<PermalinkModal open={this.state.modalshown} data={this.state.permalinkurl}
-				onClose={this._modalClosed.bind(this)} />
-	      </AJAXPOSTButton>
-	    </Menu.Item>
-	);
-    }
-    
-};
+const PermalinkButton = ({ url, logoinfo, labelsize, labeltext, iconsize }) => (
+    <CopyTextButton url={url} options={ { body: JSON.stringify(logoinfo) } }
+		    dataformatter={ data => url + data.uuid } iconclass="linkify"
+                    iconsize={iconsize} labelsize={labelsize} labeltext={labeltext}
+                    modalheader="Permalink generated!" />
+);
 export default PermalinkButton;

@@ -5,7 +5,7 @@ import { SVGCopyButton } from '../../svgdownload/index';
 const LogoSVGCopyButton = ({ svgref, iconsize, labelsize, labeltext }) => (
     <Menu.Item link>
       <SVGCopyButton svgref={svgref}>
-	<Icon className="code" style={{ color: "#000", fontSize: iconsize }} /><br />
+	<Icon className="copy outline" style={{ color: "#000", fontSize: iconsize }} /><br />
 	<div style={{ fontSize: labelsize, color: "#000" }}>{labeltext}</div>
       </SVGCopyButton>
     </Menu.Item>
