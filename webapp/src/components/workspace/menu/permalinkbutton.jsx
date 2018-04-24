@@ -35,8 +35,8 @@ class PermalinkButton extends React.Component {
  	                      error={console.log}>
 		<Icon className="linkify" style={{ color: "#000", fontSize: this.props.iconsize }} /><br />
 		<div style={{ fontSize: this.props.labelsize, color: "#000" }}>{this.props.labeltext}</div>
-		<PermalinkModal mountnode={this.props.modalmount} open={this.state.modalshown}
-				data={this.state.permalinkurl} onClose={this._modalClosed.bind(this)} />
+		<PermalinkModal open={this.state.modalshown} data={this.state.permalinkurl}
+				onClose={this._modalClosed.bind(this)} />
 	      </AJAXPOSTButton>
 	    </Menu.Item>
 	);

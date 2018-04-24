@@ -17,7 +17,7 @@ const post = dbconn => (req, res, next) => {
     )))
 };
 
-module.exports = dbconn => ({
+export default dbconn => ({
     get: get(dbconn),
     post: post(dbconn)
 });

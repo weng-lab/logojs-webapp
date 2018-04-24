@@ -4,6 +4,6 @@ const insert = dbconn => (body, success, error) => (
                + "RETURNING uuid", body).then(success).catch(error)
 );
 
-module.exports = dbconn => ({
+export default dbconn => ({
     insert: insert(dbconn)
 });

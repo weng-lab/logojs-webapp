@@ -1,7 +1,7 @@
-let pwm = require('./pwm/index');
-let logo = require('./logo/index');
+import pwm from './pwm/index';
+import logo from './logo/index';
 
-module.exports = dbconn => ({
+export default dbconn => ({
     pwm: pwm(dbconn),
     logo: logo(dbconn)
 });

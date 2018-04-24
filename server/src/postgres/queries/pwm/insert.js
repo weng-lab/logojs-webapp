@@ -8,7 +8,7 @@ const insertReturningId = dbconn => (body, success, error) => (
 	.then(success).catch(error)
 );
 
-module.exports = dbconn => ({
+export default dbconn => ({
     insertReturningUuid: insertReturningUuid(dbconn),
     insertReturningId: insertReturningId(dbconn)
 });

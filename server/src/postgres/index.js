@@ -1,5 +1,5 @@
-let Postgres = require('pg-promise');
-let Queries = require('./queries/index');
+import Postgres from 'pg-promise';
+import Queries from './queries/index';
 
 class DBCONN {
 
@@ -10,6 +10,4 @@ class DBCONN {
     
 };
 
-module.exports = {
-    DBCONN: DBCONN
-};
+export default DBCONN;

@@ -17,6 +17,6 @@ const selectByUuid = dbconn => (uuid, success, error) => (
 	.then(data => success(_format_result(data))).catch(error)
 );
 
-module.exports = dbconn => ({
+export default dbconn => ({
     selectByUuid: selectByUuid(dbconn)
 });

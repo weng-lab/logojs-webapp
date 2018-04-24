@@ -18,7 +18,7 @@ const selectIdByPwm = dbconn => (body, success, error) => (
 	.then(success).catch(error)
 );
 
-module.exports = dbconn => ({
+export default dbconn => ({
     selectByUuid: selectByUuid(dbconn),
     selectById: selectById(dbconn),
     selectUuidByPwm: selectUuidByPwm(dbconn),

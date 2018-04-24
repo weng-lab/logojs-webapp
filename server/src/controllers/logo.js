@@ -1,13 +1,13 @@
-let rdserver = require('react-dom/server');
-let logos = require('logos-to-go-react');
+import rdserver from 'react-dom/server';
+import { DNALogo, RNALogo, AALogo, FREQUENCY, INFORMATION_CONTENT } from 'logos-to-go-react';
 
 const LogoComponent = [
-    logos.DNALogo, logos.RNALogo, logos.AALogo
+    DNALogo, RNALogo, AALogo
 ];
 
 let _render_svg = data => rdserver.renderToString(LogoComponent[data.typeid]({
     startpos: data.firstbase,
-    mode: data.isfrequency ? logos.FREQUENCY : logos.INFORMATION_CONTENT,
+    mode: data.isfrequency ? FREQUENCY : INFORMATION_CONTENT,
     pwm: data.pwm.pwm,
     scale: data.scale
 })).replace(/[<]svg/g, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"');
@@ -33,7 +33,7 @@ const post = dbconn => (req, res, next) => {
     ));
 };
 
-module.exports = dbconn => ({
+export default dbconn => ({
     get: get(dbconn),
     post: post(dbconn)
 });

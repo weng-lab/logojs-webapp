@@ -1,6 +1,6 @@
-let select = require('./select');
-let insert = require('./insert');
+import select from './select';
+import insert from './insert';
 
-module.exports = dbconn => Object.assign(
+export default dbconn => Object.assign(
     select(dbconn), insert(dbconn)
 );

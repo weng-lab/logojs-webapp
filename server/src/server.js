@@ -1,6 +1,6 @@
-let Express = require('express');
-let BodyParser = require('body-parser');
-let Postgres = require('./postgres/index');
+import Express from 'express';
+import BodyParser from 'body-parser';
+import DBCONN from './postgres/index';
 let Controllers = require('./controllers/index');
 
 /* configure app to use bodyParser for parsing JSON from POST */
@@ -14,7 +14,7 @@ app.use( (req, res, next) => {
 } );
 
 /* establish database connection */
-let dbconn = new Postgres.DBCONN("postgres://logos_usr@localhost:5432/logos_to_go", {});
+let dbconn = new DBCONN("postgres://logos_usr@localhost:5432/logos_to_go", {});
 let controllers = Controllers(dbconn);
 
 /* configure routes for the API */
