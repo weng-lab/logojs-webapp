@@ -7,7 +7,7 @@ const ITEMSTYLE = {
     labelsize: "10pt",
 };
 
-const FastaLogoMenu = ({ svgref, apiurl, logoinfo, modalmount }) => (
+const FastaLogoMenu = ({ svgref, apiurl, logoinfo }) => (
     <LogoMenu width="100%" background="#d0d0d0">
       <LogoSVGDownloadButton {...ITEMSTYLE}
 			     labeltext="Save" svgref={svgref}
@@ -15,8 +15,7 @@ const FastaLogoMenu = ({ svgref, apiurl, logoinfo, modalmount }) => (
       <LogoSVGCopyButton {...ITEMSTYLE}
 			 labeltext="Copy SVG" svgref={svgref} />
       <PermalinkButton {...ITEMSTYLE} labeltext="permalink"
-		       url={apiurl} logoinfo={logoinfo}
-		       modalmount={modalmount} />
+		       url={apiurl} logoinfo={logoinfo} />
     </LogoMenu>
 );
 export default FastaLogoMenu;

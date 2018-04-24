@@ -3,7 +3,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Modal, Button, Input, Icon } from 'semantic-ui-react';
 
 const CopyButton = ({ onClick }) => (
-    <Button><Icon className="copy outline" onClick={onClick} />Copy</Button>
+    <Button onClick={onClick}><Icon className="copy outline" />Copy</Button>
 );
 
 const CopiedButton = () => (

@@ -13,7 +13,7 @@ const defaultoptions = {
 };
 
 const AJAXPOSTButton = ({ url, success, error, children, options }) => (
-    <a onClick={ () => fetch(url, {...defaultoptions, ...options}).then(success, error) }>
+    <a onClick={ () => fetch(url, {...defaultoptions, ...options}).then(success).catch(error) }>
       {children}
     </a>
 );
