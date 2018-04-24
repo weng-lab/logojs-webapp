@@ -1,5 +1,5 @@
 import React from 'react';
-import { LogoMenu, LogoSVGDownloadButton,
+import { LogoMenu, LogoSVGDownloadButton, EmbedButton,
 	 LogoSVGCopyButton, PermalinkButton } from '../menu/index';
 
 const ITEMSTYLE = {
@@ -16,6 +16,8 @@ const FastaLogoMenu = ({ svgref, apiurl, logoinfo }) => (
 			 labeltext="Copy SVG" svgref={svgref} />
       <PermalinkButton {...ITEMSTYLE} labeltext="permalink"
 		       url={apiurl} logoinfo={logoinfo} />
+      <EmbedButton {...ITEMSTYLE} labeltext="embed"
+		   url={apiurl} logoinfo={logoinfo} />
     </LogoMenu>
 );
 export default FastaLogoMenu;

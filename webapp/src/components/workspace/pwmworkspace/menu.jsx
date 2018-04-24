@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LogoMenu, LogoSVGDownloadButton,
+import { LogoMenu, LogoSVGDownloadButton, EmbedButton,
 	 LogoSVGCopyButton, PermalinkButton } from '../menu/index';
 
 const ITEMSTYLE = {
@@ -8,7 +8,7 @@ const ITEMSTYLE = {
     labelsize: "10pt",
 };
 
-const PWMLogoMenu = ({ svgref, apiurl, logoinfo, modalmount }) => (
+const PWMLogoMenu = ({ svgref, apiurl, logoinfo }) => (
     <LogoMenu width="100%" background="#d0d0d0">
       <LogoSVGDownloadButton {...ITEMSTYLE}
 			     labeltext="Save" svgref={svgref}
@@ -16,8 +16,9 @@ const PWMLogoMenu = ({ svgref, apiurl, logoinfo, modalmount }) => (
       <LogoSVGCopyButton {...ITEMSTYLE}
 			 labeltext="Copy SVG" svgref={svgref} />
       <PermalinkButton {...ITEMSTYLE} labeltext="permalink"
-		       url={apiurl} logoinfo={logoinfo}
-		       modalmount={modalmount} />
+		       url={apiurl} logoinfo={logoinfo} />
+      <EmbedButton {...ITEMSTYLE} labeltext="embed"
+		   url={apiurl} logoinfo={logoinfo} />
     </LogoMenu>
 );
 export default PWMLogoMenu;
