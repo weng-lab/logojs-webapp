@@ -8,3 +8,5 @@
 /server/node_modules
 /server/lib
 /server/yarn-error.log
+/server/npm-debug.log
+/swarm/secrets

@@ -1,5 +1,5 @@
-let pwmcontroller = require('./pwm');
-let logocontroller = require('./logo');
+import pwmcontroller from './pwm';
+import logocontroller from './logo';
 
 module.exports = dbconn => ({
     pwm: pwmcontroller(dbconn),

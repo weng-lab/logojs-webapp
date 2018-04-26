@@ -1,10 +1,11 @@
 import Postgres from 'pg-promise';
 import Queries from './queries/index';
+import { parse } from 'pg-connection-string';
 
 class DBCONN {
 
-    constructor(host, options) {
-	this.dbconn = Postgres(options)(host);
+    constructor(cxnstring) {
+	this.dbconn = Postgres(null)(parse(cxnstring));
 	this.queries = Queries(this.dbconn);
     }
     

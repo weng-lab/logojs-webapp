@@ -14,8 +14,10 @@ app.use( (req, res, next) => {
 } );
 
 /* establish database connection */
-let dbconn = new DBCONN("postgres://logos_usr@localhost:5432/logos_to_go", {});
+let dbhost = (process.argv.length >= 3 ? process.argv[2] : "postgres://logos_usr@localhost:5432/logos_to_go");
+let dbconn = new DBCONN(dbhost);
 let controllers = Controllers(dbconn);
+console.log("server.js$: connected to database " + dbhost);
 
 /* configure routes for the API */
 const router = Express.Router();

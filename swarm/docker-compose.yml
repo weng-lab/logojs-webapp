@@ -1,0 +1,52 @@
+version: '3.3'
+
+secrets:
+    psql_password:
+        file: ./secrets/psql_password.txt
+    pgpass:
+        file: ./secrets/.pgpass
+
+services:
+    pglogos:
+      image: postgres:10.1
+      secrets:
+        - psql_password
+      environment:
+        POSTGRES_PASSWORD_FILE: /run/secrets/psql_password
+      volumes:
+        - /local-data/pglogos:/var/lib/postgresql/data
+        - ./postgres/setup:/docker-entrypoint-initdb.d/
+      networks:
+        - prod
+
+    restserver:
+      image: logos-to-go-server:0.0.11
+      networks:
+        - prod
+        - proxy
+      ports:
+        - "8000:8000"
+      secrets:
+        - source: pgpass
+          mode: 0600
+      volumes:
+        - ./secrets/.pgpass:/root/.pgpass
+      depends_on:
+        - pglogos
+      command:
+        postgres://postgres@pglogos:5432/postgres
+
+    webapp:
+      image: logos-to-go-webapp:0.0.1
+      networks:
+        - prod
+        - proxy
+      ports:
+        - "3000:3000"
+      depends_on:
+        - restserver
+
+networks:
+  proxy:
+    driver: overlay
+  prod:
