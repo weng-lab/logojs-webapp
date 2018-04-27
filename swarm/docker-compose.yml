@@ -20,7 +20,7 @@ services:
         - prod
 
     restserver:
-      image: logos-to-go-server:0.0.11
+      image: logos-to-go-server:0.0.21
       networks:
         - prod
         - proxy
@@ -37,12 +37,12 @@ services:
         postgres://postgres@pglogos:5432/postgres
 
     webapp:
-      image: logos-to-go-webapp:0.0.1
+      image: logos-to-go-webapp:0.0.4
       networks:
         - prod
         - proxy
       ports:
-        - "3000:3000"
+        - "5000:5000"
       depends_on:
         - restserver
 
