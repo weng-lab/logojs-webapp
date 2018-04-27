@@ -7,8 +7,10 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 # install and cache app dependencies
 WORKDIR /usr/src/app
 COPY package.json ./
-RUN yarn
 COPY . .
+RUN yarn
+RUN yarn build
+RUN yarn global add serve
 
 # start app
-CMD ["yarn", "start"]
+CMD ["serve", "-s", "build"]
