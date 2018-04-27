@@ -19,6 +19,12 @@ class CopyTextModal extends React.Component {
 	};
     }
 
+    componentWillReceiveProps() {
+	this.setState({
+	    copied: false
+	});
+    }
+    
     _setCopied(text, success) {
 	this.setState({
 	    copied: success
