@@ -1,3 +1,17 @@
+import namedColors from 'color-name-list';
+import { AAGlyphmap, RNAGlyphmap } from 'logos-to-go-react';
+
+export const glyphsymbols = () => {
+    let retval = {};
+    AAGlyphmap.map( v => (
+	retval[v.regex] = v
+    ));
+    RNAGlyphmap.map( v => (
+	retval[v.regex] = v
+    ));
+    return retval;
+};
+
 export const TYPEID = {
     DNA: 0,
     RNA: 1,
@@ -27,3 +41,26 @@ export const textToClipboard = text => {
     document.execCommand('copy');
     document.body.removeChild(el);
 };
+
+export const colorNameFromHex = hex => {
+    let color = namedColors.find(x => x.hex === hex);
+    return (color && color.name) || hex;
+};
+
+export const hexFromColorName = name => {
+    if (name[0] === '#') { return name; }
+    if (!name || !name[0]) { return "#888888"; }
+    let color = namedColors.find(x => x.name === name[0].toUpperCase() + name.substring(1));
+    return (color && color.hex) || "#888888";
+};
+
+export const colorlightness = hex => {
+    if (hex[0] !== '#') { hex = hexFromColorName(hex); }
+    return (parseInt("0x" + hex.substring(1, 3))
+	    + parseInt("0x" + hex.substring(3, 5))
+	    + parseInt("0x" + hex.substring(5, 7))) / 3.0
+};
+
+export const foregroundColor = hex => (
+    (hex && colorlightness(hex) < 150.0 ? "#ffffff" : "#000000")
+);
