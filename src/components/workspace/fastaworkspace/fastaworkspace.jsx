@@ -1,11 +1,12 @@
 import React from 'react';
 import os from 'os';
-import { DNALogo, RNALogo, AALogo, Logo, DNAGlyphmap, RNAGlyphmap, AAGlyphmap,
+import { DNALogo, RNALogo, AALogo, Logo,
+	 DNAGlyphmap, RNAGlyphmap, AAGlyphmap,
 	 INFORMATION_CONTENT, xrange } from 'logos-to-go-react';
 
 import { TableHeader, TableContent, MainTable } from '../table/index';
 import { FastaEditor } from '../../editor/index';
-import { apiUrls, TYPEID } from '../../../common/utils';
+import { apiUrls, TYPEID, glyphsymbols } from '../../../common/utils';
 
 import FastaLogoMenu from './menu';
 import FastaSettingsPanel from './settings';
@@ -14,7 +15,10 @@ import ContentPanel from './content';
 const _lookupmap = glyphmap => {
     let ret = {};
     glyphmap.map( (x, i) => ret[x.regex] = i );
-    return ret;
+    return {
+	raw: glyphmap,
+	lookup: ret
+    };
 };
 
 const smap = (s, f) => (
@@ -48,17 +52,13 @@ AMINQACID
 AMINQACID
 `.substring(1);
 
-const LOGOCOMPONENTS = {
-    DNA: { component: DNALogo, defaulttext: DNADEFAULT },
-    RNA: { component: RNALogo, defaulttext: RNADEFAULT },
-    AA: { component: AALogo, defaulttext: PROTEINDEFAULT },
-    custom: { component: Logo }
-};
+let GLYPHSYMBOLS = glyphsymbols();
 
-const GLYPHMAPS = {
-    DNA: { raw: DNAGlyphmap, lookup: _lookupmap(DNAGlyphmap) },
-    RNA: { raw: RNAGlyphmap, lookup: _lookupmap(RNAGlyphmap) },
-    AA: { raw: AAGlyphmap, lookup: _lookupmap(AAGlyphmap) }
+const LOGOCOMPONENTS = {
+    DNA: { component: DNALogo, glyphs: DNAGlyphmap, defaulttext: DNADEFAULT },
+    RNA: { component: RNALogo, glyphs: RNAGlyphmap, defaulttext: RNADEFAULT },
+    AA: { component: AALogo, glyphs: AAGlyphmap, defaulttext: PROTEINDEFAULT },
+    custom: { component: Logo }
 };
 
 const fastaToPWM = (fasta, lookupmap) => {
@@ -78,14 +78,15 @@ class FastaWorkspace extends React.Component {
 
     constructor(props) {
 	super(props);
-	this.logoPostUrl = apiUrls(props.config.apiserver).logo("");
+	this.logoPostUrl = apiUrls(props.apiserver).logo("");
 	this.state = {
 	    fasta: DNADEFAULT,
 	    logocomponent: "DNA",
 	    scale: 1.0,
 	    startpos: 1,
 	    mode: INFORMATION_CONTENT,
-	    initialized: false
+	    initialized: false,
+	    glyphmap:  _lookupmap(LOGOCOMPONENTS["DNA"].glyphs)
 	};
     }
 
@@ -115,7 +116,19 @@ class FastaWorkspace extends React.Component {
     _logoTypeChange(e, data) {
 	this.setState({
 	    logocomponent: data.value,
-	    fasta: LOGOCOMPONENTS[data.value].defaulttext
+	    fasta: LOGOCOMPONENTS[data.value].defaulttext,
+	    glyphmap: _lookupmap(LOGOCOMPONENTS[data.value].glyphs)
+	});
+    }
+
+    _glyphmapUpdate(glyphmap) {
+	let nglyphmap = [];
+	glyphmap.map( v => {
+	    let symbol = GLYPHSYMBOLS[v.regex] && GLYPHSYMBOLS[v.regex].component;
+	    return symbol && nglyphmap.push({ ...v, component: GLYPHSYMBOLS[v.regex].component });
+	});
+	this.setState({
+	    glyphmap: _lookupmap(nglyphmap)
 	});
     }
 
@@ -138,8 +151,7 @@ class FastaWorkspace extends React.Component {
     }
     
     render() {
-	let C = LOGOCOMPONENTS[this.state.logocomponent].component;
-	let pwm = fastaToPWM(this.state.fasta, GLYPHMAPS[this.state.logocomponent].lookup);
+	let pwm = fastaToPWM(this.state.fasta, this.state.glyphmap.lookup);
 	return (
 	    <MainTable>
 	      <TableHeader />
@@ -151,21 +163,24 @@ class FastaWorkspace extends React.Component {
 				    logodefault={this.state.logocomponent}
 				    scaledefault={this.state.scale}
 				    startposdefault={this.state.startpos}
-				    modedefault={this.state.mode} />
+				    modedefault={this.state.mode}
+				    glyphmap={this.state.glyphmap.raw}
+				    onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
 		<ContentPanel topheight={50}>
 		  <FastaEditor
 		    height="100%" width="100%"
 		    text={this.state.fasta}
 		    onChange={this._fastaChange.bind(this)}
-		    id="fastamain" glyphmap={GLYPHMAPS[this.state.logocomponent].raw} />
+		    id="fastamain" glyphmap={this.state.glyphmap.raw} />
 		  <React.Fragment>
 		    <FastaLogoMenu svgref={this.logo} logoinfo={this._format_logoinfo(this.state, pwm)}
 				   apiurl={this.logoPostUrl} />
 		    <div ref={ c => { this.logo = c; } }>
-                      <C pwm={pwm}
-			 scale={this.state.scale}
-			 startpos={this.state.startpos}
-			 mode={this.state.mode} />
+                      <Logo pwm={pwm}
+			    scale={this.state.scale}
+			    startpos={this.state.startpos}
+			    mode={this.state.mode}
+			    glyphmap={this.state.glyphmap.raw} />
 		    </div>
 		  </React.Fragment>
 		</ContentPanel>

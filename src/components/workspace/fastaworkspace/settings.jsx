@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { LogoTypeDropdown, ColoredInput, ModeDropdown } from '../settings/index';
+import { LogoTypeDropdown, ColoredInput, ModeDropdown, GlyphList } from '../settings/index';
 
 const FastaSettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
-			    onModeChange, modedefault, logodefault, scaledefault,
-			    startposdefault }) => (
+			      onModeChange, modedefault, logodefault, scaledefault,
+			      startposdefault, glyphmap, onGlyphmapUpdate }) => (
     <React.Fragment>
       <LogoTypeDropdown header="Logo Type"
 			value={logodefault}
@@ -21,6 +21,8 @@ const FastaSettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
       <ColoredInput defaultValue={startposdefault} onChange={onStartPosChange}
 		    color="#000000" background="#ffffff"
 		    header="First Base Number" />
+      <br />
+      <GlyphList header="Symbol List" glyphmap={glyphmap} onGlyphmapUpdate={onGlyphmapUpdate} />
     </React.Fragment>
 );
 export default FastaSettingsPanel;

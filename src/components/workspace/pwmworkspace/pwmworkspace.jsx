@@ -1,21 +1,22 @@
 import React from 'react';
-import { DNALogo, RNALogo, AALogo, Logo,
-	 INFORMATION_CONTENT } from 'logos-to-go-react';
+import { DNALogo, RNALogo, AALogo, Logo, DNAGlyphmap,
+	 RNAGlyphmap, AAGlyphmap, INFORMATION_CONTENT } from 'logos-to-go-react';
 
 import { TableHeader, TableContent, MainTable } from '../table/index';
 import { PWMEditor } from '../../editor/index';
-import { apiUrls, isArrayOfArrays, TYPEID } from '../../../common/utils';
+import { apiUrls, isArrayOfArrays, TYPEID, glyphsymbols } from '../../../common/utils';
 
 import PWMLogoMenu from './menu';
 import PWMSettingsPanel from './settings';
 import ContentPanel from './content';
 
 let DEFAULTPWM = "[[0.5, 0.5, 0.0, 0.0],\n [0.0, 0.0, 0.5, 0.5]]";
+let GLYPHSYMBOLS = glyphsymbols();
 
 const LOGOCOMPONENTS = {
-    DNA: { component: DNALogo, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
-    RNA: { component: RNALogo, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
-    AA: { component: AALogo, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] },
+    DNA: { component: DNALogo, glyphs: DNAGlyphmap, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
+    RNA: { component: RNALogo, glyphs: RNAGlyphmap, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
+    AA: { component: AALogo, glyphs: AAGlyphmap, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] },
     custom: { component: Logo }
 };
 
@@ -23,7 +24,7 @@ class PWMWorkspace extends React.Component {
 
     constructor(props) {
 	super(props);
-	this.logoPostUrl = apiUrls(props.config.apiserver).logo("");
+	this.logoPostUrl = apiUrls(props.apiserver).logo("");
 	this.state = {
 	    pwm: {
 		text: DEFAULTPWM,
@@ -33,7 +34,8 @@ class PWMWorkspace extends React.Component {
 	    scale: 1.0,
 	    startpos: 1,
 	    mode: INFORMATION_CONTENT,
-	    initialized: false
+	    initialized: false,
+	    glyphmap: LOGOCOMPONENTS["DNA"].glyphs
 	};
     }
 
@@ -73,7 +75,19 @@ class PWMWorkspace extends React.Component {
 	}
 	this.setState({
 	    logocomponent: data.value,
+	    glyphmap: LOGOCOMPONENTS[data.value].glyphs,
 	    pwm
+	});
+    }
+
+    _glyphmapUpdate(glyphmap) {
+	let nglyphmap = [];
+	glyphmap.map( v => {
+	    let symbol = GLYPHSYMBOLS[v.regex] && GLYPHSYMBOLS[v.regex].component;
+	    return symbol && nglyphmap.push({ ...v, component: GLYPHSYMBOLS[v.regex].component });
+	});
+	this.setState({
+	    glyphmap: nglyphmap
 	});
     }
 
@@ -96,7 +110,6 @@ class PWMWorkspace extends React.Component {
     }
     
     render() {
-	let C = LOGOCOMPONENTS[this.state.logocomponent].component;
 	return (
 	    <MainTable>
 	      <TableHeader />
@@ -108,7 +121,9 @@ class PWMWorkspace extends React.Component {
 				  logodefault={this.state.logocomponent}
 				  scaledefault={this.state.scale}
 				  startposdefault={this.state.startpos}
-				  modedefault={this.state.mode} />
+				  modedefault={this.state.mode}
+				  glyphmap={this.state.glyphmap}
+				  onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
 		<ContentPanel topheight={50}>
 		  <PWMEditor
 		    height="100%" width="100%"
@@ -118,10 +133,11 @@ class PWMWorkspace extends React.Component {
 		    <PWMLogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
 				 logoinfo={this._format_logoinfo(this.state)} />
 		    <div ref={ c => { this.logo = c; } }>
-		      <C pwm={this.state.pwm.parsed}
-			 scale={this.state.scale}
-			 startpos={this.state.startpos}
-			 mode={this.state.mode} />
+		      <Logo pwm={this.state.pwm.parsed}
+			    scale={this.state.scale}
+			    startpos={this.state.startpos}
+			    mode={this.state.mode}
+			    glyphmap={this.state.glyphmap} />
 		    </div>
 		  </React.Fragment>
 		</ContentPanel>
