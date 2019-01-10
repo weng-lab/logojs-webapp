@@ -1,7 +1,7 @@
 import React from 'react';
 import os from 'os';
-import { DNALogo, RNALogo, AALogo, Logo,
-	 DNAGlyphmap, RNAGlyphmap, AAGlyphmap,
+import { DNALogo, RNALogo, AALogo, Logo, CompleteLogo,
+	 DNAGlyphmap, RNAGlyphmap, AAGlyphmap, CompleteGlyphmap,
 	 INFORMATION_CONTENT, xrange } from 'logos-to-go-react';
 
 import { TableHeader, TableContent, MainTable } from '../table/index';
@@ -52,13 +52,18 @@ AMINQACID
 AMINQACID
 `.substring(1);
 
+const CUSTOMDEFAULT = `
+>sequence 1
+CUSTOM
+`.substring(1);
+
 let GLYPHSYMBOLS = glyphsymbols();
 
 const LOGOCOMPONENTS = {
     DNA: { component: DNALogo, glyphs: DNAGlyphmap, defaulttext: DNADEFAULT },
     RNA: { component: RNALogo, glyphs: RNAGlyphmap, defaulttext: RNADEFAULT },
     AA: { component: AALogo, glyphs: AAGlyphmap, defaulttext: PROTEINDEFAULT },
-    custom: { component: Logo }
+    custom: { component: CompleteLogo, glyphs: CompleteGlyphmap, defaulttext: CUSTOMDEFAULT }
 };
 
 const fastaToPWM = (fasta, lookupmap) => {
