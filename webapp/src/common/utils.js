@@ -1,12 +1,9 @@
 import namedColors from 'color-name-list';
-import { AAGlyphmap, RNAGlyphmap } from 'logos-to-go-react';
+import { CompleteGlyphmap } from 'logos-to-go-react';
 
 export const glyphsymbols = () => {
     let retval = {};
-    AAGlyphmap.map( v => (
-	retval[v.regex] = v
-    ));
-    RNAGlyphmap.map( v => (
+    CompleteGlyphmap.map( v => (
 	retval[v.regex] = v
     ));
     return retval;
