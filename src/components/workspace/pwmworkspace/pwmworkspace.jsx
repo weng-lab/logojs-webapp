@@ -113,13 +113,13 @@ class PWMWorkspace extends React.Component {
     render() {
 	return (
 	    <React.Fragment>
-	      <Grid className="centered">
+	      <Grid className="centered" style={{ height: "100%" }}>
 		<Grid.Row style={{ backgroundColor: "#eee" }}>
 		  <Grid.Column width={3} style={{ textAlign: "center" }}>
 		    <h1 className="inverted center aligned" style={{ color: "#000", fontSize: "28pt", marginTop: "5px" }}>PWM Editor</h1>
 		  </Grid.Column>
 		</Grid.Row>
-		<Grid.Row>
+		<Grid.Row style={{ height: "100%" }}>
 		  <Grid.Column width={3}>
 		    <PWMSettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
 				      onScaleChange={this._scaleChange.bind(this)}
@@ -132,9 +132,9 @@ class PWMWorkspace extends React.Component {
 				      glyphmap={this.state.glyphmap}
 				      onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
 		  </Grid.Column>
-		  <Grid.Column width={13}>
+	          <Grid.Column width={13} style={{ height: '100%' }}>
 		    <Grid style={{ height: '100%' }}>
-		      <Grid.Row style={{ height: '70%' }}>
+		      <Grid.Row style={{ height: '40%' }}>
 			<Grid.Column width={16}>
 			  <PWMEditor
 			    height="100%" width="100%"
@@ -142,13 +142,13 @@ class PWMWorkspace extends React.Component {
 			    onChange={this._pwmChange.bind(this)} />
 			</Grid.Column>
 		      </Grid.Row>
-		      <Grid.Row>
-			<Grid.Column width={16}>
+	              <Grid.Row style={{ height: '60%' }}>
+			<Grid.Column width={16} style={{ height: "100%" }}>
 			  <PWMLogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
 				       logoinfo={this._format_logoinfo(this.state)} />
-			  <div ref={ c => { this.logo = c; } }>
+			  <div ref={ c => { this.logo = c; } }
+                               style={{ height: "75%" }}>
 			    <Logo pwm={this.state.pwm.parsed}
-				  scale={this.state.scale}
 				  startpos={this.state.startpos}
 				  mode={this.state.mode}
 				  glyphmap={this.state.glyphmap} />
