@@ -1,15 +1,13 @@
 import React from 'react';
-import { Menu, Header, Grid, Segment, Container } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { DNALogo, RNALogo, AALogo, Logo, DNAGlyphmap, CompleteGlyphmap, CompleteLogo,
 	 RNAGlyphmap, AAGlyphmap, INFORMATION_CONTENT } from 'logos-to-go-react';
 
-import { TableHeader, TableContent, MainTable } from '../table/index';
 import { PWMEditor } from '../../editor/index';
 import { apiUrls, isArrayOfArrays, TYPEID, glyphsymbols } from '../../../common/utils';
 
 import PWMLogoMenu from './menu';
 import PWMSettingsPanel from './settings';
-import ContentPanel from './content';
 
 let DEFAULTPWM = "[[0.5, 0.5, 0.0, 0.0],\n [0.0, 0.0, 0.5, 0.5]]";
 let GLYPHSYMBOLS = glyphsymbols();

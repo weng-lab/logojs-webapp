@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Icon, Segment, Container, Button } from 'semantic-ui-react';
+import { Icon, Container, Button } from 'semantic-ui-react';
 
 const UploadLinks = () => (
     <Container className="text">

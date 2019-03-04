@@ -5,13 +5,11 @@ import { DNALogo, RNALogo, AALogo, Logo, CompleteLogo,
 	 INFORMATION_CONTENT, xrange } from 'logos-to-go-react';
 import { Grid } from 'semantic-ui-react';
 
-import { TableHeader, TableContent, MainTable } from '../table/index';
 import { FastaEditor } from '../../editor/index';
 import { apiUrls, TYPEID, glyphsymbols } from '../../../common/utils';
 
 import FastaLogoMenu from './menu';
 import FastaSettingsPanel from './settings';
-import ContentPanel from './content';
 
 const _lookupmap = glyphmap => {
     let ret = {};
