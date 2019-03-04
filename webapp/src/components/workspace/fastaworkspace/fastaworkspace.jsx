@@ -3,6 +3,7 @@ import os from 'os';
 import { DNALogo, RNALogo, AALogo, Logo, CompleteLogo,
 	 DNAGlyphmap, RNAGlyphmap, AAGlyphmap, CompleteGlyphmap,
 	 INFORMATION_CONTENT, xrange } from 'logos-to-go-react';
+import { Grid } from 'semantic-ui-react';
 
 import { TableHeader, TableContent, MainTable } from '../table/index';
 import { FastaEditor } from '../../editor/index';
@@ -68,7 +69,9 @@ const LOGOCOMPONENTS = {
 
 const fastaToPWM = (fasta, lookupmap) => {
     let sequences = [];
-    fasta.split(os.EOL).map( x => x[0] !== '>' && x !== '' && sequences.push(x) );
+    fasta.split(os.EOL).filter(x => x[0] !== '#').map(
+        x => x[0] !== '>' && x !== '' && sequences.push(x)
+    );
     if (sequences.length === 0) { return [[0.0]]; }
     let minlength = Math.min(...sequences.map(x => x.length));
     let pwm = xrange(minlength).map(i => Object.keys(lookupmap).map(x => 0));
@@ -158,39 +161,55 @@ class FastaWorkspace extends React.Component {
     render() {
 	let pwm = fastaToPWM(this.state.fasta, this.state.glyphmap.lookup);
 	return (
-	    <MainTable>
-	      <TableHeader />
-	      <TableContent dimensions={{ height: 95, width: 82 }}>
-		<FastaSettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
-				    onScaleChange={this._scaleChange.bind(this)}
-				    onStartPosChange={this._startPosChange.bind(this)}
-				    onModeChange={this._modeChange.bind(this)}
-				    logodefault={this.state.logocomponent}
-				    scaledefault={this.state.scale}
-				    startposdefault={this.state.startpos}
-				    modedefault={this.state.mode}
-				    glyphmap={this.state.glyphmap.raw}
-				    onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
-		<ContentPanel topheight={50}>
-		  <FastaEditor
-		    height="100%" width="100%"
-		    text={this.state.fasta}
-		    onChange={this._fastaChange.bind(this)}
-		    id="fastamain" glyphmap={this.state.glyphmap.raw} />
-		  <React.Fragment>
-		    <FastaLogoMenu svgref={this.logo} logoinfo={this._format_logoinfo(this.state, pwm)}
-				   apiurl={this.logoPostUrl} />
-		    <div ref={ c => { this.logo = c; } }>
-                      <Logo pwm={pwm}
-			    scale={this.state.scale}
-			    startpos={this.state.startpos}
-			    mode={this.state.mode}
-			    glyphmap={this.state.glyphmap.raw} />
-		    </div>
-		  </React.Fragment>
-		</ContentPanel>
-	      </TableContent>
-	    </MainTable>
+            <React.Fragment>
+	      <Grid className="centered" style={{ height: "100%" }}>
+	        <Grid.Row style={{ backgroundColor: "#eee" }}>
+	          <Grid.Column width={3} style={{ textAlign: "center" }}>
+	            <h1 className="inverted center aligned" style={{ color: "#000", fontSize: "28pt", marginTop: "5px" }}>FASTA Editor</h1>
+	          </Grid.Column>
+		</Grid.Row>
+		<Grid.Row style={{ height: "100%" }}>
+		  <Grid.Column width={3}>
+		    <FastaSettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
+				        onScaleChange={this._scaleChange.bind(this)}
+				        onStartPosChange={this._startPosChange.bind(this)}
+				        onModeChange={this._modeChange.bind(this)}
+				        logodefault={this.state.logocomponent}
+				        scaledefault={this.state.scale}
+				        startposdefault={this.state.startpos}
+				        modedefault={this.state.mode}
+				        glyphmap={this.state.glyphmap.raw}
+	                                onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
+            	  </Grid.Column>
+	          <Grid.Column width={13} style={{ height: '100%' }}>
+		    <Grid style={{ height: '100%' }}>
+		      <Grid.Row style={{ height: '40%' }}>
+			<Grid.Column width={16}>
+		          <FastaEditor
+		            height="100%" width="100%"
+		            text={this.state.fasta}
+	                    onChange={this._fastaChange.bind(this)}
+	                    id="fastamain" glyphmap={this.state.glyphmap.raw} />
+            		</Grid.Column>
+		      </Grid.Row>
+	              <Grid.Row style={{ height: '60%' }}>
+			<Grid.Column width={16} style={{ height: '100%' }}>
+		          <FastaLogoMenu svgref={this.logo} logoinfo={this._format_logoinfo(this.state, pwm)}
+				         apiurl={this.logoPostUrl} />
+		          <div ref={ c => { this.logo = c; } }
+                               style={{ height: '75%' }}>
+                            <Logo pwm={pwm}
+			          startpos={this.state.startpos}
+			          mode={this.state.mode}
+			          glyphmap={this.state.glyphmap.raw} />
+	                  </div>
+            		</Grid.Column>
+		      </Grid.Row>
+		    </Grid>
+		  </Grid.Column>
+		</Grid.Row>
+	      </Grid>
+	    </React.Fragment>
 	);
     }
     
