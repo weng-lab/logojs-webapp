@@ -4,7 +4,6 @@ import './fastatheme.css';
 export const XHTML_NS = "http://www.w3.org/1999/xhtml";
 
 export const CUSTOMIZABLE_CLASS_NAMES = [
-    ".ace_comment.ace_line.ace_double-slash",
     ".ace_comment.ace_line.ace_double-dash",
     ".ace_comment.ace_line.ace_number-sign",
     ".ace_comment.ace_line.ace_percentage",

@@ -21,8 +21,11 @@ class FastaHighlightRules extends ace.acequire('ace/mode/text_highlight_rules').
 	this.$rules = { start: generateFastaRules(key, glyphmap) };
 	this.$rules.start.push({ defaultToken: "text" });
 	this.$rules.start.push({ regex: ">", next: "sequence_name", token: "text" });
+        this.$rules.start.push({ regex: "[\#]", next: "comment", token: "comment.line.double-slash" });
 	this.$rules.sequence_name = [{ regex: "$|^", next: "start", token: "text" },
-				     { defaultToken: "text"} ];
+				     { defaultToken: "text" }];
+        this.$rules.comment = [{ regex: "$|^", next: "start", token: "comment.line.double-slash" },
+                               { defaultToken: "comment.line.double-slash" }];
     }
     
 }
