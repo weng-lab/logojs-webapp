@@ -10,7 +10,7 @@ const OPTIONS = [
 
 const LogoTypeDropdown = ({ header, onChange }) => (
     <React.Fragment>
-      {header ? <h2>{header}</h2> : null }
+      {header ? <h3>{header}</h3> : null }
       <Dropdown
 	options={OPTIONS}
 	defaultValue="DNA"

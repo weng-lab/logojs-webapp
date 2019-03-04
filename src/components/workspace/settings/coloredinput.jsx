@@ -3,7 +3,7 @@ import { Input } from 'semantic-ui-react';
 
 const ColoredInput = ({ defaultValue, background, header, color, onChange }) => (
     <React.Fragment>
-      {header ? <h2>{header}</h2> : null}
+      {header ? <h3>{header}</h3> : null}
       <Input defaultValue={defaultValue}
 	     onChange={onChange}
 	     style={{ color }}>

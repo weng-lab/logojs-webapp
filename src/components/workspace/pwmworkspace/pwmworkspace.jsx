@@ -1,4 +1,5 @@
 import React from 'react';
+import { Menu, Header, Grid, Segment, Container } from 'semantic-ui-react';
 import { DNALogo, RNALogo, AALogo, Logo, DNAGlyphmap, CompleteGlyphmap, CompleteLogo,
 	 RNAGlyphmap, AAGlyphmap, INFORMATION_CONTENT } from 'logos-to-go-react';
 
@@ -111,38 +112,54 @@ class PWMWorkspace extends React.Component {
     
     render() {
 	return (
-	    <MainTable>
-	      <TableHeader />
-	      <TableContent dimensions={{ height: 95, width: 82 }}>
-		<PWMSettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
-				  onScaleChange={this._scaleChange.bind(this)}
-				  onStartPosChange={this._startPosChange.bind(this)}
-				  onModeChange={this._modeChange.bind(this)}
-				  logodefault={this.state.logocomponent}
-				  scaledefault={this.state.scale}
-				  startposdefault={this.state.startpos}
-				  modedefault={this.state.mode}
-				  glyphmap={this.state.glyphmap}
-				  onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
-		<ContentPanel topheight={50}>
-		  <PWMEditor
-		    height="100%" width="100%"
-		    text={this.state.pwm.text}
-		    onChange={this._pwmChange.bind(this)} />
-		  <React.Fragment>
-		    <PWMLogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
-				 logoinfo={this._format_logoinfo(this.state)} />
-		    <div ref={ c => { this.logo = c; } }>
-		      <Logo pwm={this.state.pwm.parsed}
-			    scale={this.state.scale}
-			    startpos={this.state.startpos}
-			    mode={this.state.mode}
-			    glyphmap={this.state.glyphmap} />
-		    </div>
-		  </React.Fragment>
-		</ContentPanel>
-	      </TableContent>
-	    </MainTable>
+	    <React.Fragment>
+	      <Grid className="centered">
+		<Grid.Row style={{ backgroundColor: "#eee" }}>
+		  <Grid.Column width={3} style={{ textAlign: "center" }}>
+		    <h1 className="inverted center aligned" style={{ color: "#000", fontSize: "28pt", marginTop: "5px" }}>PWM Editor</h1>
+		  </Grid.Column>
+		</Grid.Row>
+		<Grid.Row>
+		  <Grid.Column width={3}>
+		    <PWMSettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
+				      onScaleChange={this._scaleChange.bind(this)}
+				      onStartPosChange={this._startPosChange.bind(this)}
+				      onModeChange={this._modeChange.bind(this)}
+				      logodefault={this.state.logocomponent}
+				      scaledefault={this.state.scale}
+				      startposdefault={this.state.startpos}
+				      modedefault={this.state.mode}
+				      glyphmap={this.state.glyphmap}
+				      onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
+		  </Grid.Column>
+		  <Grid.Column width={13}>
+		    <Grid style={{ height: '100%' }}>
+		      <Grid.Row style={{ height: '70%' }}>
+			<Grid.Column width={16}>
+			  <PWMEditor
+			    height="100%" width="100%"
+			    text={this.state.pwm.text}
+			    onChange={this._pwmChange.bind(this)} />
+			</Grid.Column>
+		      </Grid.Row>
+		      <Grid.Row>
+			<Grid.Column width={16}>
+			  <PWMLogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
+				       logoinfo={this._format_logoinfo(this.state)} />
+			  <div ref={ c => { this.logo = c; } }>
+			    <Logo pwm={this.state.pwm.parsed}
+				  scale={this.state.scale}
+				  startpos={this.state.startpos}
+				  mode={this.state.mode}
+				  glyphmap={this.state.glyphmap} />
+			  </div>
+			</Grid.Column>
+		      </Grid.Row>
+		    </Grid>
+		  </Grid.Column>
+		</Grid.Row>
+	      </Grid>
+	    </React.Fragment>
 	);
     }
     
