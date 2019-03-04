@@ -1,5 +1,5 @@
 import React from 'react';
-import { Label, Icon, Item } from 'semantic-ui-react';
+import { Label, Icon } from 'semantic-ui-react';
 
 import { colorNameFromHex, foregroundColor } from '../../../common/utils';
 import { ColorPickerModal } from '../modalcolorpicker/index';

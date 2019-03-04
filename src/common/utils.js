@@ -53,9 +53,9 @@ export const hexFromColorName = name => {
 
 export const colorlightness = hex => {
     if (hex[0] !== '#') { hex = hexFromColorName(hex); }
-    return (parseInt("0x" + hex.substring(1, 3))
-	    + parseInt("0x" + hex.substring(3, 5))
-	    + parseInt("0x" + hex.substring(5, 7))) / 3.0
+    return (parseInt("0x" + hex.substring(1, 3), 16)
+	    + parseInt("0x" + hex.substring(3, 5), 16)
+	    + parseInt("0x" + hex.substring(5, 7), 16)) / 3.0
 };
 
 export const foregroundColor = hex => (

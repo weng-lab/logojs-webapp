@@ -19,11 +19,6 @@ const PWMSettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
 						  onChange={onModeChange} />
 				  </Menu.Item>
 				  <Menu.Item>
-				    <ColoredInput defaultValue={scaledefault} onChange={onScaleChange}
-						  color="#000000" background="#ffffff"
-						  header="Scale Factor" />
-				  </Menu.Item>
-				  <Menu.Item>
 				    <ColoredInput defaultValue={startposdefault} onChange={onStartPosChange}
 						  color="#000000" background="#ffffff"
 						  header="First Base Number" />
