@@ -18,7 +18,7 @@ const LOGOCOMPONENTS = {
     custom: { component: CompleteLogo, glyphs: CompleteGlyphmap, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] }
 };
 
-class MEMEWorkspace extends React.Component {
+class UploadWorkspace extends React.Component {
 
     constructor(props) {
 	super(props);
@@ -99,34 +99,6 @@ class MEMEWorkspace extends React.Component {
 	    mode: data.value
 	});
     }
-
-    parseMeme(text) {
-        let inmotif = false;
-        let pwms = [], cpwm = [], cmotifname = null;
-        let name = null;
-        let motifnames = [];
-        text.split('\n').forEach( line => {
-            if (line.startsWith("letter-probability"))
-                inmotif = true;
-            else if (line.startsWith("MOTIF"))
-                cmotifname = line.split("MOTIF ")[1];
-            else if (inmotif && !line.startsWith(' ')) {
-                inmotif = false;
-                pwms.push(cpwm);
-                motifnames.push(cmotifname);
-                cpwm = [];
-                cmotifname = null;
-            } else if (inmotif)
-                cpwm.push(line.trim().split(/\s+/).map(parseFloat));
-            else if (line.trim().startsWith("DATAFILE="))
-                name = line.split("DATAFILE=")[1].trim();
-        });
-        return {
-            pwms,
-            motifnames,
-            name
-        };
-    }
     
     async parseFile(f) {
         const reader = new FileReader();
@@ -143,7 +115,7 @@ class MEMEWorkspace extends React.Component {
             return;
         }
         reader.onload = e => {
-            let result = this.parseMeme(e.target.result);
+            let result = this.props.parse(e.target.result);
             if (result.pwms.length !== 0) {
                 this.setState({
                     pwms: [
@@ -200,7 +172,7 @@ class MEMEWorkspace extends React.Component {
 	      <Grid className="centered" style={{ height: "100%" }}>
 		<Grid.Row style={{ backgroundColor: "#eee" }}>
 		  <Grid.Column width={3} style={{ textAlign: "center" }}>
-		    <h1 className="inverted center aligned" style={{ color: "#000", fontSize: "28pt", marginTop: "5px" }}>MEME Viewer</h1>
+	            <h1 className="inverted center aligned" style={{ color: "#000", fontSize: "28pt", marginTop: "5px" }}>{this.props.title} Viewer</h1>
 		  </Grid.Column>
 		</Grid.Row>
 		<Grid.Row style={{ height: "100%" }}>
@@ -228,7 +200,7 @@ class MEMEWorkspace extends React.Component {
                               <Button style={{ fontSize: "24pt", textAlign: "center" }}
                                       onClick={() => this.fileinput.click()}>
                                 <Icon style={{fontSize: "72pt", marginLeft: '0em', marginRight: '0em', marginTop: '0.3em' }} name="upload" /><br/>
-                                upload meme.txt files
+                                upload {this.props.title} files
                               </Button>
                           ) : isdone && (
                               <React.Fragment>
@@ -295,4 +267,4 @@ class MEMEWorkspace extends React.Component {
     }
     
 };
-export default MEMEWorkspace;
+export default UploadWorkspace;
