@@ -7,6 +7,7 @@ import { apiUrls, isArrayOfArrays, TYPEID, glyphsymbols } from '../../../common/
 
 import MEMESettingsPanel from './settings';
 import MEMELogoMenu from './menu';
+import ErrorMessage from './errormessage';
 
 let GLYPHSYMBOLS = glyphsymbols();
 
@@ -101,15 +102,20 @@ class MEMEWorkspace extends React.Component {
 
     parseMeme(text) {
         let inmotif = false;
-        let pwms = [], cpwm = [];
+        let pwms = [], cpwm = [], cmotifname = null;
         let name = null;
+        let motifnames = [];
         text.split('\n').forEach( line => {
             if (line.startsWith("letter-probability"))
                 inmotif = true;
-            else if (inmotif && line.startsWith('-')) {
+            else if (line.startsWith("MOTIF"))
+                cmotifname = line.split("MOTIF ")[1];
+            else if (inmotif && !line.startsWith(' ')) {
                 inmotif = false;
                 pwms.push(cpwm);
+                motifnames.push(cmotifname);
                 cpwm = [];
+                cmotifname = null;
             } else if (inmotif)
                 cpwm.push(line.trim().split(/\s+/).map(parseFloat));
             else if (line.trim().startsWith("DATAFILE="))
@@ -117,6 +123,7 @@ class MEMEWorkspace extends React.Component {
         });
         return {
             pwms,
+            motifnames,
             name
         };
     }
@@ -137,7 +144,7 @@ class MEMEWorkspace extends React.Component {
         }
         reader.onload = e => {
             let result = this.parseMeme(e.target.result);
-            if (result.length !== 0) {
+            if (result.pwms.length !== 0) {
                 this.setState({
                     pwms: [
                         ...this.state.pwms, {
@@ -170,6 +177,14 @@ class MEMEWorkspace extends React.Component {
         });
         reader.readAsText(f);
     }
+
+    errorclosed() {
+        this.setState({
+            errors: [],
+            total: this.state.total - this.state.errors.length,
+            processed: this.state.processed - this.state.errors.length
+        });
+    }
     
     async fileReceived(e) {
         this.setState({ total: this.state.total + e.target.files.length });
@@ -177,7 +192,8 @@ class MEMEWorkspace extends React.Component {
     }
     
     render() {
-        let isdone = this.state.processed === this.state.pwms.length + this.state.errors.length
+        console.log(this.state);
+        let isdone = this.state.processed === this.state.total
             && this.state.pwms.length > 0;
 	return (
 	    <React.Fragment>
@@ -200,7 +216,10 @@ class MEMEWorkspace extends React.Component {
 				       glyphmap={this.state.glyphmap}
 				       onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
 		  </Grid.Column>
-	          <Grid.Column width={13} style={{ height: '100%' }}>
+                  <Grid.Column width={13} style={{ height: '100%' }}>
+                    { this.state.errors.length > 0 && (
+                        <ErrorMessage errors={this.state.errors} onClick={this.errorclosed.bind(this)}/>
+                    )}
                     <Grid textAlign="center" className={isdone ? null : "middle aligned"}
                           style={{ height: "50%" }}>
                       <Grid.Row>
@@ -235,15 +254,22 @@ class MEMEWorkspace extends React.Component {
                                     </span>
                                   </Menu.Item>
                                 </Menu>
-                                <Menu secondary>
-                                  {this.state.pwms[this.state.selectedfile].result.pwms.map( (_, i) => (
-                                      <Menu.Item key={"motif_" + i}
-                                                 onClick={ () => this.setState({ selectedmotif: i }) }
-                                                 active={i === this.state.selectedmotif}>
-                                        Motif {i + 1}
-                                      </Menu.Item>
-                                  ))}
-                                </Menu>
+                                <div style={{ textAlign: "left" }}>
+                                  <Dropdown text={this.state.pwms[this.state.selectedfile].result.motifnames[this.state.selectedmotif] || "Motif " + (this.state.selectedmotif + 1)}
+                                            floating labeled button>
+                                    <Dropdown.Menu>
+                                      <Dropdown.Menu scrolling>
+                                        {this.state.pwms[this.state.selectedfile].result.pwms.map( (_, i) => (
+                                            <Dropdown.Item key={"motif_" + i}
+                                                           onClick={ () => this.setState({ selectedmotif: i }) }
+                                                           active={i === this.state.selectedmotif}>
+                                              {this.state.pwms[this.state.selectedfile].result.motifnames[i] || "Motif " + (i + 1)}
+                                            </Dropdown.Item>
+                                        ))}
+                                      </Dropdown.Menu>
+                                    </Dropdown.Menu>
+                                  </Dropdown>
+                                </div>
                                 <MEMELogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
 				              logoinfo={this._format_logoinfo(this.state)} />
 			        <div ref={ c => { this.logo = c; } }
