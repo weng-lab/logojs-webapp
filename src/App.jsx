@@ -5,7 +5,7 @@ import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
 import { Main } from './components/main/index';
-import { PWMWorkspace, FastaWorkspace } from './components/workspace/index';
+import { PWMWorkspace, FastaWorkspace, MEMEWorkspace } from './components/workspace/index';
 
 class App extends Component {
     
@@ -16,6 +16,7 @@ class App extends Component {
 		<Route exact path='/' component={Main} />
 		<Route path='/editor/pwm' render={() => <PWMWorkspace apiserver={this.props.apiserver} />} />
  	        <Route path='/editor/fasta' render={() => <FastaWorkspace apiserver={this.props.apiserver} />} />
+ 	        <Route path='/editor/meme' render={() => <MEMEWorkspace apiserver={this.props.apiserver} />} />
 	      </Switch>
 	    </Router>
 	);
