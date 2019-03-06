@@ -1,8 +1,7 @@
 import React from 'react';
 import { Menu } from 'semantic-ui-react';
 
-import { LogoTypeDropdown, ColoredInput, ModeDropdown,
-	 GlyphList } from '../settings/index';
+import { LogoTypeDropdown, ModeDropdown, GlyphList } from '../settings/index';
 
 const MEMESettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
 			    onModeChange, modedefault, logodefault, scaledefault,

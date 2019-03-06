@@ -5,9 +5,7 @@ import { DNALogo, RNALogo, AALogo, Logo, DNAGlyphmap, CompleteGlyphmap, Complete
 
 import { apiUrls, isArrayOfArrays, TYPEID, glyphsymbols } from '../../../common/utils';
 
-import MEMEEditorGrid from './editorgrid';
 import MEMESettingsPanel from './settings';
-import MEMEFileUploader from './fileuploader';
 import MEMELogoMenu from './menu';
 
 let GLYPHSYMBOLS = glyphsymbols();
