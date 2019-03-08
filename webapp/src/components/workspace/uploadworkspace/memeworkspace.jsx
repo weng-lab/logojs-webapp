@@ -1,9 +1,29 @@
 import React from 'react';
 import UploadWorkspace from './uploadworkspace';
+import MEMEParser from './memexmlparser';
 
 class MEMEWorkspace extends React.Component {
 
     parseMeme(text) {
+        try {
+            let motifs = this.parseMemeXml(text);
+            if (motifs.pwms.length === 0)
+                throw null;
+            return motifs;
+        } catch (e) {
+            return this.parseMemeTxt(text);
+        }
+    }
+    
+    parseMemeXml(xml) {
+        let parser = new MEMEParser(xml);
+        return {
+            ...parser.parseMotifs(),
+            name: parser.parseName()
+        };
+    }
+    
+    parseMemeTxt(text) {
         let inmotif = false;
         let pwms = [], cpwm = [], cmotifname = null;
         let name = null;
@@ -15,7 +35,7 @@ class MEMEWorkspace extends React.Component {
                 cmotifname = line.split("MOTIF ")[1];
             else if (inmotif && !line.startsWith(' ')) {
                 inmotif = false;
-                pwms.push(cpwm);
+                pwms.push({ pwm: cpwm });
                 motifnames.push(cmotifname);
                 cpwm = [];
                 cmotifname = null;
@@ -32,7 +52,7 @@ class MEMEWorkspace extends React.Component {
     }
     
     render() {
-        return <UploadWorkspace parse={this.parseMeme} title="MEME"/>;
+        return <UploadWorkspace parse={this.parseMeme.bind(this)} title="MEME"/>;
     }
     
 }

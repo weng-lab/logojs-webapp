@@ -195,10 +195,11 @@ class FastaWorkspace extends React.Component {
 		          <FastaLogoMenu svgref={this.logo} logoinfo={this._format_logoinfo(this.state, pwm)}
 				         apiurl={this.logoPostUrl} />
 		          <div ref={ c => { this.logo = c; } }
-                               style={{ height: '75%' }}>
+                               style={{ height: '75%', textAlign: "center" }}>
                             <Logo pwm={pwm}
 			          startpos={this.state.startpos}
 			          mode={this.state.mode}
+                                  scale="75%"
 			          glyphmap={this.state.glyphmap.raw} />
 	                  </div>
             		</Grid.Column>

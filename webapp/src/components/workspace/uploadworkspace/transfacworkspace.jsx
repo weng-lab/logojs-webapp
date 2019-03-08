@@ -30,7 +30,7 @@ class TRANSFACWorkspace extends React.Component {
         };
         pwms = pwms.map( pwm => {
             let totals = pwm.map(sum);
-            return pwm.map( (x, i) => x.map( xx => xx / totals[i] ) );
+            return { pwm: pwm.map( (x, i) => x.map( xx => xx / totals[i] ) ) };
         });
         return {
             pwms,

@@ -48,7 +48,7 @@ class JASPARWorkspace extends React.Component {
             return toutput;
         });
         return {
-            pwms: pwms.filter(x => x.length > 0),
+            pwms: pwms.filter(x => x.length > 0).map( pwm => ({ pwm }) ),
             motifnames,
             name: null
         };
