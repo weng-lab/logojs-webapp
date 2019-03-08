@@ -116,7 +116,7 @@ class UploadWorkspace extends React.Component {
         }
         reader.onload = e => {
             let result = this.props.parse(e.target.result);
-            if (result.pwms.length !== 0) {
+            if (Object.keys(result.pwms).length !== 0) {
                 this.setState({
                     pwms: [
                         ...this.state.pwms, {
@@ -150,6 +150,13 @@ class UploadWorkspace extends React.Component {
         reader.readAsText(f);
     }
 
+    selectFile(i) {
+        this.setState({
+            selectedfile: i,
+            selectedMotif: 0
+        });
+    }
+    
     errorclosed() {
         this.setState({
             errors: [],
@@ -164,9 +171,12 @@ class UploadWorkspace extends React.Component {
     }
     
     render() {
-        console.log(this.state);
         let isdone = this.state.processed === this.state.total
             && this.state.pwms.length > 0;
+        let selectedPWMs = this.state.pwms[this.state.selectedfile];
+        let selectedGlyphmap = selectedPWMs && selectedPWMs.result && selectedPWMs.result.pwms
+            && selectedPWMs.result.pwms.length > 0 && selectedPWMs.result.pwms[this.state.selectedmotif]
+            && selectedPWMs.result.pwms[this.state.selectedmotif].glyphmap || this.state.glyphmap;
 	return (
 	    <React.Fragment>
 	      <Grid className="centered" style={{ height: "100%" }}>
@@ -185,7 +195,7 @@ class UploadWorkspace extends React.Component {
 				       scaledefault={this.state.scale}
 				       startposdefault={this.state.startpos}
 				       modedefault={this.state.mode}
-				       glyphmap={this.state.glyphmap}
+				       glyphmap={selectedGlyphmap}
 				       onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
 		  </Grid.Column>
                   <Grid.Column width={13} style={{ height: '100%' }}>
@@ -206,11 +216,11 @@ class UploadWorkspace extends React.Component {
                               <React.Fragment>
                                 <Menu secondary pointing>
                                   <Dropdown item
-                                            text={this.state.pwms[this.state.selectedfile].result.name || this.state.pwms[this.state.selectedfile].file.name}>
+                                            text={selectedPWMs.result.name || selectedPWMs.file.name}>
                                     <Dropdown.Menu>
                                       {this.state.pwms.map( (pwmset, i) => (
                                           <Dropdown.Item key={"fileitem_" + i}
-                                                         onClick={ () => this.setState({ selectedfile: i, selectedmotif: 0 }) }>
+                                                         onClick={() => this.selectFile(i)}>
                                             {pwmset.result.name || pwmset.file.name}
                                           </Dropdown.Item>
                                       ))}
@@ -227,15 +237,15 @@ class UploadWorkspace extends React.Component {
                                   </Menu.Item>
                                 </Menu>
                                 <div style={{ textAlign: "left" }}>
-                                  <Dropdown text={this.state.pwms[this.state.selectedfile].result.motifnames[this.state.selectedmotif] || "Motif " + (this.state.selectedmotif + 1)}
+                                  <Dropdown text={selectedPWMs.result.motifnames[this.state.selectedmotif]}
                                             floating labeled button>
                                     <Dropdown.Menu>
                                       <Dropdown.Menu scrolling>
-                                        {this.state.pwms[this.state.selectedfile].result.pwms.map( (_, i) => (
-                                            <Dropdown.Item key={"motif_" + i}
+                                        {selectedPWMs.result.motifnames.map( (name, i) => (
+                                            <Dropdown.Item key={"motif_" + name + '_' + i}
                                                            onClick={ () => this.setState({ selectedmotif: i }) }
                                                            active={i === this.state.selectedmotif}>
-                                              {this.state.pwms[this.state.selectedfile].result.motifnames[i] || "Motif " + (i + 1)}
+                                              {name}
                                             </Dropdown.Item>
                                         ))}
                                       </Dropdown.Menu>
@@ -245,11 +255,12 @@ class UploadWorkspace extends React.Component {
                                 <MEMELogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
 				              logoinfo={this._format_logoinfo(this.state)} />
 			        <div ref={ c => { this.logo = c; } }
-                                     style={{ height: "75%" }}>
-			          <Logo pwm={this.state.pwms[this.state.selectedfile].result.pwms[this.state.selectedmotif]}
+                                     style={{ height: "75%", textAlign: "center" }}>
+			          <Logo pwm={selectedPWMs.result.pwms[this.state.selectedmotif].pwm}
 				        startpos={0}
+                                        scale="75%"
 				        mode={this.state.mode}
-				        glyphmap={this.state.glyphmap} />
+				        glyphmap={selectedGlyphmap} />
 			        </div>
                               </React.Fragment>
                           )}

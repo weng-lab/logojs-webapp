@@ -149,6 +149,7 @@ class PWMWorkspace extends React.Component {
 			    <Logo pwm={this.state.pwm.parsed}
 				  startpos={this.state.startpos}
 				  mode={this.state.mode}
+                                  scale="75%"
 				  glyphmap={this.state.glyphmap} />
 			  </div>
 			</Grid.Column>
