@@ -11,7 +11,7 @@ import { apiUrls, TYPEID, glyphsymbols } from '../../../common/utils';
 import FastaLogoMenu from './menu';
 import FastaSettingsPanel from './settings';
 
-const _lookupmap = glyphmap => {
+export const lookupmap = glyphmap => {
     let ret = {};
     glyphmap.map( (x, i) => ret[x.regex] = i );
     return {
@@ -58,14 +58,14 @@ CUSTOM
 
 let GLYPHSYMBOLS = glyphsymbols();
 
-const LOGOCOMPONENTS = {
+export const LOGOCOMPONENTS = {
     DNA: { component: DNALogo, glyphs: DNAGlyphmap, defaulttext: DNADEFAULT },
     RNA: { component: RNALogo, glyphs: RNAGlyphmap, defaulttext: RNADEFAULT },
     AA: { component: AALogo, glyphs: AAGlyphmap, defaulttext: PROTEINDEFAULT },
     custom: { component: CompleteLogo, glyphs: CompleteGlyphmap, defaulttext: CUSTOMDEFAULT }
 };
 
-const fastaToPWM = (fasta, lookupmap) => {
+export const fastaToPWM = (fasta, lookupmap) => {
     let sequences = [];
     fasta.split(os.EOL).filter(x => x[0] !== '#').map(
         x => x[0] !== '>' && x !== '' && sequences.push(x)
@@ -92,7 +92,7 @@ class FastaWorkspace extends React.Component {
 	    startpos: 1,
 	    mode: INFORMATION_CONTENT,
 	    initialized: false,
-	    glyphmap:  _lookupmap(LOGOCOMPONENTS["DNA"].glyphs)
+	    glyphmap: lookupmap(LOGOCOMPONENTS["DNA"].glyphs)
 	};
     }
 
@@ -123,7 +123,7 @@ class FastaWorkspace extends React.Component {
 	this.setState({
 	    logocomponent: data.value,
 	    fasta: LOGOCOMPONENTS[data.value].defaulttext,
-	    glyphmap: _lookupmap(LOGOCOMPONENTS[data.value].glyphs)
+	    glyphmap: lookupmap(LOGOCOMPONENTS[data.value].glyphs)
 	});
     }
 
@@ -134,7 +134,7 @@ class FastaWorkspace extends React.Component {
 	    return symbol && nglyphmap.push({ ...v, component: GLYPHSYMBOLS[v.regex].component });
 	});
 	this.setState({
-	    glyphmap: _lookupmap(nglyphmap)
+	    glyphmap: lookupmap(nglyphmap)
 	});
     }
 

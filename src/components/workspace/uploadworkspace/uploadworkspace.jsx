@@ -235,23 +235,25 @@ class UploadWorkspace extends React.Component {
                                       <Icon name="upload"/>&nbsp;upload more
                                     </span>
                                   </Menu.Item>
-                                </Menu>
-                                <div style={{ textAlign: "left" }}>
-                                  <Dropdown text={selectedPWMs.result.motifnames[this.state.selectedmotif]}
-                                            floating labeled button>
-                                    <Dropdown.Menu>
-                                      <Dropdown.Menu scrolling>
-                                        {selectedPWMs.result.motifnames.map( (name, i) => (
-                                            <Dropdown.Item key={"motif_" + name + '_' + i}
-                                                           onClick={ () => this.setState({ selectedmotif: i }) }
-                                                           active={i === this.state.selectedmotif}>
-                                              {name}
-                                            </Dropdown.Item>
-                                        ))}
-                                      </Dropdown.Menu>
-                                    </Dropdown.Menu>
-                                  </Dropdown>
-                                </div>
+                                  </Menu>
+				  <div style={{ textAlign: "left" }}>
+				    { selectedPWMs.length ? (
+                                      <Dropdown text={selectedPWMs.result.motifnames[this.state.selectedmotif]}
+						floating labeled button>
+					<Dropdown.Menu>
+					  <Dropdown.Menu scrolling>
+                                            {selectedPWMs.result.motifnames.map( (name, i) => (
+						<Dropdown.Item key={"motif_" + name + '_' + i}
+                                                               onClick={ () => this.setState({ selectedmotif: i }) }
+                                                  active={i === this.state.selectedmotif}>
+						  {name}
+						</Dropdown.Item>
+                                            ))}
+                                          </Dropdown.Menu>
+					</Dropdown.Menu>
+			              </Dropdown>
+				    ) : (selectedPWMs.result.motifnames[this.state.selectedmotif] && <h4>{selectedPWMs.result.motifnames[this.state.selectedmotif]}</h4>) }
+			        </div>
                                 <MEMELogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
 				              logoinfo={this._format_logoinfo(this.state)} />
 			        <div ref={ c => { this.logo = c; } }

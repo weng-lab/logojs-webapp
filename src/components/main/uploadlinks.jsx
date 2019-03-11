@@ -15,6 +15,7 @@ const UploadLinks = () => (
 	<Button as={Link} to="/editor/meme">MEME Upload</Button>
 	<Button as={Link} to="/editor/jaspar">JASPAR Upload</Button>
 	<Button as={Link} to="/editor/transfac">TRANSFAC Upload</Button>
+	<Button as={Link} to="/editor/fastaupload">FASTA Upload</Button>
       </p>
     </Container>
 );
