@@ -6,7 +6,7 @@ import './App.css';
 
 import { Main } from './components/main/index';
 import { PWMWorkspace, FastaWorkspace, MEMEWorkspace,
-         JASPARWorkspace, TRANSFACWorkspace } from './components/workspace/index';
+         JASPARWorkspace, TRANSFACWorkspace, FASTAUploadWorkspace } from './components/workspace/index';
 
 class App extends Component {
     
@@ -20,6 +20,7 @@ class App extends Component {
  	        <Route path='/editor/meme' render={() => <MEMEWorkspace apiserver={this.props.apiserver} />} />
                 <Route path='/editor/jaspar' render={() => <JASPARWorkspace apiserver={this.props.apiserver} />} />
                 <Route path='/editor/transfac' render={() => <TRANSFACWorkspace apiserver={this.props.apiserver} />} />
+		<Route path='/editor/fastaupload' render={() => <FASTAUploadWorkspace apiserver={this.props.apiserver} />} />
 	      </Switch>
 	    </Router>
 	);
