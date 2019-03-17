@@ -260,7 +260,7 @@ class UploadWorkspace extends React.Component {
                                      style={{ height: "75%", textAlign: "center" }}>
 			          <Logo pwm={selectedPWMs.result.pwms[this.state.selectedmotif].pwm}
 				        startpos={0}
-                                        scale="75%"
+                                        width="90%" height="75%"
 				        mode={this.state.mode}
 				        glyphmap={selectedGlyphmap} />
 			        </div>

@@ -145,11 +145,11 @@ class PWMWorkspace extends React.Component {
 			  <PWMLogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
 				       logoinfo={this._format_logoinfo(this.state)} />
 			  <div ref={ c => { this.logo = c; } }
-                               style={{ height: "75%" }}>
+                            style={{ height: "75%", textAlign: "center" }}>
 			    <Logo pwm={this.state.pwm.parsed}
 				  startpos={this.state.startpos}
 				  mode={this.state.mode}
-                                  scale="75%"
+				  width="90%" height="75%"
 				  glyphmap={this.state.glyphmap} />
 			  </div>
 			</Grid.Column>

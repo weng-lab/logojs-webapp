@@ -199,7 +199,7 @@ class FastaWorkspace extends React.Component {
                             <Logo pwm={pwm}
 			          startpos={this.state.startpos}
 			          mode={this.state.mode}
-                                  scale="75%"
+                                  width="90%" height="75%"
 			          glyphmap={this.state.glyphmap.raw} />
 	                  </div>
             		</Grid.Column>

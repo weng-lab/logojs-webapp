@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu } from 'semantic-ui-react';
 
 const LogoMenu = ({ width, background, children }) => (
-    <Menu style={{ width, background, textAlign: 'center' }}>
+    <Menu secondary style={{ width, textAlign: 'center' }}>
       {children}
     </Menu>
 );
