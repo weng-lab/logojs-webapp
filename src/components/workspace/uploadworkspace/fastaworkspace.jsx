@@ -21,7 +21,7 @@ class FASTAWorkspace extends React.Component {
     }
 
     render() {
-        return <UploadWorkspace parse={this.parseFasta.bind(this)} title="FASTA"/>;
+        return <UploadWorkspace parse={this.parseFasta.bind(this)} title="FASTA" apiserver={this.props.apiserver} />;
     }
     
 }

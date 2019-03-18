@@ -39,9 +39,9 @@ class UploadWorkspace extends React.Component {
 
     _format_logoinfo(state) {
 	return {
-	    pwms: [],
+	    pwm: this.state.pwms[this.state.selectedfile].result.pwms[this.state.selectedmotif].pwm,
+	    scale: 1.0,
 	    typeid: TYPEID[state.logocomponent],
-	    scale: state.scale,
 	    isfreq: state.mode !== INFORMATION_CONTENT,
 	    firstbase: 0
 	};
