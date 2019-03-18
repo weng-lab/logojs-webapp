@@ -1,10 +1,10 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import { DNALogo, RNALogo, AALogo, Logo, DNAGlyphmap, CompleteGlyphmap, CompleteLogo,
-	 RNAGlyphmap, AAGlyphmap, INFORMATION_CONTENT } from 'logos-to-go-react';
+	 RNAGlyphmap, AAGlyphmap, INFORMATION_CONTENT, LogoWithNegatives } from 'logos-to-go-react';
 
 import { PWMEditor } from '../../editor/index';
-import { apiUrls, isArrayOfArrays, TYPEID, glyphsymbols } from '../../../common/utils';
+import { anyNegative, apiUrls, isArrayOfArrays, TYPEID, glyphsymbols } from '../../../common/utils';
 
 import PWMLogoMenu from './menu';
 import PWMSettingsPanel from './settings';
@@ -109,6 +109,7 @@ class PWMWorkspace extends React.Component {
     }
     
     render() {
+	let hasNegative = this.state.pwm && this.state.pwm.parsed && this.state.pwm.parsed.length && anyNegative(this.state.pwm.parsed);
 	return (
 	    <React.Fragment>
 	      <Grid className="centered" style={{ height: "100%" }}>
@@ -128,7 +129,8 @@ class PWMWorkspace extends React.Component {
 				      startposdefault={this.state.startpos}
 				      modedefault={this.state.mode}
 				      glyphmap={this.state.glyphmap}
-				      onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
+				      onGlyphmapUpdate={this._glyphmapUpdate.bind(this)}
+				      hasnegative={hasNegative} />
 		  </Grid.Column>
 	          <Grid.Column width={13} style={{ height: '100%' }}>
 		    <Grid style={{ height: '100%' }}>
@@ -146,11 +148,19 @@ class PWMWorkspace extends React.Component {
 				       logoinfo={this._format_logoinfo(this.state)} />
 			  <div ref={ c => { this.logo = c; } }
                             style={{ height: "75%", textAlign: "center" }}>
-			    <Logo pwm={this.state.pwm.parsed}
-				  startpos={this.state.startpos}
-				  mode={this.state.mode}
-				  width="90%" height="75%"
-				  glyphmap={this.state.glyphmap} />
+			    { hasNegative ? (
+				<LogoWithNegatives pwm={this.state.pwm.parsed}
+						   startpos={this.state.startpos}
+						   mode={this.state.mode}
+						   width="90%" height="75%"
+						   glyphmap={this.state.glyphmap}/>
+			    ) : (
+				<Logo pwm={this.state.pwm.parsed}
+				      startpos={this.state.startpos}
+				      mode={this.state.mode}
+				      width="90%" height="75%"
+				      glyphmap={this.state.glyphmap} />
+			    )}
 			  </div>
 			</Grid.Column>
 		      </Grid.Row>

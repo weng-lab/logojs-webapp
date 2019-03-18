@@ -52,7 +52,7 @@ class MEMEWorkspace extends React.Component {
     }
     
     render() {
-        return <UploadWorkspace parse={this.parseMeme.bind(this)} title="MEME"/>;
+        return <UploadWorkspace parse={this.parseMeme.bind(this)} title="MEME" apiserver={this.props.apiserver} />;
     }
     
 }
