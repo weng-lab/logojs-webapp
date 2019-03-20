@@ -9,7 +9,7 @@ const OPTIONS = [
 
 const ModeDropdown = ({ header, onChange }) => (
     <React.Fragment>
-      {header ? <h3>{header}</h3> : null }
+      {header ? < h3>{header}</h3> : null }
       <Dropdown
 	options={OPTIONS}
 	defaultValue={INFORMATION_CONTENT}
