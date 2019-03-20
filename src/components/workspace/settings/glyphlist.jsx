@@ -4,13 +4,13 @@ import { Label, Icon } from 'semantic-ui-react';
 import { colorNameFromHex, foregroundColor } from '../../../common/utils';
 import { ColorPickerModal } from '../modalcolorpicker/index';
 
-const GlyphLabel = ({ i, symbol, color, onClick, onRemove }) => (
+const GlyphLabel = ({ i, symbol, color, onClick, onRemove, noteditable }) => (
     <div style={{ marginBottom: '2px' }}>
       <Label style={{ width: '50%', backgroundColor: color, color: foregroundColor(color) }}>
 	{symbol + ", " + colorNameFromHex(color)}
 	<span style={{ float: 'right' }}>
 	  <Icon name="edit" onClick={onClick} />
-	  <Icon name="delete" onClick={onRemove} />
+	  {!noteditable && <Icon name="delete" onClick={onRemove} />}
 	</span>
       </Label>
     </div>
@@ -80,10 +80,13 @@ class GlyphList extends React.Component {
 	      <h2>{this.props.header}</h2>
 	      {this.state.glyphmap.map( (glyphdata, i) => (
 		  <GlyphLabel i={i} symbol={glyphdata.regex} color={glyphdata.color}
-			      onClick={ () => this.showModal(i) } onRemove={ () => this.removeIdx(i) } />
+			      onClick={ () => this.showModal(i) } onRemove={ () => this.removeIdx(i) }
+		              noteditable={this.props.noteditable} />
 	      ))}
-	      <AddLabel color="#cccccc"
-	                onClick={ this.addGlyph.bind(this) } />
+	    {!this.props.noteditable && (
+		<AddLabel color="#cccccc"
+	                  onClick={ this.addGlyph.bind(this) } />
+	    )}
 	      <ColorPickerModal open={this.state.modalkey !== -1}
 	                        onClose={this.onGlyphUpdate.bind(this)}
 	                        glyph={this.state.glyphmap[this.state.modalkey]} />
