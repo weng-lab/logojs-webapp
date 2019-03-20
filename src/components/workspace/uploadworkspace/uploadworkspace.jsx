@@ -237,7 +237,7 @@ class UploadWorkspace extends React.Component {
                                   </Menu.Item>
                                   </Menu>
 				  <div style={{ textAlign: "left" }}>
-				    { selectedPWMs.length ? (
+				    { selectedPWMs && selectedPWMs.result && selectedPWMs.result.motifnames && selectedPWMs.result.motifnames.length > 1 ? (
                                       <Dropdown text={selectedPWMs.result.motifnames[this.state.selectedmotif]}
 						floating labeled button>
 					<Dropdown.Menu>
