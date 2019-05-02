@@ -16,5 +16,5 @@ const ModeDropdown = ({ header, onChange }) => (
 	onChange={onChange}
       />
     </React.Fragment>
-)
+);
 export default ModeDropdown;
