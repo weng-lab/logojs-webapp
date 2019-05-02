@@ -8,7 +8,7 @@ const ITEMSTYLE = {
     labelsize: "10pt",
 };
 
-const MEMELogoMenu = ({ svgref, apiurl, logoinfo }) => (
+const UploadLogoMenu = ({ svgref, apiurl, logoinfo }) => (
     <LogoMenu width="100%">
       <LogoSVGDownloadButton {...ITEMSTYLE}
 			     labeltext="Save" svgref={svgref}
@@ -21,4 +21,4 @@ const MEMELogoMenu = ({ svgref, apiurl, logoinfo }) => (
 		   url={apiurl} logoinfo={logoinfo} />
     </LogoMenu>
 );
-export default MEMELogoMenu;
+export default UploadLogoMenu;

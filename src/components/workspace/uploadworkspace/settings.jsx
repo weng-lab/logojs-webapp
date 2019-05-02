@@ -3,7 +3,7 @@ import { Menu } from 'semantic-ui-react';
 
 import { LogoTypeDropdown, ModeDropdown, GlyphList } from '../settings/index';
 
-const MEMESettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
+const SettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
 			    onModeChange, modedefault, logodefault, scaledefault,
 			    startposdefault, glyphmap, onGlyphmapUpdate }) => (
 				<Menu vertical style={{ width: '100%', backgroundColor: "#fafafa" }}>
@@ -22,4 +22,4 @@ const MEMESettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
 				  </Menu.Item>
 				</Menu>
 			    );
-export default MEMESettingsPanel;
+export default SettingsPanel;

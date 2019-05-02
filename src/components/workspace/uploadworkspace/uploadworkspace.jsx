@@ -5,8 +5,9 @@ import { DNALogo, RNALogo, AALogo, Logo, DNAGlyphmap, CompleteGlyphmap, Complete
 
 import { apiUrls, isArrayOfArrays, TYPEID, glyphsymbols } from '../../../common/utils';
 
-import MEMESettingsPanel from './settings';
-import MEMELogoMenu from './menu';
+import MotifSelector from './motifselector';
+import SettingsPanel from './settings';
+import LogoMenu from './menu';
 import ErrorMessage from './errormessage';
 
 let GLYPHSYMBOLS = glyphsymbols();
@@ -164,6 +165,12 @@ class UploadWorkspace extends React.Component {
             processed: this.state.processed - this.state.errors.length
         });
     }
+
+    onItemSelected(i) {
+        this.setState({
+            selectedmotif: i
+        });
+    }
     
     async fileReceived(e) {
         this.setState({ total: this.state.total + e.target.files.length });
@@ -187,7 +194,7 @@ class UploadWorkspace extends React.Component {
 		</Grid.Row>
 		<Grid.Row style={{ height: "100%" }}>
 		  <Grid.Column width={3}>
-		    <MEMESettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
+		    <SettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
 				       onScaleChange={this._scaleChange.bind(this)}
 				       onStartPosChange={this._startPosChange.bind(this)}
 				       onModeChange={this._modeChange.bind(this)}
@@ -237,24 +244,11 @@ class UploadWorkspace extends React.Component {
                                   </Menu.Item>
                                   </Menu>
 				  <div style={{ textAlign: "left" }}>
-				    { selectedPWMs && selectedPWMs.result && selectedPWMs.result.motifnames && selectedPWMs.result.motifnames.length > 1 ? (
-                                      <Dropdown text={selectedPWMs.result.motifnames[this.state.selectedmotif]}
-						floating labeled button>
-					<Dropdown.Menu>
-					  <Dropdown.Menu scrolling>
-                                            {selectedPWMs.result.motifnames.map( (name, i) => (
-						<Dropdown.Item key={"motif_" + name + '_' + i}
-                                                               onClick={ () => this.setState({ selectedmotif: i }) }
-                                                  active={i === this.state.selectedmotif}>
-						  {name}
-						</Dropdown.Item>
-                                            ))}
-                                          </Dropdown.Menu>
-					</Dropdown.Menu>
-			              </Dropdown>
-				    ) : (selectedPWMs.result.motifnames[this.state.selectedmotif] && <h4>{selectedPWMs.result.motifnames[this.state.selectedmotif]}</h4>) }
-			        </div>
-                                <MEMELogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
+                                    <MotifSelector pwms={selectedPWMs}
+                                                   selectedmotif={this.state.selectedmotif}
+                                                   onItemSelected={this.onItemSelected.bind(this)} />
+			          </div>
+                                <LogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
 				              logoinfo={this._format_logoinfo(this.state)} />
 			        <div ref={ c => { this.logo = c; } }
                                      style={{ height: "75%", textAlign: "center" }}>
