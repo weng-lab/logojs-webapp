@@ -55,7 +55,7 @@ class JASPARWorkspace extends React.Component {
     }
     
     render() {
-        return <UploadWorkspace parse={this.parseJaspar} title="JASPAR" />;
+        return <UploadWorkspace parse={this.parseJaspar} title="JASPAR" apiserver={this.props.apiserver} />;
     }
     
 }

@@ -40,9 +40,9 @@ class UploadWorkspace extends React.Component {
 
     _format_logoinfo(state) {
 	return {
-	    pwms: [],
+	    pwm: this.state.pwms[this.state.selectedfile].result.pwms[this.state.selectedmotif].pwm,
+	    scale: 1.0,
 	    typeid: TYPEID[state.logocomponent],
-	    scale: state.scale,
 	    isfreq: state.mode !== INFORMATION_CONTENT,
 	    firstbase: 0
 	};
@@ -254,7 +254,7 @@ class UploadWorkspace extends React.Component {
                                      style={{ height: "75%", textAlign: "center" }}>
 			          <Logo pwm={selectedPWMs.result.pwms[this.state.selectedmotif].pwm}
 				        startpos={0}
-                                        scale="75%"
+                                        width="90%" height="75%"
 				        mode={this.state.mode}
 				        glyphmap={selectedGlyphmap} />
 			        </div>

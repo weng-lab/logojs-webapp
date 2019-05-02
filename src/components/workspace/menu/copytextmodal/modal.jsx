@@ -33,7 +33,7 @@ class CopyTextModal extends React.Component {
     
     render() {
 	return (
-	    <Modal open={this.props.open} onClose={this.props.onClose}>
+	    <Modal open={this.props.open} onClose={this.props.onClose} style={{ marginTop: '0px' }}>
 	      <Modal.Header><h2>{this.props.header}</h2></Modal.Header>
 	      <Modal.Content>
 		{this.props.additionaltext && <p>{this.props.additionaltext}</p>}
