@@ -61,3 +61,13 @@ export const colorlightness = hex => {
 export const foregroundColor = hex => (
     (hex && colorlightness(hex) < 150.0 ? "#ffffff" : "#000000")
 );
+
+export const anyNegative = vset => (
+    any(vset.map( v => any(v.map( x => x < 0.0 )) ))
+);
+
+export const any = b => {
+    let retval = false;
+    b.forEach( v => { if (v) retval = true; } );
+    return retval;
+};

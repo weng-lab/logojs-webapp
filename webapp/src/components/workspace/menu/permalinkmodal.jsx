@@ -27,7 +27,7 @@ class PermalinkModal extends React.Component {
     
     render() {
 	return (
-	    <Modal open={this.props.open} onClose={this.props.onClose}>
+	    <Modal open={this.props.open} onClose={this.props.onClose} style={{ marginTop: '0px' }}>
 	      <Modal.Header><h2>Permalink generated!</h2></Modal.Header>
 	      <Modal.Content>
 	        <Input defaultValue={this.props.data} style={{ width: '80%' }} />&nbsp;

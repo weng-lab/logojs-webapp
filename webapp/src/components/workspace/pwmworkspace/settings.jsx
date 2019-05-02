@@ -6,18 +6,20 @@ import { LogoTypeDropdown, ColoredInput, ModeDropdown,
 
 const PWMSettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
 			    onModeChange, modedefault, logodefault, scaledefault,
-			    startposdefault, glyphmap, onGlyphmapUpdate }) => (
+			    startposdefault, glyphmap, onGlyphmapUpdate, hasnegative }) => (
 				<Menu vertical style={{ width: '100%', backgroundColor: "#fafafa" }}>
 				  <Menu.Item>
 				    <LogoTypeDropdown header="Logo Type"
 						      value={logodefault}
 						      onChange={onLogoTypeChange} />
 				  </Menu.Item>
-				  <Menu.Item>
-				    <ModeDropdown header="Letter Height"
-						  value={modedefault}
-						  onChange={onModeChange} />
-				  </Menu.Item>
+				  {!hasnegative && (
+				      <Menu.Item>
+					<ModeDropdown header="Letter Height"
+						      value={modedefault}
+						      onChange={onModeChange} />
+				      </Menu.Item>
+				  )}
 				  <Menu.Item>
 				    <ColoredInput defaultValue={startposdefault} onChange={onStartPosChange}
 						  color="#000000" background="#ffffff"

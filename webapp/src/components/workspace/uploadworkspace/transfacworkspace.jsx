@@ -40,7 +40,7 @@ class TRANSFACWorkspace extends React.Component {
     }
 
     render() {
-        return <UploadWorkspace parse={this.parseTransfac} title="TRANSFAC"/>;
+        return <UploadWorkspace parse={this.parseTransfac} title="TRANSFAC" apiserver={this.props.apiserver} />;
     }
     
 }

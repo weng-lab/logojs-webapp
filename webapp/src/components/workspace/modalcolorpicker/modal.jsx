@@ -36,7 +36,7 @@ class ColorPickerModal extends React.Component {
 
     render() {
 	return (
-	    <Modal open={this.props.open} onClose={ () => this.props.onClose(this.state.glyph) }>
+	    <Modal style={{ marginTop: '0px' }} open={this.props.open} onClose={ () => this.props.onClose(this.state.glyph) }>
 	      <Modal.Header><h2>Glyph Editor</h2></Modal.Header>
 	      { this.props.glyph && this.state.glyph && (
 		  <Modal.Content>

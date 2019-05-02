@@ -8,17 +8,12 @@ const SettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
 			    startposdefault, glyphmap, onGlyphmapUpdate }) => (
 				<Menu vertical style={{ width: '100%', backgroundColor: "#fafafa" }}>
 				  <Menu.Item>
-				    <LogoTypeDropdown header="Logo Type"
-						      value={logodefault}
-						      onChange={onLogoTypeChange} />
-				  </Menu.Item>
-				  <Menu.Item>
 				    <ModeDropdown header="Letter Height"
 						  value={modedefault}
 						  onChange={onModeChange} />
 				  </Menu.Item>
 				  <Menu.Item>
-				    <GlyphList header="Symbol List" glyphmap={glyphmap} onGlyphmapUpdate={onGlyphmapUpdate} />
+				    <GlyphList header="Symbol List" glyphmap={glyphmap} noteditable onGlyphmapUpdate={onGlyphmapUpdate} />
 				  </Menu.Item>
 				</Menu>
 			    );
