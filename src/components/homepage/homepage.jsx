@@ -20,7 +20,7 @@ const HomePage = props => (
             <DataUpload />
             <ContentDivider />
             <Embedding />
-            <Grid.Row />
+            <Grid.Row style={{ height: "5em" }} />
           </Grid>
         </Container>
       </Segment>
