@@ -36,9 +36,9 @@ class JASPARWorkspace extends React.Component {
             let toutput = [];
             for (let j in pwm[0]) {
                 toutput.push([]);
-                for (let i in pwm) {
+                pwm.forEach( () => {
                     toutput[j].push(0.0);
-                }
+                });
             }
             for (let i in pwm) {
                 for (let j in pwm[i]) {

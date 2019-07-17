@@ -8,7 +8,7 @@ class MEMEWorkspace extends React.Component {
         try {
             let motifs = this.parseMemeXml(text);
             if (motifs.pwms.length === 0)
-                throw null;
+                throw new Error("no motifs found");
             return motifs;
         } catch (e) {
             return this.parseMemeTxt(text);

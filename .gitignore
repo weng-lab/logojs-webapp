@@ -1,1 +1,6 @@
 /public/config.json
+/lib
+/node_modules
+/build
+*~
+\#*\#

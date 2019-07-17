@@ -181,9 +181,9 @@ class UploadWorkspace extends React.Component {
         let isdone = this.state.processed === this.state.total
             && this.state.pwms.length > 0;
         let selectedPWMs = this.state.pwms[this.state.selectedfile];
-        let selectedGlyphmap = selectedPWMs && selectedPWMs.result && selectedPWMs.result.pwms
+        let selectedGlyphmap = (selectedPWMs && selectedPWMs.result && selectedPWMs.result.pwms
             && selectedPWMs.result.pwms.length > 0 && selectedPWMs.result.pwms[this.state.selectedmotif]
-            && selectedPWMs.result.pwms[this.state.selectedmotif].glyphmap || this.state.glyphmap;
+                                && selectedPWMs.result.pwms[this.state.selectedmotif].glyphmap) || this.state.glyphmap;
 	return (
 	    <React.Fragment>
 	      <Grid className="centered" style={{ height: "100%" }}>
