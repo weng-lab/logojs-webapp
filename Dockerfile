@@ -1,5 +1,5 @@
 # base image
-FROM node:9.6.1
+FROM node:10.16-alpine
 
 # add `/usr/src/app/node_modules/.bin` to $PATH
 ENV PATH /usr/src/app/node_modules/.bin:$PATH

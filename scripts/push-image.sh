@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Pushes docker image for service to docker repo. Takes 1 arg:
 # arg1: docker image tag
 # Example usage: scripts/push-image.sh v1.0.0
