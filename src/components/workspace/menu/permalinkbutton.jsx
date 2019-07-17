@@ -1,10 +1,10 @@
 import React from 'react';
 
+import { encodePermalink } from '../../../utilities/permalink';
 import { CopyTextButton } from './copytextmodal/index';
 
 const PermalinkButton = ({ url, logoinfo, labelsize, labeltext, iconsize }) => (
-    <CopyTextButton url={url} options={ { body: JSON.stringify(logoinfo) } }
-		    dataformatter={ data => url + data.uuid } iconclass="linkify"
+    <CopyTextButton dataformatter={encodePermalink} iconclass="linkify" data={logoinfo}
                     iconsize={iconsize} labelsize={labelsize} labeltext={labeltext}
                     modalheader="Permalink generated!" />
 );

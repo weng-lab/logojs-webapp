@@ -6,9 +6,9 @@ import { _svgdata } from './utils';
 
 const SVGCopyButton = ({ children, svgref }) => (
     <CopyToClipboard text={_svgdata(ReactDOM.findDOMNode(svgref))}>
-      <a>
+      <span>
 	{children}
-      </a>
+      </span>
     </CopyToClipboard>
 );
 export default SVGCopyButton;

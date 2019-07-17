@@ -52,7 +52,8 @@ class PWMWorkspace extends React.Component {
 	    typeid: TYPEID[state.logocomponent],
 	    scale: state.scale,
 	    isfreq: state.mode !== INFORMATION_CONTENT,
-	    firstbase: state.startpos
+	    firstbase: state.startpos,
+            glyphmap: state.glyphmap
 	};
     }
     
@@ -118,7 +119,7 @@ class PWMWorkspace extends React.Component {
                   <MainMenu items={mainMenuItems.items} active="Editors" fixed={true} />
                 </Container>
                 <Container style={{ textAlign: "center" }}>
-                  <Header as="h1" inverted style={{ fontSize: "2.5em", marginTop: "0.5em" }}>PWM Editor</Header>
+                  <Header as="h1" inverted style={{ fontSize: "2.5em", marginTop: "0.15em" }}>PWM Editor</Header>
                 </Container>
               </Segment>
 	      <Grid className="centered" style={{ height: "100%", width: "90%", marginLeft: "5%" }}>

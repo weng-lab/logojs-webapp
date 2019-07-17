@@ -7,8 +7,8 @@ const _dodownload = ( svgref, filename ) => {
 };
 
 const SVGDownloadButton = ({ children, svgref, filename }) => (
-    <a onClick={ () => _dodownload(svgref, filename) }>
+    <span onClick={ () => _dodownload(svgref, filename) }>
       {children}
-    </a>
+    </span>
 );
 export default SVGDownloadButton;

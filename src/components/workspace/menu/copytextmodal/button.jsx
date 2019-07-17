@@ -1,7 +1,6 @@
 import React from 'react';
 import { Icon, Menu } from 'semantic-ui-react';
 
-import { AJAXPOSTButton } from '../../../ajaxbutton/index';
 import Modal from './modal';
 
 class CopyTextButton extends React.Component {
@@ -20,25 +19,25 @@ class CopyTextButton extends React.Component {
 	});
     }
 
-    _showModal(data) {
+    _showModal() {
 	this.setState({
-	    data: this.props.dataformatter(data),
+	    data: this.props.dataformatter(this.props.data),
 	    modalshown: true
 	});
     }
 
     render() {
 	return (
-	    <Menu.Item link>
-	      <AJAXPOSTButton url={this.props.url} options={this.props.options}
-			      success={data => data.json().then(this._showModal.bind(this))}
-		              error={console.log}>
-		<Icon className={this.props.iconclass} style={{ color: "#000", fontSize: this.props.iconsize }} /><br />
-		<div style={{ fontSize: this.props.labelsize, color: "#000" }}>{this.props.labeltext}</div>
-		<Modal open={this.state.modalshown} data={this.state.data} header={this.props.modalheader}
-		       onClose={this._modalClosed.bind(this)} additionaltext={this.props.additionaltext} />
-	      </AJAXPOSTButton>
-	    </Menu.Item>
+            <React.Fragment>
+              <Modal open={this.state.modalshown} data={this.state.data} header={this.props.modalheader}
+		     onClose={this._modalClosed.bind(this)} additionaltext={this.props.additionaltext} />
+              <Menu.Item link>
+	        <span onClick={this._showModal.bind(this)}>
+		  <Icon className={this.props.iconclass} style={{ color: "#000", fontSize: this.props.iconsize }} /><br />
+		  <div style={{ fontSize: this.props.labelsize, color: "#000" }}>{this.props.labeltext}</div>
+	        </span>
+	      </Menu.Item>
+            </React.Fragment>
 	);
     }
     

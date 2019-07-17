@@ -4,23 +4,35 @@
   "private": true,
   "dependencies": {
     "brace": "^0.11.1",
-    "color-name-list": "^3.15.0",
-    "copy-to-clipboard": "^3.0.8",
-    "logos-to-go-react": "^0.1.13",
-    "react": "^16.2.0",
-    "react-ace": "^6.0.0",
-    "react-color": "^2.14.1",
+    "color-name-list": "^4.10.0",
+    "copy-to-clipboard": "^3.2.0",
+    "logos-to-go-react": "^0.1.14",
+    "react": "^16.8.6",
+    "react-ace": "^7.0.2",
+    "react-color": "^2.17.3",
     "react-copy-to-clipboard": "^5.0.1",
-    "react-dom": "^16.2.0",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1",
-    "semantic-ui-css": "^2.3.1",
-    "semantic-ui-react": "^0.79.1"
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "^3.0.1",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.87.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
