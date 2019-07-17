@@ -3,8 +3,9 @@ import os from 'os';
 import { DNALogo, RNALogo, AALogo, Logo, CompleteLogo,
 	 DNAGlyphmap, RNAGlyphmap, AAGlyphmap, CompleteGlyphmap,
 	 INFORMATION_CONTENT, xrange } from 'logos-to-go-react';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Container, Segment, Header } from 'semantic-ui-react';
 
+import { MainMenu, mainMenuItems } from '../../homepage';
 import { FastaEditor } from '../../editor/index';
 import { apiUrls, TYPEID, glyphsymbols } from '../../../common/utils';
 
@@ -160,12 +161,16 @@ class FastaWorkspace extends React.Component {
 	let pwm = fastaToPWM(this.state.fasta, this.state.glyphmap.lookup);
 	return (
             <React.Fragment>
-	      <Grid className="centered" style={{ height: "100%" }}>
-	        <Grid.Row style={{ backgroundColor: "#eee" }}>
-	          <Grid.Column width={3} style={{ textAlign: "center" }}>
-	            <h1 className="inverted center aligned" style={{ color: "#000", fontSize: "28pt", marginTop: "5px" }}>FASTA Editor</h1>
-	          </Grid.Column>
-		</Grid.Row>
+              <Segment inverted fixed="top" attached="top">
+                <Container>
+                  <MainMenu items={mainMenuItems.items} active="Editors" fixed={true} />
+                </Container>
+                <Container style={{ textAlign: "center" }}>
+                  <Header as="h1" inverted style={{ fontSize: "2.5em", marginTop: "0.5em" }}>FASTA Editor</Header>
+                </Container>
+              </Segment>
+	      <Grid className="centered" style={{ height: "100%", width: "90%", marginLeft: "5%" }}>
+                <Grid.Row />
 		<Grid.Row style={{ height: "100%" }}>
 		  <Grid.Column width={3}>
 		    <FastaSettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}

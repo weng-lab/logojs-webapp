@@ -6,7 +6,12 @@ export const mainMenuItems = {
         },
         {
             name: "Editors",
-            href: "/editors"
+            href: "/editors",
+            dropdown: true,
+            options: [
+                { key: "FASTA", text: "FASTA", href: "/editor/fasta" },
+                { key: "PWM", text: "PWM", href: "/editor/pwm" }
+            ]
         },
         {
             name: "Data Upload",

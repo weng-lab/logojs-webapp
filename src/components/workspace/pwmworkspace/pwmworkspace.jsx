@@ -1,8 +1,9 @@
 import React from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Container, Segment, Header } from 'semantic-ui-react';
 import { DNALogo, RNALogo, AALogo, Logo, DNAGlyphmap, CompleteGlyphmap, CompleteLogo,
 	 RNAGlyphmap, AAGlyphmap, INFORMATION_CONTENT, LogoWithNegatives } from 'logos-to-go-react';
 
+import { MainMenu, mainMenuItems } from '../../homepage';
 import { PWMEditor } from '../../editor/index';
 import { anyNegative, apiUrls, isArrayOfArrays, TYPEID, glyphsymbols } from '../../../common/utils';
 
@@ -112,12 +113,16 @@ class PWMWorkspace extends React.Component {
 	let hasNegative = this.state.pwm && this.state.pwm.parsed && this.state.pwm.parsed.length && anyNegative(this.state.pwm.parsed);
 	return (
 	    <React.Fragment>
-	      <Grid className="centered" style={{ height: "100%" }}>
-		<Grid.Row style={{ backgroundColor: "#eee" }}>
-		  <Grid.Column width={3} style={{ textAlign: "center" }}>
-		    <h1 className="inverted center aligned" style={{ color: "#000", fontSize: "28pt", marginTop: "5px" }}>PWM Editor</h1>
-		  </Grid.Column>
-		</Grid.Row>
+              <Segment inverted fixed="top" attached="top">
+                <Container>
+                  <MainMenu items={mainMenuItems.items} active="Editors" fixed={true} />
+                </Container>
+                <Container style={{ textAlign: "center" }}>
+                  <Header as="h1" inverted style={{ fontSize: "2.5em", marginTop: "0.5em" }}>PWM Editor</Header>
+                </Container>
+              </Segment>
+	      <Grid className="centered" style={{ height: "100%", width: "90%", marginLeft: "5%" }}>
+                <Grid.Row />
 		<Grid.Row style={{ height: "100%" }}>
 		  <Grid.Column width={3}>
 		    <PWMSettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
