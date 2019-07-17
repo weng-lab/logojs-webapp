@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
-import { Main } from './components/main/index';
+import { HomePage } from './components/homepage';
 import { PWMWorkspace, FastaWorkspace, MEMEWorkspace,
          JASPARWorkspace, TRANSFACWorkspace, FASTAUploadWorkspace } from './components/workspace/index';
 
@@ -14,7 +14,7 @@ class App extends Component {
 	return (
 	    <Router>
 	      <Switch>
-		<Route exact path='/' component={Main} />
+		<Route exact path='/' component={HomePage} />
 		<Route path='/editor/pwm' render={() => <PWMWorkspace apiserver={this.props.config.APIURL} />} />
  	        <Route path='/editor/fasta' render={() => <FastaWorkspace apiserver={this.props.config.APIURL} />} />
  	        <Route path='/editor/meme' render={() => <MEMEWorkspace apiserver={this.props.config.APIURL} />} />
