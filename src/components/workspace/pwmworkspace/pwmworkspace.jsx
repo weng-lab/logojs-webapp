@@ -83,9 +83,14 @@ class PWMWorkspace extends React.Component {
 
     _glyphmapUpdate(glyphmap) {
 	let nglyphmap = [];
-	glyphmap.map( v => {
-	    let symbol = GLYPHSYMBOLS[v.regex] && GLYPHSYMBOLS[v.regex].component;
-	    return symbol && nglyphmap.push({ ...v, component: GLYPHSYMBOLS[v.regex].component });
+	glyphmap.forEach( v => {
+	    let symbols = [];
+            for (let i = 0; i < v.regex.length; ++i) {
+                const symbol = GLYPHSYMBOLS[v.regex[i]] && GLYPHSYMBOLS[v.regex[i]].component;
+                if (!symbol) return;
+                symbols.push(symbol);
+            }
+	    nglyphmap.push({ ...v, component: symbols });
 	});
 	this.setState({
 	    glyphmap: nglyphmap
