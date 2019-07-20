@@ -1,9 +1,5 @@
-import { PWMWorkspace } from './pwmworkspace/index';
-import { FastaWorkspace } from './fastaworkspace/index';
-import { MEMEWorkspace } from './uploadworkspace/index';
-import { JASPARWorkspace } from './uploadworkspace/index';
-import { TRANSFACWorkspace } from './uploadworkspace/index';
-import { FASTAUploadWorkspace } from './uploadworkspace/index';
+import { PWMWorkspace } from './pwmworkspace';
+import { FastaWorkspace } from './fastaworkspace';
+import { AnyUploadWorkspace } from './uploadworkspace';
 
-export { PWMWorkspace, FastaWorkspace, MEMEWorkspace, JASPARWorkspace, TRANSFACWorkspace,
-	 FASTAUploadWorkspace};
+export { PWMWorkspace, FastaWorkspace, AnyUploadWorkspace };

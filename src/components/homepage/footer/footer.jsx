@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Segment, Container, Grid, Header, List } from 'semantic-ui-react';
 
 const Footer = props => (
@@ -11,8 +12,7 @@ const Footer = props => (
                 About
               </Header>
               <List link inverted>
-                <List.Item as='a'>Gallery</List.Item>
-                <List.Item as='a'>Batch generation</List.Item>
+                <List.Item as={Link} to="/gallery/">Gallery</List.Item>
                 <List.Item as='a'>Contact Us</List.Item>
               </List>
             </Grid.Column>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Grid, Header, Button, Icon } from 'semantic-ui-react';
 
 const DataUpload = props => (
@@ -12,7 +13,7 @@ const DataUpload = props => (
           Edit the logos or download them individually or all together in a ZIP archive. Obtain
           code to embed the logos or permalinks to share them.
         </p>
-        <Button>Upload now</Button>
+        <Button as={Link} to="/upload/">Upload now</Button>
       </Grid.Column>
       <Grid.Column width={1} />
       <Grid.Column width={3}>

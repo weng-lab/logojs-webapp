@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Grid, Header, Button, Icon } from 'semantic-ui-react';
 
 const Embedding = props => (
@@ -16,7 +17,7 @@ const Embedding = props => (
           interactions. Our visual gallery provides visual samples along with the code
           required to create them.
         </p>
-        <Button>Browse the gallery</Button>
+        <Button as={Link} to="/gallery">Browse the gallery</Button>
       </Grid.Column>
     </Grid.Row>
 );
