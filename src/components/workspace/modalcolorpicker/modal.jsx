@@ -61,7 +61,7 @@ class ColorPickerModal extends React.Component {
                     <Grid>
                       <Grid.Row>
                         { colors && colors.map( (color, i) => (
-                            <Grid.Column width={5}>
+                            <Grid.Column width={5} key={i}>
                               <Header as="h2">{this.state.glyph.regex[i]}</Header>
 		              <ColorPicker color={ color }
 		                           onChangeComplete={ color => this.onColorChange(colors, color, i) } />

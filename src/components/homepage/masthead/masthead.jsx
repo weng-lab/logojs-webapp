@@ -17,7 +17,7 @@ const MainMasthead = ({ children }) => (
         <Header inverted as="h2" style={{ fontWeight: "normal" }}>
           Embeddable, customizable, and interactive sequence logos, all in Javascript.
         </Header>
-        <Button as={Link} to="/genomes/" primary className="huge">
+        <Button as={Link} to="/gallery/" primary className="huge">
           Examples
         </Button>
         <Button as={Link} to="/embed/" primary className="huge">

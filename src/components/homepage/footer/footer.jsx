@@ -22,13 +22,13 @@ const Footer = props => (
               </Header>
               <List link inverted>
                 <List.Item as='a'>Installing the package</List.Item>
-                <List.Item as='a'>Visual examples</List.Item>
+                <List.Item as={Link} to="/gallery/">Visual examples</List.Item>
                 <List.Item as='a'>Full documentation</List.Item>
               </List>
             </Grid.Column>
             <Grid.Column width={7}>
               <Header inverted as="h4">
-                Code, Contributing, and Deploying an Instance
+                Code, Contributing, Embedding, and Deploying
               </Header>
               <p style={{ color: "#ffffff88" }}>
                 LogosJ is fully open-source. The package is available via NodeJS or for static inclusion;
