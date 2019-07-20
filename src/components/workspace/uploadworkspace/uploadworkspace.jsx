@@ -103,12 +103,12 @@ class UploadWorkspace extends React.Component {
     
     async parseFile(f) {
         const reader = new FileReader();
-        if (f.size > 20000000) {
+        if (f.size > 100000000) {
             this.setState({
                 errors: [
                     ...this.state.errors, {
                         file: f,
-                        message: "file too large (size limit is 20MB)"
+                        message: "file too large (size limit is 100MB)"
                     }
                 ],
                 processed: this.state.processed + 1
@@ -116,7 +116,10 @@ class UploadWorkspace extends React.Component {
             return;
         }
         reader.onload = e => {
-            let result = this.props.parse(e.target.result);
+            let result, i = 0;
+            while ((!result || !result.pwms) && this.props.parse[i++]) {
+                result = (this.props.parse[i++])(e.target.result);
+            }
             if (Object.keys(result.pwms).length !== 0) {
                 this.setState({
                     pwms: [
@@ -186,12 +189,8 @@ class UploadWorkspace extends React.Component {
                                 && selectedPWMs.result.pwms[this.state.selectedmotif].glyphmap) || this.state.glyphmap;
 	return (
 	    <React.Fragment>
-	      <Grid className="centered" style={{ height: "100%" }}>
-		<Grid.Row style={{ backgroundColor: "#eee" }}>
-		  <Grid.Column width={3} style={{ textAlign: "center" }}>
-	            <h1 className="inverted center aligned" style={{ color: "#000", fontSize: "28pt", marginTop: "5px" }}>{this.props.title} Viewer</h1>
-		  </Grid.Column>
-		</Grid.Row>
+	      <Grid className="centered" style={{ width: "90%", marginLeft: "5%", height: "100%" }}>
+                <Grid.Row />
 		<Grid.Row style={{ height: "100%" }}>
 		  <Grid.Column width={3}>
 		    <SettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}

@@ -1,6 +1,3 @@
-import MEMEWorkspace from './memeworkspace';
-import JASPARWorkspace from './jasparworkspace';
-import TRANSFACWorkspace from './transfacworkspace';
-import FASTAUploadWorkspace from './fastaworkspace';
+import AnyUploadWorkspace from './anyupload';
 
-export { MEMEWorkspace, JASPARWorkspace, TRANSFACWorkspace, FASTAUploadWorkspace };
+export { AnyUploadWorkspace };
