@@ -8,7 +8,6 @@ const MenuContent = ({ items, active }) => (
           item.dropdown ? (
               <Dropdown text={item.name}
                         key={item.name}
-                        active={item.name === active}
                         simple item>
                 <Dropdown.Menu>
                   {item.options.map( option => (
