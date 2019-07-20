@@ -5,7 +5,7 @@ import { DNALogo, RNALogo, AALogo, Logo, CompleteLogo,
 	 INFORMATION_CONTENT, xrange } from 'logos-to-go-react';
 import { Grid, Container, Segment, Header } from 'semantic-ui-react';
 
-import { MainMenu, mainMenuItems } from '../../homepage';
+import { MainMenu, mainMenuItems, Footer } from '../../homepage';
 import { FastaEditor } from '../../editor/index';
 import { apiUrls, TYPEID, glyphsymbols } from '../../../common/utils';
 
@@ -66,8 +66,9 @@ export const LOGOCOMPONENTS = {
     custom: { component: CompleteLogo, glyphs: CompleteGlyphmap, defaulttext: CUSTOMDEFAULT }
 };
 
-export const fastaToPWM = (fasta, lookupmap) => {
+export const fastaToPWM = (fasta, lookupmap, caseinsensitive) => {
     let sequences = [];
+    if (caseinsensitive) fasta = fasta.toUpperCase();
     fasta.split(os.EOL).filter(x => x[0] !== '#').map(
         x => x[0] !== '>' && x !== '' && sequences.push(x)
     );
@@ -93,7 +94,8 @@ class FastaWorkspace extends React.Component {
 	    startpos: 1,
 	    mode: INFORMATION_CONTENT,
 	    initialized: false,
-	    glyphmap: lookupmap(LOGOCOMPONENTS["DNA"].glyphs)
+	    glyphmap: lookupmap(LOGOCOMPONENTS["DNA"].glyphs),
+            caseinsensitive: true
 	};
     }
 
@@ -117,8 +119,14 @@ class FastaWorkspace extends React.Component {
     
     _fastaChange(fasta) {
 	this.setState({
-	    fasta: fasta.toUpperCase()
+	    fasta
 	});
+    }
+
+    _onCaseChange() {
+        this.setState({
+            caseinsensitive: !this.state.caseinsensitive
+        });
     }
 
     _logoTypeChange(e, data) {
@@ -159,7 +167,7 @@ class FastaWorkspace extends React.Component {
     }
     
     render() {
-	let pwm = fastaToPWM(this.state.fasta, this.state.glyphmap.lookup);
+	let pwm = fastaToPWM(this.state.fasta, this.state.glyphmap.lookup, this.state.caseinsensitive);
 	return (
             <React.Fragment>
               <Segment inverted fixed="top" attached="top">
@@ -180,10 +188,12 @@ class FastaWorkspace extends React.Component {
 				        onModeChange={this._modeChange.bind(this)}
 				        logodefault={this.state.logocomponent}
 				        scaledefault={this.state.scale}
+                                        caseInsensitive={this.state.caseinsensitive}
 				        startposdefault={this.state.startpos}
 				        modedefault={this.state.mode}
 				        glyphmap={this.state.glyphmap.raw}
-	                                onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
+	                                onGlyphmapUpdate={this._glyphmapUpdate.bind(this)}
+                                        onCaseChange={this._onCaseChange.bind(this)} />
             	  </Grid.Column>
 	          <Grid.Column width={13} style={{ height: '100%' }}>
 		    <Grid style={{ height: '100%' }}>
@@ -214,6 +224,7 @@ class FastaWorkspace extends React.Component {
 		  </Grid.Column>
 		</Grid.Row>
 	      </Grid>
+              <Footer />
 	    </React.Fragment>
 	);
     }
