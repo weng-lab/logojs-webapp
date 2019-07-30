@@ -79,7 +79,7 @@ class GlyphList extends React.Component {
 	    <React.Fragment>
 	      <h2>{this.props.header}</h2>
 	      {this.state.glyphmap.map( (glyphdata, i) => (
-		  <GlyphLabel i={i} symbol={glyphdata.regex} color={glyphdata.color}
+		  <GlyphLabel key={i} i={i} symbol={glyphdata.regex} color={glyphdata.color}
 			      onClick={ () => this.showModal(i) } onRemove={ () => this.removeIdx(i) }
 		              noteditable={this.props.noteditable} />
 	      ))}

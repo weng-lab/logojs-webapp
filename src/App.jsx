@@ -17,7 +17,7 @@ class App extends Component {
 		<Route exact path='/' component={HomePage} />
 		<Route path='/editor/pwm' render={() => <PWMWorkspace apiserver={this.props.config.APIURL} />} />
  	        <Route path='/editor/fasta' render={() => <FastaWorkspace apiserver={this.props.config.APIURL} />} />
- 	        <Route path='/editor/meme' render={() => <MEMEWorkspace apiserver={this.props.config.APIURL} />} />
+ 	        <Route path='/editor/meme' render={() => <MEMEWorkspace />} />
                 <Route path='/editor/jaspar' render={() => <JASPARWorkspace apiserver={this.props.config.APIURL} />} />
                 <Route path='/editor/transfac' render={() => <TRANSFACWorkspace apiserver={this.props.config.APIURL} />} />
 		<Route path='/editor/fastaupload' render={() => <FASTAUploadWorkspace apiserver={this.props.config.APIURL} />} />
