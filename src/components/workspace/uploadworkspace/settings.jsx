@@ -3,9 +3,7 @@ import { Menu } from 'semantic-ui-react';
 
 import { ModeDropdown, GlyphList } from '../settings/index';
 
-const SettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
-			 onModeChange, modedefault, logodefault, scaledefault,
-			 startposdefault, glyphmap, onGlyphmapUpdate }) => (
+const SettingsPanel = ({ onModeChange, modedefault, glyphmap, onGlyphmapUpdate }) => (
 			     <Menu vertical style={{ width: '100%', backgroundColor: "#fafafa" }}>
 			       <Menu.Item>
 				 <ModeDropdown header="Letter Height"

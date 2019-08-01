@@ -33,7 +33,7 @@ class MEMEWorkspace extends React.Component {
                 inmotif = true;
             else if (line.startsWith("MOTIF"))
                 cmotifname = line.split("MOTIF ")[1];
-            else if (inmotif && !line.startsWith(' ')) {
+            else if (inmotif && line.trim().length === 0) {
                 inmotif = false;
                 pwms.push({ pwm: cpwm });
                 motifnames.push(cmotifname);
@@ -52,7 +52,7 @@ class MEMEWorkspace extends React.Component {
     }
     
     render() {
-        return <UploadWorkspace parse={this.parseMeme.bind(this)} title="MEME" apiserver={this.props.apiserver} />;
+        return <UploadWorkspace parse={this.parseMeme.bind(this)} title="MEME" />;
     }
     
 }

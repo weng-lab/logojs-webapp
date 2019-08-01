@@ -8,17 +8,17 @@ const ITEMSTYLE = {
     labelsize: "10pt",
 };
 
-const UploadLogoMenu = ({ svgref, apiurl, logoinfo }) => (
+const UploadLogoMenu = ({ getsvgref, logoinfo }) => (
     <LogoMenu width="100%">
       <LogoSVGDownloadButton {...ITEMSTYLE}
-			     labeltext="Save" svgref={svgref}
+			     labeltext="Save" getsvgref={getsvgref}
 			     filename="logo.svg" />
       <LogoSVGCopyButton {...ITEMSTYLE}
-			 labeltext="Copy SVG" svgref={svgref} />
+            labeltext="Copy SVG" getsvgref={getsvgref} />
       <PermalinkButton {...ITEMSTYLE} labeltext="permalink"
-		       url={apiurl} logoinfo={logoinfo} />
+		    logoinfo={logoinfo} />
       <EmbedButton {...ITEMSTYLE} labeltext="embed"
-		   url={apiurl} logoinfo={logoinfo} />
+		    logoinfo={logoinfo} getsvgref={getsvgref} />
     </LogoMenu>
 );
 export default UploadLogoMenu;
