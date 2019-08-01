@@ -24,6 +24,7 @@ class PWMWorkspace extends React.Component {
 
     constructor(props) {
 	super(props);
+	this.logo = React.createRef();
 	this.logoPostUrl = apiUrls(props.apiserver).logo("");
 	this.state = {
 	    pwm: {
@@ -113,7 +114,9 @@ class PWMWorkspace extends React.Component {
 	this.setState({
 	    mode: data.value
 	});
-    }
+	}
+
+	getsvgref = () => this.logo.current;
     
     render() {
 	let hasNegative = this.state.pwm && this.state.pwm.parsed && this.state.pwm.parsed.length && anyNegative(this.state.pwm.parsed);
@@ -155,9 +158,9 @@ class PWMWorkspace extends React.Component {
 		      </Grid.Row>
 	              <Grid.Row style={{ height: '60%' }}>
 			<Grid.Column width={16} style={{ height: "100%" }}>
-			  <PWMLogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
+			  <PWMLogoMenu getsvgref={this.getsvgref} apiurl={this.logoPostUrl}
 				       logoinfo={this._format_logoinfo(this.state)} />
-			  <div ref={ c => { this.logo = c; } }
+			  <div ref={this.logo}
                             style={{ height: "75%", textAlign: "center" }}>
 			    { hasNegative ? (
 				<LogoWithNegatives pwm={this.state.pwm.parsed}

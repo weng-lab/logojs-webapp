@@ -139,7 +139,7 @@ class AnyUploadWorkspace extends React.Component {
                 inmotif = true;
             else if (line.startsWith("MOTIF"))
                 cmotifname = line.split("MOTIF ")[1];
-            else if (inmotif && !line.startsWith(' ')) {
+            else if (inmotif && line.trim().length === 0) {
                 inmotif = false;
                 pwms.push({ pwm: cpwm });
                 motifnames.push(cmotifname);

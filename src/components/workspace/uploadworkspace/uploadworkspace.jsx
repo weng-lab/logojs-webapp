@@ -22,8 +22,9 @@ const LOGOCOMPONENTS = {
 class UploadWorkspace extends React.Component {
 
     constructor(props) {
-	super(props);
+    super(props);
 	this.logoPostUrl = apiUrls(props.apiserver).logo("");
+    this.logo = React.createRef();
 	this.state = {
 	    pwms: [],
             errors: [],
@@ -100,6 +101,8 @@ class UploadWorkspace extends React.Component {
 	    mode: data.value
 	});
     }
+
+    getsvgref = () => this.logo.current;
     
     async parseFile(f) {
         const reader = new FileReader();
@@ -247,9 +250,9 @@ class UploadWorkspace extends React.Component {
                                                    selectedmotif={this.state.selectedmotif}
                                                    onItemSelected={this.onItemSelected.bind(this)} />
 			          </div>
-                                <LogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
+                                <LogoMenu getsvgref={this.getsvgref} apiurl={this.logoPostUrl}
 				              logoinfo={this._format_logoinfo(this.state)} />
-			        <div ref={ c => { this.logo = c; } }
+			        <div ref={this.logo}
                                      style={{ height: "75%", textAlign: "center" }}>
 			          <Logo pwm={selectedPWMs.result.pwms[this.state.selectedmotif].pwm}
 				        startpos={0}

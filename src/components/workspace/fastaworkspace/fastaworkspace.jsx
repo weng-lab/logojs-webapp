@@ -86,6 +86,7 @@ class FastaWorkspace extends React.Component {
 
     constructor(props) {
 	super(props);
+	this.logo = React.createRef();
 	this.logoPostUrl = apiUrls(props.apiserver).logo("");
 	this.state = {
 	    fasta: DNADEFAULT,
@@ -164,7 +165,9 @@ class FastaWorkspace extends React.Component {
 	this.setState({
 	    mode: data.value
 	});
-    }
+	}
+
+	getsvgref = () => this.logo.current;
     
     render() {
 	let pwm = fastaToPWM(this.state.fasta, this.state.glyphmap.lookup, this.state.caseinsensitive);
@@ -208,9 +211,9 @@ class FastaWorkspace extends React.Component {
 		      </Grid.Row>
 	              <Grid.Row style={{ height: '60%' }}>
 			<Grid.Column width={16} style={{ height: '100%' }}>
-		          <FastaLogoMenu svgref={this.logo} logoinfo={this._format_logoinfo(this.state, pwm)}
+		          <FastaLogoMenu getsvgref={this.getsvgref} logoinfo={this._format_logoinfo(this.state, pwm)}
 				         apiurl={this.logoPostUrl} />
-		          <div ref={ c => { this.logo = c; } }
+		          <div ref={this.logo}
                                style={{ height: '75%', textAlign: "center" }}>
                             <Logo pwm={pwm}
 			          startpos={this.state.startpos}

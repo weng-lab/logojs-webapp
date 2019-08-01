@@ -7,17 +7,17 @@ const ITEMSTYLE = {
     labelsize: "10pt",
 };
 
-const FastaLogoMenu = ({ svgref, apiurl, logoinfo }) => (
+const FastaLogoMenu = ({ getsvgref, apiurl, logoinfo }) => (
     <LogoMenu width="100%" background="#d0d0d0">
       <LogoSVGDownloadButton {...ITEMSTYLE}
-			     labeltext="Save" svgref={svgref}
+			     labeltext="Save" getsvgref={getsvgref}
 			     filename="logo.svg" />
       <LogoSVGCopyButton {...ITEMSTYLE}
-			 labeltext="Copy SVG" svgref={svgref} />
+			 labeltext="Copy SVG" getsvgref={getsvgref} />
       <PermalinkButton {...ITEMSTYLE} labeltext="permalink"
 		       url={apiurl} logoinfo={logoinfo} />
       <EmbedButton {...ITEMSTYLE} labeltext="embed"
-		   url={apiurl} logoinfo={logoinfo} />
+		   url={apiurl} logoinfo={logoinfo} getsvgref={getsvgref}  />
     </LogoMenu>
 );
 export default FastaLogoMenu;
