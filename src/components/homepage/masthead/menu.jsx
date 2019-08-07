@@ -26,9 +26,11 @@ const MenuContent = ({ items, active }) => (
           )
       ))}
       <Menu.Item position="right">
-        <Link to="https://www.github.com/weng-lab/logosj-package">
-          <span style={{ verticalAlign: "middle" }}><Icon className="github" style={{ fontSize: "1.5em" }} />&nbsp;GitHub</span>
-        </Link>
+        <a href="https://www.github.com/weng-lab/logosj-package">
+          <span style={{ verticalAlign: "middle" }}>
+            <Icon className="github" style={{ fontSize: "1.5em" }} />&nbsp;GitHub
+          </span>
+        </a>
       </Menu.Item>
     </React.Fragment>
 );
