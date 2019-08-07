@@ -44,7 +44,8 @@ class UploadWorkspace extends React.Component {
 	    scale: 1.0,
 	    typeid: TYPEID[state.logocomponent],
 	    isfreq: state.mode !== INFORMATION_CONTENT,
-	    firstbase: 0
+	    firstbase: 0,
+            glyphmap: state.glyphmap
 	};
     }
     
@@ -248,7 +249,7 @@ class UploadWorkspace extends React.Component {
                                                    onItemSelected={this.onItemSelected.bind(this)} />
 			          </div>
                                 <LogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
-				              logoinfo={this._format_logoinfo(this.state)} />
+				          logoinfo={this._format_logoinfo({ ...this.state, glyphmap: selectedGlyphmap })} />
 			        <div ref={ c => { this.logo = c; } }
                                      style={{ height: "75%", textAlign: "center" }}>
 			          <Logo pwm={selectedPWMs.result.pwms[this.state.selectedmotif].pwm}
