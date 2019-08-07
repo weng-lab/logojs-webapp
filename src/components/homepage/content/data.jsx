@@ -6,14 +6,14 @@ const DataUpload = props => (
     <Grid.Row>
       <Grid.Column width={11}>
         <Header as="h1">
-          Upload results for batch generation
+          Data upload: batch convert output from other tools
         </Header>
         <p style={{ fontSize: "1.33em" }}>
           Upload data from MEME, Jaspar, or other tools and batch convert them to SVG format.
           Edit the logos or download them individually or all together in a ZIP archive. Obtain
           code to embed the logos or permalinks to share them.
         </p>
-        <Button as={Link} to="/upload/">Upload now</Button>
+        <Button as={Link} to="/upload/">Data Upload</Button>
       </Grid.Column>
       <Grid.Column width={1} />
       <Grid.Column width={3}>

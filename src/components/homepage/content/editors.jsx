@@ -9,15 +9,15 @@ const Editors = props => (
       </Grid.Column>
       <Grid.Column width={12}>
         <Header as="h1">
-          Edit your logos in real time
+          Editors: edit your logos in real time
         </Header>
         <p style={{ fontSize: "1.33em" }}>
           Paste FASTA-format sequences or a position weight matrix into a textbox to create a sequence logo.
           Adjust settings or update the data in the textbox and watch the logo update in real-time.
           Download the logo in SVG format, obtain code for embedding it in your page, or get a permalink to share.
         </p>
-        <Button as={Link} to="/editor/pwm/">PWM Editor</Button>&nbsp;
-        <Button as={Link} to="/editor/fasta/">FASTA Editor</Button>
+        <Button as={Link} to="/editor/fasta/">FASTA Editor</Button>&nbsp;
+        <Button as={Link} to="/editor/pwm/">PWM Editor</Button>
       </Grid.Column>
     </Grid.Row>
 );

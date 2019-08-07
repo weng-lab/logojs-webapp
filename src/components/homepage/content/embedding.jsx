@@ -9,7 +9,7 @@ const Embedding = props => (
       </Grid.Column>
       <Grid.Column width={12}>
         <Header as="h1">
-          Flexible and highly customizable embedding
+          Gallery: examples of flexible, customizable embedded logos
         </Header>
         <p style={{ fontSize: "1.33em" }}>
           LogosJ renders highly customizable logos as vector graphics. You can layer
@@ -17,7 +17,7 @@ const Embedding = props => (
           interactions. Our visual gallery provides visual samples along with the code
           required to create them.
         </p>
-        <Button as={Link} to="/gallery">Browse the gallery</Button>
+        <Button as={Link} to="/gallery">Gallery</Button>
       </Grid.Column>
     </Grid.Row>
 );

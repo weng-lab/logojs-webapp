@@ -15,10 +15,10 @@ class App extends Component {
 	    <Router>
 	      <Switch>
 		<Route exact path='/' component={HomePage} />
-		<Route path='/editor/pwm' render={() => <PWMWorkspace apiserver={this.props.config.APIURL} />} />
+		<Route path='/editor/pwm' render={() => <PWMWorkspace />} />
                 <Route path='/gallery' render={() => <GalleryPage />} />
- 	        <Route path='/editor/fasta' render={() => <FastaWorkspace apiserver={this.props.config.APIURL} />} />
-                <Route path='/upload/' render={() => <AnyUploadWorkspace apiserver={this.props.config.APIURL} />} />
+ 	        <Route path='/editor/fasta' render={() => <FastaWorkspace />} />
+                <Route path='/upload/' render={() => <AnyUploadWorkspace />} />
 	      </Switch>
 	    </Router>
 	);
