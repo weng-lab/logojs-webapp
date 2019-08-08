@@ -1,14 +1,43 @@
 import React from 'react';
+import { Menu, Icon } from 'semantic-ui-react';
 
-import { CopyTextButton } from './copytextmodal/index';
+import EmbedModal from './embedmodal';
 
-const INSTRUCTIONS = "To embed your logo in a webpage, simply copy this HTML tag"
-      + " and paste it in the desired location:";
+class EmbedButton extends React.Component {
 
-const EmbedButton = ({ url, logoinfo, labelsize, labeltext, iconsize }) => (
-    <CopyTextButton url={url} options={ { body: JSON.stringify(logoinfo) } }
-		    dataformatter={ data => '<img src="' + url + data.uuid + '">' } iconclass="code"
-                    iconsize={iconsize} labelsize={labelsize} labeltext={labeltext}
-                    modalheader="Embed code generated!" additionaltext={INSTRUCTIONS} />
-);
+    constructor(props) {
+	super(props);
+	this.state = {
+	    modalshown: false
+	};
+    }
+
+    _modalClosed() {
+	this.setState({
+	    modalshown: false
+	});
+    }
+
+    _showModal() {
+	this.setState({
+	    modalshown: true
+	});
+    }
+
+    render() {
+	return (
+            <React.Fragment>
+              <EmbedModal open={this.state.modalshown} data={this.props.data} react={this.props.react}
+		          onClose={this._modalClosed.bind(this)} additionaltext={this.props.additionaltext} />
+              <Menu.Item link>
+	        <span onClick={this._showModal.bind(this)}>
+		  <Icon className="code" style={{ color: "#000", fontSize: this.props.iconsize }} /><br />
+		  <div style={{ fontSize: this.props.labelsize, color: "#000" }}>{this.props.labeltext}</div>
+	        </span>
+	      </Menu.Item>
+            </React.Fragment>
+	);
+    }
+    
+};
 export default EmbedButton;

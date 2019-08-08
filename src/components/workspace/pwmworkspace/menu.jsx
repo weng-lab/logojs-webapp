@@ -8,6 +8,23 @@ const ITEMSTYLE = {
     labelsize: "10pt",
 };
 
+const reactCode = logoinfo => `
+import { Logo, loadGlyphComponents } from 'logosj-react';
+const myLogoProps = {
+    startpos: ${logoinfo.firstbase},
+    pwm: [
+${logoinfo.pwm.map(x => "        " + JSON.stringify(x)).join(",\n")}
+    ],
+    glyphmap: loadGlyphComponents([
+${logoinfo.glyphmap.map(x => "        " + JSON.stringify({ regex: x.regex, color: x.color })).join(",\n")}
+    ])
+};
+
+export const MyLogo = props => (
+    <Logo {...myLogoProps} {...props} />;
+);
+`.substring(1); // trim leading line break
+
 const PWMLogoMenu = ({ svgref, apiurl, logoinfo }) => (
     <LogoMenu width="100%" background="#d0d0d0">
       <LogoSVGDownloadButton {...ITEMSTYLE}
@@ -18,7 +35,7 @@ const PWMLogoMenu = ({ svgref, apiurl, logoinfo }) => (
       <PermalinkButton {...ITEMSTYLE} labeltext="permalink"
 		       url={apiurl} logoinfo={logoinfo} />
       <EmbedButton {...ITEMSTYLE} labeltext="embed"
-		   url={apiurl} logoinfo={logoinfo} />
+                   url={apiurl} react={reactCode(logoinfo)} logoinfo={logoinfo} />
     </LogoMenu>
 );
 export default PWMLogoMenu;
