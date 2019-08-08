@@ -10,6 +10,7 @@ COPY package.json ./
 COPY . .
 RUN yarn
 RUN yarn build
+RUN yarn global add serve
 
 # start app
 CMD ["node", "server.js"]
