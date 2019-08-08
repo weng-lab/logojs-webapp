@@ -21,8 +21,15 @@ const decodeSvg = j => {
 
 app.use('/app', express.static(path.join(__dirname, 'build')));
 
+app.get('/', (req, res) => {
+    res.redirect("/app");
+});
+
 app.get('/app/*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    req.get({
+	...req,
+	url: "http://localhost:" + (process.env.REACT_PORT || 5000) + req.path
+    }).pipe(res);
 });
 
 const lookupComponent = glyph => {
@@ -59,4 +66,8 @@ app.get('/svg/:s', (req, res) => {
     
 });
 
-app.listen(process.env.PORT || 8089);
+let react = require('child_process').spawn('serve', [ '-s', 'build', '-l', process.env.REACT_PORT || 5000 ]);
+react.on('close', code => {
+    process.exit(code);
+});
+app.listen(process.env.PORT || 8093);
