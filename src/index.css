@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.highlightfixed {
+    max-height: 500px;
+    overflow-y: auto !important;
+}

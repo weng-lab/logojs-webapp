@@ -1,13 +1,48 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Icon, Menu } from 'semantic-ui-react';
-import { SVGCopyButton } from '../../svgdownload/index';
+import cleaner from 'pretty';
 
-const LogoSVGCopyButton = ({ svgref, iconsize, labelsize, labeltext }) => (
-    <Menu.Item link>
-      <SVGCopyButton svgref={svgref}>
-	<Icon className="copy outline" style={{ color: "#000", fontSize: iconsize }} /><br />
-	<div style={{ fontSize: labelsize, color: "#000" }}>{labeltext}</div>
-      </SVGCopyButton>
-    </Menu.Item>
-);
-export default LogoSVGCopyButton;
+import SVGModal from './svgmodal';
+import { _svgdata } from '../../svgdownload/utils';
+
+class SVGCopyButton extends React.Component {
+
+    constructor(props) {
+	super(props);
+	this.state = {
+	    modalshown: false
+	};
+    }
+
+    _modalClosed() {
+	this.setState({
+	    modalshown: false
+	});
+    }
+
+    _showModal() {
+	this.setState({
+	    modalshown: true
+	});
+    }
+
+    render() {
+	return (
+            <React.Fragment>
+              <SVGModal open={this.state.modalshown}
+                        svg={cleaner(_svgdata(ReactDOM.findDOMNode(this.props.svgref)))}
+		        onClose={this._modalClosed.bind(this)}
+                        additionaltext={this.props.additionaltext} />
+              <Menu.Item link>
+	        <span onClick={this._showModal.bind(this)}>
+		  <Icon className="copy outline" style={{ color: "#000", fontSize: this.props.iconsize }} /><br />
+		  <div style={{ fontSize: this.props.labelsize, color: "#000" }}>{this.props.labeltext}</div>
+	        </span>
+	      </Menu.Item>
+            </React.Fragment>
+	);
+    }
+    
+};
+export default SVGCopyButton;

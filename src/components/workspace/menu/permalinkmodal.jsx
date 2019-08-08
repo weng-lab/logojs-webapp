@@ -2,11 +2,11 @@ import React from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Modal, Button, Input, Icon } from 'semantic-ui-react';
 
-const CopyButton = ({ onClick }) => (
+export const CopyButton = ({ onClick }) => (
     <Button onClick={onClick}><Icon className="copy outline" />Copy</Button>
 );
 
-const CopiedButton = () => (
+export const CopiedButton = () => (
     <Button><Icon className="check" />Copied</Button>
 );
 
