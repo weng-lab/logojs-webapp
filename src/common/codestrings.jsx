@@ -12,3 +12,23 @@ ${indentCode(js, "      ")}
   </body>
 </html>
 `.substring(1); // trail leading linebreak
+
+export const formatPWM = pwm => (
+    "[\n" + indentCode(
+        pwm.map(
+            x => JSON.stringify(x.map(xx => +xx.toFixed(2)))
+        ).join('\n'), "  "
+    ) + "\n]"
+);
+
+const removeKey = (a, k) => {
+    let c = { ...a };
+    delete c[k];
+    return c;
+};
+
+export const formatGlyphmap = glyphmap => (
+    "[\n" + indentCode(
+        glyphmap.map(x => JSON.stringify(removeKey(x, "component"))).join('\n'), "  "
+    ) + "\n]"
+);

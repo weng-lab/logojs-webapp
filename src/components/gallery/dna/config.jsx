@@ -118,7 +118,8 @@ logosj.embedLogo(document.getElementById("logo"), {
 export const CAP_LONG_DESCRIPTION = `
 This logo shows the consensus DNA binding motif for catabolite activating protein (CAP).
 By default, a DNA logo scales its letters using information content, such that the most
-important bases in the logo appear the most important.
+important bases in the logo appear the most important. When rendering the logo, the columns
+in the matrix are ordered alphabetically (A, C, G, T).
 `;
 
 export const CTCF_LONG_DESCRIPTION = `

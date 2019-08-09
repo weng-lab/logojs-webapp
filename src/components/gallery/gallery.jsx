@@ -1,7 +1,7 @@
 import React from 'react';
 
 import DNAPreview from './dnapreview';
-import ProteinPreview from './protein';
+import ProteinPreview from './proteindemo';
 import ExtendedAlphabet from './extendedalphabet';
 import DinucleotidePreview from './dinucleotide';
 import NegativesPreview from './negatives';
