@@ -3,9 +3,10 @@ import { CompleteGlyphmap, DNAGlyphmap } from 'logos-to-go-react';
 
 import SyntaxHighlighter from '../syntax';
 import { INTRON_PWM, CAP_PWM, CTCF_PWM } from '../constants';
+import { jsCodestring } from '../../../common/codestrings';
+import { indentCode } from '../../../common/utils';
 
-export const CAP_CODESTRING_REACT = `
-import { DNALogo } from 'logosj-react';
+const CAP_PWM_CODE = `
 const CAP_PWM = [
     [ 0.36, 0.08, 0.18, 0.36 ], [ 0, 0.16, 0.04, 0.79 ], [ 0.04, 0.02, 0.81, 0.12 ],
     [ 0.02, 0.16, 0, 0.81 ], [ 0.08, 0, 0.83, 0.08 ], [ 0.87, 0.06, 0.06, 0 ],
@@ -15,14 +16,22 @@ const CAP_PWM = [
     [ 0.20, 0.65, 0, 0.14 ], [ 0.67, 0.08, 0.12, 0.12 ], [ 0.24, 0.18, 0.14, 0.42 ],
     [ 0.36, 0.02, 0, 0.61 ]
 ];
+`.substring(1);
 
+export const CAP_CODESTRING_JS = jsCodestring(`
+${CAP_PWM_CODE}
+logosj.embedDNALogo(document.getElementById("logo"), { pwm: CAP_PWM });
+`);
+
+export const CAP_CODESTRING_REACT = `
+import { DNALogo } from 'logosj-react';
+${CAP_PWM_CODE}
 export const CAPLogo = props => (
     <DNALogo pwm={CAP_PWM} />
 );
 `;
 
-export const CTCF_CODESTRING_REACT = `
-import { DNALogo } from 'logosj-react';
+const CTCF_PWM_CODE = `
 const CTCF_PWM = [
   [0.09, 0.31, 0.08, 0.50], [0.18, 0.15, 0.45, 0.20], [0.30, 0.05, 0.49, 0.14],
   [0.06, 0.87, 0.02, 0.03], [0.00, 0.98, 0.00, 0.02], [0.81, 0.01, 0.07, 0.09], 
@@ -32,14 +41,22 @@ const CTCF_PWM = [
   [0.40, 0.01, 0.55, 0.01], [0.09, 0.53, 0.33, 0.04], [0.12, 0.35, 0.08, 0.43], 
   [0.44, 0.19, 0.29, 0.06]
 ];
+`;
 
+export const CTCF_CODESTRING_REACT = `
+import { DNALogo } from 'logosj-react';
+${CTCF_PWM_CODE}
 export const CTCFLogo = props => (
     <DNALogo pwm={CTCF_PWM} mode="FREQUENCY" />
 );
 `;
 
-export const INTRON_CODESTRING_REACT = `
-import { DNALogo } from 'logosj-react';
+export const CTCF_CODESTRING_JS = jsCodestring(`
+${CTCF_PWM_CODE}
+logosj.embedDNALogo(document.getElementById("logo"), { pwm: CTCF_PWM, mode: "FREQUENCY" });
+`);
+
+const INTRON_PWM_CODE = `
 const INTRON_PWM = [
   [ 0.06, 0.46, 0.10, 0.37 ], [ 0.16, 0.22, 0.22, 0.40 ], [ 0.09, 0.26, 0.16, 0.48 ],
   [ 0.08, 0.31, 0.20, 0.41 ], [ 0.16, 0.20, 0.10, 0.53 ], [ 0.03, 0.24, 0.10, 0.62 ],
@@ -49,14 +66,22 @@ const INTRON_PWM = [
   [ 0.02, 0.71, 0.00, 0.27 ], [ 1.00, 0.00, 0.00, 0.00 ], [ 0.00, 0.00, 1.00, 0.00 ],
   [ 0.16, 0.23, 0.56, 0.05 ]
 ];
+`;
 
+export const INTRON_CODESTRING_REACT = `
+import { DNALogo } from 'logosj-react';
+${INTRON_PWM_CODE}
 export const IntronLogo = props => (
     <DNALogo pwm={INTRON_PWM} startpos={-18} />
 );
 `;
 
-export const LOWERCASE_CODESTRING_REACT = `
-import { Logo } from 'logosj-react';
+export const INTRON_CODESTRING_JS = jsCodestring(`
+${INTRON_PWM_CODE}
+logosj.embedDNALogo(document.getElementById("logo"), { pwm: INTRON_PWM, startpos: -18 });
+`);
+
+export const LOWERCASE_CONSTANTS = `
 const LOWERCASE_PWM = [
   [0.09, 0.31, 0.08, 0.50], [0.18, 0.15, 0.45, 0.20], [0.30, 0.05, 0.49, 0.14],
   [0.06, 0.87, 0.02, 0.03], [0.00, 0.98, 0.00, 0.02], [0.81, 0.01, 0.07, 0.09], 
@@ -67,16 +92,28 @@ const LOWERCASE_PWM = [
   [0.44, 0.19, 0.29, 0.06]
 ];
 const LOWERCASE_GLYPHMAP = [
-    { color: "#880000", component: CompleteGlyphmap[26].component, regex: "a" },
-    { color: "#008800", component: CompleteGlyphmap[28].component, regex: "c" },
-    { color: "#000088", component: CompleteGlyphmap[32].component, regex: "g" },
-    { color: "#880088", component: CompleteGlyphmap[45].component, regex: "t" }
+    { color: "#880000", regex: "a" },
+    { color: "#008800", regex: "c" },
+    { color: "#000088", regex: "g" },
+    { color: "#880088", regex: "t" }
 ];
+`;
 
+export const LOWERCASE_CODESTRING_REACT = `
+import { Logo, loadGlyphComponents } from 'logosj-react';
+${LOWERCASE_CONSTANTS}
 export const LowercaseLogo = props => (
-    <Logo glyphmap={LOWERCASE_GLYPHMAP} pwm={LOWERCASE_PWM} />
+    <Logo glyphmap={loadGlyphComponents(LOWERCASE_GLYPHMAP)} pwm={LOWERCASE_PWM} />
 );
 `;
+
+export const LOWERCASE_CODESTRING_JS = jsCodestring(`
+${LOWERCASE_CONSTANTS}
+logosj.embedLogo(document.getElementById("logo"), {
+  pwm: LOWERCASE_PWM,
+  glyphmap: logosj.loadGlyphComponents(LOWERCASE_GLYPHMAP)
+});
+`);
 
 export const CAP_LONG_DESCRIPTION = `
 This logo shows the consensus DNA binding motif for catabolite activating protein (CAP).
@@ -102,7 +139,7 @@ custom color scheme.
 
 export const INFORMATION_CONTENT_DEMO = {
     reactCodestring: CAP_CODESTRING_REACT,
-    jsCodestring: "",
+    jsCodestring: CAP_CODESTRING_JS,
     logoProps: {
         pwm: CAP_PWM
     },
@@ -113,7 +150,7 @@ export const INFORMATION_CONTENT_DEMO = {
 
 export const FREQUENCY_DEMO = {
     reactCodestring: CTCF_CODESTRING_REACT,
-    jsCodestring: "",
+    jsCodestring: CTCF_CODESTRING_JS,
     logoProps: {
         pwm: CTCF_PWM,
         mode: "FREQUENCY"
@@ -125,7 +162,7 @@ export const FREQUENCY_DEMO = {
 
 export const STARTPOS_DEMO = {
     reactCodestring: INTRON_CODESTRING_REACT,
-    jsCodestring: "",
+    jsCodestring: INTRON_CODESTRING_JS,
     logoProps: {
         pwm: INTRON_PWM,
         startpos: -18
@@ -140,8 +177,7 @@ This logo shows the consensus DNA binding motif for CTCF, rendered without an x-
 or y-axis.
 `;
 
-export const NOAXIS_CODESTRING_REACT = `
-import { RawLogo, DNAGlyphmap } from 'logosj-react';
+const NOAXIS_CONSTANTS = `
 const PWM = [
   [0.09, 0.31, 0.08, 0.50], [0.18, 0.15, 0.45, 0.20], [0.30, 0.05, 0.49, 0.14],
   [0.06, 0.87, 0.02, 0.03], [0.00, 0.98, 0.00, 0.02], [0.81, 0.01, 0.07, 0.09], 
@@ -151,15 +187,48 @@ const PWM = [
   [0.40, 0.01, 0.55, 0.01], [0.09, 0.53, 0.33, 0.04], [0.12, 0.35, 0.08, 0.43], 
   [0.44, 0.19, 0.29, 0.06]
 ];
+`;
 
+export const NOAXIS_CODESTRING_REACT = `
+import { RawLogo, DNAGlyphmap } from 'logosj-react';
+${NOAXIS_CONSTANTS}
 export const NoAxisLogo = props => (
+  <svg viewBox="0 0 1900 100">
     <RawLogo glyphmap={DNAGlyphmap} pwm={PWM} glyphWidth={100} stackHeight={100} />
+  </svg>
 );
 `;
 
+const NOAXIS_JS = `
+${NOAXIS_CONSTANTS}
+logosj.embedRawLogo(document.getElementById("logo"), {
+  pwm: PWM
+  glyphmap: logosj.DNAGlyphmap,
+  glyphWidth: 100,
+  stackHeight: 100
+});
+`;
+
+export const NOAXIS_CODESTRING_JS = `
+<!doctype html>
+<html>
+  <body>
+    <script src="https://package.logosj.wenglab.org/bundle.js" type="text/javascript"></script>
+    <div style="width:500px">
+      <svg viewBox="0 0 1900 100">
+        <g id="logo"></g>
+      </svg>
+    </div>
+    <script type="text/javascript">
+${indentCode(NOAXIS_JS, "      ")}
+    </script>
+  </body>
+</html>
+`.substring(1);
+
 export const NOAXIS_DEMO = {
     reactCodestring: NOAXIS_CODESTRING_REACT,
-    jsCodestring: "",
+    jsCodestring: NOAXIS_CODESTRING_JS,
     logoProps: {
         pwm: CTCF_PWM,
         glyphmap: DNAGlyphmap,
@@ -181,7 +250,7 @@ const LOWERCASE_GLYPHMAP = [
 
 export const LOWERCASE_DEMO = {
     reactCodestring: LOWERCASE_CODESTRING_REACT,
-    jsCodestring: "",
+    jsCodestring: LOWERCASE_CODESTRING_JS,
     logoProps: {
         pwm: CTCF_PWM,
         glyphmap: LOWERCASE_GLYPHMAP,

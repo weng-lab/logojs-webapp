@@ -71,3 +71,7 @@ export const any = b => {
     b.forEach( v => { if (v) retval = true; } );
     return retval;
 };
+
+export const indentCode = (code, indent) => (
+    code.split('\n').filter(x => x !== "").map(x => indent + x).join('\n')
+);
