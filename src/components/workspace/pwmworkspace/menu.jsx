@@ -28,10 +28,10 @@ export const MyLogo = props => (
 const PWMLogoMenu = ({ svgref, apiurl, logoinfo }) => (
     <LogoMenu width="100%" background="#d0d0d0">
       <LogoSVGDownloadButton {...ITEMSTYLE}
-			     labeltext="Save" svgref={svgref}
+			     labeltext="save" svgref={svgref}
 			     filename="logo.svg" />
       <LogoSVGCopyButton {...ITEMSTYLE}
-			 labeltext="Copy SVG" svgref={svgref} />
+			 labeltext="copy SVG code" svgref={svgref} />
       <PermalinkButton {...ITEMSTYLE} labeltext="permalink"
 		       url={apiurl} logoinfo={logoinfo} />
       <EmbedButton {...ITEMSTYLE} labeltext="embed"

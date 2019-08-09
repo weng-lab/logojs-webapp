@@ -27,7 +27,7 @@ class EmbedButton extends React.Component {
     render() {
 	return (
             <React.Fragment>
-              <EmbedModal open={this.state.modalshown} data={this.props.data} react={this.props.react}
+              <EmbedModal open={this.state.modalshown} data={this.props.data} react={this.props.react} js={this.props.js}
 		          onClose={this._modalClosed.bind(this)} additionaltext={this.props.additionaltext} />
               <Menu.Item link>
 	        <span onClick={this._showModal.bind(this)}>

@@ -24,16 +24,40 @@ export const MyLogo = props => (
 );
 `.substring(1); // trim leading line break
 
+const jsCode = logoinfo => `
+<!doctype html>
+<html>
+  <body>
+    <script src="https://package.logosj.wenglab.org/bundle.js" type="text/javascript"></script>
+    <div id="logo" style="width:500px"></div>
+    <script type="text/javascript">
+      window.onload = function() {
+        var logoProps = {
+          startpos: ${logoinfo.firstbase},
+          pwm: [
+${logoinfo.pwm.map(x => "            " + JSON.stringify(x)).join(",\n")}
+          ],
+          glyphmap: logosj.loadGlyphComponents([
+${logoinfo.glyphmap.raw.map(x => "            " + JSON.stringify({ regex: x.regex, color: x.color })).join(",\n")}
+          ])
+        };
+        logosj.embedLogo(document.getElementById("logo"), logoProps);
+      }
+    </script>
+  </body>
+</html>
+`.substring(1);
+
 const FastaLogoMenu = ({ svgref, apiurl, logoinfo }) => (
     <LogoMenu width="100%" background="#d0d0d0">
       <LogoSVGDownloadButton {...ITEMSTYLE}
-			     labeltext="Save" svgref={svgref}
+			     labeltext="save" svgref={svgref}
 			     filename="logo.svg" />
       <LogoSVGCopyButton {...ITEMSTYLE}
-			 labeltext="Copy SVG" svgref={svgref} />
+			 labeltext="copy SVG code" svgref={svgref} />
       <PermalinkButton {...ITEMSTYLE} labeltext="permalink"
 		       url={apiurl} logoinfo={logoinfo} />
-      <EmbedButton {...ITEMSTYLE} labeltext="embed"
+      <EmbedButton {...ITEMSTYLE} labeltext="embed" js={jsCode(logoinfo)}
                    url={apiurl} react={reactCode(logoinfo)} logoinfo={logoinfo} />
     </LogoMenu>
 );
