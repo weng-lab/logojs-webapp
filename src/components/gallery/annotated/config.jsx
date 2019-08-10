@@ -1,10 +1,10 @@
 import React from 'react';
 import { RawLogo, DNAGlyphmap, AAGlyphmap } from 'logos-to-go-react';
 
-import { jsCodestring, formatPWM, formatGlyphmap } from '../../../common/codestrings';
+import { formatPWM, formatGlyphmap } from '../../../common/codestrings';
 import { indentCode } from '../../../common/utils';
 import { ANNOTATED_PWM, ANNOTATED_GLYPHMAP, SNP_PWM,
-         SNP_REF_PWM, CAP_PWM, PROTEIN_PWM, DNA_PROTEIN_PWM,
+         SNP_REF_PWM, DNA_PROTEIN_PWM,
          PROTEIN_DNA_PWM } from '../constants';
 
 const ANNOTATED_CONSTANTS = `

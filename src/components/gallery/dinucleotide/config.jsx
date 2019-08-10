@@ -1,5 +1,3 @@
-import { DNAGlyphmap } from 'logos-to-go-react';
-
 import { jsCodestring, formatPWM, formatGlyphmap } from '../../../common/codestrings';
 import { DINUCLEOTIDE_PWM, DINUCLEOTIDE_GLYPHMAP, TRINUCLEOTIDE_GLYPHMAP,
          TRINUCLEOTIDE_PWM, MULTINUMBER_GLYPHMAP } from '../constants';
