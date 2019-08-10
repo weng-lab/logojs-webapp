@@ -21,21 +21,21 @@ const NegativesPreview = () => (
             <Grid.Column width={1} />
             <Grid.Column width={4} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
-                Protein logo
+                protein logo
               </div>
               <LogoWithNegatives glyphmap={AAGlyphmap} pwm={AA_PWM} startpos={1} />
             </Grid.Column>
             <Grid.Column width={1} />
             <Grid.Column width={4} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
-                Negative values semitransparent
+                negative values semitransparent
               </div>
               <LogoWithNegatives glyphmap={DNAGlyphmap} pwm={DNA_NEGATIVE_PWM} startpos={1} negativealpha={101} />
             </Grid.Column>
             <Grid.Column width={1} />
             <Grid.Column width={4} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
-                Negative value letters right side up
+                negative value letters right side up
               </div>
               <LogoWithNegatives glyphmap={DNAGlyphmap} pwm={DNA_NEGATIVE_PWM2} startpos={1} negativealpha={95} inverted />
             </Grid.Column>

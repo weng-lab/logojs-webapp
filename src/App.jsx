@@ -9,6 +9,9 @@ import { GalleryPage } from './components/gallery';
 import { DNAGallery } from './components/gallery/dna';
 import { ProteinGallery } from './components/gallery/protein';
 import { ExtendedAlphabetGallery } from './components/gallery/extended';
+import { NegativeAlphabetGallery } from './components/gallery/negatives';
+import { DinucleotideGallery } from './components/gallery/dinucleotide';
+import { AnnotatedGallery } from './components/gallery/annotated';
 import { PWMWorkspace, FastaWorkspace, AnyUploadWorkspace } from './components/workspace/index';
 
 class App extends Component {
@@ -25,6 +28,9 @@ class App extends Component {
                 <Route path='/gallery/dna' exact render={() => <DNAGallery />} />
                 <Route path='/gallery/protein' exact render={() => <ProteinGallery />} />
                 <Route path='/gallery/extended' exact render={() => <ExtendedAlphabetGallery />} />
+                <Route path='/gallery/negatives' exact render={() => <NegativeAlphabetGallery />} />
+                <Route path='/gallery/dinucleotide' exact render={() => <DinucleotideGallery />} />
+                <Route path='/gallery/annotated' exact render={() => <AnnotatedGallery />} />
 	      </Switch>
 	    </Router>
 	);

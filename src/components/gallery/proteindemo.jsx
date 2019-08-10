@@ -21,14 +21,14 @@ const ProteinPreview = () => (
             <Grid.Column width={1} />
             <Grid.Column width={6} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
-                Colored by chemical properties
+                colored by chemical properties
               </div>
               <AALogo pwm={PROTEIN_PWM} startpos={1} />
             </Grid.Column>
             <Grid.Column width={1} />
             <Grid.Column width={6} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
-                Extended with B (Asx) and Z (Glx)
+                extended with B (Asx) and Z (Glx)
               </div>
               <AALogo pwm={ALT_PROTEIN_PWM()} startpos={1} />
             </Grid.Column>

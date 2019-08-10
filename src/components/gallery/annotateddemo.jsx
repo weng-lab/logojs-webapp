@@ -22,7 +22,7 @@ const AnnotatedPreview = () => (
             <Grid.Column width={1} />
             <Grid.Column width={4} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
-                Important regions boxed and highlighted
+                important regions boxed
               </div>
               <svg viewBox={"0 0 " + (ANNOTATED_PWM.length * 100 + 30) + " 330"}>
                 <g transform="translate(20,-40)">
@@ -35,7 +35,7 @@ const AnnotatedPreview = () => (
             <Grid.Column width={1} />
             <Grid.Column width={4} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
-                Logo with SNP highlighted
+                SNP highlighted
               </div>
               <svg viewBox={"0 0 " + (SNP_PWM.length * 100 + 300) + " 420"}>
                 <rect x={600} width={100} height={420} fill="#bbbbbb" />
@@ -52,7 +52,7 @@ const AnnotatedPreview = () => (
             <Grid.Column width={1} />
             <Grid.Column width={4} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
-                Protein DNA interaction logo
+                protein DNA interaction logo
               </div>
               <svg viewBox={"0 0 2600 920"}>
                 <RawLogo glyphmap={DNAGlyphmap} pwm={DNA_PROTEIN_PWM} glyphWidth={100} stackHeight={200} />

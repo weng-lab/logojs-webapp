@@ -298,7 +298,7 @@ export const TRINUCLEOTIDE_PWM = [
 
 export const MULTINUMBER_GLYPHMAP = [
     { color: "#ff0000", component: [ N1, N1, N1 ], regex: "111" },
-    { color: "#888800", component: [ N2, N2, N2 ], regex: "222" },
+    { color: "#888800", component: [ N2, N2 ], regex: "22" },
     { color: "#0000ff", component: [ N1, N2, N3 ], regex: "123" }
 ];
 
