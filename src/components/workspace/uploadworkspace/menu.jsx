@@ -2,6 +2,7 @@ import React from 'react';
 
 import { LogoMenu, LogoSVGDownloadButton, EmbedButton,
 	 LogoSVGCopyButton, PermalinkButton } from '../menu/index';
+import { jsCodestring } from '../../../common/codestrings';
 
 const ITEMSTYLE = {
     logosize: "16pt",
@@ -25,16 +26,32 @@ export const MyLogo = props => (
 );
 `.substring(1); // trim leading line break
 
+const jsCode = logoinfo => jsCodestring(`
+window.onload = function() {
+  const logoProps = {
+    startpos: ${logoinfo.firstbase},
+    pwm: [
+${logoinfo.pwm.map(x => "      " + JSON.stringify(x)).join(",\n")}
+    ],
+    glyphmap: logosj.loadGlyphComponents([
+${logoinfo.glyphmap.map(x => "      " + JSON.stringify({ regex: x.regex, color: x.color })).join(",\n")}
+    ])
+  };
+  logosj.embedLogo(document.getElementById("logo"), logoProps);
+}
+`);
+
 const UploadLogoMenu = ({ svgref, apiurl, logoinfo }) => (
     <LogoMenu width="100%">
       <LogoSVGDownloadButton {...ITEMSTYLE}
-			     labeltext="save" svgref={svgref}
+			     labeltext="save" svgref={svgref.current}
+                             c={console.log(svgref)}
 			     filename="logo.svg" />
       <LogoSVGCopyButton {...ITEMSTYLE}
-			 labeltext="copy SVG code" svgref={svgref} />
+			 labeltext="copy SVG code" svgref={svgref.current} />
       <PermalinkButton {...ITEMSTYLE} labeltext="permalink"
 		       url={apiurl} logoinfo={logoinfo} />
-      <EmbedButton {...ITEMSTYLE} labeltext="embed"
+      <EmbedButton {...ITEMSTYLE} labeltext="embed" js={jsCode(logoinfo)}
                    url={apiurl} react={reactCode(logoinfo)} />
     </LogoMenu>
 );

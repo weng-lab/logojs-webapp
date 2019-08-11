@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Icon, Menu } from 'semantic-ui-react';
 import cleaner from 'pretty';
 
@@ -31,7 +30,7 @@ class SVGCopyButton extends React.Component {
 	return (
             <React.Fragment>
               <SVGModal open={this.state.modalshown}
-                        svg={cleaner(_svgdata(ReactDOM.findDOMNode(this.props.svgref)))}
+                        svg={cleaner(_svgdata(this.props.svgref))}
 		        onClose={this._modalClosed.bind(this)}
                         additionaltext={this.props.additionaltext} />
               <Menu.Item link>

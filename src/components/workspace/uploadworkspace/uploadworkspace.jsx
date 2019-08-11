@@ -24,6 +24,7 @@ class UploadWorkspace extends React.Component {
     constructor(props) {
 	super(props);
 	this.logoPostUrl = apiUrls(props.apiserver).logo("");
+        this.logo = React.createRef();
 	this.state = {
 	    pwms: [],
             errors: [],
@@ -186,7 +187,7 @@ class UploadWorkspace extends React.Component {
             && this.state.pwms.length > 0;
         let selectedPWMs = this.state.pwms[this.state.selectedfile];
         let selectedGlyphmap = (selectedPWMs && selectedPWMs.result && selectedPWMs.result.pwms
-            && selectedPWMs.result.pwms.length > 0 && selectedPWMs.result.pwms[this.state.selectedmotif]
+                                && selectedPWMs.result.pwms.length > 0 && selectedPWMs.result.pwms[this.state.selectedmotif]
                                 && selectedPWMs.result.pwms[this.state.selectedmotif].glyphmap) || this.state.glyphmap;
 	return (
 	    <React.Fragment>
@@ -195,15 +196,15 @@ class UploadWorkspace extends React.Component {
 		<Grid.Row style={{ height: "100%" }}>
 		  <Grid.Column width={3}>
 		    <SettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
-				       onScaleChange={this._scaleChange.bind(this)}
-				       onStartPosChange={this._startPosChange.bind(this)}
-				       onModeChange={this._modeChange.bind(this)}
-				       logodefault={this.state.logocomponent}
-				       scaledefault={this.state.scale}
-				       startposdefault={this.state.startpos}
-				       modedefault={this.state.mode}
-				       glyphmap={selectedGlyphmap}
-				       onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
+				   onScaleChange={this._scaleChange.bind(this)}
+				   onStartPosChange={this._startPosChange.bind(this)}
+				   onModeChange={this._modeChange.bind(this)}
+				   logodefault={this.state.logocomponent}
+				   scaledefault={this.state.scale}
+				   startposdefault={this.state.startpos}
+				   modedefault={this.state.mode}
+				   glyphmap={selectedGlyphmap}
+				   onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
 		  </Grid.Column>
                   <Grid.Column width={13} style={{ height: '100%' }}>
                     { this.state.errors.length > 0 && (
@@ -250,16 +251,16 @@ class UploadWorkspace extends React.Component {
 			          </div>
                                 <LogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
 				          logoinfo={this._format_logoinfo({ ...this.state, glyphmap: selectedGlyphmap })} />
-			        <div ref={ c => { this.logo = c; } }
-                                     style={{ height: "75%", textAlign: "center" }}>
-			          <Logo pwm={selectedPWMs.result.pwms[this.state.selectedmotif].pwm}
-				        startpos={0}
-                                        width="90%" height="75%"
-				        mode={this.state.mode}
-				        glyphmap={selectedGlyphmap} />
-			        </div>
                               </React.Fragment>
                           )}
+                          <div ref={this.logo}
+                               style={{ height: "75%", textAlign: "center" }}>
+	                    { isdone && (<Logo pwm={selectedPWMs.result.pwms[this.state.selectedmotif].pwm}
+			                       startpos={0}
+                                               width="90%" height="75%"
+			                       mode={this.state.mode}
+			                       glyphmap={selectedGlyphmap} />)}
+			  </div>
                           <input type="file" hidden ref={ c => this.fileinput = c }
                                  onChange={this.fileReceived.bind(this)}
                                  multiple />
