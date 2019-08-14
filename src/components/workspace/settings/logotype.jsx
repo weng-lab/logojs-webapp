@@ -8,14 +8,15 @@ const OPTIONS = [
     { value: 'custom', text: 'custom' }
 ];
 
-const LogoTypeDropdown = ({ header, onChange }) => (
+const LogoTypeDropdown = ({ header, onChange, value }) => (
     <React.Fragment>
       {header ? <h3>{header}</h3> : null }
       <Dropdown
 	options={OPTIONS}
 	defaultValue="DNA"
+        value={value}
 	onChange={onChange}
       />
     </React.Fragment>
-)
+);
 export default LogoTypeDropdown;

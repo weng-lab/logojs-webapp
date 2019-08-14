@@ -16,7 +16,7 @@ const myLogoProps = {
 ${logoinfo.pwm.map(x => "        " + JSON.stringify(x)).join(",\n")}
     ],
     glyphmap: loadGlyphComponents([
-${logoinfo.glyphmap.raw.map(x => "        " + JSON.stringify({ regex: x.regex, color: x.color })).join(",\n")}
+${logoinfo.glyphmap.map(x => "        " + JSON.stringify({ regex: x.regex, color: x.color })).join(",\n")}
     ])
 };
 
@@ -33,7 +33,7 @@ window.onload = function() {
 ${logoinfo.pwm.map(x => "      " + JSON.stringify(x)).join(",\n")}
     ],
     glyphmap: logosj.loadGlyphComponents([
-${logoinfo.glyphmap.raw.map(x => "      " + JSON.stringify({ regex: x.regex, color: x.color })).join(",\n")}
+${logoinfo.glyphmap.map(x => "      " + JSON.stringify({ regex: x.regex, color: x.color })).join(",\n")}
     ])
   };
   logosj.embedLogo(document.getElementById("logo"), logoProps);

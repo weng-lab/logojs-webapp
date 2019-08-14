@@ -8,6 +8,7 @@ import { Grid, Container, Segment, Header } from 'semantic-ui-react';
 import { MainMenu, mainMenuItems } from '../../homepage';
 import { FastaEditor } from '../../editor/index';
 import { apiUrls, TYPEID, glyphsymbols } from '../../../common/utils';
+import { inferGlyphmap } from '../../../utilities/inferglyphmap';
 
 import FastaLogoMenu from './menu';
 import FastaSettingsPanel from './settings';
@@ -19,6 +20,13 @@ export const lookupmap = glyphmap => {
 	raw: glyphmap,
 	lookup: ret
     };
+};
+
+const logotype = glyphmap => {
+    if (glyphmap === DNAGlyphmap) return "DNA";
+    if (glyphmap == RNAGlyphmap) return "RNA";
+    if (glyphmap === AAGlyphmap) return "AA";
+    return "custom";
 };
 
 const smap = (s, f) => (
@@ -66,20 +74,28 @@ export const LOGOCOMPONENTS = {
     custom: { component: CompleteLogo, glyphs: CompleteGlyphmap, defaulttext: CUSTOMDEFAULT }
 };
 
-export const fastaToPWM = (fasta, lookupmap, caseinsensitive) => {
-    let sequences = [];
+export const fastaToPWM = (fasta, caseinsensitive) => {
+    let sequences = [], cmatches = new Set();
     if (caseinsensitive) fasta = fasta.toUpperCase();
     fasta.split(os.EOL).filter(x => x[0] !== '#').map(
         x => x[0] !== '>' && x !== '' && sequences.push(x)
     );
     if (sequences.length === 0) { return [[0.0]]; }
     let minlength = Math.min(...sequences.map(x => x.length));
-    let pwm = xrange(minlength).map(i => Object.keys(lookupmap).map(x => 0));
+    sequences.map( s => ( smap(s, (x, j) => (
+        j < minlength && x.match(/^[a-z0-9]+$/i) && cmatches.add(x)
+    ))));
+    const glyphmap = inferGlyphmap(cmatches);
+    const lookupmap_ = lookupmap(glyphmap).lookup;
+    let pwm = xrange(minlength).map(i => Object.keys(lookupmap_).map(x => 0));
     let increment = 1.0 / sequences.length;
     sequences.map( s => ( smap(s, (x, j) => (
-	j < minlength && (pwm[j][lookupmap[x]] += increment)
+	j < minlength && (pwm[j][lookupmap_[x]] += increment)
     ))));
-    return pwm;
+    return {
+        pwm,
+        glyphmap
+    };
 };
 
 class FastaWorkspace extends React.Component {
@@ -87,6 +103,7 @@ class FastaWorkspace extends React.Component {
     constructor(props) {
 	super(props);
 	this.logoPostUrl = apiUrls(props.apiserver).logo("");
+        let { pwm, glyphmap } = fastaToPWM(DNADEFAULT, true);
 	this.state = {
 	    fasta: DNADEFAULT,
 	    logocomponent: "DNA",
@@ -94,7 +111,8 @@ class FastaWorkspace extends React.Component {
 	    startpos: 1,
 	    mode: INFORMATION_CONTENT,
 	    initialized: false,
-	    glyphmap: lookupmap(LOGOCOMPONENTS["DNA"].glyphs),
+	    glyphmap,
+            pwm,
             caseinsensitive: true
 	};
     }
@@ -118,13 +136,22 @@ class FastaWorkspace extends React.Component {
     }
     
     _fastaChange(fasta) {
+        if (fasta.trim().length === 0) return;
+        let { pwm, glyphmap } = fastaToPWM(fasta, this.state.caseinsensitive);
 	this.setState({
-	    fasta
+	    fasta,
+            pwm,
+            glyphmap,
+            logocomponent: logotype(glyphmap)
 	});
     }
 
     _onCaseChange() {
+        let { pwm, glyphmap } = fastaToPWM(this.state.fasta, !this.state.caseinsensitive);
         this.setState({
+            pwm,
+            glyphmap,
+            logocomponent: logotype(glyphmap),
             caseinsensitive: !this.state.caseinsensitive
         });
     }
@@ -144,7 +171,7 @@ class FastaWorkspace extends React.Component {
 	    return symbol && nglyphmap.push({ ...v, component: GLYPHSYMBOLS[v.regex].component });
 	});
 	this.setState({
-	    glyphmap: lookupmap(nglyphmap)
+	    glyphmap: nglyphmap
 	});
     }
 
@@ -167,7 +194,6 @@ class FastaWorkspace extends React.Component {
     }
     
     render() {
-	let pwm = fastaToPWM(this.state.fasta, this.state.glyphmap.lookup, this.state.caseinsensitive);
 	return (
             <React.Fragment>
               <Segment inverted fixed="top" attached="top">
@@ -191,7 +217,7 @@ class FastaWorkspace extends React.Component {
                                         caseInsensitive={this.state.caseinsensitive}
 				        startposdefault={this.state.startpos}
 				        modedefault={this.state.mode}
-				        glyphmap={this.state.glyphmap.raw}
+				        glyphmap={this.state.glyphmap}
 	                                onGlyphmapUpdate={this._glyphmapUpdate.bind(this)}
                                         onCaseChange={this._onCaseChange.bind(this)} />
             	  </Grid.Column>
@@ -203,20 +229,20 @@ class FastaWorkspace extends React.Component {
 		            height="100%" width="100%"
 		            text={this.state.fasta}
 	                    onChange={this._fastaChange.bind(this)}
-	                    id="fastamain" glyphmap={this.state.glyphmap.raw} />
+	                    id="fastamain" glyphmap={this.state.glyphmap} />
             		</Grid.Column>
 		      </Grid.Row>
 	              <Grid.Row style={{ height: '60%' }}>
 			<Grid.Column width={16} style={{ height: '100%' }}>
-		          <FastaLogoMenu svgref={this.logo} logoinfo={this._format_logoinfo(this.state, pwm)}
+		          <FastaLogoMenu svgref={this.logo} logoinfo={this._format_logoinfo(this.state, this.state.pwm)}
 				         apiurl={this.logoPostUrl} />
 		          <div ref={ c => { this.logo = c; } }
                                style={{ height: '75%', textAlign: "center" }}>
-                            <Logo pwm={pwm}
+                            <Logo pwm={this.state.pwm}
 			          startpos={this.state.startpos}
 			          mode={this.state.mode}
                                   width="90%" height="75%"
-			          glyphmap={this.state.glyphmap.raw} />
+			          glyphmap={this.state.glyphmap} />
 	                  </div>
             		</Grid.Column>
 		      </Grid.Row>
