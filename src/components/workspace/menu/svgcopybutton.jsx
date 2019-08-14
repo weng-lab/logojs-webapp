@@ -30,7 +30,7 @@ class SVGCopyButton extends React.Component {
 	return (
             <React.Fragment>
               <SVGModal open={this.state.modalshown}
-                        svg={cleaner(_svgdata(this.props.svgref))}
+                        svg={cleaner(_svgdata(this.props.svgref).replace(/\?>/g, "?>\n"))}
 		        onClose={this._modalClosed.bind(this)}
                         additionaltext={this.props.additionaltext} />
               <Menu.Item link>
