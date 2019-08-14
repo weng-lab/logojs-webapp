@@ -24,7 +24,7 @@ export const lookupmap = glyphmap => {
 
 const logotype = glyphmap => {
     if (glyphmap === DNAGlyphmap) return "DNA";
-    if (glyphmap == RNAGlyphmap) return "RNA";
+    if (glyphmap === RNAGlyphmap) return "RNA";
     if (glyphmap === AAGlyphmap) return "AA";
     return "custom";
 };
