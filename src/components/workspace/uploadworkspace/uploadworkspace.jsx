@@ -1,9 +1,11 @@
 import React from 'react';
 import { Grid, Menu, Dropdown, Button, Icon } from 'semantic-ui-react';
 import { DNALogo, RNALogo, AALogo, Logo, DNAGlyphmap, CompleteGlyphmap, CompleteLogo,
-	 RNAGlyphmap, AAGlyphmap, INFORMATION_CONTENT } from 'logos-to-go-react';
+	 RNAGlyphmap, AAGlyphmap, INFORMATION_CONTENT, embedLogo } from 'logos-to-go-react';
 
 import { apiUrls, isArrayOfArrays, TYPEID, glyphsymbols } from '../../../common/utils';
+import { _svgdata } from '../../svgdownload/utils';
+import SVGZip from '../../../utilities/zipfile';
 
 import MotifSelector from './motifselector';
 import SettingsPanel from './settings';
@@ -25,6 +27,7 @@ class UploadWorkspace extends React.Component {
 	super(props);
 	this.logoPostUrl = apiUrls(props.apiserver).logo("");
         this.logo = React.createRef();
+        this.hiddenlogo = React.createRef();
         this.fileinput = React.createRef();
 	this.state = {
 	    pwms: [],
@@ -93,10 +96,6 @@ class UploadWorkspace extends React.Component {
             ...npwms[this.state.selectedfile].result.pwms[this.state.selectedmotif],
             glyphmap: nglyphmap
         };
-        console.log({
-	    glyphmap: nglyphmap,
-            pwms: npwms
-	});
 	this.setState({
 	    glyphmap: nglyphmap,
             pwms: npwms
@@ -194,6 +193,24 @@ class UploadWorkspace extends React.Component {
             selectedmotif: i
         });
     }
+
+    async download() {
+        let zip = new SVGZip();
+        this.state.pwms.forEach( pwmfile => {
+            const folder = zip.folder(pwmfile.result.name);
+            pwmfile.result.pwms.forEach( (pwm, i) => {
+                embedLogo(this.hiddenlogo.current, {
+                    pwm: pwm.pwm,
+		    startpos: 0,
+		    mode: this.state.mode,
+		    glyphmap: pwm.glyphmap
+                });
+                folder.file(pwmfile.result.motifnames[i] + ".svg", _svgdata(this.hiddenlogo.current));
+            });
+        });
+        this.hiddenlogo.current.innerHTML = "";
+        zip.download("motifs.zip");
+    }
     
     async fileReceived(e) {
         const total = this.state.total + e.target.files.length;
@@ -256,8 +273,8 @@ class UploadWorkspace extends React.Component {
                                   </Dropdown.Menu>
                                 </Dropdown>
                                 <Menu.Item className="floated right">
-                                  <span style={{ cursor: "pointer" }}>
-                                    <Icon name="download"/>&nbsp;download all as ZIP
+                                  <span style={{ cursor: "pointer" }} onClick={this.download.bind(this)}>
+                                    <Icon name="download" />&nbsp;download all as ZIP
                                   </span>
                                   <span style={{ width: '2em' }} />
                                   <span onClick={ () => this.fileinput.current && this.fileinput.current.click() } style={{ cursor: "pointer" }}>
@@ -274,13 +291,14 @@ class UploadWorkspace extends React.Component {
 				        logoinfo={this._format_logoinfo({ ...this.state, glyphmap: selectedGlyphmap })} />
                             </React.Fragment>
                         )}
+                        <div ref={this.hiddenlogo} style={{ display: "none" }} />
                         <div ref={this.logo}
                              style={{ height: "50%", textAlign: "center" }}>
 	                  { isdone && (<Logo pwm={selectedPWMs.result.pwms[this.state.selectedmotif].pwm}
-			                       startpos={0}
-                                               width="90%" height="75%"
-			                       mode={this.state.mode}
-			                       glyphmap={selectedGlyphmap} />)}
+			                     startpos={0}
+                                             width="90%" height="75%"
+			                     mode={this.state.mode}
+			                     glyphmap={selectedGlyphmap} />)}
 			</div>
                         <input type="file" hidden ref={this.fileinput}
                                onChange={this.fileReceived.bind(this)}

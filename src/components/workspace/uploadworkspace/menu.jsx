@@ -45,7 +45,6 @@ const UploadLogoMenu = ({ svgref, apiurl, logoinfo }) => (
     <LogoMenu width="100%">
       <LogoSVGDownloadButton {...ITEMSTYLE}
 			     labeltext="save" svgref={svgref.current}
-                             c={console.log(svgref)}
 			     filename="logo.svg" />
       <LogoSVGCopyButton {...ITEMSTYLE}
 			 labeltext="copy SVG code" svgref={svgref.current} />

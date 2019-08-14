@@ -1,4 +1,4 @@
-import { textToClipboard } from '../../common/utils';
+import { textToClipboard, downloadBlob } from '../../common/utils';
 
 /* extract SVG data from DOM node, remove formatting from source code */
 export const _svgdata = _svgnode => {
@@ -12,14 +12,10 @@ export const _svgdata = _svgnode => {
 };
 
 export const downloadSVG = (_svg, filename) => {
-    let svgBlob = new Blob([_svgdata(_svg)], {type:"image/svg+xml;charset=utf-8"});
-    let svgUrl = URL.createObjectURL(svgBlob);
-    let downloadLink = document.createElement("a");
-    downloadLink.href = svgUrl;
-    downloadLink.download = filename;
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+    downloadBlob(
+        new Blob([_svgdata(_svg)], {type:"image/svg+xml;charset=utf-8"}),
+        filename
+    );
 };
 
 export const copySVG = (_svg) => (

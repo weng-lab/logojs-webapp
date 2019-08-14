@@ -75,3 +75,13 @@ export const any = b => {
 export const indentCode = (code, indent) => (
     code.split('\n').filter(x => x !== "").map(x => indent + x).join('\n')
 );
+
+export const downloadBlob = (blob, filename) => {
+    const url = URL.createObjectURL(blob);
+    const downloadLink = document.createElement("a");
+    downloadLink.href = url;
+    downloadLink.download = filename;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+};
