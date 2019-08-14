@@ -25,6 +25,7 @@ class UploadWorkspace extends React.Component {
 	super(props);
 	this.logoPostUrl = apiUrls(props.apiserver).logo("");
         this.logo = React.createRef();
+        this.fileinput = React.createRef();
 	this.state = {
 	    pwms: [],
             errors: [],
@@ -80,8 +81,25 @@ class UploadWorkspace extends React.Component {
 	    let symbol = GLYPHSYMBOLS[v.regex] && GLYPHSYMBOLS[v.regex].component;
 	    return symbol && nglyphmap.push({ ...v, component: GLYPHSYMBOLS[v.regex].component });
 	});
+        const npwms = [ ...this.state.pwms ];
+        npwms[this.state.selectedfile] = {
+            ...npwms[this.state.selectedfile],
+            result: {
+                ...npwms[this.state.selectedfile].result,
+                pwms: [ ...npwms[this.state.selectedfile].result.pwms ]
+            }
+        };
+        npwms[this.state.selectedfile].result.pwms[this.state.selectedmotif] = {
+            ...npwms[this.state.selectedfile].result.pwms[this.state.selectedmotif],
+            glyphmap: nglyphmap
+        };
+        console.log({
+	    glyphmap: nglyphmap,
+            pwms: npwms
+	});
 	this.setState({
-	    glyphmap: nglyphmap
+	    glyphmap: nglyphmap,
+            pwms: npwms
 	});
     }
 
@@ -178,7 +196,11 @@ class UploadWorkspace extends React.Component {
     }
     
     async fileReceived(e) {
-        this.setState({ total: this.state.total + e.target.files.length });
+        const total = this.state.total + e.target.files.length;
+        this.setState({
+            total,
+            selectedfile: total - 1
+        });
         Array.from(e.target.files).map(this.parseFile.bind(this));
     }
     
@@ -210,15 +232,15 @@ class UploadWorkspace extends React.Component {
                     { this.state.errors.length > 0 && (
                         <ErrorMessage errors={this.state.errors} onClick={this.errorclosed.bind(this)}/>
                     )}
-                    <Grid textAlign="center" className={isdone ? null : "middle aligned"}
+                    <Grid textAlign="center"
                           style={{ height: "50%" }}>
                       <Grid.Row>
                         <Grid.Column width={16}>
                           { this.state.pwms.length === 0 ? (
                               <Button style={{ fontSize: "24pt", textAlign: "center" }}
-                                      onClick={() => this.fileinput.click()}>
-                                <Icon style={{fontSize: "72pt", marginLeft: '0em', marginRight: '0em', marginTop: '0.3em' }} name="upload" /><br/>
-                                upload {this.props.title} files
+                                      onClick={() => this.fileinput.current && this.fileinput.current.click()}>
+                                <Icon style={{fontSize: "52pt", marginLeft: '0em', marginRight: '0em', marginTop: '0.3em' }} name="upload" /><br/>
+                                upload files
                               </Button>
                           ) : isdone && (
                               <React.Fragment>
@@ -239,7 +261,7 @@ class UploadWorkspace extends React.Component {
                                       <Icon name="download"/>&nbsp;download all as ZIP
                                     </span>
                                     <span style={{ width: '2em' }} />
-                                    <span onClick={ () => this.fileinput.click() } style={{ cursor: "pointer" }}>
+                                    <span onClick={ () => this.fileinput.current && this.fileinput.current.click() } style={{ cursor: "pointer" }}>
                                       <Icon name="upload"/>&nbsp;upload more
                                     </span>
                                   </Menu.Item>
@@ -254,14 +276,14 @@ class UploadWorkspace extends React.Component {
                               </React.Fragment>
                           )}
                           <div ref={this.logo}
-                               style={{ height: "75%", textAlign: "center" }}>
+                               style={{ height: "50%", textAlign: "center" }}>
 	                    { isdone && (<Logo pwm={selectedPWMs.result.pwms[this.state.selectedmotif].pwm}
 			                       startpos={0}
                                                width="90%" height="75%"
 			                       mode={this.state.mode}
 			                       glyphmap={selectedGlyphmap} />)}
 			  </div>
-                          <input type="file" hidden ref={ c => this.fileinput = c }
+                          <input type="file" hidden ref={this.fileinput}
                                  onChange={this.fileReceived.bind(this)}
                                  multiple />
                         </Grid.Column>
