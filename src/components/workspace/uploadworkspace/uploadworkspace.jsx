@@ -212,87 +212,85 @@ class UploadWorkspace extends React.Component {
                                 && selectedPWMs.result.pwms.length > 0 && selectedPWMs.result.pwms[this.state.selectedmotif]
                                 && selectedPWMs.result.pwms[this.state.selectedmotif].glyphmap) || this.state.glyphmap;
 	return (
-	    <React.Fragment>
-	      <Grid className="centered" style={{ width: "90%", marginLeft: "5%", height: "100%" }}>
-                <Grid.Row />
-		<Grid.Row style={{ height: "100%" }}>
-		  <Grid.Column width={3}>
-		    <SettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
-				   onScaleChange={this._scaleChange.bind(this)}
-				   onStartPosChange={this._startPosChange.bind(this)}
-				   onModeChange={this._modeChange.bind(this)}
-				   logodefault={this.state.logocomponent}
-				   scaledefault={this.state.scale}
-				   startposdefault={this.state.startpos}
-				   modedefault={this.state.mode}
-				   glyphmap={selectedGlyphmap}
-				   onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
-		  </Grid.Column>
-                  <Grid.Column width={13} style={{ height: '100%' }}>
-                    { this.state.errors.length > 0 && (
-                        <ErrorMessage errors={this.state.errors} onClick={this.errorclosed.bind(this)}/>
-                    )}
-                    <Grid textAlign="center"
-                          style={{ height: "50%" }}>
-                      <Grid.Row>
-                        <Grid.Column width={16}>
-                          { this.state.pwms.length === 0 ? (
-                              <Button style={{ fontSize: "24pt", textAlign: "center" }}
-                                      onClick={() => this.fileinput.current && this.fileinput.current.click()}>
-                                <Icon style={{fontSize: "52pt", marginLeft: '0em', marginRight: '0em', marginTop: '0.3em' }} name="upload" /><br/>
-                                upload files
-                              </Button>
-                          ) : isdone && (
-                              <React.Fragment>
-                                <Menu secondary pointing>
-                                  <Dropdown item
-                                            text={selectedPWMs.result.name || selectedPWMs.file.name}>
-                                    <Dropdown.Menu>
-                                      {this.state.pwms.map( (pwmset, i) => (
-                                          <Dropdown.Item key={"fileitem_" + i}
-                                                         onClick={() => this.selectFile(i)}>
-                                            {pwmset.result.name || pwmset.file.name}
-                                          </Dropdown.Item>
-                                      ))}
-                                    </Dropdown.Menu>
-                                  </Dropdown>
-                                  <Menu.Item className="floated right">
-                                    <span style={{ cursor: "pointer" }}>
-                                      <Icon name="download"/>&nbsp;download all as ZIP
-                                    </span>
-                                    <span style={{ width: '2em' }} />
-                                    <span onClick={ () => this.fileinput.current && this.fileinput.current.click() } style={{ cursor: "pointer" }}>
-                                      <Icon name="upload"/>&nbsp;upload more
-                                    </span>
-                                  </Menu.Item>
-                                  </Menu>
-				  <div style={{ textAlign: "left" }}>
-                                    <MotifSelector pwms={selectedPWMs}
-                                                   selectedmotif={this.state.selectedmotif}
-                                                   onItemSelected={this.onItemSelected.bind(this)} />
-			          </div>
-                                <LogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
-				          logoinfo={this._format_logoinfo({ ...this.state, glyphmap: selectedGlyphmap })} />
-                              </React.Fragment>
-                          )}
-                          <div ref={this.logo}
-                               style={{ height: "50%", textAlign: "center" }}>
-	                    { isdone && (<Logo pwm={selectedPWMs.result.pwms[this.state.selectedmotif].pwm}
+	    <Grid className="centered" style={{ width: "90%", marginLeft: "5%", height: "100%" }}>
+              <Grid.Row />
+	      <Grid.Row style={{ height: "100%" }}>
+		<Grid.Column width={3}>
+		  <SettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
+				 onScaleChange={this._scaleChange.bind(this)}
+				 onStartPosChange={this._startPosChange.bind(this)}
+				 onModeChange={this._modeChange.bind(this)}
+				 logodefault={this.state.logocomponent}
+				 scaledefault={this.state.scale}
+				 startposdefault={this.state.startpos}
+				 modedefault={this.state.mode}
+				 glyphmap={selectedGlyphmap}
+				 onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
+		</Grid.Column>
+                <Grid.Column width={13} style={{ height: '100%' }}>
+                  { this.state.errors.length > 0 && (
+                      <ErrorMessage errors={this.state.errors} onClick={this.errorclosed.bind(this)}/>
+                  )}
+                  <Grid textAlign="center"
+                        style={{ height: "50%" }}>
+                    <Grid.Row>
+                      <Grid.Column width={16}>
+                        { this.state.pwms.length === 0 ? (
+                            <Button style={{ fontSize: "24pt", textAlign: "center" }}
+                                    onClick={() => this.fileinput.current && this.fileinput.current.click()}>
+                              <Icon style={{fontSize: "52pt", marginLeft: '0em', marginRight: '0em', marginTop: '0.3em' }} name="upload" /><br/>
+                              upload files
+                            </Button>
+                        ) : isdone && (
+                            <React.Fragment>
+                              <Menu secondary pointing>
+                                <Dropdown item
+                                          text={selectedPWMs.result.name || selectedPWMs.file.name}>
+                                  <Dropdown.Menu>
+                                    {this.state.pwms.map( (pwmset, i) => (
+                                        <Dropdown.Item key={"fileitem_" + i}
+                                                       onClick={() => this.selectFile(i)}>
+                                          {pwmset.result.name || pwmset.file.name}
+                                        </Dropdown.Item>
+                                    ))}
+                                  </Dropdown.Menu>
+                                </Dropdown>
+                                <Menu.Item className="floated right">
+                                  <span style={{ cursor: "pointer" }}>
+                                    <Icon name="download"/>&nbsp;download all as ZIP
+                                  </span>
+                                  <span style={{ width: '2em' }} />
+                                  <span onClick={ () => this.fileinput.current && this.fileinput.current.click() } style={{ cursor: "pointer" }}>
+                                    <Icon name="upload"/>&nbsp;upload more
+                                  </span>
+                                </Menu.Item>
+                              </Menu>
+			      <div style={{ textAlign: "left" }}>
+                                <MotifSelector pwms={selectedPWMs}
+                                               selectedmotif={this.state.selectedmotif}
+                                               onItemSelected={this.onItemSelected.bind(this)} />
+			      </div>
+                              <LogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
+				        logoinfo={this._format_logoinfo({ ...this.state, glyphmap: selectedGlyphmap })} />
+                            </React.Fragment>
+                        )}
+                        <div ref={this.logo}
+                             style={{ height: "50%", textAlign: "center" }}>
+	                  { isdone && (<Logo pwm={selectedPWMs.result.pwms[this.state.selectedmotif].pwm}
 			                       startpos={0}
                                                width="90%" height="75%"
 			                       mode={this.state.mode}
 			                       glyphmap={selectedGlyphmap} />)}
-			  </div>
-                          <input type="file" hidden ref={this.fileinput}
-                                 onChange={this.fileReceived.bind(this)}
-                                 multiple />
-                        </Grid.Column>
-                      </Grid.Row>
-                    </Grid>
-		  </Grid.Column>
-		</Grid.Row>
-	      </Grid>
-	    </React.Fragment>
+			</div>
+                        <input type="file" hidden ref={this.fileinput}
+                               onChange={this.fileReceived.bind(this)}
+                               multiple />
+                      </Grid.Column>
+                    </Grid.Row>
+                  </Grid>
+		</Grid.Column>
+	      </Grid.Row>
+	    </Grid>
 	);
     }
     

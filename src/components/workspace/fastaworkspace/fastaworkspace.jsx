@@ -5,7 +5,7 @@ import { DNALogo, RNALogo, AALogo, Logo, CompleteLogo,
 	 INFORMATION_CONTENT, xrange } from 'logos-to-go-react';
 import { Grid, Container, Segment, Header } from 'semantic-ui-react';
 
-import { MainMenu, mainMenuItems, Footer } from '../../homepage';
+import { MainMenu, mainMenuItems } from '../../homepage';
 import { FastaEditor } from '../../editor/index';
 import { apiUrls, TYPEID, glyphsymbols } from '../../../common/utils';
 
@@ -224,7 +224,6 @@ class FastaWorkspace extends React.Component {
 		  </Grid.Column>
 		</Grid.Row>
 	      </Grid>
-              <Footer />
 	    </React.Fragment>
 	);
     }

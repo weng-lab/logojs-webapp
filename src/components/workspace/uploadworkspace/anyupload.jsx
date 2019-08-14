@@ -1,7 +1,7 @@
 import React from 'react';
 import { Segment, Container, Header } from 'semantic-ui-react';
 
-import { MainMenu, mainMenuItems, Footer } from '../../homepage';
+import { MainMenu, mainMenuItems } from '../../homepage';
 import UploadWorkspace from './uploadworkspace';
 import MEMEParser from './memexmlparser';
 import { lookupmap, LOGOCOMPONENTS, fastaToPWM } from '../fastaworkspace/fastaworkspace';
@@ -179,7 +179,6 @@ class AnyUploadWorkspace extends React.Component {
               <UploadWorkspace parse={parsers.map(x => x.bind(this))}
                                title="MEME, Transfac, JASPAR, or FASTA"
                                apiserver={this.props.apiserver} />
-              <Footer />
             </React.Fragment>
         );
     }

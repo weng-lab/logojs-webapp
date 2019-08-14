@@ -3,7 +3,7 @@ import { Grid, Container, Segment, Header } from 'semantic-ui-react';
 import { DNALogo, RNALogo, AALogo, Logo, DNAGlyphmap, CompleteGlyphmap, CompleteLogo,
 	 RNAGlyphmap, AAGlyphmap, INFORMATION_CONTENT, LogoWithNegatives } from 'logos-to-go-react';
 
-import { MainMenu, mainMenuItems, Footer } from '../../homepage';
+import { MainMenu, mainMenuItems } from '../../homepage';
 import { PWMEditor } from '../../editor/index';
 import { anyNegative, apiUrls, isArrayOfArrays, TYPEID, glyphsymbols } from '../../../common/utils';
 
@@ -180,7 +180,6 @@ class PWMWorkspace extends React.Component {
 		  </Grid.Column>
 		</Grid.Row>
 	      </Grid>
-              <Footer />
 	    </React.Fragment>
 	);
     }
