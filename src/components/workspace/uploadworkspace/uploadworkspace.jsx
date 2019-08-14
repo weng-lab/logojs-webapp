@@ -136,7 +136,7 @@ class UploadWorkspace extends React.Component {
         }
         reader.onload = e => {
             let result, i = 0;
-            while ((!result || !result.pwms) && this.props.parse[i++]) {
+            while ((!result || !result.pwms || !result.pwms.length) && this.props.parse[i]) {
                 result = (this.props.parse[i++])(e.target.result);
             }
             if (Object.keys(result.pwms).length !== 0) {
@@ -197,15 +197,15 @@ class UploadWorkspace extends React.Component {
     async download() {
         let zip = new SVGZip();
         this.state.pwms.forEach( pwmfile => {
-            const folder = zip.folder(pwmfile.result.name);
+            const folder = zip.folder(pwmfile.result.name || pwmfile.file.name);
             pwmfile.result.pwms.forEach( (pwm, i) => {
                 embedLogo(this.hiddenlogo.current, {
                     pwm: pwm.pwm,
 		    startpos: 0,
 		    mode: this.state.mode,
-		    glyphmap: pwm.glyphmap
+		    glyphmap: pwm.glyphmap || this.state.glyphmap
                 });
-                folder.file(pwmfile.result.motifnames[i] + ".svg", _svgdata(this.hiddenlogo.current));
+                folder.file((pwmfile.result.motifnames[i] || "motif_" + (i + 1)) + ".svg", _svgdata(this.hiddenlogo.current));
             });
         });
         this.hiddenlogo.current.innerHTML = "";

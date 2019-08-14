@@ -62,7 +62,7 @@ class AnyUploadWorkspace extends React.Component {
             }
             for (let i in pwm) {
                 for (let j in pwm[i]) {
-                    toutput[j][i] = +pwm[i][j] / totals[i];
+                    toutput[j][i] = +pwm[i][j] / totals[j];
                 }
             }
             return toutput;
@@ -159,10 +159,10 @@ class AnyUploadWorkspace extends React.Component {
     
     render() {
         const parsers = [
-            this.parseFasta,
             this.parseMeme,
             this.parseTransfac,
-            this.parseJaspar
+            this.parseJaspar,
+            this.parseFasta
         ];
         return (
             <React.Fragment>
