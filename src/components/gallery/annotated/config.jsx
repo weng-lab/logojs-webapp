@@ -1,5 +1,5 @@
 import React from 'react';
-import { RawLogo, DNAGlyphmap, AAGlyphmap } from 'logos-to-go-react';
+import { RawLogo, DNAGlyphmap, ProteinGlyphmap } from 'logos-to-go-react';
 
 import { formatPWM, formatGlyphmap } from '../../../common/codestrings';
 import { indentCode } from '../../../common/utils';
@@ -182,7 +182,7 @@ logosj.embedRawLogo(document.getElementById("dnalogo"), {
 });
 logosj.embedRawLogo(document.getElementById("proteinlogo"), {
   pwm: PROTEIN_DNA_PWM,
-  glyphmap: logosj.AAGlyphmap,
+  glyphmap: logosj.ProteinGlyphmap,
   glyphWidth: 100,
   stackHeight: 400
 });
@@ -210,13 +210,13 @@ ${indentCode(INTERACTION_JS, "      ")}
 `.substring(1);
 
 export const INTERACTION_CODESTRING_REACT = `
-import { RawLogo, DNAGlyphmap, AAGlyphmap } from 'logosj-react';
+import { RawLogo, DNAGlyphmap, ProteinGlyphmap } from 'logosj-react';
 ${INTERACTION_CONSTANTS}
 export const SNPLogo = props => (
   <svg viewBox={"0 0 2600 920"}>
     <RawLogo glyphmap={DNAGlyphmap} pwm={DNA_PROTEIN_PWM} glyphWidth={100} stackHeight={200} />
     <g transform="translate(0,500)">
-      <RawLogo glyphmap={AAGlyphmap} pwm={PROTEIN_DNA_PWM} glyphWidth={100} stackHeight={400} />
+      <RawLogo glyphmap={ProteinGlyphmap} pwm={PROTEIN_DNA_PWM} glyphWidth={100} stackHeight={400} />
     </g>
     <path fill="#88888888" d="M 1530 220 L 1600 590 L 1700 590 L 1630 220 L 1530 220" />
     <path fill="#88888888" d="M 1670 220 L 1200 520 L 1300 520 L 1750 220 L 1670 220" />
@@ -239,7 +239,7 @@ export const INTERACTION_DEMO = {
         <svg viewBox={"0 0 2600 920"}>
           <RawLogo glyphmap={DNAGlyphmap} pwm={DNA_PROTEIN_PWM} glyphWidth={100} stackHeight={200} />
           <g transform="translate(0,500)">
-            <RawLogo glyphmap={AAGlyphmap} pwm={PROTEIN_DNA_PWM} glyphWidth={100} stackHeight={400} />
+            <RawLogo glyphmap={ProteinGlyphmap} pwm={PROTEIN_DNA_PWM} glyphWidth={100} stackHeight={400} />
           </g>
           <path fill="#88888888" d="M 1530 220 L 1600 590 L 1700 590 L 1630 220 L 1530 220" />
           <path fill="#88888888" d="M 1670 220 L 1200 520 L 1300 520 L 1750 220 L 1670 220" />

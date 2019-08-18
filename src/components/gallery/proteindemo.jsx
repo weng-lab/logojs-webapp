@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Segment, Header, Button } from 'semantic-ui-react';
-import { AALogo } from 'logos-to-go-react';
+import { ProteinLogo } from 'logos-to-go-react';
 
 import { PROTEIN_PWM, ALT_PROTEIN_PWM } from './constants';
 
@@ -23,14 +23,14 @@ const ProteinPreview = () => (
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 colored by chemical properties
               </div>
-              <AALogo pwm={PROTEIN_PWM} startpos={1} />
+              <ProteinLogo pwm={PROTEIN_PWM} startpos={1} />
             </Grid.Column>
             <Grid.Column width={1} />
             <Grid.Column width={6} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 extended with B (Asx) and Z (Glx)
               </div>
-              <AALogo pwm={ALT_PROTEIN_PWM()} startpos={1} />
+              <ProteinLogo pwm={ALT_PROTEIN_PWM()} startpos={1} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row style={{ textAlign: "center" }}>

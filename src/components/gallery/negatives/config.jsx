@@ -1,4 +1,4 @@
-import { AAGlyphmap, DNAGlyphmap } from 'logos-to-go-react';
+import { ProteinGlyphmap, DNAGlyphmap } from 'logos-to-go-react';
 
 import { jsCodestring, formatPWM } from '../../../common/codestrings';
 import { AA_PWM, DNA_NEGATIVE_PWM, DNA_NEGATIVE_PWM2 } from '../constants';
@@ -11,15 +11,15 @@ export const AA_CODESTRING_JS = jsCodestring(`
 ${AA_CONSTANTS}
 logosj.embedLogoWithNegatives(document.getElementById("logo"), {
   pwm: AA_PWM,
-  glyphmap: logosj.AAGlyphmap
+  glyphmap: logosj.ProteinGlyphmap
 });
 `);
 
 export const AA_CODESTRING_REACT = `
-import { LogoWithNegatives, AAGlyphmap } from 'logosj-react';
+import { LogoWithNegatives, ProteinGlyphmap } from 'logosj-react';
 ${AA_CONSTANTS}
 export const ProteinLogo = props => (
-    <LogoWithNegatives pwm={AA_PWM} glyphmap={AAGlyphmap} />
+    <LogoWithNegatives pwm={AA_PWM} glyphmap={ProteinGlyphmap} />
 );
 `.substring(1);
 
@@ -34,7 +34,7 @@ export const AA_DEMO = {
     jsCodestring: AA_CODESTRING_JS,
     logoProps: {
         pwm: AA_PWM,
-        glyphmap: AAGlyphmap,
+        glyphmap: ProteinGlyphmap,
         protein: true
     },
     description: "A logo can render both positive and negative letter heights.",

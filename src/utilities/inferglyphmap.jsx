@@ -1,4 +1,4 @@
-import { DNAGlyphmap, RNAGlyphmap, AAGlyphmap, CompleteGlyphmap } from 'logos-to-go-react';
+import { DNAGlyphmap, RNAGlyphmap, ProteinGlyphmap, CompleteGlyphmap } from 'logos-to-go-react';
 
 const DNASet = new Set([ 'A', 'C', 'G', 'T' ]);
 const RNASet = new Set([ 'A', 'C', 'G', 'U' ]);
@@ -15,6 +15,6 @@ const difference = (a, b) => (
 export const inferGlyphmap = cmatches => {
     if (difference(cmatches, DNASet).length === 0) return DNAGlyphmap;
     if (difference(cmatches, RNASet).length === 0) return RNAGlyphmap;
-    if (difference(cmatches, ProteinSet).length === 0) return AAGlyphmap;
+    if (difference(cmatches, ProteinSet).length === 0) return ProteinGlyphmap;
     return CompleteGlyphmap;
 };

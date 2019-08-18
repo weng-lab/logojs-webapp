@@ -1,6 +1,6 @@
 import React from 'react';
 import { Segment, Grid, Header } from 'semantic-ui-react';
-import { AALogo } from 'logos-to-go-react';
+import { ProteinLogo } from 'logos-to-go-react';
 
 import CodeAccordion from '../code';
 
@@ -23,7 +23,7 @@ export const DemoPanel = ({ reactCodestring, jsCodestring, logoProps, descriptio
           <Grid.Row>
             <Grid.Column width={1} />
             <Grid.Column width={6} style={{ textAlign: "center" }}>
-              <AALogo startpos={1} {...logoProps} />
+              <ProteinLogo startpos={1} {...logoProps} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>

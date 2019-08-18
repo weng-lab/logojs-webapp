@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Menu, Dropdown, Button, Icon } from 'semantic-ui-react';
-import { DNALogo, RNALogo, AALogo, Logo, DNAGlyphmap, CompleteGlyphmap, CompleteLogo,
-	 RNAGlyphmap, AAGlyphmap, INFORMATION_CONTENT, embedLogo } from 'logos-to-go-react';
+import { DNALogo, RNALogo, ProteinLogo, Logo, DNAGlyphmap, CompleteGlyphmap, CompleteLogo,
+	 RNAGlyphmap, ProteinGlyphmap, INFORMATION_CONTENT, embedLogo } from 'logos-to-go-react';
 
 import { apiUrls, isArrayOfArrays, TYPEID, glyphsymbols } from '../../../common/utils';
 import { _svgdata } from '../../svgdownload/utils';
@@ -17,7 +17,7 @@ let GLYPHSYMBOLS = glyphsymbols();
 const LOGOCOMPONENTS = {
     DNA: { component: DNALogo, glyphs: DNAGlyphmap, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
     RNA: { component: RNALogo, glyphs: RNAGlyphmap, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
-    AA: { component: AALogo, glyphs: AAGlyphmap, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] },
+    AA: { component: ProteinLogo, glyphs: ProteinGlyphmap, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] },
     custom: { component: CompleteLogo, glyphs: CompleteGlyphmap, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] }
 };
 

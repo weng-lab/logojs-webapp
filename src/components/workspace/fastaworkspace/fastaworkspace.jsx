@@ -1,7 +1,7 @@
 import React from 'react';
 import os from 'os';
-import { DNALogo, RNALogo, AALogo, Logo, CompleteLogo,
-	 DNAGlyphmap, RNAGlyphmap, AAGlyphmap, CompleteGlyphmap,
+import { DNALogo, RNALogo, ProteinLogo, Logo, CompleteLogo,
+	 DNAGlyphmap, RNAGlyphmap, ProteinGlyphmap, CompleteGlyphmap,
 	 INFORMATION_CONTENT, xrange } from 'logos-to-go-react';
 import { Grid, Container, Segment, Header } from 'semantic-ui-react';
 
@@ -25,7 +25,7 @@ export const lookupmap = glyphmap => {
 const logotype = glyphmap => {
     if (glyphmap === DNAGlyphmap) return "DNA";
     if (glyphmap === RNAGlyphmap) return "RNA";
-    if (glyphmap === AAGlyphmap) return "AA";
+    if (glyphmap === ProteinGlyphmap) return "AA";
     return "custom";
 };
 
@@ -70,7 +70,7 @@ let GLYPHSYMBOLS = glyphsymbols();
 export const LOGOCOMPONENTS = {
     DNA: { component: DNALogo, glyphs: DNAGlyphmap, defaulttext: DNADEFAULT },
     RNA: { component: RNALogo, glyphs: RNAGlyphmap, defaulttext: RNADEFAULT },
-    AA: { component: AALogo, glyphs: AAGlyphmap, defaulttext: PROTEINDEFAULT },
+    AA: { component: ProteinLogo, glyphs: ProteinGlyphmap, defaulttext: PROTEINDEFAULT },
     custom: { component: CompleteLogo, glyphs: CompleteGlyphmap, defaulttext: CUSTOMDEFAULT }
 };
 

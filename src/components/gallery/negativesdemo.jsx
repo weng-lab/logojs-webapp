@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Segment, Header, Button } from 'semantic-ui-react';
-import { LogoWithNegatives, AAGlyphmap, DNAGlyphmap } from 'logos-to-go-react';
+import { LogoWithNegatives, ProteinGlyphmap, DNAGlyphmap } from 'logos-to-go-react';
 
 import { AA_PWM, DNA_NEGATIVE_PWM, DNA_NEGATIVE_PWM2 } from './constants';
 
@@ -23,7 +23,7 @@ const NegativesPreview = () => (
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 protein logo
               </div>
-              <LogoWithNegatives glyphmap={AAGlyphmap} pwm={AA_PWM} startpos={1} />
+              <LogoWithNegatives glyphmap={ProteinGlyphmap} pwm={AA_PWM} startpos={1} />
             </Grid.Column>
             <Grid.Column width={1} />
             <Grid.Column width={4} style={{ textAlign: "center" }}>
