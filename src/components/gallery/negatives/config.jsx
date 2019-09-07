@@ -1,4 +1,4 @@
-import { ProteinGlyphmap, DNAGlyphmap } from 'logos-to-go-react';
+import { ProteinAlphabet, DNAAlphabet } from 'logos-to-go-react';
 
 import { jsCodestring, formatPWM } from '../../../common/codestrings';
 import { AA_PWM, DNA_NEGATIVE_PWM, DNA_NEGATIVE_PWM2 } from '../constants';
@@ -11,15 +11,15 @@ export const AA_CODESTRING_JS = jsCodestring(`
 ${AA_CONSTANTS}
 logosj.embedLogoWithNegatives(document.getElementById("logo"), {
   pwm: AA_PWM,
-  glyphmap: logosj.ProteinGlyphmap
+  alphabet: logosj.ProteinAlphabet
 });
 `);
 
 export const AA_CODESTRING_REACT = `
-import { LogoWithNegatives, ProteinGlyphmap } from 'logosj-react';
+import { LogoWithNegatives, ProteinAlphabet } from 'logosj-react';
 ${AA_CONSTANTS}
 export const ProteinLogo = props => (
-    <LogoWithNegatives pwm={AA_PWM} glyphmap={ProteinGlyphmap} />
+    <LogoWithNegatives pwm={AA_PWM} alphabet={ProteinAlphabet} />
 );
 `.substring(1);
 
@@ -34,7 +34,7 @@ export const AA_DEMO = {
     jsCodestring: AA_CODESTRING_JS,
     logoProps: {
         pwm: AA_PWM,
-        glyphmap: ProteinGlyphmap,
+        alphabet: ProteinAlphabet,
         protein: true
     },
     description: "A logo can render both positive and negative letter heights.",
@@ -50,16 +50,16 @@ export const DNA_CODESTRING_JS = jsCodestring(`
 ${DNA_CONSTANTS}
 logosj.embedLogoWithNegatives(document.getElementById("logo"), {
   pwm: DNA_PWM,
-  glyphmap: logosj.DNAGlyphmap,
+  alphabet: logosj.DNAAlphabet,
   negativealpha: 101
 });
 `);
 
 export const DNA_CODESTRING_REACT = `
-import { LogoWithNegatives, DNAGlyphmap } from 'logosj-react';
+import { LogoWithNegatives, DNAAlphabet } from 'logosj-react';
 ${DNA_CONSTANTS}
 export const DNALogo = props => (
-    <LogoWithNegatives pwm={DNA_PWM} glyphmap={DNAGlyphmap} negativealpha={101} />
+    <LogoWithNegatives pwm={DNA_PWM} alphabet={DNAAlphabet} negativealpha={101} />
 );
 `.substring(1);
 
@@ -74,7 +74,7 @@ export const DNA_DEMO = {
     jsCodestring: DNA_CODESTRING_JS,
     logoProps: {
         pwm: DNA_NEGATIVE_PWM,
-        glyphmap: DNAGlyphmap,
+        alphabet: DNAAlphabet,
         negativealpha: 101
     },
     description: "A logo can render its negative letters in a lighter shade.",
@@ -90,17 +90,17 @@ export const DNA_CODESTRING_JS2 = jsCodestring(`
 ${DNA_CONSTANTS2}
 logosj.embedLogo(document.getElementById("logo"), {
   pwm: DNA_PWM,
-  glyphmap: logosj.DNAGlyphmap,
+  alphabet: logosj.DNAAlphabet,
   negativealpha: 101,
   inverted: true
 });
 `);
 
 export const DNA_CODESTRING_REACT2 = `
-import { LogoWithNegatives, DNAGlyphmap } from 'logosj-react';
+import { LogoWithNegatives, DNAAlphabet } from 'logosj-react';
 ${DNA_CONSTANTS2}
 export const DNALogo = props => (
-    <Logo pwm={DNA_PWM} glyphmap={DNAGlyphmap} negativealpha={101} inverted />
+    <Logo pwm={DNA_PWM} alphabet={DNAAlphabet} negativealpha={101} inverted />
 );
 `.substring(1);
 
@@ -114,7 +114,7 @@ export const DNA_DEMO2 = {
     jsCodestring: DNA_CODESTRING_JS2,
     logoProps: {
         pwm: DNA_NEGATIVE_PWM2,
-        glyphmap: DNAGlyphmap,
+        alphabet: DNAAlphabet,
         negativealpha: 101,
         inverted: true
     },

@@ -7,7 +7,7 @@ import { LogoTypeDropdown, ColoredInput, ModeDropdown,
 const PWMSettingsPanel = ({
     onLogoTypeChange, onScaleChange, onStartPosChange,
     onModeChange, modedefault, logodefault, scaledefault,
-    startposdefault, glyphmap, onGlyphmapUpdate, hasnegative
+    startposdefault, alphabet, onAlphabetUpdate, hasnegative
 }) => (
     <Menu vertical style={{ width: '100%', backgroundColor: "#fafafa" }}>
       <Menu.Item>
@@ -28,7 +28,7 @@ const PWMSettingsPanel = ({
 		      header="First Base Number" />
       </Menu.Item>
       <Menu.Item>
-	<GlyphList header="Symbol List" glyphmap={glyphmap} onGlyphmapUpdate={onGlyphmapUpdate} />
+	<GlyphList header="Symbol List" alphabet={alphabet} onAlphabetUpdate={onAlphabetUpdate} />
       </Menu.Item>
     </Menu>
 );

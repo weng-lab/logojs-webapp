@@ -1,5 +1,5 @@
 import React from 'react';
-import { CompleteGlyphmap, DNAGlyphmap } from 'logos-to-go-react';
+import { CompleteAlphabet, DNAAlphabet } from 'logos-to-go-react';
 
 import SyntaxHighlighter from '../syntax';
 import { INTRON_PWM, CAP_PWM, CTCF_PWM } from '../constants';
@@ -91,7 +91,7 @@ const LOWERCASE_PWM = [
   [0.40, 0.01, 0.55, 0.01], [0.09, 0.53, 0.33, 0.04], [0.12, 0.35, 0.08, 0.43], 
   [0.44, 0.19, 0.29, 0.06]
 ];
-const LOWERCASE_GLYPHMAP = [
+const LOWERCASE_ALPHABET = [
     { color: "#880000", regex: "a" },
     { color: "#008800", regex: "c" },
     { color: "#000088", regex: "g" },
@@ -103,7 +103,7 @@ export const LOWERCASE_CODESTRING_REACT = `
 import { Logo, loadGlyphComponents } from 'logosj-react';
 ${LOWERCASE_CONSTANTS}
 export const LowercaseLogo = props => (
-    <Logo glyphmap={loadGlyphComponents(LOWERCASE_GLYPHMAP)} pwm={LOWERCASE_PWM} />
+    <Logo alphabet={loadGlyphComponents(LOWERCASE_ALPHABET)} pwm={LOWERCASE_PWM} />
 );
 `;
 
@@ -111,7 +111,7 @@ export const LOWERCASE_CODESTRING_JS = jsCodestring(`
 ${LOWERCASE_CONSTANTS}
 logosj.embedLogo(document.getElementById("logo"), {
   pwm: LOWERCASE_PWM,
-  glyphmap: logosj.loadGlyphComponents(LOWERCASE_GLYPHMAP)
+  alphabet: logosj.loadGlyphComponents(LOWERCASE_ALPHABET)
 });
 `);
 
@@ -191,11 +191,11 @@ const PWM = [
 `;
 
 export const NOAXIS_CODESTRING_REACT = `
-import { RawLogo, DNAGlyphmap } from 'logosj-react';
+import { RawLogo, DNAAlphabet } from 'logosj-react';
 ${NOAXIS_CONSTANTS}
 export const NoAxisLogo = props => (
   <svg viewBox="0 0 1900 100">
-    <RawLogo glyphmap={DNAGlyphmap} pwm={PWM} glyphWidth={100} stackHeight={100} />
+    <RawLogo alphabet={DNAAlphabet} pwm={PWM} glyphWidth={100} stackHeight={100} />
   </svg>
 );
 `;
@@ -204,7 +204,7 @@ const NOAXIS_JS = `
 ${NOAXIS_CONSTANTS}
 logosj.embedRawLogo(document.getElementById("logo"), {
   pwm: PWM
-  glyphmap: logosj.DNAGlyphmap,
+  alphabet: logosj.DNAAlphabet,
   glyphWidth: 100,
   stackHeight: 100
 });
@@ -232,7 +232,7 @@ export const NOAXIS_DEMO = {
     jsCodestring: NOAXIS_CODESTRING_JS,
     logoProps: {
         pwm: CTCF_PWM,
-        glyphmap: DNAGlyphmap,
+        alphabet: DNAAlphabet,
         raw: true,
         glyphWidth: 100,
         stackHeight: 100
@@ -242,11 +242,11 @@ export const NOAXIS_DEMO = {
     longDescription: NOAXIS_LONG_DESCRIPTION
 };
 
-const LOWERCASE_GLYPHMAP = [
-    { color: "#880000", component: CompleteGlyphmap[26].component, regex: "a" },
-    { color: "#008800", component: CompleteGlyphmap[28].component, regex: "c" },
-    { color: "#000088", component: CompleteGlyphmap[32].component, regex: "g" },
-    { color: "#880088", component: CompleteGlyphmap[45].component, regex: "t" }
+const LOWERCASE_ALPHABET = [
+    { color: "#880000", component: CompleteAlphabet[26].component, regex: "a" },
+    { color: "#008800", component: CompleteAlphabet[28].component, regex: "c" },
+    { color: "#000088", component: CompleteAlphabet[32].component, regex: "g" },
+    { color: "#880088", component: CompleteAlphabet[45].component, regex: "t" }
 ];
 
 export const LOWERCASE_DEMO = {
@@ -254,7 +254,7 @@ export const LOWERCASE_DEMO = {
     jsCodestring: LOWERCASE_CODESTRING_JS,
     logoProps: {
         pwm: CTCF_PWM,
-        glyphmap: LOWERCASE_GLYPHMAP,
+        alphabet: LOWERCASE_ALPHABET,
         custom: true
     },
     description: "A DNA logo can use lowercase letters and custom colors.",

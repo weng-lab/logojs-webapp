@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Grid, Segment, Header, Button } from 'semantic-ui-react';
 import { RNALogo, Logo } from 'logos-to-go-react';
 
-import { RNA_PWM, METHYL_PWM, METHYL_GLYPHMAP, HEX_GLYPHMAP, HEX_PWM } from './constants';
+import { RNA_PWM, METHYL_PWM, METHYL_ALPHABET, HEX_ALPHABET, HEX_PWM } from './constants';
 
 const ExtendedAlphabetPreview = () => (
     <Segment.Group>
@@ -30,14 +30,14 @@ const ExtendedAlphabetPreview = () => (
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 CpG methylation
               </div>
-              <Logo glyphmap={METHYL_GLYPHMAP} pwm={METHYL_PWM} startpos={1} />
+              <Logo alphabet={METHYL_ALPHABET} pwm={METHYL_PWM} startpos={1} />
             </Grid.Column>
             <Grid.Column width={1} />
             <Grid.Column width={3} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 digits and lower case
               </div>
-              <Logo glyphmap={HEX_GLYPHMAP} pwm={HEX_PWM()} startpos={1} mode="FREQUENCY" />
+              <Logo alphabet={HEX_ALPHABET} pwm={HEX_PWM()} startpos={1} mode="FREQUENCY" />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row style={{ textAlign: "center" }}>

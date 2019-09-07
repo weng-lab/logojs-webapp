@@ -39,8 +39,8 @@ export const classToRule = className => (
     className.substring(1).replace(/ace_/g, "")
 );
 
-export const generateFastaTheme = (key, glyphmap) => (
-    glyphmap.map( (glyph, i) => (
+export const generateFastaTheme = (key, alphabet) => (
+    alphabet.map( (glyph, i) => (
 	i >= CUSTOMIZABLE_CLASS_NAMES.length ? null : (
 	    ".ace_fasta-" + key + CUSTOMIZABLE_CLASS_NAMES[i] + " { color: " + glyph.color + "; }"
 	)
@@ -50,15 +50,15 @@ export const generateFastaTheme = (key, glyphmap) => (
 /**
  * Applies a custom Fasta theme for the editor by dynamically generating CSS text and appending it to the document.
  * This method will replace an existing Fasta theme previously appended to the document with the same key.
- * @param glyphmap: List of glyphs to color within the editor, in the format { regex, color }
+ * @param alphabet: List of glyphs to color within the editor, in the format { regex, color }
  */
-export const applyFastaTheme = (key, glyphmap) => {
+export const applyFastaTheme = (key, alphabet) => {
     
     let doc = document.ownerDocument || document;
     let head = doc.head || doc.getElementsByTagName("head")[0] || doc.documentElement;
     let celem = _truncateExistingCssString(key, doc, head);
     let cssText = '';
-    generateFastaTheme(key, glyphmap).map(t => (cssText += t + '\n'));
+    generateFastaTheme(key, alphabet).map(t => (cssText += t + '\n'));
     celem.appendChild(doc.createTextNode(cssText));
 
     ace.define("ace/theme/fasta-" + key, (acequire, exports, module) => {

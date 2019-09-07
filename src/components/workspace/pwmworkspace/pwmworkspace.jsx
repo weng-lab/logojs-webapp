@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Container, Segment, Header } from 'semantic-ui-react';
-import { DNALogo, RNALogo, ProteinLogo, Logo, DNAGlyphmap, CompleteGlyphmap, CompleteLogo,
-	 RNAGlyphmap, ProteinGlyphmap, INFORMATION_CONTENT, LogoWithNegatives } from 'logos-to-go-react';
+import { DNALogo, RNALogo, ProteinLogo, Logo, DNAAlphabet, CompleteAlphabet, CompleteLogo,
+	 RNAAlphabet, ProteinAlphabet, INFORMATION_CONTENT, LogoWithNegatives } from 'logos-to-go-react';
 
 import { MainMenu, mainMenuItems } from '../../homepage';
 import { PWMEditor } from '../../editor/index';
@@ -14,10 +14,10 @@ let DEFAULTPWM = "[[0.5, 0.5, 0.0, 0.0],\n [0.0, 0.0, 0.5, 0.5]]";
 let GLYPHSYMBOLS = glyphsymbols();
 
 const LOGOCOMPONENTS = {
-    DNA: { component: DNALogo, glyphs: DNAGlyphmap, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
-    RNA: { component: RNALogo, glyphs: RNAGlyphmap, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
-    AA: { component: ProteinLogo, glyphs: ProteinGlyphmap, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] },
-    custom: { component: CompleteLogo, glyphs: CompleteGlyphmap, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] }
+    DNA: { component: DNALogo, glyphs: DNAAlphabet, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
+    RNA: { component: RNALogo, glyphs: RNAAlphabet, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
+    AA: { component: ProteinLogo, glyphs: ProteinAlphabet, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] },
+    custom: { component: CompleteLogo, glyphs: CompleteAlphabet, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] }
 };
 
 class PWMWorkspace extends React.Component {
@@ -36,7 +36,7 @@ class PWMWorkspace extends React.Component {
 	    startpos: 1,
 	    mode: INFORMATION_CONTENT,
 	    initialized: false,
-	    glyphmap: LOGOCOMPONENTS["DNA"].glyphs
+	    alphabet: LOGOCOMPONENTS["DNA"].glyphs
 	};
     }
 
@@ -54,7 +54,7 @@ class PWMWorkspace extends React.Component {
 	    scale: state.scale,
 	    isfreq: state.mode !== INFORMATION_CONTENT,
 	    firstbase: state.startpos,
-            glyphmap: state.glyphmap
+            alphabet: state.alphabet
 	};
     }
     
@@ -77,24 +77,24 @@ class PWMWorkspace extends React.Component {
 	}
 	this.setState({
 	    logocomponent: data.value,
-	    glyphmap: LOGOCOMPONENTS[data.value].glyphs,
+	    alphabet: LOGOCOMPONENTS[data.value].glyphs,
 	    pwm
 	});
     }
 
-    _glyphmapUpdate(glyphmap) {
-	let nglyphmap = [];
-	glyphmap.forEach( v => {
+    _alphabetUpdate(alphabet) {
+	let nalphabet = [];
+	alphabet.forEach( v => {
 	    let symbols = [];
             for (let i = 0; i < v.regex.length; ++i) {
                 const symbol = GLYPHSYMBOLS[v.regex[i]] && GLYPHSYMBOLS[v.regex[i]].component;
                 if (!symbol) return;
                 symbols.push(symbol);
             }
-	    nglyphmap.push({ ...v, component: symbols });
+	    nalphabet.push({ ...v, component: symbols });
 	});
 	this.setState({
-	    glyphmap: nglyphmap
+	    alphabet: nalphabet
 	});
     }
 
@@ -140,8 +140,8 @@ class PWMWorkspace extends React.Component {
 				      scaledefault={this.state.scale}
 				      startposdefault={this.state.startpos}
 				      modedefault={this.state.mode}
-				      glyphmap={this.state.glyphmap}
-				      onGlyphmapUpdate={this._glyphmapUpdate.bind(this)}
+				      alphabet={this.state.alphabet}
+				      onAlphabetUpdate={this._alphabetUpdate.bind(this)}
 				      hasnegative={hasNegative} />
 		  </Grid.Column>
 	          <Grid.Column width={13} style={{ height: '100%' }}>
@@ -165,13 +165,13 @@ class PWMWorkspace extends React.Component {
 						   startpos={this.state.startpos}
 						   mode={this.state.mode}
 						   width="90%" height="75%"
-						   glyphmap={this.state.glyphmap}/>
+						   alphabet={this.state.alphabet}/>
 			    ) : (
 				<Logo pwm={this.state.pwm.parsed}
 				      startpos={this.state.startpos}
 				      mode={this.state.mode}
 				      width="90%" height="75%"
-				      glyphmap={this.state.glyphmap} />
+				      alphabet={this.state.alphabet} />
 			    )}
 			  </div>
 			</Grid.Column>

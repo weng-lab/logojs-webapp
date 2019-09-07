@@ -1,4 +1,4 @@
-import { CompleteGlyphmap, DNAGlyphmap, disymbolGlyphmap } from "logos-to-go-react";
+import { CompleteAlphabet, DNAAlphabet, disymbolAlphabet } from "logos-to-go-react";
 
 export const DNA_PROTEIN_PWM = [
     [ 0.2, 0, 0, 0.2 ],
@@ -128,32 +128,32 @@ export const METHYL_PWM = [
     [1, 0, 0, 0, 0, 0]
 ];
 
-export const METHYL_GLYPHMAP = [
-    { color: "#880088", component: CompleteGlyphmap[0].component, regex: "A" },
-    { color: "#880000", component: CompleteGlyphmap[2].component, regex: "C" },
-    { color: "#000088", component: CompleteGlyphmap[6].component, regex: "G" },
-    { color: "#888800", component: CompleteGlyphmap[19].component, regex: "T" },
-    { color: "#ff0000", component: CompleteGlyphmap[12].component, regex: "M" },
-    { color: "#008888", component: CompleteGlyphmap[22].component, regex: "W" }
+export const METHYL_ALPHABET = [
+    { color: "#880088", component: CompleteAlphabet[0].component, regex: "A" },
+    { color: "#880000", component: CompleteAlphabet[2].component, regex: "C" },
+    { color: "#000088", component: CompleteAlphabet[6].component, regex: "G" },
+    { color: "#888800", component: CompleteAlphabet[19].component, regex: "T" },
+    { color: "#ff0000", component: CompleteAlphabet[12].component, regex: "M" },
+    { color: "#008888", component: CompleteAlphabet[22].component, regex: "W" }
 ];
 
-export const HEX_GLYPHMAP = [
-    { color: "#880000", component: CompleteGlyphmap[26].component, regex: "a" },
-    { color: "#880000", component: CompleteGlyphmap[27].component, regex: "b" },
-    { color: "#880000", component: CompleteGlyphmap[28].component, regex: "c" },
-    { color: "#880000", component: CompleteGlyphmap[29].component, regex: "d" },
-    { color: "#880000", component: CompleteGlyphmap[30].component, regex: "e" },
-    { color: "#880000", component: CompleteGlyphmap[31].component, regex: "f" },
-    { color: "#000088", component: CompleteGlyphmap[52].component, regex: "1" },
-    { color: "#000088", component: CompleteGlyphmap[53].component, regex: "2" },
-    { color: "#000088", component: CompleteGlyphmap[54].component, regex: "3" },
-    { color: "#000088", component: CompleteGlyphmap[55].component, regex: "4" },
-    { color: "#000088", component: CompleteGlyphmap[56].component, regex: "5" },
-    { color: "#000088", component: CompleteGlyphmap[57].component, regex: "6" },
-    { color: "#000088", component: CompleteGlyphmap[58].component, regex: "7" },
-    { color: "#000088", component: CompleteGlyphmap[59].component, regex: "8" },
-    { color: "#000088", component: CompleteGlyphmap[60].component, regex: "9" },
-    { color: "#000088", component: CompleteGlyphmap[14].component, regex: "0" }
+export const HEX_ALPHABET = [
+    { color: "#880000", component: CompleteAlphabet[26].component, regex: "a" },
+    { color: "#880000", component: CompleteAlphabet[27].component, regex: "b" },
+    { color: "#880000", component: CompleteAlphabet[28].component, regex: "c" },
+    { color: "#880000", component: CompleteAlphabet[29].component, regex: "d" },
+    { color: "#880000", component: CompleteAlphabet[30].component, regex: "e" },
+    { color: "#880000", component: CompleteAlphabet[31].component, regex: "f" },
+    { color: "#000088", component: CompleteAlphabet[52].component, regex: "1" },
+    { color: "#000088", component: CompleteAlphabet[53].component, regex: "2" },
+    { color: "#000088", component: CompleteAlphabet[54].component, regex: "3" },
+    { color: "#000088", component: CompleteAlphabet[55].component, regex: "4" },
+    { color: "#000088", component: CompleteAlphabet[56].component, regex: "5" },
+    { color: "#000088", component: CompleteAlphabet[57].component, regex: "6" },
+    { color: "#000088", component: CompleteAlphabet[58].component, regex: "7" },
+    { color: "#000088", component: CompleteAlphabet[59].component, regex: "8" },
+    { color: "#000088", component: CompleteAlphabet[60].component, regex: "9" },
+    { color: "#000088", component: CompleteAlphabet[14].component, regex: "0" }
 ];
 
 export const HEX_PWM = () => {
@@ -216,7 +216,7 @@ export const ALT_PROTEIN_PWM = () => {
     return result;
 };
 
-export const DINUCLEOTIDE_GLYPHMAP = () => disymbolGlyphmap(DNAGlyphmap);
+export const DINUCLEOTIDE_ALPHABET = () => disymbolAlphabet(DNAAlphabet);
 
 export const DINUCLEOTIDE_PWM = [
     [ 0, 0, 0.25, 0, 0, 0, 0, 0.25, 0.25, 0, 0, 0, 0, 0, 0.25, 0 ],
@@ -227,13 +227,13 @@ export const DINUCLEOTIDE_PWM = [
     [ 0, 0, 0.25, 0, 0.25, 0, 0.2, 0, 0, 0.1, 0, 0, 0.1, 0.1, 0, 0 ]
 ];
 
-const A = CompleteGlyphmap[0].component;
-const C = CompleteGlyphmap[2].component;
-const G = CompleteGlyphmap[6].component;
-const T = CompleteGlyphmap[19].component;
+const A = CompleteAlphabet[0].component;
+const C = CompleteAlphabet[2].component;
+const G = CompleteAlphabet[6].component;
+const T = CompleteAlphabet[19].component;
 
-export const ANNOTATED_GLYPHMAP = [
-    ...DNAGlyphmap,
+export const ANNOTATED_ALPHABET = [
+    ...DNAAlphabet,
     { color: "#aaaaaa", component: A, regex: "A" },
     { color: "#aaaaaa", component: C, regex: "C" },
     { color: "#aaaaaa", component: G, regex: "G" },
@@ -280,11 +280,11 @@ export const SNP_REF_PWM = [
     [ 0, 0, 0, 2 ]
 ];
 
-const N1 = CompleteGlyphmap[52].component;
-const N2 = CompleteGlyphmap[53].component;
-const N3 = CompleteGlyphmap[54].component;
+const N1 = CompleteAlphabet[52].component;
+const N2 = CompleteAlphabet[53].component;
+const N3 = CompleteAlphabet[54].component;
 
-export const TRINUCLEOTIDE_GLYPHMAP = [
+export const TRINUCLEOTIDE_ALPHABET = [
     { color: "#880000", component: [ A, A, A ], regex: "AAA" },
     { color: "#008800", component: [ C, A, T ], regex: "CAT" },
     { color: "#000088", component: [ T, A, G ], regex: "TAG" }
@@ -296,7 +296,7 @@ export const TRINUCLEOTIDE_PWM = [
     [ 0.2, 0, 0.8 ]
 ];
 
-export const MULTINUMBER_GLYPHMAP = [
+export const MULTINUMBER_ALPHABET = [
     { color: "#ff0000", component: [ N1, N1, N1 ], regex: "111" },
     { color: "#888800", component: [ N2, N2 ], regex: "22" },
     { color: "#0000ff", component: [ N1, N2, N3 ], regex: "123" }

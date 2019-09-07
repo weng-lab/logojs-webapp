@@ -5,7 +5,7 @@ import { ModeDropdown, GlyphList } from '../settings/index';
 
 const SettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
 			 onModeChange, modedefault, logodefault, scaledefault,
-			 startposdefault, glyphmap, onGlyphmapUpdate }) => (
+			 startposdefault, alphabet, onAlphabetUpdate }) => (
 			     <Menu vertical style={{ width: '100%', backgroundColor: "#fafafa" }}>
 			       <Menu.Item>
 				 <ModeDropdown header="Letter Height"
@@ -13,7 +13,7 @@ const SettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
 					       onChange={onModeChange} />
 			       </Menu.Item>
 			       <Menu.Item>
-				 <GlyphList header="Symbol List" glyphmap={glyphmap} noteditable onGlyphmapUpdate={onGlyphmapUpdate} />
+				 <GlyphList header="Symbol List" alphabet={alphabet} noteditable onAlphabetUpdate={onAlphabetUpdate} />
 			       </Menu.Item>
 			     </Menu>
 			 );

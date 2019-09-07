@@ -33,22 +33,22 @@ class GlyphList extends React.Component {
     constructor(props) {
 	super(props);
 	this.state = {
-	    glyphmap: props.glyphmap,
+	    alphabet: props.alphabet,
 	    modalkey: -1
 	};
     }
 
     componentWillReceiveProps(props) {
 	this.setState({
-	    glyphmap: props.glyphmap,
+	    alphabet: props.alphabet,
 	    modalkey: -1
 	});
     }
     
     onGlyphUpdate(glyphdata) {
-	let glyphmap = [...this.props.glyphmap];
-	glyphmap[this.state.modalkey] = glyphdata;
-	this.props.onGlyphmapUpdate(glyphmap);
+	let alphabet = [...this.props.alphabet];
+	alphabet[this.state.modalkey] = glyphdata;
+	this.props.onAlphabetUpdate(alphabet);
     }
 
     showModal(i) {
@@ -58,19 +58,19 @@ class GlyphList extends React.Component {
     }
 
     removeIdx(i) {
-	let glyphmap = [...this.props.glyphmap];
-	glyphmap.splice(i, 1);
-	this.props.onGlyphmapUpdate(glyphmap);
+	let alphabet = [...this.props.alphabet];
+	alphabet.splice(i, 1);
+	this.props.onAlphabetUpdate(alphabet);
     }
 
     addGlyph() {
-	let glyphmap = [
-	    ...this.props.glyphmap,
+	let alphabet = [
+	    ...this.props.alphabet,
 	    { color: "#cccccc", regex: '' }
 	];
 	this.setState({
-	    glyphmap,
-	    modalkey: glyphmap.length - 1
+	    alphabet,
+	    modalkey: alphabet.length - 1
 	});
     }
     
@@ -78,7 +78,7 @@ class GlyphList extends React.Component {
 	return (
 	    <React.Fragment>
 	      <h2>{this.props.header}</h2>
-	      {this.state.glyphmap.map( (glyphdata, i) => (
+	      {this.state.alphabet.map( (glyphdata, i) => (
 		  <GlyphLabel i={i} symbol={glyphdata.regex} color={glyphdata.color.map ? glyphdata.color[0] : glyphdata.color}
 			      onClick={ () => this.showModal(i) } onRemove={ () => this.removeIdx(i) }
 		              noteditable={this.props.noteditable} key={i} />
@@ -89,7 +89,7 @@ class GlyphList extends React.Component {
 	    )}
 	      <ColorPickerModal open={this.state.modalkey !== -1}
 	                        onClose={this.onGlyphUpdate.bind(this)}
-	                        glyph={this.state.glyphmap[this.state.modalkey]} />
+	                        glyph={this.state.alphabet[this.state.modalkey]} />
 	    </React.Fragment>
 	);
     }

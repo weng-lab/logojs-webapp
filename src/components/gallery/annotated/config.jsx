@@ -1,22 +1,22 @@
 import React from 'react';
-import { RawLogo, DNAGlyphmap, ProteinGlyphmap } from 'logos-to-go-react';
+import { RawLogo, DNAAlphabet, ProteinAlphabet } from 'logos-to-go-react';
 
-import { formatPWM, formatGlyphmap } from '../../../common/codestrings';
+import { formatPWM, formatAlphabet } from '../../../common/codestrings';
 import { indentCode } from '../../../common/utils';
-import { ANNOTATED_PWM, ANNOTATED_GLYPHMAP, SNP_PWM,
+import { ANNOTATED_PWM, ANNOTATED_ALPHABET, SNP_PWM,
          SNP_REF_PWM, DNA_PROTEIN_PWM,
          PROTEIN_DNA_PWM } from '../constants';
 
 const ANNOTATED_CONSTANTS = `
 const ANNOTATED_PWM = ${formatPWM(ANNOTATED_PWM)};
-const ANNOTATED_GLYPHMAP = ${formatGlyphmap(ANNOTATED_GLYPHMAP)};
+const ANNOTATED_ALPHABET = ${formatAlphabet(ANNOTATED_ALPHABET)};
 `.substring(1);
 
 export const ANNOTATED_JS = `
 ${ANNOTATED_CONSTANTS}
 logosj.embedRawLogo(document.getElementById("logo"), {
   pwm: ANNOTATED_PWM,
-  glyphmap: ANNOTATED_GLYPHMAP,
+  alphabet: ANNOTATED_ALPHABET,
   glyphWidth: 100,
   stackHeight: 300
 });
@@ -47,7 +47,7 @@ ${ANNOTATED_CONSTANTS}
 export const AnnotatedLogo = props => (
   <svg viewBox="0 0 1530 330">
     <g transform="translate(20,-40)" id="logo">
-      <RawLogo pwm={ANNOTATED_PWM} glyphmap={ANNOTATED_GLYPHMAP} glyphWidth={100} stackHeight={300} />
+      <RawLogo pwm={ANNOTATED_PWM} alphabet={ANNOTATED_ALPHABET} glyphWidth={100} stackHeight={300} />
     </g>
     <rect fill="none" stroke="#888888" strokeWidth="25" x={15} y={10} width={600} height={300} />
     <rect fill="none" stroke="#888888" strokeWidth="25" x={915} width={600} y={10} height={300} />
@@ -68,7 +68,7 @@ export const ANNOTATED_DEMO = {
     component: (
         <svg viewBox="0 0 1530 330">
           <g transform="translate(20,-40)" id="logo">
-            <RawLogo pwm={ANNOTATED_PWM} glyphmap={ANNOTATED_GLYPHMAP} glyphWidth={100} stackHeight={300} />
+            <RawLogo pwm={ANNOTATED_PWM} alphabet={ANNOTATED_ALPHABET} glyphWidth={100} stackHeight={300} />
           </g>
           <rect fill="none" stroke="#888888" strokeWidth="25" x={15} y={10} width={600} height={300} />
           <rect fill="none" stroke="#888888" strokeWidth="25" x={915} width={600} y={10} height={300} />
@@ -88,13 +88,13 @@ export const SNP_JS = `
 ${SNP_CONSTANTS}
 logosj.embedRawLogo(document.getElementById("motiflogo"), {
   pwm: SNP_PWM,
-  glyphmap: logosj.DNAGlyphmap,
+  alphabet: logosj.DNAAlphabet,
   glyphWidth: 100,
   stackHeight: 200
 });
 logosj.embedRawLogo(document.getElementById("reflogo"), {
   pwm: REFERENCE_PWM,
-  glyphmap: logosj.DNAGlyphmap,
+  alphabet: logosj.DNAAlphabet,
   glyphWidth: 100,
   stackHeight: 200
 });
@@ -122,16 +122,16 @@ ${indentCode(SNP_JS, "      ")}
 `.substring(1);
 
 export const SNP_CODESTRING_REACT = `
-import { RawLogo, DNAGlyphmap } from 'logosj-react';
+import { RawLogo, DNAAlphabet } from 'logosj-react';
 ${SNP_CONSTANTS}
 export const SNPLogo = props => (
   <svg viewBox="0 0 1100 420">
     <rect x={600} width={100} height={420} fill="#bbbbbb" />
     <g transform="translate(300,0)">
-      <RawLogo glyphmap={DNAGlyphmap} pwm={SNP_PWM} glyphWidth={100} stackHeight={200} />
+      <RawLogo alphabet={DNAAlphabet} pwm={SNP_PWM} glyphWidth={100} stackHeight={200} />
     </g>
     <g transform="translate(300, 220)">
-      <RawLogo glyphmap={DNAGlyphmap} pwm={REFERENCE_PWM} glyphWidth={100} stackHeight={200} />
+      <RawLogo alphabet={DNAAlphabet} pwm={REFERENCE_PWM} glyphWidth={100} stackHeight={200} />
     </g>
     <text y={150} x={260} textAnchor="end" style={{ fontSize: "50px" }}>PWM</text>
     <text y={350} x={260} textAnchor="end" style={{ fontSize: "50px" }}>reference</text>
@@ -153,10 +153,10 @@ export const SNP_DEMO = {
         <svg viewBox={"0 0 " + (SNP_PWM.length * 100 + 300) + " 420"}>
           <rect x={600} width={100} height={420} fill="#bbbbbb" />
           <g transform="translate(300,0)">
-            <RawLogo glyphmap={DNAGlyphmap} pwm={SNP_PWM} glyphWidth={100} stackHeight={200} />
+            <RawLogo alphabet={DNAAlphabet} pwm={SNP_PWM} glyphWidth={100} stackHeight={200} />
           </g>
           <g transform="translate(300, 220)">
-            <RawLogo glyphmap={DNAGlyphmap} pwm={SNP_REF_PWM} glyphWidth={100} stackHeight={200} />
+            <RawLogo alphabet={DNAAlphabet} pwm={SNP_REF_PWM} glyphWidth={100} stackHeight={200} />
           </g>
           <text y={150} x={260} textAnchor="end" style={{ fontSize: "50px" }}>PWM</text>
           <text y={350} x={260} textAnchor="end" style={{ fontSize: "50px" }}>reference</text>
@@ -176,13 +176,13 @@ export const INTERACTION_JS = `
 ${INTERACTION_CONSTANTS}
 logosj.embedRawLogo(document.getElementById("dnalogo"), {
   pwm: DNA_PROTEIN_PWM,
-  glyphmap: logosj.DNAGlyphmap,
+  alphabet: logosj.DNAAlphabet,
   glyphWidth: 100,
   stackHeight: 200
 });
 logosj.embedRawLogo(document.getElementById("proteinlogo"), {
   pwm: PROTEIN_DNA_PWM,
-  glyphmap: logosj.ProteinGlyphmap,
+  alphabet: logosj.ProteinAlphabet,
   glyphWidth: 100,
   stackHeight: 400
 });
@@ -210,13 +210,13 @@ ${indentCode(INTERACTION_JS, "      ")}
 `.substring(1);
 
 export const INTERACTION_CODESTRING_REACT = `
-import { RawLogo, DNAGlyphmap, ProteinGlyphmap } from 'logosj-react';
+import { RawLogo, DNAAlphabet, ProteinAlphabet } from 'logosj-react';
 ${INTERACTION_CONSTANTS}
 export const SNPLogo = props => (
   <svg viewBox={"0 0 2600 920"}>
-    <RawLogo glyphmap={DNAGlyphmap} pwm={DNA_PROTEIN_PWM} glyphWidth={100} stackHeight={200} />
+    <RawLogo alphabet={DNAAlphabet} pwm={DNA_PROTEIN_PWM} glyphWidth={100} stackHeight={200} />
     <g transform="translate(0,500)">
-      <RawLogo glyphmap={ProteinGlyphmap} pwm={PROTEIN_DNA_PWM} glyphWidth={100} stackHeight={400} />
+      <RawLogo alphabet={ProteinAlphabet} pwm={PROTEIN_DNA_PWM} glyphWidth={100} stackHeight={400} />
     </g>
     <path fill="#88888888" d="M 1530 220 L 1600 590 L 1700 590 L 1630 220 L 1530 220" />
     <path fill="#88888888" d="M 1670 220 L 1200 520 L 1300 520 L 1750 220 L 1670 220" />
@@ -237,9 +237,9 @@ export const INTERACTION_DEMO = {
     jsCodestring: INTERACTION_CODESTRING_JS,
     component: (
         <svg viewBox={"0 0 2600 920"}>
-          <RawLogo glyphmap={DNAGlyphmap} pwm={DNA_PROTEIN_PWM} glyphWidth={100} stackHeight={200} />
+          <RawLogo alphabet={DNAAlphabet} pwm={DNA_PROTEIN_PWM} glyphWidth={100} stackHeight={200} />
           <g transform="translate(0,500)">
-            <RawLogo glyphmap={ProteinGlyphmap} pwm={PROTEIN_DNA_PWM} glyphWidth={100} stackHeight={400} />
+            <RawLogo alphabet={ProteinAlphabet} pwm={PROTEIN_DNA_PWM} glyphWidth={100} stackHeight={400} />
           </g>
           <path fill="#88888888" d="M 1530 220 L 1600 590 L 1700 590 L 1630 220 L 1530 220" />
           <path fill="#88888888" d="M 1670 220 L 1200 520 L 1300 520 L 1750 220 L 1670 220" />

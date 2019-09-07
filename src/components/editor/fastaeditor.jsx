@@ -12,8 +12,8 @@ const SETOPTIONS = {
 class FastaEditor extends React.Component {
 
     _updateTheme() {
-	applyFastaTheme(this.props.id, this.props.glyphmap);
-	this._mode = FastaMode(this.props.id, this.props.glyphmap);
+	applyFastaTheme(this.props.id, this.props.alphabet);
+	this._mode = FastaMode(this.props.id, this.props.alphabet);
 	this._editor.editor.getSession().setMode(this._mode);
     }
     

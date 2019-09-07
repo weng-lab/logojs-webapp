@@ -10,7 +10,7 @@ class MEMEParser {
         this.alphabet = this.parseAlphabet();
     }
 
-    makeGlyphmap(pwm, alphabet) {
+    makeAlphabet(pwm, alphabet) {
         let allsymbols = new Set();
         pwm.forEach( pentry => Object.keys(pentry).forEach( key => allsymbols.add(key) ));
         return Array.from(allsymbols).filter(symbol => alphabet[symbol] && GLYPHSYMBOLS[symbol]).map( symbol => ({
@@ -20,9 +20,9 @@ class MEMEParser {
         }) );
     }
 
-    collapsePWM(pwm, glyphmap) {
+    collapsePWM(pwm, alphabet) {
         return pwm.map( pentry => (
-            glyphmap.map( glyph => pentry[glyph.regex] || 0.0)
+            alphabet.map( glyph => pentry[glyph.regex] || 0.0)
         ));             
     }
     
@@ -59,11 +59,11 @@ class MEMEParser {
         let motifName = motifAttributes => motifAttributes.id.value + " (" + motifAttributes.name.value + ')';
         motifTags.forEach( motif => {
             let parsed = this.parseMotif(motif);
-            let glyphmap = this.makeGlyphmap(parsed, this.alphabet);
+            let alphabet = this.makeAlphabet(parsed, this.alphabet);
             motifnames.push(motifName(motif.attributes));
             pwms.push({
-                glyphmap,
-                pwm: this.collapsePWM(parsed, glyphmap)
+                alphabet,
+                pwm: this.collapsePWM(parsed, alphabet)
             });
         });
         return {

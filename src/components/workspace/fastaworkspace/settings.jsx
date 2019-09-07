@@ -5,7 +5,7 @@ import { LogoTypeDropdown, ColoredInput, ModeDropdown, GlyphList } from '../sett
 
 const FastaSettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
 			      onModeChange, modedefault, logodefault, scaledefault, caseInsensitive,
-			      startposdefault, glyphmap, onGlyphmapUpdate, onCaseChange }) => (
+			      startposdefault, alphabet, onAlphabetUpdate, onCaseChange }) => (
                                   <Menu vertical style={{ width: '100%', backgroundColor: "#fafafa" }}>
 				    <Menu.Item>
                                       <LogoTypeDropdown header="Logo Type"
@@ -26,7 +26,7 @@ const FastaSettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
                                       <Checkbox checked={caseInsensitive} onClick={onCaseChange} />&nbsp;Case Insensitive
                                     </Menu.Item>
                                     <Menu.Item>
-                                      <GlyphList header="Symbol List" glyphmap={glyphmap} onGlyphmapUpdate={onGlyphmapUpdate} />
+                                      <GlyphList header="Symbol List" alphabet={alphabet} onAlphabetUpdate={onAlphabetUpdate} />
                                     </Menu.Item>
                                   </Menu>
 );

@@ -11,13 +11,13 @@ class AnyUploadWorkspace extends React.Component {
     constructor(props) {
 	super(props);
 	this.state = {
-	    glyphmap: lookupmap(LOGOCOMPONENTS["DNA"].glyphs)
+	    alphabet: lookupmap(LOGOCOMPONENTS["DNA"].glyphs)
 	};
     }
     
     parseFasta(text) {
 	return {
-	    pwms: [{ pwm: fastaToPWM(text.toUpperCase(), this.state.glyphmap.lookup) }],
+	    pwms: [{ pwm: fastaToPWM(text.toUpperCase(), this.state.alphabet.lookup) }],
 	    motifnames: [ null ],
 	    name: null
 	};

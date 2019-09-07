@@ -1,8 +1,8 @@
 import ace from 'brace';
 import { CUSTOMIZABLE_CLASS_NAMES, classToRule } from './fastatheme';
 
-export const generateFastaRules = (key, glyphmap) => (
-    glyphmap.map( (glyph, i) => ({
+export const generateFastaRules = (key, alphabet) => (
+    alphabet.map( (glyph, i) => ({
 	regex: glyph.regex,
 	token: _getRule(i, key)
     }))
@@ -16,9 +16,9 @@ const _getRule = (i, key) => (
 
 class FastaHighlightRules extends ace.acequire('ace/mode/text_highlight_rules').TextHighlightRules {
 
-    constructor(key, glyphmap) {
+    constructor(key, alphabet) {
 	super();
-	this.$rules = { start: generateFastaRules(key, glyphmap) };
+	this.$rules = { start: generateFastaRules(key, alphabet) };
 	this.$rules.start.push({ defaultToken: "text" });
 	this.$rules.start.push({ regex: ">", next: "sequence_name", token: "text" });
         this.$rules.start.push({ regex: "[#]", next: "comment", token: "comment.line.double-slash" });
@@ -32,18 +32,18 @@ class FastaHighlightRules extends ace.acequire('ace/mode/text_highlight_rules').
 
 class FastaMode extends ace.acequire('ace/mode/text').Mode {
     
-    constructor(key, glyphmap) {
+    constructor(key, alphabet) {
 	super();
-	this.$highlightRules = new FastaHighlightRules(key, glyphmap);
+	this.$highlightRules = new FastaHighlightRules(key, alphabet);
 	this.$id = "ace/theme/fasta-mode-" + key;
     }
     
 }
 
-const defineFastaMode = (key, glyphmap) => {
+const defineFastaMode = (key, alphabet) => {
     ace.define("ace/theme/fasta-mode-" + key, (acequire, exports, module) => {
 	exports.Mode = FastaMode;
     });
-    return new FastaMode(key, glyphmap);
+    return new FastaMode(key, alphabet);
 };
 export default defineFastaMode;

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Grid, Segment, Header, Button } from 'semantic-ui-react';
 import { Logo } from 'logos-to-go-react';
 
-import { DINUCLEOTIDE_GLYPHMAP, DINUCLEOTIDE_PWM, MULTINUMBER_GLYPHMAP,
-         TRINUCLEOTIDE_GLYPHMAP, TRINUCLEOTIDE_PWM } from './constants';
+import { DINUCLEOTIDE_ALPHABET, DINUCLEOTIDE_PWM, MULTINUMBER_ALPHABET,
+         TRINUCLEOTIDE_ALPHABET, TRINUCLEOTIDE_PWM } from './constants';
 
 const DinucleotidePreview = () => (
     <Segment.Group>
@@ -24,21 +24,21 @@ const DinucleotidePreview = () => (
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 dinucleotide, colored by letter
               </div>
-              <Logo height="10em" glyphmap={DINUCLEOTIDE_GLYPHMAP()} pwm={DINUCLEOTIDE_PWM} startpos={1} />
+              <Logo height="10em" alphabet={DINUCLEOTIDE_ALPHABET()} pwm={DINUCLEOTIDE_PWM} startpos={1} />
             </Grid.Column>
             <Grid.Column width={1} />
             <Grid.Column width={3} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 trinucleotide, colored by symbol
               </div>
-              <Logo height="10em" glyphwidth={1.5} glyphmap={TRINUCLEOTIDE_GLYPHMAP} pwm={TRINUCLEOTIDE_PWM} startpos={1} />
+              <Logo height="10em" glyphwidth={1.5} alphabet={TRINUCLEOTIDE_ALPHABET} pwm={TRINUCLEOTIDE_PWM} startpos={1} />
             </Grid.Column>
             <Grid.Column width={1} />
             <Grid.Column width={3} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 custom alphabet
               </div>
-              <Logo height="10em" glyphwidth={1.5} glyphmap={MULTINUMBER_GLYPHMAP} pwm={TRINUCLEOTIDE_PWM} startpos={1} />
+              <Logo height="10em" glyphwidth={1.5} alphabet={MULTINUMBER_ALPHABET} pwm={TRINUCLEOTIDE_PWM} startpos={1} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row style={{ textAlign: "center" }}>

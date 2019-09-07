@@ -1,18 +1,18 @@
-import { CompleteGlyphmap } from 'logos-to-go-react';
+import { CompleteAlphabet } from 'logos-to-go-react';
 
-import { jsCodestring, formatPWM, formatGlyphmap } from '../../../common/codestrings';
-import { METHYL_PWM, METHYL_GLYPHMAP, RNA_PWM, HEX_PWM, HEX_GLYPHMAP } from '../constants';
+import { jsCodestring, formatPWM, formatAlphabet } from '../../../common/codestrings';
+import { METHYL_PWM, METHYL_ALPHABET, RNA_PWM, HEX_PWM, HEX_ALPHABET } from '../constants';
 
 const METHYL_CONSTANTS = `
 const METHYL_PWM = ${formatPWM(METHYL_PWM)};
-const METHYL_GLYPHMAP = ${formatGlyphmap(METHYL_GLYPHMAP)};
+const METHYL_ALPHABET = ${formatAlphabet(METHYL_ALPHABET)};
 `.substring(1);
 
 export const METHYL_CODESTRING_JS = jsCodestring(`
 ${METHYL_CONSTANTS}
 logosj.embedLogo(document.getElementById("logo"), {
   pwm: METHYL_PWM,
-  glyphmap: METHYL_GLYPHMAP
+  alphabet: METHYL_ALPHABET
 });
 `);
 
@@ -20,7 +20,7 @@ export const METHYL_CODESTRING_REACT = `
 import { Logo } from 'logosj-react';
 ${METHYL_CONSTANTS}
 export const MethylLogo = props => (
-    <Logo pwm={METHYL_PWM} glyphmap={METHYL_GLYPHMAP} />
+    <Logo pwm={METHYL_PWM} alphabet={METHYL_ALPHABET} />
 );
 `.substring(1);
 
@@ -37,7 +37,7 @@ export const METHYL_DEMO = {
     jsCodestring: METHYL_CODESTRING_JS,
     logoProps: {
         pwm: METHYL_PWM,
-        glyphmap: METHYL_GLYPHMAP
+        alphabet: METHYL_ALPHABET
     },
     description: "A DNA logo can be extended to show CpG methylation.",
     header: "CpG methylation",
@@ -82,14 +82,14 @@ export const RNA_DEMO = {
 
 const HEX_CONSTANTS = `
 const CUSTOM_PWM = ${formatPWM(HEX_PWM())};
-const CUSTOM_GLYPHMAP = ${formatGlyphmap(HEX_GLYPHMAP)};
+const CUSTOM_ALPHABET = ${formatAlphabet(HEX_ALPHABET)};
 `.substring(1);
 
 export const HEX_CODESTRING_JS = jsCodestring(`
 ${HEX_CONSTANTS}
 logosj.embedLogo(document.getElementById("logo"), {
   pwm: CUSTOM_PWM,
-  glyphmap: CUSTOM_GLYPHMAP
+  alphabet: CUSTOM_ALPHABET
 });
 `);
 
@@ -97,7 +97,7 @@ export const HEX_CODESTRING_REACT = `
 import { Logo } from 'logosj-react';
 ${HEX_CONSTANTS}
 export const MyRNALogo = props => (
-    <Logo pwm={CUSTOM_PWM} glyphmap={CUSTOM_GLYPHMAP} />
+    <Logo pwm={CUSTOM_PWM} alphabet={CUSTOM_ALPHABET} />
 );
 `.substring(1);
 
@@ -112,7 +112,7 @@ export const HEX_DEMO = {
     jsCodestring: HEX_CODESTRING_JS,
     logoProps: {
         pwm: HEX_PWM(),
-        glyphmap: HEX_GLYPHMAP
+        alphabet: HEX_ALPHABET
     },
     description: "A logo can use any combination of upper case letters, lower case letters, and digits.",
     header: "Custom symbols",
@@ -128,25 +128,25 @@ const DUPLICATE_PWM = [
     [ 0, 0, 0, 0, 0, 1 ]
 ];
 
-const DUPLICATE_GLYPHMAP = [
-    { regex: "A", component: CompleteGlyphmap[0].component, color: "#ff0000" },
-    { regex: "A", component: CompleteGlyphmap[0].component, color: "#ffa500" },
-    { regex: "A", component: CompleteGlyphmap[0].component, color: "#ffcc00" },
-    { regex: "A", component: CompleteGlyphmap[0].component, color: "#008800" },
-    { regex: "A", component: CompleteGlyphmap[0].component, color: "#0000aa" },
-    { regex: "A", component: CompleteGlyphmap[0].component, color: "#aa00aa" }
+const DUPLICATE_ALPHABET = [
+    { regex: "A", component: CompleteAlphabet[0].component, color: "#ff0000" },
+    { regex: "A", component: CompleteAlphabet[0].component, color: "#ffa500" },
+    { regex: "A", component: CompleteAlphabet[0].component, color: "#ffcc00" },
+    { regex: "A", component: CompleteAlphabet[0].component, color: "#008800" },
+    { regex: "A", component: CompleteAlphabet[0].component, color: "#0000aa" },
+    { regex: "A", component: CompleteAlphabet[0].component, color: "#aa00aa" }
 ];
 
 const DUPLICATE_CONSTANTS = `
 const CUSTOM_PWM = ${formatPWM(DUPLICATE_PWM)};
-const CUSTOM_GLYPHMAP = ${formatGlyphmap(DUPLICATE_GLYPHMAP)};
+const CUSTOM_ALPHABET = ${formatAlphabet(DUPLICATE_ALPHABET)};
 `.substring(1);
 
 export const DUPLICATE_CODESTRING_JS = jsCodestring(`
 ${DUPLICATE_CONSTANTS}
 logosj.embedLogo(document.getElementById("logo"), {
   pwm: CUSTOM_PWM,
-  glyphmap: CUSTOM_GLYPHMAP
+  alphabet: CUSTOM_ALPHABET
 });
 `);
 
@@ -154,7 +154,7 @@ export const DUPLICATE_CODESTRING_REACT = `
 import { Logo } from 'logosj-react';
 ${DUPLICATE_CONSTANTS}
 export const MyRNALogo = props => (
-    <Logo pwm={CUSTOM_PWM} glyphmap={CUSTOM_GLYPHMAP} />
+    <Logo pwm={CUSTOM_PWM} alphabet={CUSTOM_ALPHABET} />
 );
 `.substring(1);
 
@@ -170,7 +170,7 @@ export const DUPLICATE_DEMO = {
     jsCodestring: DUPLICATE_CODESTRING_JS,
     logoProps: {
         pwm: DUPLICATE_PWM,
-        glyphmap: DUPLICATE_GLYPHMAP
+        alphabet: DUPLICATE_ALPHABET
     },
     description: "A logo can use the same symbol more than once with different colors.",
     header: "Repeated symbols",

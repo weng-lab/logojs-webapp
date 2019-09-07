@@ -1,9 +1,9 @@
 import namedColors from 'color-name-list';
-import { CompleteGlyphmap } from 'logos-to-go-react';
+import { CompleteAlphabet } from 'logos-to-go-react';
 
 export const glyphsymbols = () => {
     let retval = {};
-    CompleteGlyphmap.map( v => (
+    CompleteAlphabet.map( v => (
 	retval[v.regex] = v
     ));
     return retval;

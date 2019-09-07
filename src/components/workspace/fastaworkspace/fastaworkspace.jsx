@@ -1,31 +1,31 @@
 import React from 'react';
 import os from 'os';
 import { DNALogo, RNALogo, ProteinLogo, Logo, CompleteLogo,
-	 DNAGlyphmap, RNAGlyphmap, ProteinGlyphmap, CompleteGlyphmap,
+	 DNAAlphabet, RNAAlphabet, ProteinAlphabet, CompleteAlphabet,
 	 INFORMATION_CONTENT, xrange } from 'logos-to-go-react';
 import { Grid, Container, Segment, Header } from 'semantic-ui-react';
 
 import { MainMenu, mainMenuItems } from '../../homepage';
 import { FastaEditor } from '../../editor/index';
 import { apiUrls, TYPEID, glyphsymbols } from '../../../common/utils';
-import { inferGlyphmap } from '../../../utilities/inferglyphmap';
+import { inferAlphabet } from '../../../utilities/inferalphabet';
 
 import FastaLogoMenu from './menu';
 import FastaSettingsPanel from './settings';
 
-export const lookupmap = glyphmap => {
+export const lookupmap = alphabet => {
     let ret = {};
-    glyphmap.map( (x, i) => ret[x.regex] = i );
+    alphabet.map( (x, i) => ret[x.regex] = i );
     return {
-	raw: glyphmap,
+	raw: alphabet,
 	lookup: ret
     };
 };
 
-const logotype = glyphmap => {
-    if (glyphmap === DNAGlyphmap) return "DNA";
-    if (glyphmap === RNAGlyphmap) return "RNA";
-    if (glyphmap === ProteinGlyphmap) return "AA";
+const logotype = alphabet => {
+    if (alphabet === DNAAlphabet) return "DNA";
+    if (alphabet === RNAAlphabet) return "RNA";
+    if (alphabet === ProteinAlphabet) return "AA";
     return "custom";
 };
 
@@ -68,10 +68,10 @@ CUSTOM
 let GLYPHSYMBOLS = glyphsymbols();
 
 export const LOGOCOMPONENTS = {
-    DNA: { component: DNALogo, glyphs: DNAGlyphmap, defaulttext: DNADEFAULT },
-    RNA: { component: RNALogo, glyphs: RNAGlyphmap, defaulttext: RNADEFAULT },
-    AA: { component: ProteinLogo, glyphs: ProteinGlyphmap, defaulttext: PROTEINDEFAULT },
-    custom: { component: CompleteLogo, glyphs: CompleteGlyphmap, defaulttext: CUSTOMDEFAULT }
+    DNA: { component: DNALogo, glyphs: DNAAlphabet, defaulttext: DNADEFAULT },
+    RNA: { component: RNALogo, glyphs: RNAAlphabet, defaulttext: RNADEFAULT },
+    AA: { component: ProteinLogo, glyphs: ProteinAlphabet, defaulttext: PROTEINDEFAULT },
+    custom: { component: CompleteLogo, glyphs: CompleteAlphabet, defaulttext: CUSTOMDEFAULT }
 };
 
 export const fastaToPWM = (fasta, caseinsensitive) => {
@@ -85,8 +85,8 @@ export const fastaToPWM = (fasta, caseinsensitive) => {
     sequences.map( s => ( smap(s, (x, j) => (
         j < minlength && x.match(/^[a-z0-9]+$/i) && cmatches.add(x)
     ))));
-    const glyphmap = inferGlyphmap(cmatches);
-    const lookupmap_ = lookupmap(glyphmap).lookup;
+    const alphabet = inferAlphabet(cmatches);
+    const lookupmap_ = lookupmap(alphabet).lookup;
     let pwm = xrange(minlength).map(i => Object.keys(lookupmap_).map(x => 0));
     let increment = 1.0 / sequences.length;
     sequences.map( s => ( smap(s, (x, j) => (
@@ -94,7 +94,7 @@ export const fastaToPWM = (fasta, caseinsensitive) => {
     ))));
     return {
         pwm,
-        glyphmap
+        alphabet
     };
 };
 
@@ -103,7 +103,7 @@ class FastaWorkspace extends React.Component {
     constructor(props) {
 	super(props);
 	this.logoPostUrl = apiUrls(props.apiserver).logo("");
-        let { pwm, glyphmap } = fastaToPWM(DNADEFAULT, true);
+        let { pwm, alphabet } = fastaToPWM(DNADEFAULT, true);
 	this.state = {
 	    fasta: DNADEFAULT,
 	    logocomponent: "DNA",
@@ -111,7 +111,7 @@ class FastaWorkspace extends React.Component {
 	    startpos: 1,
 	    mode: INFORMATION_CONTENT,
 	    initialized: false,
-	    glyphmap,
+	    alphabet,
             pwm,
             caseinsensitive: true
 	};
@@ -131,27 +131,27 @@ class FastaWorkspace extends React.Component {
 	    scale: state.scale,
 	    isfreq: state.mode !== INFORMATION_CONTENT,
 	    firstbase: state.startpos,
-            glyphmap: state.glyphmap
+            alphabet: state.alphabet
 	};
     }
     
     _fastaChange(fasta) {
         if (fasta.trim().length === 0) return;
-        let { pwm, glyphmap } = fastaToPWM(fasta, this.state.caseinsensitive);
+        let { pwm, alphabet } = fastaToPWM(fasta, this.state.caseinsensitive);
 	this.setState({
 	    fasta,
             pwm,
-            glyphmap,
-            logocomponent: logotype(glyphmap)
+            alphabet,
+            logocomponent: logotype(alphabet)
 	});
     }
 
     _onCaseChange() {
-        let { pwm, glyphmap } = fastaToPWM(this.state.fasta, !this.state.caseinsensitive);
+        let { pwm, alphabet } = fastaToPWM(this.state.fasta, !this.state.caseinsensitive);
         this.setState({
             pwm,
-            glyphmap,
-            logocomponent: logotype(glyphmap),
+            alphabet,
+            logocomponent: logotype(alphabet),
             caseinsensitive: !this.state.caseinsensitive
         });
     }
@@ -160,18 +160,18 @@ class FastaWorkspace extends React.Component {
 	this.setState({
 	    logocomponent: data.value,
 	    fasta: LOGOCOMPONENTS[data.value].defaulttext,
-	    glyphmap: lookupmap(LOGOCOMPONENTS[data.value].glyphs)
+	    alphabet: lookupmap(LOGOCOMPONENTS[data.value].glyphs)
 	});
     }
 
-    _glyphmapUpdate(glyphmap) {
-	let nglyphmap = [];
-	glyphmap.map( v => {
+    _alphabetUpdate(alphabet) {
+	let nalphabet = [];
+	alphabet.map( v => {
 	    let symbol = GLYPHSYMBOLS[v.regex] && GLYPHSYMBOLS[v.regex].component;
-	    return symbol && nglyphmap.push({ ...v, component: GLYPHSYMBOLS[v.regex].component });
+	    return symbol && nalphabet.push({ ...v, component: GLYPHSYMBOLS[v.regex].component });
 	});
 	this.setState({
-	    glyphmap: nglyphmap
+	    alphabet: nalphabet
 	});
     }
 
@@ -217,8 +217,8 @@ class FastaWorkspace extends React.Component {
                                         caseInsensitive={this.state.caseinsensitive}
 				        startposdefault={this.state.startpos}
 				        modedefault={this.state.mode}
-				        glyphmap={this.state.glyphmap}
-	                                onGlyphmapUpdate={this._glyphmapUpdate.bind(this)}
+				        alphabet={this.state.alphabet}
+	                                onAlphabetUpdate={this._alphabetUpdate.bind(this)}
                                         onCaseChange={this._onCaseChange.bind(this)} />
             	  </Grid.Column>
 	          <Grid.Column width={13} style={{ height: '100%' }}>
@@ -229,7 +229,7 @@ class FastaWorkspace extends React.Component {
 		            height="100%" width="100%"
 		            text={this.state.fasta}
 	                    onChange={this._fastaChange.bind(this)}
-	                    id="fastamain" glyphmap={this.state.glyphmap} />
+	                    id="fastamain" alphabet={this.state.alphabet} />
             		</Grid.Column>
 		      </Grid.Row>
 	              <Grid.Row style={{ height: '60%' }}>
@@ -242,7 +242,7 @@ class FastaWorkspace extends React.Component {
 			          startpos={this.state.startpos}
 			          mode={this.state.mode}
                                   width="90%" height="75%"
-			          glyphmap={this.state.glyphmap} />
+			          alphabet={this.state.alphabet} />
 	                  </div>
             		</Grid.Column>
 		      </Grid.Row>

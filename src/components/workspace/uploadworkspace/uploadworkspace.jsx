@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Menu, Dropdown, Button, Icon } from 'semantic-ui-react';
-import { DNALogo, RNALogo, ProteinLogo, Logo, DNAGlyphmap, CompleteGlyphmap, CompleteLogo,
-	 RNAGlyphmap, ProteinGlyphmap, INFORMATION_CONTENT, embedLogo } from 'logos-to-go-react';
+import { DNALogo, RNALogo, ProteinLogo, Logo, DNAAlphabet, CompleteAlphabet, CompleteLogo,
+	 RNAAlphabet, ProteinAlphabet, INFORMATION_CONTENT, embedLogo } from 'logos-to-go-react';
 
 import { apiUrls, isArrayOfArrays, TYPEID, glyphsymbols } from '../../../common/utils';
 import { _svgdata } from '../../svgdownload/utils';
@@ -15,10 +15,10 @@ import ErrorMessage from './errormessage';
 let GLYPHSYMBOLS = glyphsymbols();
 
 const LOGOCOMPONENTS = {
-    DNA: { component: DNALogo, glyphs: DNAGlyphmap, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
-    RNA: { component: RNALogo, glyphs: RNAGlyphmap, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
-    AA: { component: ProteinLogo, glyphs: ProteinGlyphmap, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] },
-    custom: { component: CompleteLogo, glyphs: CompleteGlyphmap, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] }
+    DNA: { component: DNALogo, glyphs: DNAAlphabet, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
+    RNA: { component: RNALogo, glyphs: RNAAlphabet, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
+    AA: { component: ProteinLogo, glyphs: ProteinAlphabet, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] },
+    custom: { component: CompleteLogo, glyphs: CompleteAlphabet, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] }
 };
 
 class UploadWorkspace extends React.Component {
@@ -35,7 +35,7 @@ class UploadWorkspace extends React.Component {
 	    logocomponent: "DNA",
 	    mode: INFORMATION_CONTENT,
 	    initialized: false,
-	    glyphmap: LOGOCOMPONENTS["DNA"].glyphs,
+	    alphabet: LOGOCOMPONENTS["DNA"].glyphs,
             processed: 0,
             total: 0,
             selectedfile: 0,
@@ -50,7 +50,7 @@ class UploadWorkspace extends React.Component {
 	    typeid: TYPEID[state.logocomponent],
 	    isfreq: state.mode !== INFORMATION_CONTENT,
 	    firstbase: 0,
-            glyphmap: state.glyphmap
+            alphabet: state.alphabet
 	};
     }
     
@@ -73,16 +73,16 @@ class UploadWorkspace extends React.Component {
 	}
 	this.setState({
 	    logocomponent: data.value,
-	    glyphmap: LOGOCOMPONENTS[data.value].glyphs,
+	    alphabet: LOGOCOMPONENTS[data.value].glyphs,
 	    pwm
 	});
     }
 
-    _glyphmapUpdate(glyphmap) {
-	let nglyphmap = [];
-	glyphmap.map( v => {
+    _alphabetUpdate(alphabet) {
+	let nalphabet = [];
+	alphabet.map( v => {
 	    let symbol = GLYPHSYMBOLS[v.regex] && GLYPHSYMBOLS[v.regex].component;
-	    return symbol && nglyphmap.push({ ...v, component: GLYPHSYMBOLS[v.regex].component });
+	    return symbol && nalphabet.push({ ...v, component: GLYPHSYMBOLS[v.regex].component });
 	});
         const npwms = [ ...this.state.pwms ];
         npwms[this.state.selectedfile] = {
@@ -94,10 +94,10 @@ class UploadWorkspace extends React.Component {
         };
         npwms[this.state.selectedfile].result.pwms[this.state.selectedmotif] = {
             ...npwms[this.state.selectedfile].result.pwms[this.state.selectedmotif],
-            glyphmap: nglyphmap
+            alphabet: nalphabet
         };
 	this.setState({
-	    glyphmap: nglyphmap,
+	    alphabet: nalphabet,
             pwms: npwms
 	});
     }
@@ -203,7 +203,7 @@ class UploadWorkspace extends React.Component {
                     pwm: pwm.pwm,
 		    startpos: 0,
 		    mode: this.state.mode,
-		    glyphmap: pwm.glyphmap || this.state.glyphmap
+		    alphabet: pwm.alphabet || this.state.alphabet
                 });
                 folder.file((pwmfile.result.motifnames[i] || "motif_" + (i + 1)) + ".svg", _svgdata(this.hiddenlogo.current));
             });
@@ -225,9 +225,9 @@ class UploadWorkspace extends React.Component {
         let isdone = this.state.processed === this.state.total
             && this.state.pwms.length > 0;
         let selectedPWMs = this.state.pwms[this.state.selectedfile];
-        let selectedGlyphmap = (selectedPWMs && selectedPWMs.result && selectedPWMs.result.pwms
+        let selectedAlphabet = (selectedPWMs && selectedPWMs.result && selectedPWMs.result.pwms
                                 && selectedPWMs.result.pwms.length > 0 && selectedPWMs.result.pwms[this.state.selectedmotif]
-                                && selectedPWMs.result.pwms[this.state.selectedmotif].glyphmap) || this.state.glyphmap;
+                                && selectedPWMs.result.pwms[this.state.selectedmotif].alphabet) || this.state.alphabet;
 	return (
 	    <Grid className="centered" style={{ width: "90%", marginLeft: "5%", height: "100%" }}>
               <Grid.Row />
@@ -241,8 +241,8 @@ class UploadWorkspace extends React.Component {
 				 scaledefault={this.state.scale}
 				 startposdefault={this.state.startpos}
 				 modedefault={this.state.mode}
-				 glyphmap={selectedGlyphmap}
-				 onGlyphmapUpdate={this._glyphmapUpdate.bind(this)} />
+				 alphabet={selectedAlphabet}
+				 onAlphabetUpdate={this._alphabetUpdate.bind(this)} />
 		</Grid.Column>
                 <Grid.Column width={13} style={{ height: '100%' }}>
                   { this.state.errors.length > 0 && (
@@ -288,7 +288,7 @@ class UploadWorkspace extends React.Component {
                                                onItemSelected={this.onItemSelected.bind(this)} />
 			      </div>
                               <LogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
-				        logoinfo={this._format_logoinfo({ ...this.state, glyphmap: selectedGlyphmap })} />
+				        logoinfo={this._format_logoinfo({ ...this.state, alphabet: selectedAlphabet })} />
                             </React.Fragment>
                         )}
                         <div ref={this.hiddenlogo} style={{ display: "none" }} />
@@ -298,7 +298,7 @@ class UploadWorkspace extends React.Component {
 			                     startpos={0}
                                              width="90%" height="75%"
 			                     mode={this.state.mode}
-			                     glyphmap={selectedGlyphmap} />)}
+			                     alphabet={selectedAlphabet} />)}
 			</div>
                         <input type="file" hidden ref={this.fileinput}
                                onChange={this.fileReceived.bind(this)}

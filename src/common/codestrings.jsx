@@ -27,8 +27,8 @@ const removeKey = (a, k) => {
     return c;
 };
 
-export const formatGlyphmap = glyphmap => (
+export const formatAlphabet = alphabet => (
     "[\n" + indentCode(
-        glyphmap.map(x => JSON.stringify(removeKey(x, "component"))).join('\n'), "  "
+        alphabet.map(x => JSON.stringify(removeKey(x, "component"))).join('\n'), "  "
     ) + "\n]"
 );
