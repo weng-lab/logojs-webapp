@@ -13,7 +13,9 @@ const Footer = props => (
               </Header>
               <List link inverted>
                 <List.Item as={Link} to="/gallery/">Gallery</List.Item>
-                <List.Item as='a'>Contact Us</List.Item>
+                <List.Item as='a' href="https://www.github.com/weng-lab/logosj-package">
+                  GitHub
+                </List.Item>
               </List>
             </Grid.Column>
             <Grid.Column width={3}>
@@ -21,9 +23,11 @@ const Footer = props => (
                 Documentation
               </Header>
               <List link inverted>
-                <List.Item as='a'>Installing the package</List.Item>
+                <List.Item as={Link} to="/installation/">Installing the package</List.Item>
                 <List.Item as={Link} to="/gallery/">Visual examples</List.Item>
-                <List.Item as='a'>Full documentation</List.Item>
+                <List.Item as='a' href="https://weng-lab.github.io/logosj-package">
+                  Full documentation
+                </List.Item>
               </List>
             </Grid.Column>
             <Grid.Column width={7}>

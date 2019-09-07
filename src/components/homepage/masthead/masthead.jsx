@@ -20,7 +20,7 @@ const MainMasthead = ({ children }) => (
         <Button as={Link} to="/gallery/" primary className="huge">
           Examples
         </Button>
-        <Button as={Link} to="/embed/" primary className="huge">
+        <Button as="a" href="https://weng-lab.github.io/logosj-package/" primary className="huge">
           Documentation
         </Button>
       </Container>
