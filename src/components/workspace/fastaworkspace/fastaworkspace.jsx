@@ -74,6 +74,15 @@ export const LOGOCOMPONENTS = {
     custom: { component: CompleteLogo, glyphs: CompleteAlphabet, defaulttext: CUSTOMDEFAULT }
 };
 
+const minMax2DArray = arr => {
+    let max = Number.MIN_VALUE, min = Number.MAX_VALUE;
+    arr.forEach(e => {
+        if (max < e) max = e;
+        if (min > e) min = e;
+    });
+    return { max, min };
+};
+
 export const fastaToPWM = (fasta, caseinsensitive) => {
     let sequences = [], cmatches = new Set();
     if (caseinsensitive) fasta = fasta.toUpperCase();
@@ -81,7 +90,7 @@ export const fastaToPWM = (fasta, caseinsensitive) => {
         x => x[0] !== '>' && x !== '' && sequences.push(x)
     );
     if (sequences.length === 0) { return [[0.0]]; }
-    let minlength = Math.min(...sequences.map(x => x.length));
+    let minlength = minMax2DArray(sequences.map(x => x.length)).min;
     sequences.map( s => ( smap(s, (x, j) => (
         j < minlength && x.match(/^[a-z0-9]+$/i) && cmatches.add(x)
     ))));
@@ -89,9 +98,12 @@ export const fastaToPWM = (fasta, caseinsensitive) => {
     const lookupmap_ = lookupmap(alphabet).lookup;
     let pwm = xrange(minlength).map(i => Object.keys(lookupmap_).map(x => 0));
     let increment = 1.0 / sequences.length;
-    sequences.map( s => ( smap(s, (x, j) => (
-	j < minlength && (pwm[j][lookupmap_[x]] += increment)
-    ))));
+    sequences.map( s => ( smap(s, (x, j) => {
+        if (lookupmap_[x] !== undefined || x === 'n' || x === 'N')
+	    j < minlength && lookupmap_[x] && (pwm[j][lookupmap_[x]] += increment);
+        else
+            throw new Error("unrecognized character '" + x + "'");
+    })));
     return {
         pwm,
         alphabet

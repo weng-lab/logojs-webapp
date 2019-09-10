@@ -16,14 +16,30 @@ class AnyUploadWorkspace extends React.Component {
     }
     
     parseFasta(text) {
-	return {
-	    pwms: [{ pwm: fastaToPWM(text.toUpperCase(), this.state.alphabet.lookup) }],
-	    motifnames: [ null ],
-	    name: null
-	};
+        try {
+	    return {
+	        pwms: [{ pwm: fastaToPWM(text.toUpperCase(), true) }],
+	        motifnames: [ null ],
+	        name: null
+	    };
+        } catch (e) {
+            return {
+                pwms: []
+            };
+        }
     }
 
     parseJaspar(text) {
+        try {
+            return this._parseJaspar(text);
+        } catch (e) {
+            return {
+                pwms: []
+            };
+        }
+    }
+    
+    _parseJaspar(text) {
         let inmotif = false;
         let pwms = [], cpwm = [], cmotifname = null;
         let motifnames = [];
