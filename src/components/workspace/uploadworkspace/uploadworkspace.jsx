@@ -50,7 +50,7 @@ class UploadWorkspace extends React.Component {
 	    typeid: TYPEID[state.logocomponent],
 	    isfreq: state.mode !== INFORMATION_CONTENT,
 	    firstbase: 0,
-            alphabet: state.alphabet
+            alphabet: state.alphabet,
 	};
     }
     
@@ -176,7 +176,7 @@ class UploadWorkspace extends React.Component {
     selectFile(i) {
         this.setState({
             selectedfile: i,
-            selectedMotif: 0
+            selectedmotif: 0
         });
     }
     
