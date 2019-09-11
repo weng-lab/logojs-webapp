@@ -1,7 +1,7 @@
 import { DNAAlphabet, RNAAlphabet, ProteinAlphabet, CompleteAlphabet } from 'logos-to-go-react';
 
-const DNASet = new Set([ 'A', 'C', 'G', 'T' ]);
-const RNASet = new Set([ 'A', 'C', 'G', 'U' ]);
+const DNASet = new Set([ 'A', 'C', 'G', 'T', 'N' ]);
+const RNASet = new Set([ 'A', 'C', 'G', 'U', 'N' ]);
 export const ProteinSet = new Set([
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
     'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T',

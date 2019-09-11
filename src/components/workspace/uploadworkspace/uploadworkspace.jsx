@@ -36,21 +36,22 @@ class UploadWorkspace extends React.Component {
 	    mode: INFORMATION_CONTENT,
 	    initialized: false,
 	    alphabet: LOGOCOMPONENTS["DNA"].glyphs,
-            processed: 0,
             total: 0,
             selectedfile: 0,
-            selectedmotif: 0
+            selectedmotif: 0,
+            remaining: 0
 	};
     }
 
     _format_logoinfo(state) {
+        const pwm = this.state.pwms[this.state.selectedfile].result.pwms[this.state.selectedmotif].pwm;
 	return {
-	    pwm: this.state.pwms[this.state.selectedfile].result.pwms[this.state.selectedmotif].pwm,
+	    pwm: pwm.pwm ? pwm.pwm : pwm,
 	    scale: 1.0,
 	    typeid: TYPEID[state.logocomponent],
 	    isfreq: state.mode !== INFORMATION_CONTENT,
 	    firstbase: 0,
-            alphabet: state.alphabet
+            alphabet: state.alphabet,
 	};
     }
     
@@ -130,7 +131,7 @@ class UploadWorkspace extends React.Component {
                         message: "file too large (size limit is 100MB)"
                     }
                 ],
-                processed: this.state.processed + 1
+                remaining: this.state.remaining - 1
             });
             return;
         }
@@ -147,7 +148,9 @@ class UploadWorkspace extends React.Component {
                             result
                         }
                     ],
-                    processed: this.state.processed + 1
+                    total: this.state.total + 1,
+                    selectedfile: this.state.total,
+                    remaining: this.state.remaining - 1
                 });
             } else {
                 this.setState({
@@ -157,7 +160,7 @@ class UploadWorkspace extends React.Component {
                             message: "no motifs found - is the file in the correct format?"
                         }
                     ],
-                    processed: this.state.processed + 1
+                    remaining: this.state.remaining - 1
                 });
             }
         };
@@ -168,7 +171,7 @@ class UploadWorkspace extends React.Component {
                     message: "reading failed - is the file in the correct format?"
                 }
             ],
-            processed: this.state.processed + 1
+            remaining: this.state.remaining - 1
         });
         reader.readAsText(f);
     }
@@ -176,15 +179,13 @@ class UploadWorkspace extends React.Component {
     selectFile(i) {
         this.setState({
             selectedfile: i,
-            selectedMotif: 0
+            selectedmotif: 0
         });
     }
     
     errorclosed() {
         this.setState({
-            errors: [],
-            total: this.state.total - this.state.errors.length,
-            processed: this.state.processed - this.state.errors.length
+            errors: []
         });
     }
 
@@ -213,17 +214,14 @@ class UploadWorkspace extends React.Component {
     }
     
     async fileReceived(e) {
-        const total = this.state.total + e.target.files.length;
         this.setState({
-            total,
-            selectedfile: total - 1
+            remaining: e.target.files.length
         });
         Array.from(e.target.files).map(this.parseFile.bind(this));
     }
     
     render() {
-        let isdone = this.state.processed === this.state.total
-            && this.state.pwms.length > 0;
+        let isdone = this.state.remaining === 0 && this.state.pwms.length > 0;
         let selectedPWMs = this.state.pwms[this.state.selectedfile];
         let selectedAlphabet = (selectedPWMs && selectedPWMs.result && selectedPWMs.result.pwms
                                 && selectedPWMs.result.pwms.length > 0 && selectedPWMs.result.pwms[this.state.selectedmotif]
@@ -293,8 +291,8 @@ class UploadWorkspace extends React.Component {
                         )}
                         <div ref={this.hiddenlogo} style={{ display: "none" }} />
                         <div ref={this.logo}
-                             style={{ height: "50%", textAlign: "center" }}>
-	                  { isdone && (<Logo pwm={selectedPWMs.result.pwms[this.state.selectedmotif].pwm}
+                             style={{ maxHeight: "500px", height: "50%", textAlign: "center" }}>
+	                  { isdone && (<Logo pwm={selectedPWMs.result.pwms[this.state.selectedmotif].pwm.pwm ? selectedPWMs.result.pwms[this.state.selectedmotif].pwm.pwm : selectedPWMs.result.pwms[this.state.selectedmotif].pwm}
 			                     startpos={0}
                                              width="90%" height="75%"
 			                     mode={this.state.mode}
