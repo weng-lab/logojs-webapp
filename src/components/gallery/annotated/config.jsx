@@ -1,5 +1,5 @@
 import React from 'react';
-import { RawLogo, DNAAlphabet, ProteinAlphabet } from 'logos-to-go-react';
+import { RawLogo, DNAAlphabet, ProteinAlphabet } from 'logosj-react';
 
 import { formatPWM, formatAlphabet } from '../../../common/codestrings';
 import { indentCode } from '../../../common/utils';

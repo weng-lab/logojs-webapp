@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Segment, Header, Button } from 'semantic-ui-react';
-import { RNALogo, Logo } from 'logos-to-go-react';
+import { RNALogo, Logo } from 'logosj-react';
 
 import { RNA_PWM, METHYL_PWM, METHYL_ALPHABET, HEX_ALPHABET, HEX_PWM } from './constants';
 

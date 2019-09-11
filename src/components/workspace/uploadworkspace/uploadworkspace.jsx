@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Menu, Dropdown, Button, Icon } from 'semantic-ui-react';
 import { DNALogo, RNALogo, ProteinLogo, Logo, DNAAlphabet, CompleteAlphabet, CompleteLogo,
-	 RNAAlphabet, ProteinAlphabet, INFORMATION_CONTENT, embedLogo } from 'logos-to-go-react';
+	 RNAAlphabet, ProteinAlphabet, INFORMATION_CONTENT, embedLogo } from 'logosj-react';
 
 import { apiUrls, isArrayOfArrays, TYPEID, glyphsymbols } from '../../../common/utils';
 import { _svgdata } from '../../svgdownload/utils';

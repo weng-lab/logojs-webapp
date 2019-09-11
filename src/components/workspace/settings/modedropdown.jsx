@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dropdown } from 'semantic-ui-react';
-import { INFORMATION_CONTENT, FREQUENCY } from 'logos-to-go-react';
+import { INFORMATION_CONTENT, FREQUENCY } from 'logosj-react';
 
 const OPTIONS = [
     { value: INFORMATION_CONTENT, text: "Information Content" },

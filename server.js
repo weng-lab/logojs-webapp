@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const logos = require('logos-to-go-react');
+const logos = require('logosj-react');
 const ReactDOMServer = require('react-dom/server');
 const React = require('react');
 

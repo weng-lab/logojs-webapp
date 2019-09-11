@@ -17,7 +17,7 @@ export const formatPWM = pwm => (
     "[\n" + indentCode(
         pwm.map(
             x => JSON.stringify(x.map(xx => +xx.toFixed(2)))
-        ).join('\n'), "  "
+        ).join(",\n"), "  "
     ) + "\n]"
 );
 
@@ -29,6 +29,6 @@ const removeKey = (a, k) => {
 
 export const formatAlphabet = alphabet => (
     "[\n" + indentCode(
-        alphabet.map(x => JSON.stringify(removeKey(x, "component"))).join('\n'), "  "
+        alphabet.map(x => JSON.stringify(removeKey(x, "component"))).join(",\n"), "  "
     ) + "\n]"
 );

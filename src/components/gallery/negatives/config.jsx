@@ -1,4 +1,4 @@
-import { ProteinAlphabet, DNAAlphabet } from 'logos-to-go-react';
+import { ProteinAlphabet, DNAAlphabet } from 'logosj-react';
 
 import { jsCodestring, formatPWM } from '../../../common/codestrings';
 import { AA_PWM, DNA_NEGATIVE_PWM, DNA_NEGATIVE_PWM2 } from '../constants';
@@ -100,7 +100,7 @@ export const DNA_CODESTRING_REACT2 = `
 import { LogoWithNegatives, DNAAlphabet } from 'logosj-react';
 ${DNA_CONSTANTS2}
 export const DNALogo = props => (
-    <Logo pwm={DNA_PWM} alphabet={DNAAlphabet} negativealpha={101} inverted />
+    <LogoWithNegatives pwm={DNA_PWM} alphabet={DNAAlphabet} negativealpha={101} inverted />
 );
 `.substring(1);
 

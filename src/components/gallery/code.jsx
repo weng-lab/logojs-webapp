@@ -26,7 +26,8 @@ class CodeAccordion extends React.Component {
                 {this.state.open ? this.props.activeTitle : this.props.title}
               </Accordion.Title>
               <Accordion.Content active={this.state.open}>
-                <CodeTab react={this.props.react} js={this.props.js} />
+                <CodeTab react={"import React from 'react';\n" + this.props.react}
+                         js={this.props.js} />
               </Accordion.Content>
             </Accordion>
         );

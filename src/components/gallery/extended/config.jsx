@@ -1,11 +1,11 @@
-import { CompleteAlphabet } from 'logos-to-go-react';
+import { CompleteAlphabet } from 'logosj-react';
 
 import { jsCodestring, formatPWM, formatAlphabet } from '../../../common/codestrings';
 import { METHYL_PWM, METHYL_ALPHABET, RNA_PWM, HEX_PWM, HEX_ALPHABET } from '../constants';
 
 const METHYL_CONSTANTS = `
 const METHYL_PWM = ${formatPWM(METHYL_PWM)};
-const METHYL_ALPHABET = loadGlyphComponents(${formatAlphabet(METHYL_ALPHABET)});
+const METHYL_ALPHABET = ${formatAlphabet(METHYL_ALPHABET)};
 `.substring(1);
 
 export const METHYL_CODESTRING_JS = jsCodestring(`
@@ -17,7 +17,7 @@ logosj.embedLogo(document.getElementById("logo"), {
 `);
 
 export const METHYL_CODESTRING_REACT = `
-import { Logo, loadGlyphComponents } from 'logosj-react';
+import { Logo } from 'logosj-react';
 ${METHYL_CONSTANTS}
 export const MethylLogo = props => (
     <Logo pwm={METHYL_PWM} alphabet={METHYL_ALPHABET} />
@@ -82,7 +82,7 @@ export const RNA_DEMO = {
 
 const HEX_CONSTANTS = `
 const CUSTOM_PWM = ${formatPWM(HEX_PWM())};
-const CUSTOM_ALPHABET = loadGlyphComponents(${formatAlphabet(HEX_ALPHABET)});
+const CUSTOM_ALPHABET = ${formatAlphabet(HEX_ALPHABET)};
 `.substring(1);
 
 export const HEX_CODESTRING_JS = jsCodestring(`
@@ -94,7 +94,7 @@ logosj.embedLogo(document.getElementById("logo"), {
 `);
 
 export const HEX_CODESTRING_REACT = `
-import { Logo, loadGlyphComponents } from 'logosj-react';
+import { Logo } from 'logosj-react';
 ${HEX_CONSTANTS}
 export const CustomLogo = props => (
     <Logo pwm={CUSTOM_PWM} alphabet={CUSTOM_ALPHABET} />
@@ -139,7 +139,7 @@ const DUPLICATE_ALPHABET = [
 
 const DUPLICATE_CONSTANTS = `
 const CUSTOM_PWM = ${formatPWM(DUPLICATE_PWM)};
-const CUSTOM_ALPHABET = loadGlyphComponents(${formatAlphabet(DUPLICATE_ALPHABET)});
+const CUSTOM_ALPHABET = ${formatAlphabet(DUPLICATE_ALPHABET)};
 `.substring(1);
 
 export const DUPLICATE_CODESTRING_JS = jsCodestring(`
@@ -151,7 +151,7 @@ logosj.embedLogo(document.getElementById("logo"), {
 `);
 
 export const DUPLICATE_CODESTRING_REACT = `
-import { Logo, loadGlyphComponents } from 'logosj-react';
+import { Logo } from 'logosj-react';
 ${DUPLICATE_CONSTANTS}
 export const ALogo = props => (
     <Logo pwm={CUSTOM_PWM} alphabet={CUSTOM_ALPHABET} />

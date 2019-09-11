@@ -1,4 +1,4 @@
-import { CompleteAlphabet, DNAAlphabet, disymbolAlphabet } from "logos-to-go-react";
+import { CompleteAlphabet, DNAAlphabet, disymbolAlphabet } from "logosj-react";
 
 export const DNA_PROTEIN_PWM = [
     [ 0.2, 0, 0, 0.2 ],

@@ -1,5 +1,5 @@
 import namedColors from 'color-name-list';
-import { CompleteAlphabet } from 'logos-to-go-react';
+import { CompleteAlphabet } from 'logosj-react';
 
 export const glyphsymbols = () => {
     let retval = {};

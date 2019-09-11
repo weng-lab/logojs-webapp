@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Segment, Header, Button } from 'semantic-ui-react';
-import { RawLogo, DNAAlphabet, ProteinAlphabet } from 'logos-to-go-react';
+import { RawLogo, DNAAlphabet, ProteinAlphabet } from 'logosj-react';
 
 import { ANNOTATED_PWM, ANNOTATED_ALPHABET, SNP_PWM, SNP_REF_PWM,
          DNA_PROTEIN_PWM, PROTEIN_DNA_PWM } from './constants';

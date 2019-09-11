@@ -2,7 +2,7 @@ import React from 'react';
 import os from 'os';
 import { DNALogo, RNALogo, ProteinLogo, Logo, CompleteLogo,
 	 DNAAlphabet, RNAAlphabet, ProteinAlphabet, CompleteAlphabet,
-	 INFORMATION_CONTENT, xrange } from 'logos-to-go-react';
+	 INFORMATION_CONTENT, xrange } from 'logosj-react';
 import { Grid, Container, Segment, Header } from 'semantic-ui-react';
 
 import { MainMenu, mainMenuItems } from '../../homepage';

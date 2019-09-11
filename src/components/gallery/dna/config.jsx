@@ -1,5 +1,5 @@
 import React from 'react';
-import { CompleteAlphabet, DNAAlphabet } from 'logos-to-go-react';
+import { CompleteAlphabet, DNAAlphabet } from 'logosj-react';
 
 import SyntaxHighlighter from '../syntax';
 import { INTRON_PWM, CAP_PWM, CTCF_PWM } from '../constants';
@@ -76,10 +76,10 @@ const LOWERCASE_ALPHABET = [
 `;
 
 export const LOWERCASE_CODESTRING_REACT = `
-import { Logo, loadGlyphComponents } from 'logosj-react';
+import { Logo } from 'logosj-react';
 ${LOWERCASE_CONSTANTS}
 export const LowercaseLogo = props => (
-    <Logo alphabet={loadGlyphComponents(LOWERCASE_ALPHABET)} pwm={LOWERCASE_PWM} />
+    <Logo alphabet={LOWERCASE_ALPHABET} pwm={LOWERCASE_PWM} />
 );
 `;
 
@@ -87,7 +87,7 @@ export const LOWERCASE_CODESTRING_JS = jsCodestring(`
 ${LOWERCASE_CONSTANTS}
 logosj.embedLogo(document.getElementById("logo"), {
   pwm: LOWERCASE_PWM,
-  alphabet: logosj.loadGlyphComponents(LOWERCASE_ALPHABET)
+  alphabet: logosj.LOWERCASE_ALPHABET
 });
 `);
 

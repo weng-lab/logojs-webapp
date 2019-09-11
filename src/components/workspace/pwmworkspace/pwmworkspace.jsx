@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Container, Segment, Header } from 'semantic-ui-react';
 import { DNALogo, RNALogo, ProteinLogo, Logo, DNAAlphabet, CompleteAlphabet, CompleteLogo,
-	 RNAAlphabet, ProteinAlphabet, INFORMATION_CONTENT, LogoWithNegatives } from 'logos-to-go-react';
+	 RNAAlphabet, ProteinAlphabet, INFORMATION_CONTENT, LogoWithNegatives } from 'logosj-react';
 
 import { MainMenu, mainMenuItems } from '../../homepage';
 import { PWMEditor } from '../../editor/index';

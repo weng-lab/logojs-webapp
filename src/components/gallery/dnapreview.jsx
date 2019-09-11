@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Segment, Header, Button } from 'semantic-ui-react';
-import { DNALogo } from 'logos-to-go-react';
+import { DNALogo } from 'logosj-react';
 
 import { CTCF_PWM, CAP_PWM, INTRON_PWM } from './constants';
 

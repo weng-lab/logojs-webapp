@@ -1,4 +1,4 @@
-import { DNAAlphabet, RNAAlphabet, ProteinAlphabet, CompleteAlphabet } from 'logos-to-go-react';
+import { DNAAlphabet, RNAAlphabet, ProteinAlphabet, CompleteAlphabet } from 'logosj-react';
 
 const DNASet = new Set([ 'A', 'C', 'G', 'T', 'N' ]);
 const RNASet = new Set([ 'A', 'C', 'G', 'U', 'N' ]);
