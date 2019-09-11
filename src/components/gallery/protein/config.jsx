@@ -13,7 +13,7 @@ logosj.embedProteinLogo(document.getElementById("logo"), { pwm: CAP_PWM });
 export const CAP_CODESTRING_REACT = `
 import { ProteinLogo } from 'logosj-react';
 ${PROTEIN_PWM_CODE}
-export const ProteinLogo = props => (
+export const MyProteinLogo = props => (
     <ProteinLogo pwm={PROTEIN_PWM} />
 );
 `.substring(1);
@@ -25,8 +25,8 @@ const PROTEIN_PWM = ${formatPWM(ALT_PROTEIN_PWM())};
 export const ALT_CODESTRING_REACT = `
 import { ProteinLogo } from 'logosj-react';
 ${ALT_PWM_CODE}
-export const ProteinLogo = props => (
-    <ProteinLogo pwm={ALT_PWM} />
+export const MyProteinLogo = props => (
+    <ProteinLogo pwm={PROTEIN_PWM} />
 );
 `.substring(1);
 

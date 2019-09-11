@@ -4,7 +4,7 @@ import { DINUCLEOTIDE_PWM, DINUCLEOTIDE_ALPHABET, TRINUCLEOTIDE_ALPHABET,
 
 const DINUCLEOTIDE_CONSTANTS = `
 const DINUCLEOTIDE_PWM = ${formatPWM(DINUCLEOTIDE_PWM)};
-const DINUCLEOTIDE_ALPHABET = ${formatAlphabet(DINUCLEOTIDE_ALPHABET())};
+const DINUCLEOTIDE_ALPHABET = loadGlyphComponents(${formatAlphabet(DINUCLEOTIDE_ALPHABET())});
 `.substring(1);
 
 export const DINUCLEOTIDE_CODESTRING_JS = jsCodestring(`
@@ -16,7 +16,7 @@ logosj.embedLogo(document.getElementById("logo"), {
 `);
 
 export const DINUCLEOTIDE_CODESTRING_REACT = `
-import { Logo } from 'logosj-react';
+import { Logo, loadGlyphComponents } from 'logosj-react';
 ${DINUCLEOTIDE_CONSTANTS}
 export const DinucleotideLogo = props => (
     <Logo pwm={DINUCLEOTIDE_PWM} alphabet={DINUCLEOTIDE_ALPHABET} />
@@ -42,7 +42,7 @@ export const DINUCLEOTIDE_DEMO = {
 
 const TRINUCLEOTIDE_CONSTANTS = `
 const TRINUCLEOTIDE_PWM = ${formatPWM(TRINUCLEOTIDE_PWM)};
-const TRINUCLEOTIDE_ALPHABET = ${formatAlphabet(TRINUCLEOTIDE_ALPHABET)};
+const TRINUCLEOTIDE_ALPHABET = loadGlyphComponents(${formatAlphabet(TRINUCLEOTIDE_ALPHABET)});
 `.substring(1);
 
 export const TRINUCLEOTIDE_CODESTRING_JS = jsCodestring(`
@@ -55,7 +55,7 @@ logosj.embedLogo(document.getElementById("logo"), {
 `);
 
 export const TRINUCLEOTIDE_CODESTRING_REACT = `
-import { Logo } from 'logosj-react';
+import { Logo, loadGlyphComponents } from 'logosj-react';
 ${TRINUCLEOTIDE_CONSTANTS}
 export const TrinucleotideLogo = props => (
     <Logo pwm={TRINUCLEOTIDE_PWM} alphabet={TRINUCLEOTIDE_ALPHABET} glyphwidth={1.5} />
@@ -86,7 +86,7 @@ export const TRINUCLEOTIDE_DEMO = {
 
 const MULTINUMBER_CONSTANTS = `
 const CUSTOM_PWM = ${formatPWM(TRINUCLEOTIDE_PWM)};
-const CUSTOM_ALPHABET = ${formatAlphabet(MULTINUMBER_ALPHABET)};
+const CUSTOM_ALPHABET = loadGlyphComponents(${formatAlphabet(MULTINUMBER_ALPHABET)});
 `.substring(1);
 
 export const MULTINUMBER_CODESTRING_JS = jsCodestring(`
@@ -99,7 +99,7 @@ logosj.embedLogo(document.getElementById("logo"), {
 `);
 
 export const MULTINUMBER_CODESTRING_REACT = `
-import { Logo } from 'logosj-react';
+import { Logo, loadGlyphComponents } from 'logosj-react';
 ${MULTINUMBER_CONSTANTS}
 export const MyLogo = props => (
     <Logo pwm={CUSTOM_PWM} alphabet={CUSTOM_ALPHABET} glyphwidth={1.5} />

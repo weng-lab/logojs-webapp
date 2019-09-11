@@ -144,15 +144,15 @@ export const HEX_ALPHABET = [
     { color: "#880000", component: CompleteAlphabet[29].component, regex: "d" },
     { color: "#880000", component: CompleteAlphabet[30].component, regex: "e" },
     { color: "#880000", component: CompleteAlphabet[31].component, regex: "f" },
-    { color: "#000088", component: CompleteAlphabet[52].component, regex: "1" },
-    { color: "#000088", component: CompleteAlphabet[53].component, regex: "2" },
-    { color: "#000088", component: CompleteAlphabet[54].component, regex: "3" },
-    { color: "#000088", component: CompleteAlphabet[55].component, regex: "4" },
-    { color: "#000088", component: CompleteAlphabet[56].component, regex: "5" },
-    { color: "#000088", component: CompleteAlphabet[57].component, regex: "6" },
-    { color: "#000088", component: CompleteAlphabet[58].component, regex: "7" },
-    { color: "#000088", component: CompleteAlphabet[59].component, regex: "8" },
-    { color: "#000088", component: CompleteAlphabet[60].component, regex: "9" },
+    { color: "#000088", component: CompleteAlphabet[53].component, regex: "1" },
+    { color: "#000088", component: CompleteAlphabet[54].component, regex: "2" },
+    { color: "#000088", component: CompleteAlphabet[55].component, regex: "3" },
+    { color: "#000088", component: CompleteAlphabet[56].component, regex: "4" },
+    { color: "#000088", component: CompleteAlphabet[57].component, regex: "5" },
+    { color: "#000088", component: CompleteAlphabet[58].component, regex: "6" },
+    { color: "#000088", component: CompleteAlphabet[59].component, regex: "7" },
+    { color: "#000088", component: CompleteAlphabet[60].component, regex: "8" },
+    { color: "#000088", component: CompleteAlphabet[61].component, regex: "9" },
     { color: "#000088", component: CompleteAlphabet[14].component, regex: "0" }
 ];
 
@@ -280,9 +280,9 @@ export const SNP_REF_PWM = [
     [ 0, 0, 0, 2 ]
 ];
 
-const N1 = CompleteAlphabet[52].component;
-const N2 = CompleteAlphabet[53].component;
-const N3 = CompleteAlphabet[54].component;
+const N1 = CompleteAlphabet[53].component;
+const N2 = CompleteAlphabet[54].component;
+const N3 = CompleteAlphabet[55].component;
 
 export const TRINUCLEOTIDE_ALPHABET = [
     { color: "#880000", component: [ A, A, A ], regex: "AAA" },
