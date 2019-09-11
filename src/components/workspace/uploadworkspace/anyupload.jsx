@@ -70,17 +70,17 @@ class AnyUploadWorkspace extends React.Component {
             if (pwm.length === 0) { return []; }
             let totals = pwm[0].map( (_, i) => sum(pwm.map(x => +x[i])) );
             let toutput = [];
-            for (let j in pwm[0]) {
+            pwm[0].forEach( (_, j) => {
                 toutput.push([]);
                 pwm.forEach( () => {
                     toutput[j].push(0.0);
                 });
-            }
-            for (let i in pwm) {
-                for (let j in pwm[i]) {
+            });
+            pwm.forEach( (_, i) => {
+                pwm[i].forEach( (_, j) => {
                     toutput[j][i] = +pwm[i][j] / totals[j];
-                }
-            }
+                });
+            });
             return toutput;
         });
         return {
