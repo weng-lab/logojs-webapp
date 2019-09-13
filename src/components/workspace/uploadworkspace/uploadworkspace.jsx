@@ -150,6 +150,7 @@ class UploadWorkspace extends React.Component {
                     ],
                     total: this.state.total + 1,
                     selectedfile: this.state.total,
+                    selectedmotif: 0,
                     remaining: this.state.remaining - 1
                 });
             } else {
