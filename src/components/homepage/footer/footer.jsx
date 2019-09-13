@@ -23,7 +23,7 @@ const Footer = props => (
                 Documentation
               </Header>
               <List link inverted>
-                <List.Item as={Link} to="/installation/">Installing the package</List.Item>
+                <List.Item as='a' href="https://github.com/weng-lab/logosj-package#using-in-your-web-application">Installing the package</List.Item>
                 <List.Item as={Link} to="/gallery/">Visual examples</List.Item>
                 <List.Item as='a' href="https://weng-lab.github.io/logosj-package">
                   Full documentation
