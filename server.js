@@ -6,9 +6,9 @@ const logos = require('logosj-react');
 const ReactDOMServer = require('react-dom/server');
 const React = require('react');
 
-let glyphmap = {};
-logos.CompleteGlyphmap.forEach( x => {
-    glyphmap[x.regex] = x.component
+let alphabet = {};
+logos.CompleteAlphabet.forEach( x => {
+    alphabet[x.regex] = x.component
 });
 
 const app = express();
@@ -38,7 +38,7 @@ const lookupComponent = glyph => {
 	component: []
     };
     for (let i = 0; i < glyph.regex.length; ++i) {
-	nglyph.component.push(glyphmap[glyph.regex[i]]);
+	nglyph.component.push(alphabet[glyph.regex[i]]);
     }
     return nglyph;
 };
@@ -46,7 +46,7 @@ const lookupComponent = glyph => {
 app.get('/svg/:s', (req, res) => {
 
     const logo = decodeSvg(req.params.s);
-    logo.glyphmap = (logo.glyphmap.raw || logo.glyphmap).map(lookupComponent);
+    logo.alphabet = (logo.alphabet.raw || logo.alphabet).map(lookupComponent);
     
     res.setHeader('Content-Type', 'image/svg+xml');
     return res.status(200).send(
