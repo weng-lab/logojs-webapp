@@ -172,7 +172,7 @@ class FastaWorkspace extends React.Component {
 	this.setState({
 	    logocomponent: data.value,
 	    fasta: LOGOCOMPONENTS[data.value].defaulttext,
-	    alphabet: lookupmap(LOGOCOMPONENTS[data.value].glyphs)
+	    alphabet: lookupmap(LOGOCOMPONENTS[data.value].glyphs).raw
 	});
     }
 
