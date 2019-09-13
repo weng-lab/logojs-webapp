@@ -83,7 +83,7 @@ const minMax2DArray = arr => {
     return { max, min };
 };
 
-export const fastaToPWM = (fasta, caseinsensitive) => {
+export const fastaToPWM = (fasta, caseinsensitive, dthrow = true) => {
     let sequences = [], cmatches = new Set();
     if (caseinsensitive) fasta = fasta.toUpperCase();
     fasta.split(os.EOL).filter(x => x[0] !== '#').map(
@@ -101,7 +101,7 @@ export const fastaToPWM = (fasta, caseinsensitive) => {
     sequences.map( s => ( smap(s, (x, j) => {
         if (lookupmap_[x] !== undefined || x === 'n' || x === 'N')
 	    j < minlength && lookupmap_[x] !== undefined && lookupmap_[x] !== null && (pwm[j][lookupmap_[x]] += increment);
-        else
+        else if (dthrow)
             throw new Error("unrecognized character '" + x + "'");
     })));
     return {
@@ -115,7 +115,7 @@ class FastaWorkspace extends React.Component {
     constructor(props) {
 	super(props);
 	this.logoPostUrl = apiUrls(props.apiserver).logo("");
-        let { pwm, alphabet } = fastaToPWM(DNADEFAULT, true);
+        let { pwm, alphabet } = fastaToPWM(DNADEFAULT, true, false);
 	this.state = {
 	    fasta: DNADEFAULT,
 	    logocomponent: "DNA",
@@ -149,7 +149,7 @@ class FastaWorkspace extends React.Component {
     
     _fastaChange(fasta) {
         if (fasta.trim().length === 0) return;
-        let { pwm, alphabet } = fastaToPWM(fasta, this.state.caseinsensitive);
+        const { pwm, alphabet } = fastaToPWM(fasta, this.state.caseinsensitive, false);
 	this.setState({
 	    fasta,
             pwm,
@@ -159,7 +159,7 @@ class FastaWorkspace extends React.Component {
     }
 
     _onCaseChange() {
-        let { pwm, alphabet } = fastaToPWM(this.state.fasta, !this.state.caseinsensitive);
+        const { pwm, alphabet } = fastaToPWM(this.state.fasta, !this.state.caseinsensitive, false);
         this.setState({
             pwm,
             alphabet,
@@ -169,10 +169,13 @@ class FastaWorkspace extends React.Component {
     }
 
     _logoTypeChange(e, data) {
+        const fasta = LOGOCOMPONENTS[data.value].defaulttext;
+        const { pwm, alphabet } = fastaToPWM(fasta, this.state.caseinsensitive);
 	this.setState({
 	    logocomponent: data.value,
-	    fasta: LOGOCOMPONENTS[data.value].defaulttext,
-	    alphabet: lookupmap(LOGOCOMPONENTS[data.value].glyphs).raw
+	    fasta,
+	    alphabet,
+            pwm
 	});
     }
 
