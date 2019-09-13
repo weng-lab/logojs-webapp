@@ -6,7 +6,8 @@ const ColoredInput = ({ defaultValue, background, header, color, onChange }) => 
       {header ? <h3>{header}</h3> : null}
       <Input defaultValue={defaultValue}
 	     onChange={onChange}
-	     style={{ color }}>
+	     style={{ color }}
+             maxLength={15}>
 	<input style={{ color, background }} />
       </Input>
     </React.Fragment>
