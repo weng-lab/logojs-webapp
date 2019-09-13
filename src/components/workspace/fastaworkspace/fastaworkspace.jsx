@@ -100,7 +100,7 @@ export const fastaToPWM = (fasta, caseinsensitive) => {
     let increment = 1.0 / sequences.length;
     sequences.map( s => ( smap(s, (x, j) => {
         if (lookupmap_[x] !== undefined || x === 'n' || x === 'N')
-	    j < minlength && lookupmap_[x] && (pwm[j][lookupmap_[x]] += increment);
+	    j < minlength && lookupmap_[x] !== undefined && lookupmap_[x] !== null && (pwm[j][lookupmap_[x]] += increment);
         else
             throw new Error("unrecognized character '" + x + "'");
     })));
