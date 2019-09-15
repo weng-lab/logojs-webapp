@@ -30,8 +30,8 @@ export const ANNOTATED_CODESTRING_JS = `
     <div style="width:500px">
       <svg viewBox="0 0 1530 330">
         <g transform="translate(20,-40)" id="logo"></g>
-        <rect fill="none" stroke="#888888" strokeWidth="25" x={15} y={10} width={600} height={300} />
-        <rect fill="none" stroke="#888888" strokeWidth="25" x={915} width={600} y={10} height={300} />
+        <rect fill="none" stroke="#888888" stroke-width="25" x="15" y="10" width="600" height="300"></rect>
+        <rect fill="none" stroke="#888888" stroke-width="25" x="915" width="600" y="10" height="300"></rect>
       </svg>
     </div>
     <script type="text/javascript">
@@ -106,12 +106,12 @@ export const SNP_CODESTRING_JS = `
   <body>
     <script src="https://package.logosj.wenglab.org/bundle.js" type="text/javascript"></script>
     <div style="width:500px">
-      <svg viewBox="0 0 1100 420"}>
-        <rect x={600} width={100} height={420} fill="#bbbbbb" />
+      <svg viewBox="0 0 1100 420">
+        <rect x="600" width="100" height="420" fill="#bbbbbb"></rect>
         <g transform="translate(300,0)" id="motiflogo"></g>
         <g transform="translate(300, 220)" id="reflogo"></g>
-        <text y={150} x={260} textAnchor="end" style={{ fontSize: "50px" }}>PWM</text>
-        <text y={350} x={260} textAnchor="end" style={{ fontSize: "50px" }}>reference</text>
+        <text y="150" x="260" text-anchor="end" style="font-size: 50px;">PWM</text>
+        <text y="350" x="260" text-anchor="end" style="font-size: 50px">reference</text>
       </svg>
     </div>
     <script type="text/javascript">
@@ -197,9 +197,9 @@ export const INTERACTION_CODESTRING_JS = `
       <svg viewBox="0 0 2600 920">
         <g id="dnalogo"></g>
         <g transform="translate(0,500)" id="proteinlogo"></g>
-        <path fill="#88888888" d="M 1530 220 L 1600 590 L 1700 590 L 1630 220 L 1530 220" />
-        <path fill="#88888888" d="M 1670 220 L 1200 520 L 1300 520 L 1750 220 L 1670 220" />
-        <path fill="#88888888" d="M 1750 220 L 1100 520 L 1200 520 L 1800 220 L 1750 220" />
+        <path fill="#88888888" d="M 1530 220 L 1600 590 L 1700 590 L 1630 220 L 1530 220"></path>
+        <path fill="#88888888" d="M 1670 220 L 1200 520 L 1300 520 L 1750 220 L 1670 220"></path>
+        <path fill="#88888888" d="M 1750 220 L 1100 520 L 1200 520 L 1800 220 L 1750 220"></path>
       </svg>
     </div>
     <script type="text/javascript">

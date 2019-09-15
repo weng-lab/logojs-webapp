@@ -87,7 +87,7 @@ export const LOWERCASE_CODESTRING_JS = jsCodestring(`
 ${LOWERCASE_CONSTANTS}
 logosj.embedLogo(document.getElementById("logo"), {
   pwm: LOWERCASE_PWM,
-  alphabet: logosj.LOWERCASE_ALPHABET
+  alphabet: LOWERCASE_ALPHABET
 });
 `);
 
@@ -179,7 +179,7 @@ export const NoAxisLogo = props => (
 const NOAXIS_JS = `
 ${NOAXIS_CONSTANTS}
 logosj.embedRawLogo(document.getElementById("logo"), {
-  pwm: PWM
+  pwm: PWM,
   alphabet: logosj.DNAAlphabet,
   glyphWidth: 100,
   stackHeight: 100

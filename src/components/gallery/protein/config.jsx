@@ -7,7 +7,7 @@ const PROTEIN_PWM = ${formatPWM(PROTEIN_PWM)};
 
 export const CAP_CODESTRING_JS = jsCodestring(`
 ${PROTEIN_PWM_CODE}
-logosj.embedProteinLogo(document.getElementById("logo"), { pwm: CAP_PWM });
+logosj.embedProteinLogo(document.getElementById("logo"), { pwm: PROTEIN_PWM });
 `);
 
 export const CAP_CODESTRING_REACT = `
@@ -32,7 +32,7 @@ export const MyProteinLogo = props => (
 
 export const ALT_CODESTRING_JS = jsCodestring(`
 ${ALT_PWM_CODE}
-logosj.embedProteinLogo(document.getElementById("logo"), { pwm: ALT_PWM });
+logosj.embedProteinLogo(document.getElementById("logo"), { pwm: PROTEIN_PWM });
 `);
 
 export const CAP_LONG_DESCRIPTION = `

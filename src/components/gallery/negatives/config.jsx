@@ -88,7 +88,7 @@ const DNA_PWM = ${formatPWM(DNA_NEGATIVE_PWM2)};
 
 export const DNA_CODESTRING_JS2 = jsCodestring(`
 ${DNA_CONSTANTS2}
-logosj.embedLogo(document.getElementById("logo"), {
+logosj.embedLogoWithNegatives(document.getElementById("logo"), {
   pwm: DNA_PWM,
   alphabet: logosj.DNAAlphabet,
   negativealpha: 101,
