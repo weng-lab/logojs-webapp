@@ -6241,10 +6241,10 @@ loglevel@^1.4.1:
   resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.6.4.tgz#f408f4f006db8354d0577dcf6d33485b3cb90d56"
   integrity sha512-p0b6mOGKcGa+7nnmKbpzR6qloPbrgLcnio++E+14Vo/XffOGwZtRpUhr8dTH/x2oCMmEoIU0Zwm3ZauhvYD17g==
 
-logosj-react@^1.0.12:
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/logosj-react/-/logosj-react-1.0.12.tgz#d0bb3024263620f0c2676a7380c2d2613621313b"
-  integrity sha512-JtD6KuIQs49JG0LOgplmGHhGqwdRVGHyugvNnl1QuaneLCKkIWDQwsPT615+ahBQ+QVa6ii1rUvHUKdKv9wnIA==
+logosj-react@^1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/logosj-react/-/logosj-react-1.0.14.tgz#4219337dd1e877d50b16bd132a2d6369b8df7799"
+  integrity sha512-C5uRZCjXWsX3M4NmU5I13asy3rPLD/GgB335/gGNndchVY9vY30i5s0pmk7Y59z0fdMkBw1wlUJy0GWPhl8p5A==
   dependencies:
     color-name-list "^4.10.0"
     react "^16.3.1"
