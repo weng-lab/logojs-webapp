@@ -3,4 +3,14 @@ sudo: required
 language: node_js
 node_js: 10.16
 script:
-- scripts/build-local.sh
+  - scripts/build-local.sh
+  - scripts/build-image.sh $TRAVIS_TAG
+deploy:
+  - provider: script
+    script: scripts/push-image.sh $TRAVIS_TAG
+    on:
+      tags: true
+  - provider: script
+    script: scripts/deploy.sh staging $TRAVIS_TAG
+    on:
+      tags: true

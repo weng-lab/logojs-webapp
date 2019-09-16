@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logosj-webapp-deployment
+  labels:
+    app: logosj-webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logosj-webapp
+  template:
+    metadata:
+      labels:
+        app: logosj-webapp
+    spec:
+      containers:
+      - name: logosj-webapp
+        image: gcr.io/devenv-215523/logosj-webapp
+        env:
+        - name: ENVIRONMENT
+          value: staging
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: logosj-webapp-service
+  labels:
+    app: logosj-webapp
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: logosj-webapp
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: staging-logosj-webapp-tls
+  namespace: default
+spec:
+  secretName: logosj-webapp-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  commonName: logosj.wenglab.org
+  dnsNames:
+  - logosj.wenglab.org
+  acme:
+    config:
+    - http01:
+        ingress: logosj-webapp-ingress
+      domains:
+      - logosj.wenglab.org
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: logosj-webapp-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "logosj-webapp-external-ip"
+spec:
+  backend:
+    serviceName: logosj-webapp-service
+    servicePort: 80
+  tls:
+  - secretName: logosj-webapp-tls
+    hosts:
+    - logosj.wenglab.org
