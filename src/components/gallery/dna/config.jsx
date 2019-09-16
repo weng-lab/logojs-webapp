@@ -190,7 +190,7 @@ export const NOAXIS_CODESTRING_JS = `
 <!doctype html>
 <html>
   <body>
-    <script src="https://package.logosj.wenglab.org/bundle.js" type="text/javascript"></script>
+    <script src="http://bundle.logosj.wenglab.org/bundle.js" type="text/javascript"></script>
     <div style="width:500px">
       <svg viewBox="0 0 1900 100">
         <g id="logo"></g>

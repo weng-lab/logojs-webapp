@@ -26,7 +26,7 @@ export const ANNOTATED_CODESTRING_JS = `
 <!doctype html>
 <html>
   <body>
-    <script src="https://package.logosj.wenglab.org/bundle.js" type="text/javascript"></script>
+    <script src="http://bundle.logosj.wenglab.org/bundle.js" type="text/javascript"></script>
     <div style="width:500px">
       <svg viewBox="0 0 1530 330">
         <g transform="translate(20,-40)" id="logo"></g>
@@ -104,7 +104,7 @@ export const SNP_CODESTRING_JS = `
 <!doctype html>
 <html>
   <body>
-    <script src="https://package.logosj.wenglab.org/bundle.js" type="text/javascript"></script>
+    <script src="http://bundle.logosj.wenglab.org/bundle.js" type="text/javascript"></script>
     <div style="width:500px">
       <svg viewBox="0 0 1100 420">
         <rect x="600" width="100" height="420" fill="#bbbbbb"></rect>
@@ -192,7 +192,7 @@ export const INTERACTION_CODESTRING_JS = `
 <!doctype html>
 <html>
   <body>
-    <script src="https://package.logosj.wenglab.org/bundle.js" type="text/javascript"></script>
+    <script src="http://bundle.logosj.wenglab.org/bundle.js" type="text/javascript"></script>
     <div style="width:500px">
       <svg viewBox="0 0 2600 920">
         <g id="dnalogo"></g>

@@ -14,4 +14,5 @@ RUN yarn build
 RUN yarn global add serve
 
 # start app
+EXPOSE 80
 CMD ["node", "server.js"]

@@ -43,6 +43,10 @@ const lookupComponent = glyph => {
     return nglyph;
 };
 
+app.get('/healthz', (req, res) => {
+    res.status(200).send("healthy\n");
+});
+
 app.get('/svg/:s', (req, res) => {
 
     const logo = decodeSvg(req.params.s);
