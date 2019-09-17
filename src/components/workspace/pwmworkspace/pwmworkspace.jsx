@@ -153,7 +153,8 @@ class PWMWorkspace extends React.Component {
 			  <PWMEditor
 			    height="100%" width="100%"
 			    text={this.state.pwm.text}
-			    onChange={this._pwmChange.bind(this)} />
+			    onChange={this._pwmChange.bind(this)}
+                            alphabetlength={this.state.alphabet.length} />
 			</Grid.Column>
 		      </Grid.Row>
 	              <Grid.Row style={{ height: '60%' }}>
