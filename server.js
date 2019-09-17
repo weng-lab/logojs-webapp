@@ -20,16 +20,13 @@ const decodeSvg = j => {
 };
 
 app.use('/app', express.static(path.join(__dirname, 'build')));
+app.use('/app/gallery', express.static(path.join(__dirname, 'build')));
+app.use('/app/upload', express.static(path.join(__dirname, 'build')));
+app.use('/app/gallery/*', express.static(path.join(__dirname, 'build')));
+app.use('/app/editor/*', express.static(path.join(__dirname, 'build')));
 
 app.get('/', (req, res) => {
     res.redirect("/app");
-});
-
-app.get('/app/*', (req, res) => {
-    req.get({
-	...req,
-	url: "http://localhost:" + (process.env.REACT_PORT || 5000) + req.path
-    }).pipe(res);
 });
 
 const lookupComponent = glyph => {
@@ -75,5 +72,5 @@ console.log("serve -s build -l " + (process.env.REACT_PORT || 5000));
 react.on('close', code => {
     process.exit(code);
 });
-console.log("listening on " + (process.env.PORT || 8093));
-app.listen(process.env.PORT || 8093);
+console.log("listening on " + (process.env.PORT || 8094));
+app.listen(process.env.PORT || 8094);

@@ -154,18 +154,20 @@ class AnyUploadWorkspace extends React.Component {
         text.split('\n').forEach( line => {
             if (line.startsWith("letter-probability")) {
                 inmotif = true;
-                alength = +line.split("alength= ")[1].split(' ')[0];
+                alength = line.split("alength= ")[1] ? +line.split("alength= ")[1].split(' ')[0] : -1;
             } else if (line.startsWith("MOTIF"))
                 cmotifname = line.split("MOTIF ")[1];
-            else if (inmotif && line.trim().split(/\s+/).length !== alength) {
+            else if (inmotif && (alength !== -1 && line.trim().split(/\s+/).length !== alength)) {
                 inmotif = false;
                 pwms.push({ pwm: cpwm });
                 motifnames.push(cmotifname);
                 cpwm = [];
                 cmotifname = null;
-            } else if (inmotif)
-                cpwm.push(line.trim().split(/\s+/).map(parseFloat));
-            else if (line.trim().startsWith("DATAFILE="))
+            } else if (inmotif) {
+                const values = line.trim().split(/\s+/).map(parseFloat);
+                cpwm.push(values);
+                if (alength === -1) alength = values.length;
+            } else if (line.trim().startsWith("DATAFILE="))
                 name = line.split("DATAFILE=")[1].trim();
         });
         return {
