@@ -50,6 +50,8 @@ class UploadWorkspace extends React.Component {
 	    scale: 1.0,
 	    typeid: TYPEID[state.logocomponent],
 	    isfreq: state.mode !== INFORMATION_CONTENT,
+            mode: state.mode,
+            startpos: 0,
 	    firstbase: 0,
             alphabet: state.alphabet,
 	};

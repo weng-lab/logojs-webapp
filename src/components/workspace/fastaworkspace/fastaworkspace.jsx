@@ -142,6 +142,8 @@ class FastaWorkspace extends React.Component {
 	    typeid: TYPEID[state.logocomponent],
 	    scale: state.scale,
 	    isfreq: state.mode !== INFORMATION_CONTENT,
+            startpos: state.startpos,
+            mode: state.mode,
 	    firstbase: state.startpos,
             alphabet: state.alphabet
 	};
