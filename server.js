@@ -67,10 +67,4 @@ app.get('/svg/:s', (req, res) => {
     
 });
 
-let react = require('child_process').spawn('serve', [ '-s', 'build', '-l', process.env.REACT_PORT || 5000 ]);
-console.log("serve -s build -l " + (process.env.REACT_PORT || 5000));
-react.on('close', code => {
-    process.exit(code);
-});
-console.log("listening on " + (process.env.PORT || 8094));
 app.listen(process.env.PORT || 8094);
