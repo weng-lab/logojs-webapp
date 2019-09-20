@@ -11,7 +11,7 @@ const METHYL_ALPHABET = ${formatAlphabet(METHYL_ALPHABET)};
 export const METHYL_CODESTRING_JS = jsCodestring(`
 ${METHYL_CONSTANTS}
 logosj.embedLogo(document.getElementById("logo"), {
-  pwm: METHYL_PWM,
+  ppm: METHYL_PWM,
   alphabet: METHYL_ALPHABET
 });
 `);
@@ -20,7 +20,7 @@ export const METHYL_CODESTRING_REACT = `
 import { Logo } from 'logosj-react';
 ${METHYL_CONSTANTS}
 export const MethylLogo = props => (
-    <Logo pwm={METHYL_PWM} alphabet={METHYL_ALPHABET} />
+    <Logo ppm={METHYL_PWM} alphabet={METHYL_ALPHABET} />
 );
 `.substring(1);
 
@@ -36,7 +36,7 @@ export const METHYL_DEMO = {
     reactCodestring: METHYL_CODESTRING_REACT,
     jsCodestring: METHYL_CODESTRING_JS,
     logoProps: {
-        pwm: METHYL_PWM,
+        ppm: METHYL_PWM,
         alphabet: METHYL_ALPHABET
     },
     description: "A DNA logo can be extended to show CpG methylation.",
@@ -51,7 +51,7 @@ const RNA_PWM = ${formatPWM(RNA_PWM)};
 export const RNA_CODESTRING_JS = jsCodestring(`
 ${RNA_CONSTANTS}
 logosj.embedRNALogo(document.getElementById("logo"), {
-  pwm: RNA_PWM
+  ppm: RNA_PWM
 });
 `);
 
@@ -59,7 +59,7 @@ export const RNA_CODESTRING_REACT = `
 import { RNALogo } from 'logosj-react';
 ${RNA_CONSTANTS}
 export const MyRNALogo = props => (
-    <RNALogo pwm={RNA_PWM} />
+    <RNALogo ppm={RNA_PWM} />
 );
 `.substring(1);
 
@@ -72,7 +72,7 @@ export const RNA_DEMO = {
     reactCodestring: RNA_CODESTRING_REACT,
     jsCodestring: RNA_CODESTRING_JS,
     logoProps: {
-        pwm: RNA_PWM,
+        ppm: RNA_PWM,
         rna: true
     },
     description: "A logo can use an RNA alphabet.",
@@ -88,7 +88,7 @@ const CUSTOM_ALPHABET = ${formatAlphabet(HEX_ALPHABET)};
 export const HEX_CODESTRING_JS = jsCodestring(`
 ${HEX_CONSTANTS}
 logosj.embedLogo(document.getElementById("logo"), {
-  pwm: CUSTOM_PWM,
+  ppm: CUSTOM_PWM,
   alphabet: CUSTOM_ALPHABET
 });
 `);
@@ -97,7 +97,7 @@ export const HEX_CODESTRING_REACT = `
 import { Logo } from 'logosj-react';
 ${HEX_CONSTANTS}
 export const CustomLogo = props => (
-    <Logo pwm={CUSTOM_PWM} alphabet={CUSTOM_ALPHABET} />
+    <Logo ppm={CUSTOM_PWM} alphabet={CUSTOM_ALPHABET} />
 );
 `.substring(1);
 
@@ -111,7 +111,7 @@ export const HEX_DEMO = {
     reactCodestring: HEX_CODESTRING_REACT,
     jsCodestring: HEX_CODESTRING_JS,
     logoProps: {
-        pwm: HEX_PWM(),
+        ppm: HEX_PWM(),
         alphabet: HEX_ALPHABET
     },
     description: "A logo can use any combination of upper case letters, lower case letters, and digits.",
@@ -145,7 +145,7 @@ const CUSTOM_ALPHABET = ${formatAlphabet(DUPLICATE_ALPHABET)};
 export const DUPLICATE_CODESTRING_JS = jsCodestring(`
 ${DUPLICATE_CONSTANTS}
 logosj.embedLogo(document.getElementById("logo"), {
-  pwm: CUSTOM_PWM,
+  ppm: CUSTOM_PWM,
   alphabet: CUSTOM_ALPHABET
 });
 `);
@@ -154,7 +154,7 @@ export const DUPLICATE_CODESTRING_REACT = `
 import { Logo } from 'logosj-react';
 ${DUPLICATE_CONSTANTS}
 export const ALogo = props => (
-    <Logo pwm={CUSTOM_PWM} alphabet={CUSTOM_ALPHABET} />
+    <Logo ppm={CUSTOM_PWM} alphabet={CUSTOM_ALPHABET} />
 );
 `.substring(1);
 
@@ -169,7 +169,7 @@ export const DUPLICATE_DEMO = {
     reactCodestring: DUPLICATE_CODESTRING_REACT,
     jsCodestring: DUPLICATE_CODESTRING_JS,
     logoProps: {
-        pwm: DUPLICATE_PWM,
+        ppm: DUPLICATE_PWM,
         alphabet: DUPLICATE_ALPHABET
     },
     description: "A logo can use the same symbol more than once with different colors.",

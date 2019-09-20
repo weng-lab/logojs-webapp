@@ -12,7 +12,7 @@ import { ExtendedAlphabetGallery } from './components/gallery/extended';
 import { NegativeAlphabetGallery } from './components/gallery/negatives';
 import { DinucleotideGallery } from './components/gallery/dinucleotide';
 import { AnnotatedGallery } from './components/gallery/annotated';
-import { PWMWorkspace, FastaWorkspace, AnyUploadWorkspace } from './components/workspace/index';
+import { AnyUploadWorkspace } from './components/workspace/index';
 
 class App extends Component {
     
@@ -21,10 +21,8 @@ class App extends Component {
 	    <Router basename={process.env.PUBLIC_URL}>
 	      <Switch>
 		<Route exact path='/' component={HomePage} />
-		<Route path='/editor/pwm' render={() => <PWMWorkspace />} />
                 <Route path='/gallery' exact render={() => <GalleryPage />} />
- 	        <Route path='/editor/fasta' render={() => <FastaWorkspace />} />
-                <Route path='/upload/' render={() => <AnyUploadWorkspace />} />
+                <Route path='/create/' render={() => <AnyUploadWorkspace />} />
                 <Route path='/gallery/dna' exact render={() => <DNAGallery />} />
                 <Route path='/gallery/protein' exact render={() => <ProteinGallery />} />
                 <Route path='/gallery/extended' exact render={() => <ExtendedAlphabetGallery />} />

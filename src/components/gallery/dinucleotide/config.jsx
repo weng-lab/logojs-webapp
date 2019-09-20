@@ -10,7 +10,7 @@ const DINUCLEOTIDE_ALPHABET = ${formatAlphabet(DINUCLEOTIDE_ALPHABET())};
 export const DINUCLEOTIDE_CODESTRING_JS = jsCodestring(`
 ${DINUCLEOTIDE_CONSTANTS}
 logosj.embedLogo(document.getElementById("logo"), {
-  pwm: DINUCLEOTIDE_PWM,
+  ppm: DINUCLEOTIDE_PWM,
   alphabet: DINUCLEOTIDE_ALPHABET
 });
 `);
@@ -19,7 +19,7 @@ export const DINUCLEOTIDE_CODESTRING_REACT = `
 import { Logo } from 'logosj-react';
 ${DINUCLEOTIDE_CONSTANTS}
 export const DinucleotideLogo = props => (
-    <Logo pwm={DINUCLEOTIDE_PWM} alphabet={DINUCLEOTIDE_ALPHABET} />
+    <Logo ppm={DINUCLEOTIDE_PWM} alphabet={DINUCLEOTIDE_ALPHABET} />
 );
 `.substring(1);
 
@@ -32,7 +32,7 @@ export const DINUCLEOTIDE_DEMO = {
     reactCodestring: DINUCLEOTIDE_CODESTRING_REACT,
     jsCodestring: DINUCLEOTIDE_CODESTRING_JS,
     logoProps: {
-        pwm: DINUCLEOTIDE_PWM,
+        ppm: DINUCLEOTIDE_PWM,
         alphabet: DINUCLEOTIDE_ALPHABET()
     },
     description: "A logo can have dinucleotide symbols.",
@@ -48,7 +48,7 @@ const TRINUCLEOTIDE_ALPHABET = ${formatAlphabet(TRINUCLEOTIDE_ALPHABET)};
 export const TRINUCLEOTIDE_CODESTRING_JS = jsCodestring(`
 ${TRINUCLEOTIDE_CONSTANTS}
 logosj.embedLogo(document.getElementById("logo"), {
-  pwm: TRINUCLEOTIDE_PWM,
+  ppm: TRINUCLEOTIDE_PWM,
   alphabet: TRINUCLEOTIDE_ALPHABET,
   glyphwidth: 1.5
 });
@@ -58,7 +58,7 @@ export const TRINUCLEOTIDE_CODESTRING_REACT = `
 import { Logo } from 'logosj-react';
 ${TRINUCLEOTIDE_CONSTANTS}
 export const TrinucleotideLogo = props => (
-    <Logo pwm={TRINUCLEOTIDE_PWM} alphabet={TRINUCLEOTIDE_ALPHABET} glyphwidth={1.5} />
+    <Logo ppm={TRINUCLEOTIDE_PWM} alphabet={TRINUCLEOTIDE_ALPHABET} glyphwidth={1.5} />
 );
 `.substring(1);
 
@@ -75,7 +75,7 @@ export const TRINUCLEOTIDE_DEMO = {
     reactCodestring: TRINUCLEOTIDE_CODESTRING_REACT,
     jsCodestring: TRINUCLEOTIDE_CODESTRING_JS,
     logoProps: {
-        pwm: TRINUCLEOTIDE_PWM,
+        ppm: TRINUCLEOTIDE_PWM,
         alphabet: TRINUCLEOTIDE_ALPHABET,
         glyphwidth: 1.5
     },
@@ -92,7 +92,7 @@ const CUSTOM_ALPHABET = ${formatAlphabet(MULTINUMBER_ALPHABET)};
 export const MULTINUMBER_CODESTRING_JS = jsCodestring(`
 ${MULTINUMBER_CONSTANTS}
 logosj.embedLogo(document.getElementById("logo"), {
-  pwm: CUSTOM_PWM,
+  ppm: CUSTOM_PWM,
   alphabet: CUSTOM_ALPHABET,
   glyphwidth: 1.5
 });
@@ -102,7 +102,7 @@ export const MULTINUMBER_CODESTRING_REACT = `
 import { Logo } from 'logosj-react';
 ${MULTINUMBER_CONSTANTS}
 export const MyLogo = props => (
-    <Logo pwm={CUSTOM_PWM} alphabet={CUSTOM_ALPHABET} glyphwidth={1.5} />
+    <Logo ppm={CUSTOM_PWM} alphabet={CUSTOM_ALPHABET} glyphwidth={1.5} />
 );
 `.substring(1);
 
@@ -116,7 +116,7 @@ export const MULTINUMBER_DEMO = {
     reactCodestring: MULTINUMBER_CODESTRING_REACT,
     jsCodestring: MULTINUMBER_CODESTRING_JS,
     logoProps: {
-        pwm: TRINUCLEOTIDE_PWM,
+        ppm: TRINUCLEOTIDE_PWM,
         alphabet: MULTINUMBER_ALPHABET,
         glyphwidth: 1.5
     },

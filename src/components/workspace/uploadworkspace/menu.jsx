@@ -13,9 +13,10 @@ const reactCode = logoinfo => `
 import { Logo, loadGlyphComponents } from 'logosj-react';
 const myLogoProps = {
     startpos: ${logoinfo.firstbase},
-    pwm: [
-${logoinfo.pwm.map(x => "        " + JSON.stringify(x)).join(",\n")}
+    ppm: [
+${logoinfo.ppm.map(x => "        " + JSON.stringify(x)).join(",\n")}
     ],
+    backgroundFrequencies: ${JSON.stringify(logoinfo.backgroundFrequencies)},
     alphabet: loadGlyphComponents([
 ${logoinfo.alphabet.map(x => "        " + JSON.stringify({ regex: x.regex, color: x.color })).join(",\n")}
     ])
@@ -30,9 +31,10 @@ const jsCode = logoinfo => jsCodestring(`
 window.onload = function() {
   const logoProps = {
     startpos: ${logoinfo.firstbase},
-    pwm: [
-${logoinfo.pwm.map(x => "      " + JSON.stringify(x)).join(",\n")}
+    ppm: [
+${logoinfo.ppm.map(x => "      " + JSON.stringify(x)).join(",\n")}
     ],
+    backgroundFrequencies: ${JSON.stringify(logoinfo.backgroundFrequencies)},
     alphabet: logosj.loadGlyphComponents([
 ${logoinfo.alphabet.map(x => "      " + JSON.stringify({ regex: x.regex, color: x.color })).join(",\n")}
     ])

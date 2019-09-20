@@ -21,9 +21,8 @@ const decodeSvg = j => {
 
 app.use('/app', express.static(path.join(__dirname, 'build')));
 app.use('/app/gallery', express.static(path.join(__dirname, 'build')));
-app.use('/app/upload', express.static(path.join(__dirname, 'build')));
+app.use('/app/create', express.static(path.join(__dirname, 'build')));
 app.use('/app/gallery/*', express.static(path.join(__dirname, 'build')));
-app.use('/app/editor/*', express.static(path.join(__dirname, 'build')));
 
 app.get('/', (req, res) => {
     res.redirect("/app");

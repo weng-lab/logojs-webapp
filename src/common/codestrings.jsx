@@ -13,9 +13,9 @@ ${indentCode(js, "      ")}
 </html>
 `.substring(1); // trail leading linebreak
 
-export const formatPWM = pwm => (
+export const formatPWM = ppm => (
     "[\n" + indentCode(
-        pwm.map(
+        ppm.map(
             x => JSON.stringify(x.map(xx => +xx.toFixed(2)))
         ).join(",\n"), "  "
     ) + "\n]"

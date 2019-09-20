@@ -26,7 +26,7 @@ const AnnotatedPreview = () => (
               </div>
               <svg viewBox={"0 0 " + (ANNOTATED_PWM.length * 100 + 30) + " 330"}>
                 <g transform="translate(20,-40)">
-                  <RawLogo alphabet={ANNOTATED_ALPHABET} pwm={ANNOTATED_PWM} glyphWidth={100} stackHeight={300} />
+                  <RawLogo alphabet={ANNOTATED_ALPHABET} values={ANNOTATED_PWM} glyphWidth={100} stackHeight={300} />
                 </g>
                 <rect fill="none" stroke="#888888" strokeWidth="25" x={15} y={10} width={600} height={300} />
                 <rect fill="none" stroke="#888888" strokeWidth="25" x={915} width={600} y={10} height={300} />
@@ -40,10 +40,10 @@ const AnnotatedPreview = () => (
               <svg viewBox={"0 0 " + (SNP_PWM.length * 100 + 300) + " 420"}>
                 <rect x={600} width={100} height={420} fill="#bbbbbb" />
                 <g transform="translate(300,0)">
-                  <RawLogo alphabet={DNAAlphabet} pwm={SNP_PWM} glyphWidth={100} stackHeight={200} />
+                  <RawLogo alphabet={DNAAlphabet} values={SNP_PWM} glyphWidth={100} stackHeight={200} />
                 </g>
                 <g transform="translate(300, 220)">
-                  <RawLogo alphabet={DNAAlphabet} pwm={SNP_REF_PWM} glyphWidth={100} stackHeight={200} />
+                  <RawLogo alphabet={DNAAlphabet} values={SNP_REF_PWM} glyphWidth={100} stackHeight={200} />
                 </g>
                 <text y={150} x={260} textAnchor="end" style={{ fontSize: "50px" }}>PWM</text>
                 <text y={350} x={260} textAnchor="end" style={{ fontSize: "50px" }}>reference</text>
@@ -55,9 +55,9 @@ const AnnotatedPreview = () => (
                 protein DNA interaction logo
               </div>
               <svg viewBox={"0 0 2600 920"}>
-                <RawLogo alphabet={DNAAlphabet} pwm={DNA_PROTEIN_PWM} glyphWidth={100} stackHeight={200} />
+                <RawLogo alphabet={DNAAlphabet} values={DNA_PROTEIN_PWM} glyphWidth={100} stackHeight={200} />
                 <g transform="translate(0,500)">
-                  <RawLogo alphabet={ProteinAlphabet} pwm={PROTEIN_DNA_PWM} glyphWidth={100} stackHeight={400} />
+                  <RawLogo alphabet={ProteinAlphabet} values={PROTEIN_DNA_PWM} glyphWidth={100} stackHeight={400} />
                 </g>
                 <path fill="#88888888" d="M 1530 220 L 1600 590 L 1700 590 L 1630 220 L 1530 220" />
                 <path fill="#88888888" d="M 1670 220 L 1200 520 L 1300 520 L 1750 220 L 1670 220" />

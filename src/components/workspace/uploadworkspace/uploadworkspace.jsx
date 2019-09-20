@@ -1,9 +1,7 @@
 import React from 'react';
 import { Grid, Menu, Dropdown, Button, Icon } from 'semantic-ui-react';
-import { DNALogo, RNALogo, ProteinLogo, Logo, DNAAlphabet, CompleteAlphabet, CompleteLogo,
-	 RNAAlphabet, ProteinAlphabet, INFORMATION_CONTENT, embedLogo } from 'logosj-react';
+import { embedLogo, Logo } from 'logosj-react';
 
-import { apiUrls, isArrayOfArrays, TYPEID, glyphsymbols } from '../../../common/utils';
 import { _svgdata } from '../../svgdownload/utils';
 import SVGZip from '../../../utilities/zipfile';
 
@@ -11,116 +9,79 @@ import MotifSelector from './motifselector';
 import SettingsPanel from './settings';
 import LogoMenu from './menu';
 import ErrorMessage from './errormessage';
-
-let GLYPHSYMBOLS = glyphsymbols();
-
-const LOGOCOMPONENTS = {
-    DNA: { component: DNALogo, glyphs: DNAAlphabet, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
-    RNA: { component: RNALogo, glyphs: RNAAlphabet, defaultpwm: [[1.0, 0.0, 0.0, 0.0]] },
-    AA: { component: ProteinLogo, glyphs: ProteinAlphabet, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] },
-    custom: { component: CompleteLogo, glyphs: CompleteAlphabet, defaultpwm: [[1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] }
-};
+import PasteModal from './pastemodal';
+import { WorkspaceEditorTabs } from './editor';
 
 class UploadWorkspace extends React.Component {
 
     constructor(props) {
 	super(props);
-	this.logoPostUrl = apiUrls(props.apiserver).logo("");
         this.logo = React.createRef();
-        this.hiddenlogo = React.createRef();
-        this.fileinput = React.createRef();
-	this.state = {
-	    pwms: [],
+        this.hiddenLogo = React.createRef();
+        this.fileInput = React.createRef();
+        this.state = {
+            logoSets: [],
             errors: [],
-	    logocomponent: "DNA",
-	    mode: INFORMATION_CONTENT,
-	    initialized: false,
-	    alphabet: LOGOCOMPONENTS["DNA"].glyphs,
             total: 0,
-            selectedfile: 0,
-            selectedmotif: 0,
-            remaining: 0
+            remaining: 0,
+            pasteModalShown: false
+        };
+    }
+
+    _format_logoinfo(logo) {
+	return {
+	    ppm: logo.ppm,
+	    scale: 1.0,
+            mode: logo.mode,
+            startpos: logo.startpos || 0,
+            alphabet: logo.alphabet,
+            backgroundFrequencies: logo.backgroundFrequencies
 	};
     }
 
-    _format_logoinfo(state) {
-        const pwm = this.state.pwms[this.state.selectedfile].result.pwms[this.state.selectedmotif].pwm;
-	return {
-	    pwm: pwm.pwm ? pwm.pwm : pwm,
-	    scale: 1.0,
-	    typeid: TYPEID[state.logocomponent],
-	    isfreq: state.mode !== INFORMATION_CONTENT,
-            mode: state.mode,
-            startpos: 0,
-	    firstbase: 0,
-            alphabet: state.alphabet,
-	};
+    _updateCurrent(nLogo) {
+        const nSets = [ ...this.state.logoSets ];
+        const nLogos = [ ...this.state.selectedFile.logos ];
+        nLogos[this.state.selectedIndex.motif] = {
+            ...this.state.selected,
+            ...nLogo
+        };
+        nSets[this.state.selectedIndex.file] = {
+            ...this.state.selectedFile,
+            logos: nLogos
+        };
+        this.setState({
+            logoSets: nSets,
+            selected: nLogos[this.state.selectedIndex.motif],
+            selectedFile: nSets[this.state.selectedIndex.file]
+        });
     }
-    
-    _pwmChange(pwm) {
-	if (isArrayOfArrays(pwm.parsed)) {
-	    this.setState({
-		pwm
-	    });
-	}
+
+    _ppmChange(ppm, fasta) {
+        this._updateCurrent({
+            ppm,
+            fasta
+        });
     }
     
     _logoTypeChange(e, data) {
-	let pwm = {
-	    text: JSON.stringify(LOGOCOMPONENTS[data.value].defaultpwm),
-	    parsed: LOGOCOMPONENTS[data.value].defaultpwm
-	};
-	if (pwm.parsed && pwm.parsed.length && this.state.pwm.parsed.length
-	    && pwm.parsed[0].length === this.state.pwm.parsed[0].length) {
-	    pwm = this.state.pwm;
-	}
-	this.setState({
-	    logocomponent: data.value,
-	    alphabet: LOGOCOMPONENTS[data.value].glyphs,
-	    pwm
-	});
+
     }
 
     _alphabetUpdate(alphabet) {
-	let nalphabet = [];
-	alphabet.map( v => {
-	    let symbol = GLYPHSYMBOLS[v.regex] && GLYPHSYMBOLS[v.regex].component;
-	    return symbol && nalphabet.push({ ...v, component: GLYPHSYMBOLS[v.regex].component });
-	});
-        const npwms = [ ...this.state.pwms ];
-        npwms[this.state.selectedfile] = {
-            ...npwms[this.state.selectedfile],
-            result: {
-                ...npwms[this.state.selectedfile].result,
-                pwms: [ ...npwms[this.state.selectedfile].result.pwms ]
-            }
-        };
-        npwms[this.state.selectedfile].result.pwms[this.state.selectedmotif] = {
-            ...npwms[this.state.selectedfile].result.pwms[this.state.selectedmotif],
-            alphabet: nalphabet
-        };
-	this.setState({
-	    alphabet: nalphabet,
-            pwms: npwms
-	});
-    }
-
-    _scaleChange(e, data) {
-	this.setState({
-	    scale: +data.value
-	});
+        this._updateCurrent({
+            alphabet
+        });
     }
 
     _startPosChange(e, data) {
-	this.setState({
-	    startpos: +data.value
-	});
+
     }
 
     _modeChange(e, data) {
-	this.setState({
-	    mode: data.value
-	});
+        this._updateCurrent({
+            mode: data.value
+        });
     }
     
     async parseFile(f) {
@@ -139,20 +100,20 @@ class UploadWorkspace extends React.Component {
         }
         reader.onload = e => {
             let result, i = 0;
-            while ((!result || !result.pwms || !result.pwms.length) && this.props.parse[i]) {
+            while ((!result || !result.logos || !result.logos.length) && this.props.parse[i]) {
                 result = (this.props.parse[i++])(e.target.result);
             }
-            if (Object.keys(result.pwms).length !== 0) {
+            if (Object.keys(result.logos).length !== 0) {
+                const selectedFile = {
+                    file: f,
+                    logos: result.logos
+                };
                 this.setState({
-                    pwms: [
-                        ...this.state.pwms, {
-                            file: f,
-                            result
-                        }
-                    ],
+                    logoSets: [ ...this.state.logoSets, selectedFile ],
                     total: this.state.total + 1,
-                    selectedfile: this.state.total,
-                    selectedmotif: 0,
+                    selectedFile,
+                    selected: selectedFile.logos[0],
+                    selectedIndex: { file: this.state.total, motif: 0 },
                     remaining: this.state.remaining - 1
                 });
             } else {
@@ -180,9 +141,12 @@ class UploadWorkspace extends React.Component {
     }
 
     selectFile(i) {
+        if (!this.state.logoSets[i] || !this.state.logoSets[i].logos || !this.state.logoSets[i].logos.length)
+            return;
         this.setState({
-            selectedfile: i,
-            selectedmotif: 0
+            selectedFile: this.state.logoSets[i],
+            selected: this.state.logoSets[i].logos[0],
+            selectedIndex: { file: i, motif: 0 }
         });
     }
     
@@ -193,26 +157,24 @@ class UploadWorkspace extends React.Component {
     }
 
     onItemSelected(i) {
+        if (!this.state.selectedFile || !this.state.selectedFile.logos || !this.state.selectedFile.logos[i])
+            return;
         this.setState({
-            selectedmotif: i
+            selected: this.state.selectedFile.logos[i],
+            selectedIndex: { ...this.state.selectedIndex, motif: i }
         });
     }
 
     async download() {
         let zip = new SVGZip();
-        this.state.pwms.forEach( pwmfile => {
-            const folder = zip.folder(pwmfile.result.name || pwmfile.file.name);
-            pwmfile.result.pwms.forEach( (pwm, i) => {
-                embedLogo(this.hiddenlogo.current, {
-                    pwm: pwm.pwm,
-		    startpos: 0,
-		    mode: this.state.mode,
-		    alphabet: pwm.alphabet || this.state.alphabet
-                });
-                folder.file((pwmfile.result.motifnames[i] || "motif_" + (i + 1)) + ".svg", _svgdata(this.hiddenlogo.current));
+        this.state.logoSets.forEach( logoSet => {
+            const folder = zip.folder(logoSet.name || logoSet.file.name);
+            logoSet.logos.forEach( (logo, i) => {
+                embedLogo(this.hiddenLogo.current, logo);
+                folder.file((logo.name || "motif_" + (i + 1)) + ".svg", _svgdata(this.hiddenLogo.current));
             });
         });
-        this.hiddenlogo.current.innerHTML = "";
+        this.hiddenLogo.current.innerHTML = "";
         zip.download("motifs.zip");
     }
     
@@ -222,95 +184,135 @@ class UploadWorkspace extends React.Component {
         });
         Array.from(e.target.files).map(this.parseFile.bind(this));
     }
-    
+
+    pasteModalClosed(logos) {
+        if (!logos || !logos.length) {
+            this.setState({
+                pasteModalShown: false
+            });
+            return;
+        }
+        const newLogoSet = {
+            name: "pasted motif set " + (this.state.total + 1),
+            logos
+        };
+        this.setState({
+            pasteModalShown: false,
+            logoSets: [
+                ...this.state.logoSets,
+                newLogoSet
+            ],
+            total: this.state.total + 1,
+            selectedIndex: {
+                file: this.state.total,
+                motif: 0
+            },
+            selected: logos[0],
+            selectedFile: newLogoSet
+        });
+    }
+
     render() {
-        let isdone = this.state.remaining === 0 && this.state.pwms.length > 0;
-        let selectedPWMs = this.state.pwms[this.state.selectedfile];
-        let selectedAlphabet = (selectedPWMs && selectedPWMs.result && selectedPWMs.result.pwms
-                                && selectedPWMs.result.pwms.length > 0 && selectedPWMs.result.pwms[this.state.selectedmotif]
-                                && selectedPWMs.result.pwms[this.state.selectedmotif].alphabet) || this.state.alphabet;
+        let isdone = this.state.remaining === 0 && this.state.logoSets.length > 0;
+        let selectedPWMs = this.state.selectedFile && this.state.selectedFile.logos;
 	return (
-	    <Grid className="centered" style={{ width: "90%", marginLeft: "5%", height: "100%" }}>
-              <Grid.Row />
-	      <Grid.Row style={{ height: "100%" }}>
-		<Grid.Column width={3}>
-		  <SettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
-				 onScaleChange={this._scaleChange.bind(this)}
-				 onStartPosChange={this._startPosChange.bind(this)}
-				 onModeChange={this._modeChange.bind(this)}
-				 logodefault={this.state.logocomponent}
-				 scaledefault={this.state.scale}
-				 startposdefault={this.state.startpos}
-				 modedefault={this.state.mode}
-				 alphabet={selectedAlphabet}
-				 onAlphabetUpdate={this._alphabetUpdate.bind(this)} />
-		</Grid.Column>
-                <Grid.Column width={13} style={{ height: '100%' }}>
-                  { this.state.errors.length > 0 && (
-                      <ErrorMessage errors={this.state.errors} onClick={this.errorclosed.bind(this)}/>
-                  )}
-                  <Grid textAlign="center"
-                        style={{ height: "50%" }}>
-                    <Grid.Row>
-                      <Grid.Column width={16}>
-                        { this.state.pwms.length === 0 ? (
-                            <Button style={{ fontSize: "24pt", textAlign: "center" }}
-                                    onClick={() => this.fileinput.current && this.fileinput.current.click()}>
-                              <Icon style={{fontSize: "52pt", marginLeft: '0em', marginRight: '0em', marginTop: '0.3em' }} name="upload" /><br/>
-                              upload files
-                            </Button>
-                        ) : isdone && (
-                            <React.Fragment>
-                              <Menu secondary pointing>
-                                <Dropdown item
-                                          text={selectedPWMs.result.name || selectedPWMs.file.name}>
-                                  <Dropdown.Menu>
-                                    {this.state.pwms.map( (pwmset, i) => (
-                                        <Dropdown.Item key={"fileitem_" + i}
-                                                       onClick={() => this.selectFile(i)}>
-                                          {pwmset.result.name || pwmset.file.name}
-                                        </Dropdown.Item>
-                                    ))}
-                                  </Dropdown.Menu>
-                                </Dropdown>
-                                <Menu.Item className="floated right">
-                                  <span style={{ cursor: "pointer" }} onClick={this.download.bind(this)}>
-                                    <Icon name="download" />&nbsp;download all as ZIP
-                                  </span>
-                                  <span style={{ width: '2em' }} />
-                                  <span onClick={ () => this.fileinput.current && this.fileinput.current.click() } style={{ cursor: "pointer" }}>
-                                    <Icon name="upload"/>&nbsp;upload more
-                                  </span>
-                                </Menu.Item>
-                              </Menu>
-			      <div style={{ textAlign: "left" }}>
-                                <MotifSelector pwms={selectedPWMs}
-                                               selectedmotif={this.state.selectedmotif}
-                                               onItemSelected={this.onItemSelected.bind(this)} />
-			      </div>
-                              <LogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
-				        logoinfo={this._format_logoinfo({ ...this.state, alphabet: selectedAlphabet })} />
-                            </React.Fragment>
-                        )}
-                        <div ref={this.hiddenlogo} style={{ display: "none" }} />
-                        <div ref={this.logo}
-                             style={{ maxHeight: "500px", height: "50%", textAlign: "center" }}>
-	                  { isdone && (<Logo pwm={selectedPWMs.result.pwms[this.state.selectedmotif].pwm.pwm ? selectedPWMs.result.pwms[this.state.selectedmotif].pwm.pwm : selectedPWMs.result.pwms[this.state.selectedmotif].pwm}
-			                     startpos={0}
-                                             width="90%" height="75%"
-			                     mode={this.state.mode}
-			                     alphabet={selectedAlphabet} />)}
-			</div>
-                        <input type="file" hidden ref={this.fileinput}
-                               onChange={this.fileReceived.bind(this)}
-                               multiple />
-                      </Grid.Column>
-                    </Grid.Row>
-                  </Grid>
-		</Grid.Column>
-	      </Grid.Row>
-	    </Grid>
-	);
+	    <React.Fragment>
+	      <PasteModal open={this.state.pasteModalShown} onClose={this.pasteModalClosed.bind(this)} />
+              <Grid className="centered" style={{ width: "90%", marginLeft: "5%", height: "100%" }}>
+                <Grid.Row />
+                <Grid.Row style={{ height: "100%" }}>
+                  <Grid.Column width={3}>
+                    <SettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
+                                   onStartPosChange={this._startPosChange.bind(this)}
+                                   onModeChange={this._modeChange.bind(this)}
+                                   startposdefault={this.state.selected && this.state.selected.startpos}
+                                   modedefault={this.state.selected && this.state.selected.mode}
+                                   alphabet={this.state.selected ? this.state.selected.alphabet : []}
+                                   onAlphabetUpdate={this._alphabetUpdate.bind(this)} />
+                  </Grid.Column>
+                  <Grid.Column width={13} style={{ height: '100%' }}>
+                    { this.state.errors && this.state.errors.length > 0 && (
+                        <ErrorMessage errors={this.state.errors} onClick={this.errorclosed.bind(this)}/>
+                    )}
+                    <Grid textAlign="center"
+                          style={{ height: "50%" }}>
+                      <Grid.Row>
+                        <Grid.Column width={16}>
+                          { this.state.logoSets.length === 0 ? (
+                              <React.Fragment>
+                                <Button style={{ fontSize: "24pt", textAlign: "center" }}
+                                        onClick={() => this.fileInput.current && this.fileInput.current.click()}>
+                                  <Icon style={{fontSize: "52pt", marginLeft: '0em', marginRight: '0em', marginTop: '0.3em' }} name="upload" /><br/>
+                                  upload files
+                                </Button>
+                                <span style={{ fontSize: "3em"}}>or&nbsp;</span>
+                                <Button style={{ fontSize: "24pt", textAlign: "center" }}
+                                        onClick={() => this.setState({ pasteModalShown: true })}>
+                                  <Icon style={{fontSize: "52pt", marginLeft: '0em', marginRight: '0em', marginTop: '0.3em' }} name="paste" /><br/>
+                                  paste data
+                                </Button>
+                              </React.Fragment>
+                          ) : isdone && (
+                              <React.Fragment>
+                                <Menu secondary pointing>
+                                  <Dropdown item
+                                            text={this.state.selectedFile.name || this.state.selectedFile.file.name}>
+                                    <Dropdown.Menu>
+                                      {this.state.logoSets.map( (logoSet, i) => (
+                                          <Dropdown.Item key={"fileitem_" + i}
+                                                         onClick={() => this.selectFile(i)}>
+                                            {logoSet.name || logoSet.file.name}
+                                          </Dropdown.Item>
+                                      ))}
+                                    </Dropdown.Menu>
+                                  </Dropdown>
+                                  <Menu.Item className="floated right">
+                                    <span style={{ cursor: "pointer" }} onClick={this.download.bind(this)}>
+                                      <Icon name="download" />&nbsp;download all as ZIP
+                                    </span>
+                                    <span style={{ width: '2em' }} />
+                                    <span onClick={ () => this.fileInput.current && this.fileInput.current.click() } style={{ cursor: "pointer" }}>
+                                      <Icon name="upload"/>&nbsp;upload files
+                                    </span>
+                                    <span style={{ width: '2em' }} />
+                                    <span onClick={ () => this.setState({ pasteModalShown: true }) } style={{ cursor: "pointer" }}>
+                                      <Icon name="paste"/>&nbsp;paste motif data
+                                    </span>
+                                  </Menu.Item>
+                                </Menu>
+                                <div style={{ textAlign: "left" }}>
+                                  <MotifSelector ppms={selectedPWMs}
+                                                 selectedmotif={this.state.selected}
+                                                 onItemSelected={this.onItemSelected.bind(this)} />
+                                </div>
+                                <LogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
+                                          logoinfo={this._format_logoinfo(this.state.selected)} />
+                              </React.Fragment>
+                          )}
+                          <div ref={this.hiddenLogo} style={{ display: "none" }} />
+                          <div ref={this.logo}
+                               style={{ maxHeight: "500px", height: "20%", textAlign: "center" }}>
+                            { isdone && (<Logo {...this.state.selected}
+                            width="90%" height="100%" />)}
+                          </div>
+                          <div style={{ maxHeight: "500px", height: "30%", textAlign: "center" }}>
+                            <WorkspaceEditorTabs
+                              id={this.state.selectedIndex}
+                              logo={this.state.selected}
+                              onPWMChange={this._ppmChange.bind(this)}
+                              onFastaChange={this._ppmChange.bind(this)} />
+                          </div>
+                          <input type="file" hidden ref={this.fileInput}
+                                 onChange={this.fileReceived.bind(this)}
+                                 multiple />
+                        </Grid.Column>
+                      </Grid.Row>
+                    </Grid>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+            </React.Fragment>
+        );
     }
     
 };

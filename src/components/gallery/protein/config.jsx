@@ -7,14 +7,14 @@ const PROTEIN_PWM = ${formatPWM(PROTEIN_PWM)};
 
 export const CAP_CODESTRING_JS = jsCodestring(`
 ${PROTEIN_PWM_CODE}
-logosj.embedProteinLogo(document.getElementById("logo"), { pwm: PROTEIN_PWM });
+logosj.embedProteinLogo(document.getElementById("logo"), { ppm: PROTEIN_PWM });
 `);
 
 export const CAP_CODESTRING_REACT = `
 import { ProteinLogo } from 'logosj-react';
 ${PROTEIN_PWM_CODE}
 export const MyProteinLogo = props => (
-    <ProteinLogo pwm={PROTEIN_PWM} />
+    <ProteinLogo ppm={PROTEIN_PWM} />
 );
 `.substring(1);
 
@@ -26,13 +26,13 @@ export const ALT_CODESTRING_REACT = `
 import { ProteinLogo } from 'logosj-react';
 ${ALT_PWM_CODE}
 export const MyProteinLogo = props => (
-    <ProteinLogo pwm={PROTEIN_PWM} />
+    <ProteinLogo ppm={PROTEIN_PWM} />
 );
 `.substring(1);
 
 export const ALT_CODESTRING_JS = jsCodestring(`
 ${ALT_PWM_CODE}
-logosj.embedProteinLogo(document.getElementById("logo"), { pwm: PROTEIN_PWM });
+logosj.embedProteinLogo(document.getElementById("logo"), { ppm: PROTEIN_PWM });
 `);
 
 export const CAP_LONG_DESCRIPTION = `
@@ -53,7 +53,7 @@ export const PROTEIN_DEMO = {
     reactCodestring: CAP_CODESTRING_REACT,
     jsCodestring: CAP_CODESTRING_JS,
     logoProps: {
-        pwm: PROTEIN_PWM
+        ppm: PROTEIN_PWM
     },
     description: "A default protein logo colors amino acids by chemical properties.",
     header: "Default protein logo",
@@ -64,7 +64,7 @@ export const ALT_DEMO = {
     reactCodestring: ALT_CODESTRING_REACT,
     jsCodestring: ALT_CODESTRING_JS,
     logoProps: {
-        pwm: ALT_PROTEIN_PWM()
+        ppm: ALT_PROTEIN_PWM()
     },
     description: "A protein logo can use extra symbols to represent indistighuishable N/D (B) and Q/E (Z).",
     header: "Extended amino acid symbol set",

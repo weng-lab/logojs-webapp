@@ -17,7 +17,7 @@ const Editors = props => (
           Download the logo in SVG format, obtain code for embedding it in your page, or get a permalink to share.
         </p>
         <Button as={Link} to="/editor/fasta/">FASTA Editor</Button>&nbsp;
-        <Button as={Link} to="/editor/pwm/">PWM Editor</Button>
+        <Button as={Link} to="/editor/ppm/">PWM Editor</Button>
       </Grid.Column>
     </Grid.Row>
 );

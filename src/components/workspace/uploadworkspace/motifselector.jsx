@@ -4,12 +4,12 @@ import { Dropdown } from 'semantic-ui-react';
 class MotifSelector extends React.Component {
 
     render() {
-        let pwms = this.props.pwms;
-        let motifnames = pwms && pwms.result && pwms.result.motifnames;
+        let ppms = this.props.ppms;
+        let motifnames = ppms && ppms.map && ppms.map( x => x.name );
         if (!motifnames || !motifnames.length) { return null; }
         return (
             motifnames.length > 1 ? (
-                <Dropdown text={motifnames[this.props.selectedmotif]}
+                <Dropdown text={this.props.selectedmotif.name}
 			  floating labeled button>
 		  <Dropdown.Menu>
 		    <Dropdown.Menu scrolling>
@@ -23,7 +23,7 @@ class MotifSelector extends React.Component {
                     </Dropdown.Menu>
 		  </Dropdown.Menu>
 		</Dropdown>
-	    ) : (motifnames[this.props.selectedmotif] && <h4>{motifnames[this.props.selectedmotif]}</h4>)
+	    ) : (this.props.selectedmotif.name ? <h4>{this.props.selectedmotif.name}</h4> : null)
         );
     }
     

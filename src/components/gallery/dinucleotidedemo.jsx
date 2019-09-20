@@ -24,21 +24,21 @@ const DinucleotidePreview = () => (
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 dinucleotide, colored by letter
               </div>
-              <Logo height="10em" alphabet={DINUCLEOTIDE_ALPHABET()} pwm={DINUCLEOTIDE_PWM} startpos={1} />
+              <Logo height="10em" alphabet={DINUCLEOTIDE_ALPHABET()} ppm={DINUCLEOTIDE_PWM} startpos={1} />
             </Grid.Column>
             <Grid.Column width={1} />
             <Grid.Column width={3} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 trinucleotide, colored by symbol
               </div>
-              <Logo height="10em" glyphwidth={1.5} alphabet={TRINUCLEOTIDE_ALPHABET} pwm={TRINUCLEOTIDE_PWM} startpos={1} />
+              <Logo height="10em" glyphwidth={1.5} alphabet={TRINUCLEOTIDE_ALPHABET} ppm={TRINUCLEOTIDE_PWM} startpos={1} />
             </Grid.Column>
             <Grid.Column width={1} />
             <Grid.Column width={3} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 custom alphabet
               </div>
-              <Logo height="10em" glyphwidth={1.5} alphabet={MULTINUMBER_ALPHABET} pwm={TRINUCLEOTIDE_PWM} startpos={1} />
+              <Logo height="10em" glyphwidth={1.5} alphabet={MULTINUMBER_ALPHABET} ppm={TRINUCLEOTIDE_PWM} startpos={1} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row style={{ textAlign: "center" }}>

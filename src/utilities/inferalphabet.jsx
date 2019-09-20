@@ -1,4 +1,7 @@
-import { DNAAlphabet, RNAAlphabet, ProteinAlphabet, CompleteAlphabet } from 'logosj-react';
+import { DNAAlphabet, RNAAlphabet, ProteinAlphabet } from 'logosj-react';
+import { glyphsymbols } from '../common/utils';
+
+const GLYPHSYMBOLS = glyphsymbols();
 
 const DNASet = new Set([ 'A', 'C', 'G', 'T', 'N' ]);
 const RNASet = new Set([ 'A', 'C', 'G', 'U', 'N' ]);
@@ -15,6 +18,6 @@ const difference = (a, b) => (
 export const inferAlphabet = cmatches => {
     if (difference(cmatches, DNASet).length === 0) return DNAAlphabet;
     if (difference(cmatches, RNASet).length === 0) return RNAAlphabet;
-    if (difference(cmatches, ProteinSet).length === 0) return ProteinAlphabet;
-    return CompleteAlphabet;
+    if (difference(cmatches, ProteinSet).length === 0 && difference(ProteinSet, cmatches).length === 0) return ProteinAlphabet;
+    return Array.from(cmatches).map( x => GLYPHSYMBOLS[x] );
 };

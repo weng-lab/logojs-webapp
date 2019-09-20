@@ -23,21 +23,21 @@ const DNAPreview = () => (
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 information content
               </div>
-              <DNALogo pwm={CAP_PWM} startpos={1} />
+              <DNALogo ppm={CAP_PWM} startpos={1} />
             </Grid.Column>
             <Grid.Column width={1} />
             <Grid.Column width={4} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 frequency
               </div>
-              <DNALogo pwm={CTCF_PWM} startpos={1} mode="FREQUENCY" />
+              <DNALogo ppm={CTCF_PWM} startpos={1} mode="FREQUENCY" />
             </Grid.Column>
             <Grid.Column width={1} />
             <Grid.Column width={4} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 custom starting base number
               </div>
-              <DNALogo pwm={INTRON_PWM} startpos={-18} />
+              <DNALogo ppm={INTRON_PWM} startpos={-18} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row style={{ textAlign: "center" }}>

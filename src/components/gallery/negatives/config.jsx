@@ -10,7 +10,7 @@ const AA_PWM = ${formatPWM(AA_PWM)};
 export const AA_CODESTRING_JS = jsCodestring(`
 ${AA_CONSTANTS}
 logosj.embedLogoWithNegatives(document.getElementById("logo"), {
-  pwm: AA_PWM,
+  values: AA_PWM,
   alphabet: logosj.ProteinAlphabet
 });
 `);
@@ -19,7 +19,7 @@ export const AA_CODESTRING_REACT = `
 import { LogoWithNegatives, ProteinAlphabet } from 'logosj-react';
 ${AA_CONSTANTS}
 export const ProteinLogo = props => (
-    <LogoWithNegatives pwm={AA_PWM} alphabet={ProteinAlphabet} />
+    <LogoWithNegatives values={AA_PWM} alphabet={ProteinAlphabet} />
 );
 `.substring(1);
 
@@ -33,7 +33,7 @@ export const AA_DEMO = {
     reactCodestring: AA_CODESTRING_REACT,
     jsCodestring: AA_CODESTRING_JS,
     logoProps: {
-        pwm: AA_PWM,
+        values: AA_PWM,
         alphabet: ProteinAlphabet,
         protein: true
     },
@@ -49,7 +49,7 @@ const DNA_PWM = ${formatPWM(DNA_NEGATIVE_PWM)};
 export const DNA_CODESTRING_JS = jsCodestring(`
 ${DNA_CONSTANTS}
 logosj.embedLogoWithNegatives(document.getElementById("logo"), {
-  pwm: DNA_PWM,
+  values: DNA_PWM,
   alphabet: logosj.DNAAlphabet,
   negativealpha: 101
 });
@@ -59,7 +59,7 @@ export const DNA_CODESTRING_REACT = `
 import { LogoWithNegatives, DNAAlphabet } from 'logosj-react';
 ${DNA_CONSTANTS}
 export const DNALogo = props => (
-    <LogoWithNegatives pwm={DNA_PWM} alphabet={DNAAlphabet} negativealpha={101} />
+    <LogoWithNegatives values={DNA_PWM} alphabet={DNAAlphabet} negativealpha={101} />
 );
 `.substring(1);
 
@@ -73,7 +73,7 @@ export const DNA_DEMO = {
     reactCodestring: DNA_CODESTRING_REACT,
     jsCodestring: DNA_CODESTRING_JS,
     logoProps: {
-        pwm: DNA_NEGATIVE_PWM,
+        values: DNA_NEGATIVE_PWM,
         alphabet: DNAAlphabet,
         negativealpha: 101
     },
@@ -89,7 +89,7 @@ const DNA_PWM = ${formatPWM(DNA_NEGATIVE_PWM2)};
 export const DNA_CODESTRING_JS2 = jsCodestring(`
 ${DNA_CONSTANTS2}
 logosj.embedLogoWithNegatives(document.getElementById("logo"), {
-  pwm: DNA_PWM,
+  values: DNA_PWM,
   alphabet: logosj.DNAAlphabet,
   negativealpha: 101,
   inverted: true
@@ -100,7 +100,7 @@ export const DNA_CODESTRING_REACT2 = `
 import { LogoWithNegatives, DNAAlphabet } from 'logosj-react';
 ${DNA_CONSTANTS2}
 export const DNALogo = props => (
-    <LogoWithNegatives pwm={DNA_PWM} alphabet={DNAAlphabet} negativealpha={101} inverted />
+    <LogoWithNegatives values={DNA_PWM} alphabet={DNAAlphabet} negativealpha={101} inverted />
 );
 `.substring(1);
 
@@ -113,7 +113,7 @@ export const DNA_DEMO2 = {
     reactCodestring: DNA_CODESTRING_REACT2,
     jsCodestring: DNA_CODESTRING_JS2,
     logoProps: {
-        pwm: DNA_NEGATIVE_PWM2,
+        values: DNA_NEGATIVE_PWM2,
         alphabet: DNAAlphabet,
         negativealpha: 101,
         inverted: true

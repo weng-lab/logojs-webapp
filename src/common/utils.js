@@ -22,7 +22,7 @@ export const isArrayOfArrays = x => {
 };
 
 export const apiUrls = apibase => ({
-    pwm: uuid => apibase + "/api/pwm/" + uuid,
+    ppm: uuid => apibase + "/api/ppm/" + uuid,
     logo: uuid => apibase + "/api/logo/" + uuid
 });
 

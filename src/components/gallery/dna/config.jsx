@@ -12,14 +12,14 @@ const CAP_PWM = ${formatPWM(CAP_PWM)};
 
 export const CAP_CODESTRING_JS = jsCodestring(`
 ${CAP_PWM_CODE}
-logosj.embedDNALogo(document.getElementById("logo"), { pwm: CAP_PWM });
+logosj.embedDNALogo(document.getElementById("logo"), { ppm: CAP_PWM });
 `);
 
 export const CAP_CODESTRING_REACT = `
 import { DNALogo } from 'logosj-react';
 ${CAP_PWM_CODE}
 export const CAPLogo = props => (
-    <DNALogo pwm={CAP_PWM} />
+    <DNALogo ppm={CAP_PWM} />
 );
 `;
 
@@ -31,13 +31,13 @@ export const CTCF_CODESTRING_REACT = `
 import { DNALogo } from 'logosj-react';
 ${CTCF_PWM_CODE}
 export const CTCFLogo = props => (
-    <DNALogo pwm={CTCF_PWM} mode="FREQUENCY" />
+    <DNALogo ppm={CTCF_PWM} mode="FREQUENCY" />
 );
 `;
 
 export const CTCF_CODESTRING_JS = jsCodestring(`
 ${CTCF_PWM_CODE}
-logosj.embedDNALogo(document.getElementById("logo"), { pwm: CTCF_PWM, mode: "FREQUENCY" });
+logosj.embedDNALogo(document.getElementById("logo"), { ppm: CTCF_PWM, mode: "FREQUENCY" });
 `);
 
 const INTRON_PWM_CODE = `
@@ -48,13 +48,13 @@ export const INTRON_CODESTRING_REACT = `
 import { DNALogo } from 'logosj-react';
 ${INTRON_PWM_CODE}
 export const IntronLogo = props => (
-    <DNALogo pwm={INTRON_PWM} startpos={-18} />
+    <DNALogo ppm={INTRON_PWM} startpos={-18} />
 );
 `;
 
 export const INTRON_CODESTRING_JS = jsCodestring(`
 ${INTRON_PWM_CODE}
-logosj.embedDNALogo(document.getElementById("logo"), { pwm: INTRON_PWM, startpos: -18 });
+logosj.embedDNALogo(document.getElementById("logo"), { ppm: INTRON_PWM, startpos: -18 });
 `);
 
 export const LOWERCASE_CONSTANTS = `
@@ -79,14 +79,14 @@ export const LOWERCASE_CODESTRING_REACT = `
 import { Logo } from 'logosj-react';
 ${LOWERCASE_CONSTANTS}
 export const LowercaseLogo = props => (
-    <Logo alphabet={LOWERCASE_ALPHABET} pwm={LOWERCASE_PWM} />
+    <Logo alphabet={LOWERCASE_ALPHABET} ppm={LOWERCASE_PWM} />
 );
 `;
 
 export const LOWERCASE_CODESTRING_JS = jsCodestring(`
 ${LOWERCASE_CONSTANTS}
 logosj.embedLogo(document.getElementById("logo"), {
-  pwm: LOWERCASE_PWM,
+  ppm: LOWERCASE_PWM,
   alphabet: LOWERCASE_ALPHABET
 });
 `);
@@ -118,7 +118,7 @@ export const INFORMATION_CONTENT_DEMO = {
     reactCodestring: CAP_CODESTRING_REACT,
     jsCodestring: CAP_CODESTRING_JS,
     logoProps: {
-        pwm: CAP_PWM
+        ppm: CAP_PWM
     },
     description: "A DNA logo can use information content to scale its letters.",
     header: "Information Content",
@@ -129,7 +129,7 @@ export const FREQUENCY_DEMO = {
     reactCodestring: CTCF_CODESTRING_REACT,
     jsCodestring: CTCF_CODESTRING_JS,
     logoProps: {
-        pwm: CTCF_PWM,
+        ppm: CTCF_PWM,
         mode: "FREQUENCY"
     },
     description: "A DNA logo can use frequency to scale its letters.",
@@ -141,7 +141,7 @@ export const STARTPOS_DEMO = {
     reactCodestring: INTRON_CODESTRING_REACT,
     jsCodestring: INTRON_CODESTRING_JS,
     logoProps: {
-        pwm: INTRON_PWM,
+        ppm: INTRON_PWM,
         startpos: -18
     },
     description: "A DNA logo can use a custom number for the first base.",
@@ -171,7 +171,7 @@ import { RawLogo, DNAAlphabet } from 'logosj-react';
 ${NOAXIS_CONSTANTS}
 export const NoAxisLogo = props => (
   <svg viewBox="0 0 1900 100">
-    <RawLogo alphabet={DNAAlphabet} pwm={PWM} glyphWidth={100} stackHeight={100} />
+    <RawLogo alphabet={DNAAlphabet} values={PWM} glyphWidth={100} stackHeight={100} />
   </svg>
 );
 `;
@@ -179,7 +179,7 @@ export const NoAxisLogo = props => (
 const NOAXIS_JS = `
 ${NOAXIS_CONSTANTS}
 logosj.embedRawLogo(document.getElementById("logo"), {
-  pwm: PWM,
+  ppm: PWM,
   alphabet: logosj.DNAAlphabet,
   glyphWidth: 100,
   stackHeight: 100
@@ -207,7 +207,7 @@ export const NOAXIS_DEMO = {
     reactCodestring: NOAXIS_CODESTRING_REACT,
     jsCodestring: NOAXIS_CODESTRING_JS,
     logoProps: {
-        pwm: CTCF_PWM,
+        ppm: CTCF_PWM,
         alphabet: DNAAlphabet,
         raw: true,
         glyphWidth: 100,
@@ -229,7 +229,7 @@ export const LOWERCASE_DEMO = {
     reactCodestring: LOWERCASE_CODESTRING_REACT,
     jsCodestring: LOWERCASE_CODESTRING_JS,
     logoProps: {
-        pwm: CTCF_PWM,
+        ppm: CTCF_PWM,
         alphabet: LOWERCASE_ALPHABET,
         custom: true
     },

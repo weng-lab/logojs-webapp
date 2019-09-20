@@ -27,7 +27,7 @@ export const DemoPanel = ({ reactCodestring, jsCodestring, logoProps, descriptio
                   <Logo startpos={1} {...logoProps} />
               ) : (
                   logoProps.raw ? (
-                      <svg viewBox={"0 0 " + (logoProps.pwm.length * 100) + " " + logoProps.stackHeight}>
+                      <svg viewBox={"0 0 " + (logoProps.values.length * 100) + " " + logoProps.stackHeight}>
                         <RawLogo startpos={1} {...logoProps} />
                       </svg>
                   ) : (

@@ -23,21 +23,21 @@ const NegativesPreview = () => (
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 protein logo
               </div>
-              <LogoWithNegatives alphabet={ProteinAlphabet} pwm={AA_PWM} startpos={1} />
+              <LogoWithNegatives alphabet={ProteinAlphabet} values={AA_PWM} startpos={1} />
             </Grid.Column>
             <Grid.Column width={1} />
             <Grid.Column width={4} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 negative values semitransparent
               </div>
-              <LogoWithNegatives alphabet={DNAAlphabet} pwm={DNA_NEGATIVE_PWM} startpos={1} negativealpha={101} />
+              <LogoWithNegatives alphabet={DNAAlphabet} values={DNA_NEGATIVE_PWM} startpos={1} negativealpha={101} />
             </Grid.Column>
             <Grid.Column width={1} />
             <Grid.Column width={4} style={{ textAlign: "center" }}>
               <div style={{ fontStyle: "italic", marginBottom: "0.7em" }}>
                 negative value letters right side up
               </div>
-              <LogoWithNegatives alphabet={DNAAlphabet} pwm={DNA_NEGATIVE_PWM2} startpos={1} negativealpha={95} inverted />
+              <LogoWithNegatives alphabet={DNAAlphabet} values={DNA_NEGATIVE_PWM2} startpos={1} negativealpha={95} inverted />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row style={{ textAlign: "center" }}>
