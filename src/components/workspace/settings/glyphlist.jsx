@@ -1,8 +1,10 @@
 import React from 'react';
-import { Label, Icon } from 'semantic-ui-react';
+import { Label, Icon, Button } from 'semantic-ui-react';
+import { DNAAlphabet, RNAAlphabet, ProteinAlphabet } from 'logosj-react';
 
 import { colorNameFromHex, foregroundColor } from '../../../common/utils';
 import { ColorPickerModal } from '../modalcolorpicker/index';
+import Collapsible from './collapsible';
 
 const GlyphLabel = ({ i, symbol, color, onClick, onRemove, noteditable }) => (
     <div style={{ marginBottom: '2px' }}>
@@ -77,7 +79,16 @@ class GlyphList extends React.Component {
     render() {
 	return (
 	    <React.Fragment>
-	      <h2>{this.props.header}</h2>
+	      <h3>{this.props.header}</h3>
+              <Collapsible activeTitle="Hide presets" inactiveTitle="Select a preset">
+                { this.state.alphabet.length <= 4 && (
+                    <React.Fragment>
+                      <Button onClick={() => this.props.onAlphabetUpdate && this.props.onAlphabetUpdate(DNAAlphabet)}>DNA</Button>&nbsp;
+                      <Button onClick={() => this.props.onAlphabetUpdate && this.props.onAlphabetUpdate(RNAAlphabet)}>RNA</Button>&nbsp;
+                    </React.Fragment>
+                )}
+                <Button onClick={() => this.props.onAlphabetUpdate && this.props.onAlphabetUpdate(ProteinAlphabet)}>protein</Button>
+              </Collapsible><br/>
 	      {this.state.alphabet.map( (glyphdata, i) => (
 		  <GlyphLabel i={i} symbol={glyphdata.regex} color={glyphdata.color.map ? glyphdata.color[0] : glyphdata.color}
 			      onClick={ () => this.showModal(i) } onRemove={ () => this.removeIdx(i) }

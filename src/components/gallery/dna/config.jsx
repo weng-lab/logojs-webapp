@@ -179,7 +179,7 @@ export const NoAxisLogo = props => (
 const NOAXIS_JS = `
 ${NOAXIS_CONSTANTS}
 logosj.embedRawLogo(document.getElementById("logo"), {
-  ppm: PWM,
+  values: PWM,
   alphabet: logosj.DNAAlphabet,
   glyphWidth: 100,
   stackHeight: 100
@@ -207,7 +207,7 @@ export const NOAXIS_DEMO = {
     reactCodestring: NOAXIS_CODESTRING_REACT,
     jsCodestring: NOAXIS_CODESTRING_JS,
     logoProps: {
-        ppm: CTCF_PWM,
+        values: CTCF_PWM,
         alphabet: DNAAlphabet,
         raw: true,
         glyphWidth: 100,

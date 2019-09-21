@@ -25,7 +25,7 @@ const minMax2DArray = arr => {
     return { max, min };
 };
 
-export const fastaToPWM = (fasta, caseinsensitive, dthrow = true) => {
+export const fastaToPWM = (fasta, caseinsensitive, dthrow = true, alphabet = null) => {
     let sequences = [], cmatches = new Set();
     if (caseinsensitive) fasta = fasta.toUpperCase();
     fasta.split(os.EOL).filter(x => x[0] !== '#').map(
@@ -36,12 +36,12 @@ export const fastaToPWM = (fasta, caseinsensitive, dthrow = true) => {
     sequences.map( s => ( smap(s, (x, j) => (
         j < minlength && x.match(/^[a-z0-9]+$/i) && cmatches.add(x)
     ))));
-    const alphabet = inferAlphabet(cmatches);
+    if (!alphabet) alphabet = inferAlphabet(cmatches);
     const lookupmap_ = lookupmap(alphabet).lookup;
     let ppm = xrange(minlength).map(i => Object.keys(lookupmap_).map(x => 0));
     let increment = 1.0 / sequences.length;
     sequences.map( s => ( smap(s, (x, j) => {
-        if (x === '-' || x === '.' || x === '*') return;
+        if (x === '-' || x === '.' || x === '*' || x === ' ') return;
         if (lookupmap_[x] !== undefined || x === 'n' || x === 'N')
 	    j < minlength && lookupmap_[x] !== undefined && lookupmap_[x] !== null && (ppm[j][lookupmap_[x]] += increment);
         else if (dthrow)
@@ -54,10 +54,10 @@ export const fastaToPWM = (fasta, caseinsensitive, dthrow = true) => {
     };
 };
 
-export const parseFasta = text => {
+export const parseFasta = (text, alphabet = null) => {
     try {
         return {
-            logos: [ fastaToPWM(text.toUpperCase(), true) ],
+            logos: [ fastaToPWM(text.toUpperCase(), true, true, alphabet) ],
             name: null
         };
     } catch (e) {

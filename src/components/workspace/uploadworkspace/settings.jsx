@@ -1,19 +1,25 @@
 import React from 'react';
 import { Menu } from 'semantic-ui-react';
 
-import { ModeDropdown, GlyphList } from '../settings/index';
+import { ModeDropdown, GlyphList, ColoredInput } from '../settings/index';
 
 const SettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
-			 onModeChange, modedefault, logodefault, scaledefault,
-			 startposdefault, alphabet, onAlphabetUpdate }) => (
+			 onModeChange, mode, logodefault, scaledefault,
+			 startposdefault, alphabet, onAlphabetUpdate, onFrequencyChange,
+                         backgroundFrequencies }) => (
 			     <Menu vertical style={{ width: '100%', backgroundColor: "#fafafa" }}>
 			       <Menu.Item>
 				 <ModeDropdown header="Letter Height"
-					       value={modedefault}
-					       onChange={onModeChange} />
+					       onChange={onModeChange}
+                                               onFrequencyChange={onFrequencyChange}
+                                               backgroundFrequencies={backgroundFrequencies}
+                                               mode={mode} />
 			       </Menu.Item>
+                               <Menu.Item>
+                                 <ColoredInput header="Starting base number" defaultValue={startposdefault || 1} onChange={onStartPosChange} />
+                               </Menu.Item>
 			       <Menu.Item>
-				 <GlyphList header="Symbol List" alphabet={alphabet} noteditable onAlphabetUpdate={onAlphabetUpdate} />
+				 <GlyphList header="Symbol List" alphabet={alphabet} onAlphabetUpdate={onAlphabetUpdate} />
 			       </Menu.Item>
 			     </Menu>
 			 );

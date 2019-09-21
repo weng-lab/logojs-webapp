@@ -59,7 +59,7 @@ export const parseJasparUnsafe = text => {
         logos: results.filter(x => x.length > 0).map( (ppm, i) => ({
             ppm,
             name: motifnames[i],
-            alphabet: alphabet[0] === 'A' && alphabet[1] === 'C' && alphabet[2] === 'G' && alphabet[3] === 'T' ? DNAAlphabet : alphabet.map( x => GLYPHSYMBOLS[x] || { regex: x, color: "#000000" } )
+            alphabet: alphabet.length === 4 && alphabet[0] === 'A' && alphabet[1] === 'C' && alphabet[2] === 'G' && alphabet[3] === 'T' ? DNAAlphabet : alphabet.map( x => GLYPHSYMBOLS[x] || { regex: x, color: "#000000" } )
         }) ),
         name: null
     };

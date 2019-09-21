@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Menu, Dropdown, Button, Icon } from 'semantic-ui-react';
-import { embedLogo, Logo } from 'logosj-react';
+import { embedLogo, Logo, INFORMATION_CONTENT } from 'logosj-react';
 
 import { _svgdata } from '../../svgdownload/utils';
 import SVGZip from '../../../utilities/zipfile';
@@ -10,6 +10,7 @@ import SettingsPanel from './settings';
 import LogoMenu from './menu';
 import ErrorMessage from './errormessage';
 import PasteModal from './pastemodal';
+import { fastaToPWM } from './parsers/fasta';
 import { WorkspaceEditorTabs } from './editor';
 
 class UploadWorkspace extends React.Component {
@@ -42,6 +43,8 @@ class UploadWorkspace extends React.Component {
     _updateCurrent(nLogo) {
         const nSets = [ ...this.state.logoSets ];
         const nLogos = [ ...this.state.selectedFile.logos ];
+        if (this.state.selected.fasta)
+            nLogo.ppm = fastaToPWM(this.state.selected.fasta, true, true, nLogo.alphabet || this.state.selected.alphabet).ppm;
         nLogos[this.state.selectedIndex.motif] = {
             ...this.state.selected,
             ...nLogo
@@ -63,10 +66,6 @@ class UploadWorkspace extends React.Component {
             fasta
         });
     }
-    
-    _logoTypeChange(e, data) {
-
-    }
 
     _alphabetUpdate(alphabet) {
         this._updateCurrent({
@@ -75,7 +74,9 @@ class UploadWorkspace extends React.Component {
     }
 
     _startPosChange(e, data) {
-
+        this._updateCurrent({
+            startpos: +data.value
+        });
     }
 
     _modeChange(e, data) {
@@ -212,6 +213,24 @@ class UploadWorkspace extends React.Component {
         });
     }
 
+    _backgroundUpdate(glyph, value) {
+        if (!this.state.selected || !this.state.selected.alphabet || !this.state.selected.alphabet.map) return;
+        const map = this._backgroundFrequencyMap();
+        map[glyph] = value;
+        this._updateCurrent({
+            backgroundFrequencies: this.state.selected.alphabet.map( symbol => map[symbol.regex] !== undefined ? map[symbol.regex] : 1.0 / this.state.selected.alphabet.length )
+        });
+    }
+    
+    _backgroundFrequencyMap() {
+        let map = {};
+        this.state.selected && this.state.selected.alphabet && this.state.selected.alphabet.forEach( (symbol, i) => {
+            map[symbol.regex] = this.state.selected.backgroundFrequencies && this.state.selected.backgroundFrequencies[i] !== undefined
+                ? this.state.selected.backgroundFrequencies[i] : 1.0 / this.state.selected.alphabet.length;
+        });
+        return map;
+    }
+    
     render() {
         let isdone = this.state.remaining === 0 && this.state.logoSets.length > 0;
         let selectedPWMs = this.state.selectedFile && this.state.selectedFile.logos;
@@ -222,12 +241,13 @@ class UploadWorkspace extends React.Component {
                 <Grid.Row />
                 <Grid.Row style={{ height: "100%" }}>
                   <Grid.Column width={3}>
-                    <SettingsPanel onLogoTypeChange={this._logoTypeChange.bind(this)}
-                                   onStartPosChange={this._startPosChange.bind(this)}
+                    <SettingsPanel onStartPosChange={this._startPosChange.bind(this)}
+                                   mode={(this.state.selected && this.state.selected.mode) || INFORMATION_CONTENT}
                                    onModeChange={this._modeChange.bind(this)}
                                    startposdefault={this.state.selected && this.state.selected.startpos}
-                                   modedefault={this.state.selected && this.state.selected.mode}
                                    alphabet={this.state.selected ? this.state.selected.alphabet : []}
+                                   backgroundFrequencies={this._backgroundFrequencyMap()}
+                                   onFrequencyChange={this._backgroundUpdate.bind(this)}
                                    onAlphabetUpdate={this._alphabetUpdate.bind(this)} />
                   </Grid.Column>
                   <Grid.Column width={13} style={{ height: '100%' }}>

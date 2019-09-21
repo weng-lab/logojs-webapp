@@ -12,7 +12,7 @@ const ITEMSTYLE = {
 const reactCode = logoinfo => `
 import { Logo, loadGlyphComponents } from 'logosj-react';
 const myLogoProps = {
-    startpos: ${logoinfo.firstbase},
+    startpos: ${logoinfo.startpos},
     ppm: [
 ${logoinfo.ppm.map(x => "        " + JSON.stringify(x)).join(",\n")}
     ],
@@ -30,7 +30,7 @@ export const MyLogo = props => (
 const jsCode = logoinfo => jsCodestring(`
 window.onload = function() {
   const logoProps = {
-    startpos: ${logoinfo.firstbase},
+    startpos: ${logoinfo.startpos},
     ppm: [
 ${logoinfo.ppm.map(x => "      " + JSON.stringify(x)).join(",\n")}
     ],

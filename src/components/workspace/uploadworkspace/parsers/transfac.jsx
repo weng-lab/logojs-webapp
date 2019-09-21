@@ -38,7 +38,7 @@ export const parseTransfac = text => {
         logos: results.map( (result, i) => ({
             ...result,
             name: motifnames[i],
-            alphabet: alphabet[0] === 'A' && alphabet[1] === 'C' && alphabet[2] === 'G' && alphabet[3] === 'T' ? DNAAlphabet : alphabet.map( x => GLYPHSYMBOLS[x] || { regex: x, color: "#000000" } )
+            alphabet: alphabet.length === 4 && alphabet[0] === 'A' && alphabet[1] === 'C' && alphabet[2] === 'G' && alphabet[3] === 'T' ? DNAAlphabet : alphabet.map( x => GLYPHSYMBOLS[x] || { regex: x, color: "#000000" } )
         })),
         name: null
     };
