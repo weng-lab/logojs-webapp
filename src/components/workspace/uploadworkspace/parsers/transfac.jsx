@@ -8,7 +8,7 @@ export const parseTransfac = text => {
     let results = [], cppm = [], cmotifname = null;
     let motifnames = [];
     let lines = text.split('\n');
-    let alphabet = null;
+    let alphabet = null, alphabets = [];
     lines.forEach( (line, i) => {
         if (line.startsWith("DE"))
             cmotifname = line.split("DE")[1].trim();
@@ -16,6 +16,7 @@ export const parseTransfac = text => {
             if (cppm.length > 0) {
                 results.push(cppm);
                 motifnames.push(cmotifname);
+                alphabets.push(alphabet);
             }
             cppm = [];
             inmotif = false;
@@ -38,7 +39,7 @@ export const parseTransfac = text => {
         logos: results.map( (result, i) => ({
             ...result,
             name: motifnames[i],
-            alphabet: alphabet.length === 4 && alphabet[0] === 'A' && alphabet[1] === 'C' && alphabet[2] === 'G' && alphabet[3] === 'T' ? DNAAlphabet : alphabet.map( x => GLYPHSYMBOLS[x] || { regex: x, color: "#000000" } )
+            alphabet: alphabets[i].length === 4 && alphabets[i][0] === 'A' && alphabets[i][1] === 'C' && alphabets[i][2] === 'G' && alphabets[i][3] === 'T' ? DNAAlphabet : alphabet.map( x => GLYPHSYMBOLS[x] || { regex: x, color: "#000000" } )
         })),
         name: null
     };

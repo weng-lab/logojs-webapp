@@ -40,6 +40,59 @@ class UploadWorkspace extends React.Component {
 	};
     }
 
+    _updateFile() {
+        const nLogo = {
+            startpos: this.state.selected.startpos,
+            alphabet: this.state.selected.alphabet,
+            backgroundFrequencies: this.state.selected.backgroundFrequencies
+        };
+        const nSets = [ ...this.state.logoSets ];
+        const nLogos = this.state.selectedFile.logos.map( logo => ({
+            ...logo,
+            ...nLogo,
+            ppm: logo.fasta ? fastaToPWM(logo.fasta, true, true, nLogo.alphabet || logo.alphabet) : nLogo.ppm || logo.ppm
+        }));
+        nSets[this.state.selectedIndex.file] = {
+            ...this.state.selectedFile,
+            logos: nLogos
+        };
+        this.setState({
+            logoSets: nSets,
+            selected: nLogos[this.state.selectedIndex.motif],
+            selectedFile: nSets[this.state.selectedIndex.file]
+        });
+    }
+
+    _updateAll() {
+        const nLogo = {
+            startpos: this.state.selected.startpos,
+            alphabet: this.state.selected.alphabet,
+            backgroundFrequencies: this.state.selected.backgroundFrequencies
+        };
+        const nSets = [ ...this.state.logoSets ];
+        nSets.forEach( (logoSet, i) => {
+            const nLogos = logoSet.logos.map( logo => ({
+                ...logo,
+                ...nLogo,
+                ppm: logo.fasta ? fastaToPWM(logo.fasta, true, true, nLogo.alphabet || logo.alphabet) : nLogo.ppm || logo.ppm
+            }));
+            nSets[i] = {
+                ...logoSet,
+                logos: nLogos
+            };
+        });
+        console.log({
+            logoSets: nSets,
+            selected: nSets[this.state.selectedIndex.file][this.state.selectedIndex.motif],
+            selectedFile: nSets[this.state.selectedIndex.file]
+        });
+        this.setState({
+            logoSets: nSets,
+            selected: nSets[this.state.selectedIndex.file].logos[this.state.selectedIndex.motif],
+            selectedFile: nSets[this.state.selectedIndex.file]
+        });
+    }
+    
     _updateCurrent(nLogo) {
         const nSets = [ ...this.state.logoSets ];
         const nLogos = [ ...this.state.selectedFile.logos ];
@@ -240,17 +293,22 @@ class UploadWorkspace extends React.Component {
               <Grid className="centered" style={{ width: "90%", marginLeft: "5%", height: "100%" }}>
                 <Grid.Row />
                 <Grid.Row style={{ height: "100%" }}>
-                  <Grid.Column width={3}>
-                    <SettingsPanel onStartPosChange={this._startPosChange.bind(this)}
-                                   mode={(this.state.selected && this.state.selected.mode) || INFORMATION_CONTENT}
-                                   onModeChange={this._modeChange.bind(this)}
-                                   startposdefault={this.state.selected && this.state.selected.startpos}
-                                   alphabet={this.state.selected ? this.state.selected.alphabet : []}
-                                   backgroundFrequencies={this._backgroundFrequencyMap()}
-                                   onFrequencyChange={this._backgroundUpdate.bind(this)}
-                                   onAlphabetUpdate={this._alphabetUpdate.bind(this)} />
-                  </Grid.Column>
-                  <Grid.Column width={13} style={{ height: '100%' }}>
+                  { this.state.selected && (
+                      <Grid.Column width={3}>
+                        <SettingsPanel
+                          onApplyToFile={this._updateFile.bind(this)}
+                          onApplyToAll={this._updateAll.bind(this)}
+                          onStartPosChange={this._startPosChange.bind(this)}
+                          mode={(this.state.selected && this.state.selected.mode) || INFORMATION_CONTENT}
+                          onModeChange={this._modeChange.bind(this)}
+                          startposdefault={this.state.selected && this.state.selected.startpos}
+                          alphabet={this.state.selected ? this.state.selected.alphabet : []}
+                          backgroundFrequencies={this._backgroundFrequencyMap()}
+                          onFrequencyChange={this._backgroundUpdate.bind(this)}
+                          onAlphabetUpdate={this._alphabetUpdate.bind(this)} />
+                      </Grid.Column>
+                  )}
+                  <Grid.Column width={this.state.selected ? 13 : 16} style={{ height: '100%' }}>
                     { this.state.errors && this.state.errors.length > 0 && (
                         <ErrorMessage errors={this.state.errors} onClick={this.errorclosed.bind(this)}/>
                     )}

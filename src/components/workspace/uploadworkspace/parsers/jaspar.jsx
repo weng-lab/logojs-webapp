@@ -15,12 +15,14 @@ export const parseJasparUnsafe = text => {
     let results = [], cppm = [], cmotifname = null;
     let motifnames = [];
     let lines = text.split('\n');
-    let alphabet = [];
+    let alphabets = [], alphabet = [];
     lines.forEach( (line, i) => {
         if (line.startsWith('>')) {
             if (cppm.length > 0) {
                 results.push(cppm);
                 motifnames.push(cmotifname);
+                alphabets.push(alphabet);
+                alphabet = [];
             };
             cppm = [];
             cmotifname = line.replace(/>/, "").replace(/\s+/g, "_");
@@ -31,6 +33,7 @@ export const parseJasparUnsafe = text => {
         if (i === lines.length - 1) {
             results.push(cppm);
             motifnames.push(cmotifname);
+            alphabets.push(alphabet);
         }
     });
     let sum = x => {
@@ -59,7 +62,7 @@ export const parseJasparUnsafe = text => {
         logos: results.filter(x => x.length > 0).map( (ppm, i) => ({
             ppm,
             name: motifnames[i],
-            alphabet: alphabet.length === 4 && alphabet[0] === 'A' && alphabet[1] === 'C' && alphabet[2] === 'G' && alphabet[3] === 'T' ? DNAAlphabet : alphabet.map( x => GLYPHSYMBOLS[x] || { regex: x, color: "#000000" } )
+            alphabet: alphabets[i].length === 4 && alphabets[i][0] === 'A' && alphabets[i][1] === 'C' && alphabets[i][2] === 'G' && alphabets[i][3] === 'T' ? DNAAlphabet : alphabets[i].map( x => GLYPHSYMBOLS[x] || { regex: x, color: "#000000" } )
         }) ),
         name: null
     };
