@@ -17,7 +17,7 @@ scripts/build-local.sh
 node server.js
 ```
 
-and you will be able to access the web application at the default URL of http://localhost:8093, with support for all the application's functionality
+and you will be able to access the web application at the default URL of http://localhost:8094, with support for all the application's functionality
 (logo editing, data uploading, logo downloads, and permalink generation and sharing). If you deploy the application at a publicly accessible URL, you
 will be able to use it share permalinks you generate with others.
 
@@ -48,4 +48,4 @@ The LogosJ webapp is Docker-ready. To build the container, do
 docker build -t logosj-webapp .
 ```
 
-within the project root directory. When the container is run, it will expose the fully-functional application on its port 8093.
+within the project root directory. When the container is run, it will expose the fully-functional application on its port 80.
