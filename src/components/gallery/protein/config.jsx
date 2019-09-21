@@ -1,38 +1,38 @@
-import { jsCodestring, formatPWM } from '../../../common/codestrings';
-import { PROTEIN_PWM, ALT_PROTEIN_PWM } from '../constants';
+import { jsCodestring, formatPPM } from '../../../common/codestrings';
+import { PROTEIN_PPM, ALT_PROTEIN_PPM } from '../constants';
 
-const PROTEIN_PWM_CODE = `
-const PROTEIN_PWM = ${formatPWM(PROTEIN_PWM)};
+const PROTEIN_PPM_CODE = `
+const PROTEIN_PPM = ${formatPPM(PROTEIN_PPM)};
 `.substring(1);
 
 export const CAP_CODESTRING_JS = jsCodestring(`
-${PROTEIN_PWM_CODE}
-logosj.embedProteinLogo(document.getElementById("logo"), { ppm: PROTEIN_PWM });
+${PROTEIN_PPM_CODE}
+logosj.embedProteinLogo(document.getElementById("logo"), { ppm: PROTEIN_PPM });
 `);
 
 export const CAP_CODESTRING_REACT = `
 import { ProteinLogo } from 'logosj-react';
-${PROTEIN_PWM_CODE}
+${PROTEIN_PPM_CODE}
 export const MyProteinLogo = props => (
-    <ProteinLogo ppm={PROTEIN_PWM} />
+    <ProteinLogo ppm={PROTEIN_PPM} />
 );
 `.substring(1);
 
-const ALT_PWM_CODE = `
-const PROTEIN_PWM = ${formatPWM(ALT_PROTEIN_PWM())};
+const ALT_PPM_CODE = `
+const PROTEIN_PPM = ${formatPPM(ALT_PROTEIN_PPM())};
 `;
 
 export const ALT_CODESTRING_REACT = `
 import { ProteinLogo } from 'logosj-react';
-${ALT_PWM_CODE}
+${ALT_PPM_CODE}
 export const MyProteinLogo = props => (
-    <ProteinLogo ppm={PROTEIN_PWM} />
+    <ProteinLogo ppm={PROTEIN_PPM} />
 );
 `.substring(1);
 
 export const ALT_CODESTRING_JS = jsCodestring(`
-${ALT_PWM_CODE}
-logosj.embedProteinLogo(document.getElementById("logo"), { ppm: PROTEIN_PWM });
+${ALT_PPM_CODE}
+logosj.embedProteinLogo(document.getElementById("logo"), { ppm: PROTEIN_PPM });
 `);
 
 export const CAP_LONG_DESCRIPTION = `
@@ -53,7 +53,7 @@ export const PROTEIN_DEMO = {
     reactCodestring: CAP_CODESTRING_REACT,
     jsCodestring: CAP_CODESTRING_JS,
     logoProps: {
-        ppm: PROTEIN_PWM
+        ppm: PROTEIN_PPM
     },
     description: "A default protein logo colors amino acids by chemical properties.",
     header: "Default protein logo",
@@ -64,7 +64,7 @@ export const ALT_DEMO = {
     reactCodestring: ALT_CODESTRING_REACT,
     jsCodestring: ALT_CODESTRING_JS,
     logoProps: {
-        ppm: ALT_PROTEIN_PWM()
+        ppm: ALT_PROTEIN_PPM()
     },
     description: "A protein logo can use extra symbols to represent indistighuishable N/D (B) and Q/E (Z).",
     header: "Extended amino acid symbol set",

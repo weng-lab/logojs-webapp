@@ -10,7 +10,7 @@ import SettingsPanel from './settings';
 import LogoMenu from './menu';
 import ErrorMessage from './errormessage';
 import PasteModal from './pastemodal';
-import { fastaToPWM } from './parsers/fasta';
+import { fastaToPPM } from './parsers/fasta';
 import { WorkspaceEditorTabs } from './editor';
 
 class UploadWorkspace extends React.Component {
@@ -50,7 +50,7 @@ class UploadWorkspace extends React.Component {
         const nLogos = this.state.selectedFile.logos.map( logo => ({
             ...logo,
             ...nLogo,
-            ppm: logo.fasta ? fastaToPWM(logo.fasta, true, true, nLogo.alphabet || logo.alphabet) : nLogo.ppm || logo.ppm
+            ppm: logo.fasta ? fastaToPPM(logo.fasta, true, true, nLogo.alphabet || logo.alphabet) : nLogo.ppm || logo.ppm
         }));
         nSets[this.state.selectedIndex.file] = {
             ...this.state.selectedFile,
@@ -74,7 +74,7 @@ class UploadWorkspace extends React.Component {
             const nLogos = logoSet.logos.map( logo => ({
                 ...logo,
                 ...nLogo,
-                ppm: logo.fasta ? fastaToPWM(logo.fasta, true, true, nLogo.alphabet || logo.alphabet) : nLogo.ppm || logo.ppm
+                ppm: logo.fasta ? fastaToPPM(logo.fasta, true, true, nLogo.alphabet || logo.alphabet) : nLogo.ppm || logo.ppm
             }));
             nSets[i] = {
                 ...logoSet,
@@ -97,7 +97,7 @@ class UploadWorkspace extends React.Component {
         const nSets = [ ...this.state.logoSets ];
         const nLogos = [ ...this.state.selectedFile.logos ];
         if (this.state.selected.fasta)
-            nLogo.ppm = fastaToPWM(this.state.selected.fasta, true, true, nLogo.alphabet || this.state.selected.alphabet).ppm;
+            nLogo.ppm = fastaToPPM(this.state.selected.fasta, true, true, nLogo.alphabet || this.state.selected.alphabet).ppm;
         nLogos[this.state.selectedIndex.motif] = {
             ...this.state.selected,
             ...nLogo
@@ -286,7 +286,7 @@ class UploadWorkspace extends React.Component {
     
     render() {
         let isdone = this.state.remaining === 0 && this.state.logoSets.length > 0;
-        let selectedPWMs = this.state.selectedFile && this.state.selectedFile.logos;
+        let selectedPPMs = this.state.selectedFile && this.state.selectedFile.logos;
 	return (
 	    <React.Fragment>
 	      <PasteModal open={this.state.pasteModalShown} onClose={this.pasteModalClosed.bind(this)} />
@@ -359,7 +359,7 @@ class UploadWorkspace extends React.Component {
                                   </Menu.Item>
                                 </Menu>
                                 <div style={{ textAlign: "left" }}>
-                                  <MotifSelector ppms={selectedPWMs}
+                                  <MotifSelector ppms={selectedPPMs}
                                                  selectedmotif={this.state.selected}
                                                  onItemSelected={this.onItemSelected.bind(this)} />
                                 </div>
@@ -377,7 +377,7 @@ class UploadWorkspace extends React.Component {
                             <WorkspaceEditorTabs
                               id={this.state.selectedIndex}
                               logo={this.state.selected}
-                              onPWMChange={this._ppmChange.bind(this)}
+                              onPPMChange={this._ppmChange.bind(this)}
                               onFastaChange={this._ppmChange.bind(this)} />
                           </div>
                           <input type="file" hidden ref={this.fileInput}

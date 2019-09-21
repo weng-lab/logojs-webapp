@@ -1,16 +1,16 @@
 import React from 'react';
 import { Tab } from 'semantic-ui-react';
 
-import WorkspacePWMEditor from './pwm';
+import WorkspacePPMEditor from './pwm';
 import WorkspaceFastaEditor from './fasta';
 
-const WorkspaceEditorTabs = ({ logo, onPWMChange, onFastaChange, id }) => {
+const WorkspaceEditorTabs = ({ logo, onPPMChange, onFastaChange, id }) => {
     if (!logo) return null;
     const panes = [{
-        menuItem: "PWM",
+        menuItem: "PPM",
         render: () => (
             <div style={{ minHeight: "500px", height: "100%" }}>
-              <WorkspacePWMEditor logo={logo} onPWMChange={onPWMChange} />
+              <WorkspacePPMEditor logo={logo} onPPMChange={onPPMChange} />
             </div>
         )
     }];

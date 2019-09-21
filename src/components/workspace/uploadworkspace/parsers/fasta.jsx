@@ -25,7 +25,7 @@ const minMax2DArray = arr => {
     return { max, min };
 };
 
-export const fastaToPWM = (fasta, caseinsensitive, dthrow = true, alphabet = null) => {
+export const fastaToPPM = (fasta, caseinsensitive, dthrow = true, alphabet = null) => {
     let sequences = [], cmatches = new Set();
     if (caseinsensitive) fasta = fasta.toUpperCase();
     fasta.split(os.EOL).filter(x => x[0] !== '#').map(
@@ -57,7 +57,7 @@ export const fastaToPWM = (fasta, caseinsensitive, dthrow = true, alphabet = nul
 export const parseFasta = (text, alphabet = null) => {
     try {
         return {
-            logos: [ fastaToPWM(text.toUpperCase(), true, true, alphabet) ],
+            logos: [ fastaToPPM(text.toUpperCase(), true, true, alphabet) ],
             name: null
         };
     } catch (e) {

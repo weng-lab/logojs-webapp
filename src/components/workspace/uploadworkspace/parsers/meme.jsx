@@ -113,7 +113,7 @@ class MEMEParser {
         }) );
     }
 
-    collapsePWM(ppm, alphabet) {
+    collapsePPM(ppm, alphabet) {
         return ppm.map( pentry => (
             alphabet.map( glyph => pentry[glyph.regex] || 0.0)
         ));             
@@ -177,7 +177,7 @@ class MEMEParser {
             results.push({
                 alphabet,
                 backgroundFrequencies: this.collapseBackgroundFrequencies(this.backgroundFrequencies, alphabet),
-                ppm: this.collapsePWM(parsed, alphabet),
+                ppm: this.collapsePPM(parsed, alphabet),
                 name: motifName(motif.attributes)
             });
         });

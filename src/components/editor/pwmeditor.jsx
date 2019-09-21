@@ -10,7 +10,7 @@ const SETOPTIONS = {
     tabSize: 2
 };
 
-class PWMEditor extends React.Component {
+class PPMEditor extends React.Component {
     
     _onChange(text) {
 	    try {
@@ -45,4 +45,4 @@ class PWMEditor extends React.Component {
     }
     
 };
-export default PWMEditor;
+export default PPMEditor;

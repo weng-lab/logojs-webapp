@@ -1,6 +1,6 @@
 import { CompleteAlphabet, DNAAlphabet, disymbolAlphabet } from "logosj-react";
 
-export const DNA_PROTEIN_PWM = [
+export const DNA_PROTEIN_PPM = [
     [ 0.2, 0, 0, 0.2 ],
     [ 0.2, 0, 0, 0.2 ],
     [ 0, 0, 0, 0 ],
@@ -25,7 +25,7 @@ export const DNA_PROTEIN_PWM = [
     [ 0, 0, 0, 0.2 ]
 ];
 
-export const PROTEIN_DNA_PWM = [
+export const PROTEIN_DNA_PPM = [
     [0,0,0,0,0,0,0,0.5,0,0,0,0,0,0,0,2,0,0,0,0,0,0],
     [0,0,0,0,0,0,0.2,0,0,0,0,0,0,0,0.5,0,0,0,0,0,0,0],
     [0,0,0,1.1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -51,7 +51,7 @@ export const PROTEIN_DNA_PWM = [
     [0,0,0,0,0.5,0,0,0,0,0,0,0,0,0,0.5,0.5,0,0,0,0,0,0]
 ];
 
-export const CTCF_PWM = [
+export const CTCF_PPM = [
   [0.09, 0.31, 0.08, 0.50], [0.18, 0.15, 0.45, 0.20],
   [0.30, 0.05, 0.49, 0.14], [0.06, 0.87, 0.02, 0.03], 
   [0.00, 0.98, 0.00, 0.02], [0.81, 0.01, 0.07, 0.09], 
@@ -64,7 +64,7 @@ export const CTCF_PWM = [
   [0.44, 0.19, 0.29, 0.06]
 ];
 
-export const CAP_PWM = [
+export const CAP_PPM = [
     [0.3673469387755103, 0.08163265306122448, 0.18367346938775508, 0.3673469387755103],
     [0, 0.16326530612244897, 0.04081632653061224, 0.7959183673469393],
     [0.04081632653061224, 0.02040816326530612, 0.8163265306122455, 0.12244897959183672],
@@ -86,7 +86,7 @@ export const CAP_PWM = [
     [0.3673469387755103, 0.02040816326530612, 0, 0.612244897959184]
 ];
 
-export const INTRON_PWM = [
+export const INTRON_PPM = [
     [0.060000000000000005,0.46000000000000024,0.10999999999999999,0.37000000000000016],
     [0.16,0.22000000000000006,0.22000000000000006,0.4000000000000002],
     [0.09999999999999999,0.26000000000000006,0.16,0.48000000000000026],
@@ -108,7 +108,7 @@ export const INTRON_PWM = [
     [0.16,0.23000000000000007,0.5600000000000003,0.05],
 ];
 
-export const RNA_PWM = [
+export const RNA_PPM = [
     [0.7, 0.1, 0.1, 0.1],
     [0, 1, 0, 0],
     [0, 0, 0, 1],
@@ -118,7 +118,7 @@ export const RNA_PWM = [
     [0.3, 0.2, 0.3, 0.2]
 ];
 
-export const METHYL_PWM = [
+export const METHYL_PPM = [
     [0, 0, 0, 1, 0, 0],
     [0, 0, 0, 1, 0, 0],
     [0.3, 0, 0.3, 0.4, 0, 0],
@@ -156,7 +156,7 @@ export const HEX_ALPHABET = [
     { color: "#000088", component: CompleteAlphabet[14].component, regex: "0" }
 ];
 
-export const HEX_PWM = () => {
+export const HEX_PPM = () => {
     let r = [];
     for (let i = 0; i < 8; ++i) {
         let rr = [];
@@ -168,7 +168,7 @@ export const HEX_PWM = () => {
     return r;
 };
 
-export const PROTEIN_PWM = [
+export const PROTEIN_PPM = [
     [0.009900990099009901,0,0.019801980198019802,0,0,0.039603960396039604,0,0,0.20792079207920797,0,0.5544554455445547,0,0,0,0,0,0,0,0.06930693069306931,0,0,0],
     [0.0297029702970297,0,0,0.0297029702970297,0,0,0,0,0,0.18811881188118815,0,0,0.04950495049504951,0.3465346534653467,0.009900990099009901,0.1089108910891089,0.019801980198019802,0.15841584158415842,0.0297029702970297,0,0.009900990099009901,0],
     [0.009900990099009901,0,0.009900990099009901,0,0,0,0,0,0.19801980198019806,0,0.3465346534653467,0.3861386138613863,0,0,0,0,0,0,0.04950495049504951,0,0,0],
@@ -205,10 +205,10 @@ export const PROTEIN_PWM = [
     [0,0,0,0,0,0,0,0,0.6534653465346538,0,0.16831683168316833,0,0,0,0,0,0,0,0.1386138613861386,0,0,0]
 ];
 
-export const ALT_PROTEIN_PWM = () => {
+export const ALT_PROTEIN_PPM = () => {
     let result = [];
-    for (let i = 0; i < PROTEIN_PWM.length; ++i) {
-        let nresult = [ ...PROTEIN_PWM[i] ];
+    for (let i = 0; i < PROTEIN_PPM.length; ++i) {
+        let nresult = [ ...PROTEIN_PPM[i] ];
         nresult[1] = nresult[3] + nresult[12]; nresult[3] = 0; nresult[12] = 0;
         nresult[21] = nresult[4] + nresult[14]; nresult[4] = 0; nresult[14] = 0;
         result.push(nresult);
@@ -218,7 +218,7 @@ export const ALT_PROTEIN_PWM = () => {
 
 export const DINUCLEOTIDE_ALPHABET = () => disymbolAlphabet(DNAAlphabet);
 
-export const DINUCLEOTIDE_PWM = [
+export const DINUCLEOTIDE_PPM = [
     [ 0, 0, 0.25, 0, 0, 0, 0, 0.25, 0.25, 0, 0, 0, 0, 0, 0.25, 0 ],
     [ 0, 0, 0, 0.4, 0.2, 0, 0, 0, 0, 0, 0, 0, 0, 0.2, 0.2, 0 ],
     [ 0, 0, 0, 0.3, 0, 0, 0, 0, 0, 0, 0, 0.2, 0, 0, 0.5, 0 ],
@@ -240,7 +240,7 @@ export const ANNOTATED_ALPHABET = [
     { color: "#aaaaaa", component: T, regex: "T" }
 ];
 
-export const ANNOTATED_PWM = [
+export const ANNOTATED_PPM = [
     [ 2, 0, 0, 0, 0, 0, 0, 0 ],
     [ 0, 0, 2, 0, 0, 0, 0, 0 ],
     [ 2, 0, 0, 0, 0, 0, 0, 0 ],
@@ -258,7 +258,7 @@ export const ANNOTATED_PWM = [
     [ 0, 0, 0, 2, 0, 0, 0, 0 ]
 ];
 
-export const SNP_PWM = [
+export const SNP_PPM = [
     [ 0.05, 0.05, 0, 0 ],
     [ 0, 0, 0.3, 0.7 ],
     [ 0, 0, 0.05, 0.05 ],
@@ -269,7 +269,7 @@ export const SNP_PWM = [
     [ 0, 0, 0.1, 0 ]
 ];
 
-export const SNP_REF_PWM = [
+export const SNP_REF_PPM = [
     [ 2, 0, 0, 0 ],
     [ 0, 0, 0, 2 ],
     [ 2, 0, 0, 0 ],
@@ -290,7 +290,7 @@ export const TRINUCLEOTIDE_ALPHABET = [
     { color: "#000088", component: [ T, A, G ], regex: "TAG" }
 ];
 
-export const TRINUCLEOTIDE_PWM = [
+export const TRINUCLEOTIDE_PPM = [
     [ 0.8, 0.2, 0 ],
     [ 0, 0.8, 0.2 ],
     [ 0.2, 0, 0.8 ]
@@ -302,7 +302,7 @@ export const MULTINUMBER_ALPHABET = [
     { color: "#0000ff", component: [ N1, N2, N3 ], regex: "123" }
 ];
 
-export const AA_PWM = [
+export const AA_PPM = [
     [ 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, -4.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     [ 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, -2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     [ 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3.8, 0, 0, 0 ],
@@ -317,7 +317,7 @@ export const AA_PWM = [
     [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
 ];
 
-export const DNA_NEGATIVE_PWM = [
+export const DNA_NEGATIVE_PPM = [
     [ 0, 0, 0, 0 ],
     [ -0.5, 0.5, -0.5, 0.5 ],
     [ 0.5, -2, -2, 3 ],
@@ -330,7 +330,7 @@ export const DNA_NEGATIVE_PWM = [
     [ 0, 0, 0, 0 ]
 ];
 
-export const DNA_NEGATIVE_PWM2 = [
+export const DNA_NEGATIVE_PPM2 = [
     [ 1, 0, 0, -1 ],
     [ -2, -0.7, -1, 4.1 ],
     [ -2, -0.5, -1.5, 5 ],

@@ -2,63 +2,63 @@ import React from 'react';
 import { CompleteAlphabet, DNAAlphabet } from 'logosj-react';
 
 import SyntaxHighlighter from '../syntax';
-import { INTRON_PWM, CAP_PWM, CTCF_PWM } from '../constants';
-import { jsCodestring, formatPWM } from '../../../common/codestrings';
+import { INTRON_PPM, CAP_PPM, CTCF_PPM } from '../constants';
+import { jsCodestring, formatPPM } from '../../../common/codestrings';
 import { indentCode } from '../../../common/utils';
 
-const CAP_PWM_CODE = `
-const CAP_PWM = ${formatPWM(CAP_PWM)};
+const CAP_PPM_CODE = `
+const CAP_PPM = ${formatPPM(CAP_PPM)};
 `.substring(1);
 
 export const CAP_CODESTRING_JS = jsCodestring(`
-${CAP_PWM_CODE}
-logosj.embedDNALogo(document.getElementById("logo"), { ppm: CAP_PWM });
+${CAP_PPM_CODE}
+logosj.embedDNALogo(document.getElementById("logo"), { ppm: CAP_PPM });
 `);
 
 export const CAP_CODESTRING_REACT = `
 import { DNALogo } from 'logosj-react';
-${CAP_PWM_CODE}
+${CAP_PPM_CODE}
 export const CAPLogo = props => (
-    <DNALogo ppm={CAP_PWM} />
+    <DNALogo ppm={CAP_PPM} />
 );
 `;
 
-const CTCF_PWM_CODE = `
-const CTCF_PWM = ${formatPWM(CTCF_PWM)};
+const CTCF_PPM_CODE = `
+const CTCF_PPM = ${formatPPM(CTCF_PPM)};
 `;
 
 export const CTCF_CODESTRING_REACT = `
 import { DNALogo } from 'logosj-react';
-${CTCF_PWM_CODE}
+${CTCF_PPM_CODE}
 export const CTCFLogo = props => (
-    <DNALogo ppm={CTCF_PWM} mode="FREQUENCY" />
+    <DNALogo ppm={CTCF_PPM} mode="FREQUENCY" />
 );
 `;
 
 export const CTCF_CODESTRING_JS = jsCodestring(`
-${CTCF_PWM_CODE}
-logosj.embedDNALogo(document.getElementById("logo"), { ppm: CTCF_PWM, mode: "FREQUENCY" });
+${CTCF_PPM_CODE}
+logosj.embedDNALogo(document.getElementById("logo"), { ppm: CTCF_PPM, mode: "FREQUENCY" });
 `);
 
-const INTRON_PWM_CODE = `
-const INTRON_PWM = ${formatPWM(INTRON_PWM)};
+const INTRON_PPM_CODE = `
+const INTRON_PPM = ${formatPPM(INTRON_PPM)};
 `;
 
 export const INTRON_CODESTRING_REACT = `
 import { DNALogo } from 'logosj-react';
-${INTRON_PWM_CODE}
+${INTRON_PPM_CODE}
 export const IntronLogo = props => (
-    <DNALogo ppm={INTRON_PWM} startpos={-18} />
+    <DNALogo ppm={INTRON_PPM} startpos={-18} />
 );
 `;
 
 export const INTRON_CODESTRING_JS = jsCodestring(`
-${INTRON_PWM_CODE}
-logosj.embedDNALogo(document.getElementById("logo"), { ppm: INTRON_PWM, startpos: -18 });
+${INTRON_PPM_CODE}
+logosj.embedDNALogo(document.getElementById("logo"), { ppm: INTRON_PPM, startpos: -18 });
 `);
 
 export const LOWERCASE_CONSTANTS = `
-const LOWERCASE_PWM = [
+const LOWERCASE_PPM = [
   [0.09, 0.31, 0.08, 0.50], [0.18, 0.15, 0.45, 0.20], [0.30, 0.05, 0.49, 0.14],
   [0.06, 0.87, 0.02, 0.03], [0.00, 0.98, 0.00, 0.02], [0.81, 0.01, 0.07, 0.09], 
   [0.04, 0.57, 0.36, 0.01], [0.11, 0.47, 0.05, 0.35], [0.93, 0.01, 0.03, 0.01],
@@ -79,14 +79,14 @@ export const LOWERCASE_CODESTRING_REACT = `
 import { Logo } from 'logosj-react';
 ${LOWERCASE_CONSTANTS}
 export const LowercaseLogo = props => (
-    <Logo alphabet={LOWERCASE_ALPHABET} ppm={LOWERCASE_PWM} />
+    <Logo alphabet={LOWERCASE_ALPHABET} ppm={LOWERCASE_PPM} />
 );
 `;
 
 export const LOWERCASE_CODESTRING_JS = jsCodestring(`
 ${LOWERCASE_CONSTANTS}
 logosj.embedLogo(document.getElementById("logo"), {
-  ppm: LOWERCASE_PWM,
+  ppm: LOWERCASE_PPM,
   alphabet: LOWERCASE_ALPHABET
 });
 `);
@@ -118,7 +118,7 @@ export const INFORMATION_CONTENT_DEMO = {
     reactCodestring: CAP_CODESTRING_REACT,
     jsCodestring: CAP_CODESTRING_JS,
     logoProps: {
-        ppm: CAP_PWM
+        ppm: CAP_PPM
     },
     description: "A DNA logo can use information content to scale its letters.",
     header: "Information Content",
@@ -129,7 +129,7 @@ export const FREQUENCY_DEMO = {
     reactCodestring: CTCF_CODESTRING_REACT,
     jsCodestring: CTCF_CODESTRING_JS,
     logoProps: {
-        ppm: CTCF_PWM,
+        ppm: CTCF_PPM,
         mode: "FREQUENCY"
     },
     description: "A DNA logo can use frequency to scale its letters.",
@@ -141,7 +141,7 @@ export const STARTPOS_DEMO = {
     reactCodestring: INTRON_CODESTRING_REACT,
     jsCodestring: INTRON_CODESTRING_JS,
     logoProps: {
-        ppm: INTRON_PWM,
+        ppm: INTRON_PPM,
         startpos: -18
     },
     description: "A DNA logo can use a custom number for the first base.",
@@ -155,7 +155,7 @@ or y-axis.
 `;
 
 const NOAXIS_CONSTANTS = `
-const PWM = [
+const PPM = [
   [0.09, 0.31, 0.08, 0.50], [0.18, 0.15, 0.45, 0.20], [0.30, 0.05, 0.49, 0.14],
   [0.06, 0.87, 0.02, 0.03], [0.00, 0.98, 0.00, 0.02], [0.81, 0.01, 0.07, 0.09], 
   [0.04, 0.57, 0.36, 0.01], [0.11, 0.47, 0.05, 0.35], [0.93, 0.01, 0.03, 0.01],
@@ -171,7 +171,7 @@ import { RawLogo, DNAAlphabet } from 'logosj-react';
 ${NOAXIS_CONSTANTS}
 export const NoAxisLogo = props => (
   <svg viewBox="0 0 1900 100">
-    <RawLogo alphabet={DNAAlphabet} values={PWM} glyphWidth={100} stackHeight={100} />
+    <RawLogo alphabet={DNAAlphabet} values={PPM} glyphWidth={100} stackHeight={100} />
   </svg>
 );
 `;
@@ -179,7 +179,7 @@ export const NoAxisLogo = props => (
 const NOAXIS_JS = `
 ${NOAXIS_CONSTANTS}
 logosj.embedRawLogo(document.getElementById("logo"), {
-  values: PWM,
+  values: PPM,
   alphabet: logosj.DNAAlphabet,
   glyphWidth: 100,
   stackHeight: 100
@@ -207,7 +207,7 @@ export const NOAXIS_DEMO = {
     reactCodestring: NOAXIS_CODESTRING_REACT,
     jsCodestring: NOAXIS_CODESTRING_JS,
     logoProps: {
-        values: CTCF_PWM,
+        values: CTCF_PPM,
         alphabet: DNAAlphabet,
         raw: true,
         glyphWidth: 100,
@@ -229,7 +229,7 @@ export const LOWERCASE_DEMO = {
     reactCodestring: LOWERCASE_CODESTRING_REACT,
     jsCodestring: LOWERCASE_CODESTRING_JS,
     logoProps: {
-        ppm: CTCF_PWM,
+        ppm: CTCF_PPM,
         alphabet: LOWERCASE_ALPHABET,
         custom: true
     },

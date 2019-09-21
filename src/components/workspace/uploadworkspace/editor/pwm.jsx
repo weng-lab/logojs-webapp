@@ -1,19 +1,19 @@
 import React from 'react';
 import * as os from 'os';
 
-import { PWMEditor } from '../../../editor/index';
+import { PPMEditor } from '../../../editor/index';
 
-const formatPWM = ppm => (
+const formatPPM = ppm => (
     '[' + os.EOL + ppm.map( row => (
         "    [" + row.join(", ") + ']'
     )).join("," + os.EOL) + os.EOL + ']'
 );
 
-const WorkspacePWMEditor = ({ logo, onPWMChange }) => (
-    <PWMEditor
+const WorkspacePPMEditor = ({ logo, onPPMChange }) => (
+    <PPMEditor
         height="100%" width="100%"
-        text={formatPWM(logo.ppm)}
-        onChange={result => onPWMChange(result.parsed)}
+        text={formatPPM(logo.ppm)}
+        onChange={result => onPPMChange(result.parsed)}
         alphabetlength={logo.alphabet.length} />
 );
-export default WorkspacePWMEditor;
+export default WorkspacePPMEditor;
