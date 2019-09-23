@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Menu, Dropdown, Button, Icon } from 'semantic-ui-react';
-import { embedLogo, Logo, INFORMATION_CONTENT } from 'logosj-react';
+import { embedLogo, Logo, INFORMATION_CONTENT, LogoWithNegatives } from 'logosj-react';
 
 import { _svgdata } from '../../svgdownload/utils';
 import SVGZip from '../../../utilities/zipfile';
@@ -42,12 +42,14 @@ class UploadWorkspace extends React.Component {
 	};
     }
 
-    _updateFile() {
+    _updateFile(hasNegatives, mode) {
         const nLogo = {
             startpos: this.state.selected.startpos,
-            alphabet: this.state.selected.alphabet,
-            backgroundFrequencies: this.state.selected.backgroundFrequencies
+            alphabet: this.state.selected.alphabet
         };
+        if (!hasNegatives) nLogo.backgroundFrequencies = this.state.selected.backgroundFrequencies;
+        if (!hasNegatives) nLogo.mode = mode;
+        if (!hasNegatives && mode === INFORMATION_CONTENT) nLogo.yAxisMax = this.state.selected.yAxisAuto === false ? this.state.selected.yAxisMax : null;
         const nSets = [ ...this.state.logoSets ];
         const nLogos = this.state.selectedFile.logos.map( logo => ({
             ...logo,
@@ -65,12 +67,14 @@ class UploadWorkspace extends React.Component {
         });
     }
 
-    _updateAll() {
+    _updateAll(hasNegatives, mode) {
         const nLogo = {
             startpos: this.state.selected.startpos,
-            alphabet: this.state.selected.alphabet,
-            backgroundFrequencies: this.state.selected.backgroundFrequencies
+            alphabet: this.state.selected.alphabet
         };
+        if (!hasNegatives) nLogo.backgroundFrequencies = this.state.selected.backgroundFrequencies;
+        if (!hasNegatives) nLogo.mode = mode;
+        if (!hasNegatives && mode === INFORMATION_CONTENT) nLogo.yAxisMax = this.state.selected.yAxisAuto === false ? this.state.selected.yAxisMax : null;
         const nSets = [ ...this.state.logoSets ];
         nSets.forEach( (logoSet, i) => {
             const nLogos = logoSet.logos.map( logo => ({
@@ -292,12 +296,27 @@ class UploadWorkspace extends React.Component {
             yAxisMax
         });
     }
+
+    _hasNegatives(ppm) {
+        let r = false;
+        ppm.forEach( row => { row.forEach( x => { if (x < 0) r = true; } ); } );
+        return r;
+    }
     
     render() {
+        
         let isdone = this.state.remaining === 0 && this.state.logoSets.length > 0;
         let selectedPPMs = this.state.selectedFile && this.state.selectedFile.logos;
         const selectedProps = this.state.selected ? { ...this.state.selected } : {};
         if (selectedProps && selectedProps.yAxisAuto) selectedProps.yAxisMax = null;
+        
+        const defaultMax = this.state.selected && (
+            this.state.selected.backgroundFrequencies
+                ? Math.max(...this.state.selected.backgroundFrequencies.map( x => Math.log2(1.0 / (x || 0.01))))
+                : (this.state.selected.alphabet && Math.log2(this.state.selected.alphabet.length))
+        );
+        const hasNegatives = this.state.selected && this.state.selected.ppm && this._hasNegatives(this.state.selected.ppm);
+        
 	return (
 	    <React.Fragment>
 	      <PasteModal open={this.state.pasteModalShown} onClose={this.pasteModalClosed.bind(this)} />
@@ -307,6 +326,7 @@ class UploadWorkspace extends React.Component {
                   { this.state.selected && (
                       <Grid.Column width={3}>
                         <SettingsPanel
+                          hasNegatives={hasNegatives}
                           onApplyToFile={this._updateFile.bind(this)}
                           onApplyToAll={this._updateAll.bind(this)}
                           onStartPosChange={this._startPosChange.bind(this)}
@@ -317,8 +337,8 @@ class UploadWorkspace extends React.Component {
                           backgroundFrequencies={this._backgroundFrequencyMap()}
                           onFrequencyChange={this._backgroundUpdate.bind(this)}
                           onAlphabetUpdate={this._alphabetUpdate.bind(this)}
-                          yAxisAuto={this.state.selected.yAxisAuto !== false}
-                          yAxisMax={this.state.selected.yAxisMax || Math.max(...this.state.selected.backgroundFrequencies.map( x => Math.log2(1.0 / (x || 0.01)) ))}
+                          yAxisAuto={this.state.selected && this.state.selected.yAxisAuto !== false}
+                          yAxisMax={(this.state.selected && this.state.selected.yAxisMax) || defaultMax}
                           onYAxisToggle={this._yAxisToggle.bind(this)}
                         />
                       </Grid.Column>
@@ -385,7 +405,13 @@ class UploadWorkspace extends React.Component {
                           <div ref={this.hiddenLogo} style={{ display: "none" }} />
                           <div ref={this.logo}
                                style={{ maxHeight: "500px", height: "20%", textAlign: "center" }}>
-                            { isdone && (<Logo {...selectedProps} width="90%" height="100%" />)}
+                            { isdone && (
+                                hasNegatives ? (
+                                    <LogoWithNegatives values={this.state.selected.ppm} {...selectedProps} width="90%" height="100%" />
+                                ) : (
+                                    <Logo {...selectedProps} width="90%" height="100%" />
+                                )
+                            )}
                           </div>
                           <div style={{ maxHeight: "500px", height: "30%", textAlign: "center" }}>
                             <WorkspaceEditorTabs
