@@ -25,7 +25,8 @@ class UploadWorkspace extends React.Component {
             errors: [],
             total: 0,
             remaining: 0,
-            pasteModalShown: false
+            pasteModalShown: false,
+            yAxisAuto: true
         };
     }
 
@@ -36,7 +37,8 @@ class UploadWorkspace extends React.Component {
             mode: logo.mode,
             startpos: logo.startpos || 0,
             alphabet: logo.alphabet,
-            backgroundFrequencies: logo.backgroundFrequencies
+            backgroundFrequencies: logo.backgroundFrequencies,
+            yAxisMax: logo.yAxisAuto === false ? logo.yAxisMax : null
 	};
     }
 
@@ -283,10 +285,19 @@ class UploadWorkspace extends React.Component {
         });
         return map;
     }
+
+    _yAxisToggle(yAxisAuto, yAxisMax) {
+        this._updateCurrent({
+            yAxisAuto,
+            yAxisMax
+        });
+    }
     
     render() {
         let isdone = this.state.remaining === 0 && this.state.logoSets.length > 0;
         let selectedPPMs = this.state.selectedFile && this.state.selectedFile.logos;
+        const selectedProps = this.state.selected ? { ...this.state.selected } : {};
+        if (selectedProps && selectedProps.yAxisAuto) selectedProps.yAxisMax = null;
 	return (
 	    <React.Fragment>
 	      <PasteModal open={this.state.pasteModalShown} onClose={this.pasteModalClosed.bind(this)} />
@@ -305,7 +316,11 @@ class UploadWorkspace extends React.Component {
                           alphabet={this.state.selected ? this.state.selected.alphabet : []}
                           backgroundFrequencies={this._backgroundFrequencyMap()}
                           onFrequencyChange={this._backgroundUpdate.bind(this)}
-                          onAlphabetUpdate={this._alphabetUpdate.bind(this)} />
+                          onAlphabetUpdate={this._alphabetUpdate.bind(this)}
+                          yAxisAuto={this.state.selected.yAxisAuto !== false}
+                          yAxisMax={this.state.selected.yAxisMax || Math.max(...this.state.selected.backgroundFrequencies.map( x => Math.log2(1.0 / (x || 0.01)) ))}
+                          onYAxisToggle={this._yAxisToggle.bind(this)}
+                        />
                       </Grid.Column>
                   )}
                   <Grid.Column width={this.state.selected ? 13 : 16} style={{ height: '100%' }}>
@@ -370,8 +385,7 @@ class UploadWorkspace extends React.Component {
                           <div ref={this.hiddenLogo} style={{ display: "none" }} />
                           <div ref={this.logo}
                                style={{ maxHeight: "500px", height: "20%", textAlign: "center" }}>
-                            { isdone && (<Logo {...this.state.selected}
-                            width="90%" height="100%" />)}
+                            { isdone && (<Logo {...selectedProps} width="90%" height="100%" />)}
                           </div>
                           <div style={{ maxHeight: "500px", height: "30%", textAlign: "center" }}>
                             <WorkspaceEditorTabs

@@ -19,7 +19,8 @@ ${logoinfo.ppm.map(x => "        " + JSON.stringify(x)).join(",\n")}
     backgroundFrequencies: ${JSON.stringify(logoinfo.backgroundFrequencies)},
     alphabet: loadGlyphComponents([
 ${logoinfo.alphabet.map(x => "        " + JSON.stringify({ regex: x.regex, color: x.color })).join(",\n")}
-    ])
+    ]),
+    yAxisMax: ${logoinfo.yAxisMax}
 };
 
 export const MyLogo = props => (
@@ -37,7 +38,8 @@ ${logoinfo.ppm.map(x => "      " + JSON.stringify(x)).join(",\n")}
     backgroundFrequencies: ${JSON.stringify(logoinfo.backgroundFrequencies)},
     alphabet: logosj.loadGlyphComponents([
 ${logoinfo.alphabet.map(x => "      " + JSON.stringify({ regex: x.regex, color: x.color })).join(",\n")}
-    ])
+    ]),
+    yAxisMax: ${logoinfo.yAxisMax}
   };
   logosj.embedLogo(document.getElementById("logo"), logoProps);
 }
