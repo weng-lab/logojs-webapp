@@ -10,7 +10,7 @@
     "compression": "^1.7.4",
     "copy-to-clipboard": "^3.2.0",
     "jszip": "^3.2.2",
-    "logosj-react": "^1.2.1",
+    "logosj-react": "^1.2.3",
     "pretty": "^2.0.0",
     "prismjs": "^1.17.1",
     "react": "^16.8.6",
