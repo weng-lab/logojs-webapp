@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Menu, Dropdown, Button, Icon } from 'semantic-ui-react';
-import { embedLogo, Logo, INFORMATION_CONTENT, LogoWithNegatives } from 'logosj-react';
+import { embedLogo, embedLogoWithNegatives, Logo, INFORMATION_CONTENT, LogoWithNegatives } from 'logosj-react';
 
 import { _svgdata } from '../../svgdownload/utils';
 import SVGZip from '../../../utilities/zipfile';
@@ -233,7 +233,7 @@ class UploadWorkspace extends React.Component {
         this.state.logoSets.forEach( logoSet => {
             const folder = zip.folder(logoSet.name || logoSet.file.name);
             logoSet.logos.forEach( (logo, i) => {
-                embedLogo(this.hiddenLogo.current, logo);
+                hasNegatives(logo.ppm || logo.values) ? embedLogoWithNegatives(this.hiddenLogo.current, { ...logo, values: logo.ppm || logo.values }) : embedLogo(this.hiddenLogo.current, logo);
                 folder.file((logo.name || "motif_" + (i + 1)) + ".svg", _svgdata(this.hiddenLogo.current));
             });
         });
