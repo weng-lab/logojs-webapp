@@ -20,7 +20,9 @@ ${logoinfo.ppm.map(x => "        " + JSON.stringify(x)).join(",\n")}
     alphabet: loadGlyphComponents([
 ${logoinfo.alphabet.map(x => "        " + JSON.stringify({ regex: x.regex, color: x.color })).join(",\n")}
     ]),
-    yAxisMax: ${logoinfo.yAxisMax}
+    yAxisMax: ${logoinfo.yAxisMax},
+    negativealpha: ${logoinfo.negativealpha},
+    inverted: ${logoinfo.inverted}
 };
 
 export const MyLogo = props => (
@@ -39,7 +41,9 @@ ${logoinfo.ppm.map(x => "      " + JSON.stringify(x)).join(",\n")}
     alphabet: logosj.loadGlyphComponents([
 ${logoinfo.alphabet.map(x => "      " + JSON.stringify({ regex: x.regex, color: x.color })).join(",\n")}
     ]),
-    yAxisMax: ${logoinfo.yAxisMax}
+    yAxisMax: ${logoinfo.yAxisMax},
+    negativealpha: ${logoinfo.negativealpha},
+    inverted: ${logoinfo.inverted}
   };
   logosj.embedLogo(document.getElementById("logo"), logoProps);
 }

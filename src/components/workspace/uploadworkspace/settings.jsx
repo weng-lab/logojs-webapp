@@ -7,12 +7,12 @@ import { ModeDropdown, GlyphList, ColoredInput } from '../settings/index';
 const CONFIRM = "Are you sure? This action cannot be undone.";
 
 const SettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
-			 onModeChange, mode, logodefault, scaledefault,
+			 onModeChange, mode, logodefault, scaledefault, onAlphaChange, negativeAlpha,
 			 startposdefault, alphabet, onAlphabetUpdate, onFrequencyChange,
                          backgroundFrequencies, onApplyToFile, onApplyToAll, yAxisAuto,
-                         onYAxisToggle, yAxisMax, hasNegatives }) => (
+                         onYAxisToggle, yAxisMax, hasNegatives, inverted, onInvertedToggle }) => (
 			     <Menu vertical style={{ width: '100%', backgroundColor: "#fafafa" }}>
-                               { !hasNegatives && (
+                               { !hasNegatives ? (
                                    <React.Fragment>
 			             <Menu.Item>
 				       <ModeDropdown header="Letter height"
@@ -36,6 +36,25 @@ const SettingsPanel = ({ onLogoTypeChange, onScaleChange, onStartPosChange,
                                            
                                          </Menu.Item>
                                      )}
+                                   </React.Fragment>
+                               ) : (
+                                   <React.Fragment>
+                                     <Menu.Item>
+                                       <Header as="h3">Negative letter orientation</Header>
+                                       <Form>
+                                         <Form.Field>
+                                           <Radio checked={!inverted} label="Upside down" onClick={() => inverted && onInvertedToggle()} />
+                                         </Form.Field>
+                                         <Form.Field>
+				           <Radio checked={inverted} label="Right side up" onClick={() => !inverted && onInvertedToggle()} />
+                                         </Form.Field>
+                                       </Form>
+			             </Menu.Item>
+                                     <Menu.Item>
+                                       <Header as="h3">Negative letter opacity</Header>
+                                       <strong>{negativeAlpha} / 255</strong>
+                                       <Form.Input min={0} max={255} onChange={onAlphaChange} step={1} type='range' value={negativeAlpha} />
+			             </Menu.Item>
                                    </React.Fragment>
                                )}
                                <Menu.Item>

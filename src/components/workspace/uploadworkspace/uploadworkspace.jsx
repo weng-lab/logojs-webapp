@@ -25,8 +25,7 @@ class UploadWorkspace extends React.Component {
             errors: [],
             total: 0,
             remaining: 0,
-            pasteModalShown: false,
-            yAxisAuto: true
+            pasteModalShown: false
         };
     }
 
@@ -38,7 +37,9 @@ class UploadWorkspace extends React.Component {
             startpos: logo.startpos || 0,
             alphabet: logo.alphabet,
             backgroundFrequencies: logo.backgroundFrequencies,
-            yAxisMax: logo.yAxisAuto === false ? logo.yAxisMax : null
+            yAxisMax: logo.yAxisAuto === false ? logo.yAxisMax : null,
+            inverted: logo.inverted,
+            negativealpha: logo.negativealpha
 	};
     }
 
@@ -302,6 +303,18 @@ class UploadWorkspace extends React.Component {
         ppm.forEach( row => { row.forEach( x => { if (x < 0) r = true; } ); } );
         return r;
     }
+
+    _invertedToggle() {
+        this._updateCurrent({
+            inverted: !this.state.selected.inverted
+        });
+    }
+
+    _alphaChange(e, { value }) {
+        this._updateCurrent({
+            negativealpha: value
+        });
+    }
     
     render() {
         
@@ -340,6 +353,10 @@ class UploadWorkspace extends React.Component {
                           yAxisAuto={this.state.selected && this.state.selected.yAxisAuto !== false}
                           yAxisMax={(this.state.selected && this.state.selected.yAxisMax) || defaultMax}
                           onYAxisToggle={this._yAxisToggle.bind(this)}
+                          onInvertedToggle={this._invertedToggle.bind(this)}
+                          inverted={this.state.selected && this.state.selected.inverted}
+                          onAlphaChange={this._alphaChange.bind(this)}
+                          negativeAlpha={this.state.selected && (this.state.selected.negativealpha === undefined ? 255 : this.state.selected.negativealpha)}
                         />
                       </Grid.Column>
                   )}
