@@ -45,12 +45,41 @@ app.get('/healthz', (req, res) => {
     res.status(200).send("healthy\n");
 });
 
+const hasNegatives = values => {
+    let r = false;
+    values.forEach( row => {
+	row.forEach( x => {
+	    if (x < 0) r = true;
+	});
+    });
+    return r;
+};
+
 app.get('/svg/:s', (req, res) => {
 
     const logo = decodeSvg(req.params.s);
     logo.alphabet = (logo.alphabet.raw || logo.alphabet).map(lookupComponent);
     
     res.setHeader('Content-Type', 'image/svg+xml');
+
+    const values = logo.values || logo.ppm;
+    if (values && values.forEach)
+	if (hasNegatives(values))
+	    return res.status(200).send(
+		ReactDOMServer.renderToStaticMarkup(
+		    React.createElement(
+			logos.LogoWithNegatives,
+			logo
+		    )
+		).replace(
+			/svg/, 'svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"'
+		).replace(
+  			/width="1"/, ''
+		).replace(
+  			/height="1"/, ''
+		)
+	    );
+    
     return res.status(200).send(
 	ReactDOMServer.renderToStaticMarkup(
 	    React.createElement(

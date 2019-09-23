@@ -1,6 +1,12 @@
 import namedColors from 'color-name-list';
 import { CompleteAlphabet } from 'logosj-react';
 
+export const hasNegatives = (ppm) => {
+    let r = false;
+    ppm.forEach( row => { row.forEach( x => { if (x < 0) r = true; } ); } );
+    return r;
+}
+
 export const glyphsymbols = () => {
     let retval = {};
     CompleteAlphabet.map( v => (

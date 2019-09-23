@@ -3,6 +3,7 @@ import React from 'react';
 import { LogoMenu, LogoSVGDownloadButton, EmbedButton,
 	 LogoSVGCopyButton, PermalinkButton } from '../menu/index';
 import { jsCodestring } from '../../../common/codestrings';
+import { hasNegatives } from '../../../common/utils';
 
 const ITEMSTYLE = {
     logosize: "16pt",
@@ -10,10 +11,10 @@ const ITEMSTYLE = {
 };
 
 const reactCode = logoinfo => `
-import { Logo, loadGlyphComponents } from 'logosj-react';
+import { Logo${hasNegatives(logoinfo.ppm) ? "WithNegatives" : ""}, loadGlyphComponents } from 'logosj-react';
 const myLogoProps = {
     startpos: ${logoinfo.startpos},
-    ppm: [
+    ${hasNegatives(logoinfo.ppm) ? "values" : "ppm"}: [
 ${logoinfo.ppm.map(x => "        " + JSON.stringify(x)).join(",\n")}
     ],
     backgroundFrequencies: ${JSON.stringify(logoinfo.backgroundFrequencies)},
@@ -26,7 +27,7 @@ ${logoinfo.alphabet.map(x => "        " + JSON.stringify({ regex: x.regex, color
 };
 
 export const MyLogo = props => (
-    <Logo {...myLogoProps} {...props} />;
+    <Logo${hasNegatives(logoinfo.ppm) ? "WithNegatives" : ""} {...myLogoProps} {...props} />;
 );
 `.substring(1); // trim leading line break
 
@@ -34,7 +35,7 @@ const jsCode = logoinfo => jsCodestring(`
 window.onload = function() {
   const logoProps = {
     startpos: ${logoinfo.startpos},
-    ppm: [
+    ${hasNegatives(logoinfo.ppm) ? "values" : "ppm"}: [
 ${logoinfo.ppm.map(x => "      " + JSON.stringify(x)).join(",\n")}
     ],
     backgroundFrequencies: ${JSON.stringify(logoinfo.backgroundFrequencies)},
@@ -45,7 +46,7 @@ ${logoinfo.alphabet.map(x => "      " + JSON.stringify({ regex: x.regex, color: 
     negativealpha: ${logoinfo.negativealpha},
     inverted: ${logoinfo.inverted}
   };
-  logosj.embedLogo(document.getElementById("logo"), logoProps);
+  logosj.embedLogo${hasNegatives(logoinfo.ppm) ? "WithNegatives" : ""}(document.getElementById("logo"), logoProps);
 }
 `);
 

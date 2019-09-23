@@ -5,6 +5,7 @@ import { embedLogo, Logo, INFORMATION_CONTENT, LogoWithNegatives } from 'logosj-
 import { _svgdata } from '../../svgdownload/utils';
 import SVGZip from '../../../utilities/zipfile';
 
+import { hasNegatives } from '../../../common/utils';
 import MotifSelector from './motifselector';
 import SettingsPanel from './settings';
 import LogoMenu from './menu';
@@ -32,6 +33,7 @@ class UploadWorkspace extends React.Component {
     _format_logoinfo(logo) {
 	return {
 	    ppm: logo.ppm,
+            values: logo.ppm,
 	    scale: 1.0,
             mode: logo.mode,
             startpos: logo.startpos || 0,
@@ -298,12 +300,6 @@ class UploadWorkspace extends React.Component {
         });
     }
 
-    _hasNegatives(ppm) {
-        let r = false;
-        ppm.forEach( row => { row.forEach( x => { if (x < 0) r = true; } ); } );
-        return r;
-    }
-
     _invertedToggle() {
         this._updateCurrent({
             inverted: !this.state.selected.inverted
@@ -328,7 +324,7 @@ class UploadWorkspace extends React.Component {
                 ? Math.max(...this.state.selected.backgroundFrequencies.map( x => Math.log2(1.0 / (x || 0.01))))
                 : (this.state.selected.alphabet && Math.log2(this.state.selected.alphabet.length))
         );
-        const hasNegatives = this.state.selected && this.state.selected.ppm && this._hasNegatives(this.state.selected.ppm);
+        const _hasNegatives = this.state.selected && this.state.selected.ppm && hasNegatives(this.state.selected.ppm);
         
 	return (
 	    <React.Fragment>
@@ -339,7 +335,7 @@ class UploadWorkspace extends React.Component {
                   { this.state.selected && (
                       <Grid.Column width={3}>
                         <SettingsPanel
-                          hasNegatives={hasNegatives}
+                          hasNegatives={_hasNegatives}
                           onApplyToFile={this._updateFile.bind(this)}
                           onApplyToAll={this._updateAll.bind(this)}
                           onStartPosChange={this._startPosChange.bind(this)}
@@ -423,7 +419,7 @@ class UploadWorkspace extends React.Component {
                           <div ref={this.logo}
                                style={{ maxHeight: "500px", height: "20%", textAlign: "center" }}>
                             { isdone && (
-                                hasNegatives ? (
+                                _hasNegatives ? (
                                     <LogoWithNegatives values={this.state.selected.ppm} {...selectedProps} width="90%" height="100%" />
                                 ) : (
                                     <Logo {...selectedProps} width="90%" height="100%" />
