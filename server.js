@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const compression = require('compression');
+const hsts = require('hsts');
 
 const logos = require('logosj-react');
 const ReactDOMServer = require('react-dom/server');
@@ -21,6 +22,7 @@ const decodeSvg = j => {
 };
 
 app.use(compression());
+app.use(hsts({ maxAge: 15552000 }));
 app.use('/app', express.static(path.join(__dirname, 'build')));
 app.use('/app/gallery', express.static(path.join(__dirname, 'build')));
 app.use('/app/create', express.static(path.join(__dirname, 'build')));
