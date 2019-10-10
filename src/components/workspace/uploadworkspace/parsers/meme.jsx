@@ -80,7 +80,7 @@ const parseMemeTxt = text => {
             ...result,
             name: motifnames[i],
             alphabet,
-            backgroundFrequencies: alphabet.map( a => backgroundFrequencies[a.regex] )
+            backgroundFrequencies: alphabet.map( a => backgroundFrequencies[a.regex] === undefined ? 1.0 / alphabet.length : backgroundFrequencies[a.regex] )
         }) ),
         name
     };
