@@ -5448,9 +5448,10 @@ loglevel@^1.4.1:
   version "1.6.4"
   resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.6.4.tgz#f408f4f006db8354d0577dcf6d33485b3cb90d56"
 
-logosj-react@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/logosj-react/-/logosj-react-1.2.3.tgz#210b6727002079bb8a064f41c99f5c1802155997"
+logosj-react@^1.4.7:
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/logosj-react/-/logosj-react-1.4.7.tgz#15c4208d5961e0a396da0d0ff1bf07f46944e539"
+  integrity sha512-nxZ/jR75dxgHLARUNiG1A+AphnS8B4gMT6cT6V53T9K5VJWKHEVPy4/981q04xXlXixXstsLPRHkCIR4GAe0uw==
   dependencies:
     color-name-list "^4.10.0"
     react "^16.3.1"
