@@ -50,7 +50,7 @@ ${logoinfo.alphabet.map(x => "      " + JSON.stringify({ regex: x.regex, color: 
 }
 `);
 
-const UploadLogoMenu = ({ svgref, apiurl, logoinfo }) => (
+const UploadLogoMenu = ({ svgref, apiurl, logoinfo, hidecopy }) => (
     <LogoMenu width="100%">
       <LogoSVGDownloadButton {...ITEMSTYLE}
 			     labeltext="save (SVG)" svgref={svgref.current}
@@ -58,8 +58,10 @@ const UploadLogoMenu = ({ svgref, apiurl, logoinfo }) => (
       <ImageDownloadButton {...ITEMSTYLE}
       			     labeltext="save (non-vector)" svgref={svgref.current}
       			     filename="logo" />
-      <LogoSVGCopyButton {...ITEMSTYLE}
-			 labeltext="copy SVG code" svgref={svgref.current} />
+      {!hidecopy && (
+          <LogoSVGCopyButton {...ITEMSTYLE}
+                 labeltext="copy SVG code" svgref={svgref.current} />
+      )}
       <PermalinkButton {...ITEMSTYLE} labeltext="permalink"
 		       url={apiurl} logoinfo={logoinfo} />
       <EmbedButton {...ITEMSTYLE} labeltext="embed" js={jsCode(logoinfo)}

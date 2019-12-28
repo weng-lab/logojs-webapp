@@ -19,10 +19,17 @@ class SVGModal extends React.Component { //  = ({ open, onClose, svg }) => (
 	    copied: success
 	});
     }
+
+    close() {
+        this.setState({
+            copied: false
+        });
+        this.props.onClose && this.props.onClose();
+    }
     
     render() {
         return (
-            <Modal open={this.props.open} onClose={this.props.onClose} style={{ marginTop: '0px' }}>
+            <Modal open={this.props.open} onClose={this.close.bind(this)} style={{ marginTop: '0px' }}>
               <Modal.Header><h2>Copy SVG Markup</h2></Modal.Header>
               <Modal.Content>
                 <SyntaxHighlighter language="jsx" className="highlightfixed">
@@ -33,7 +40,7 @@ class SVGModal extends React.Component { //  = ({ open, onClose, svg }) => (
 	        </CopyToClipboard>
               </Modal.Content>
               <Modal.Actions>
-	        <Button onClick={this.props.onClose}>
+	        <Button onClick={this.close.bind(this)}>
                   <Icon className="check" />Done
                 </Button>
               </Modal.Actions>

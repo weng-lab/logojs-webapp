@@ -399,7 +399,9 @@ class UploadWorkspace extends React.Component {
                 ? Math.max(...this.state.selected.backgroundFrequencies.map( x => Math.log2(1.0 / (x || 0.01))))
                 : (this.state.selected.alphabet && Math.log2(this.state.selected.alphabet.length))
         );
-        const _hasNegatives = this.state.selected && this.state.selected.ppm && hasNegatives(this.state.selected.ppm);
+        const ppm = this.state.selected && this.state.selected.ppm;
+        const alphabet = this.state.selected && this.state.selected.alphabet;
+        const _hasNegatives = ppm && hasNegatives(ppm);
         
 	return (
 	    <React.Fragment>
@@ -492,7 +494,7 @@ class UploadWorkspace extends React.Component {
                                                  selectedmotif={this.state.selected}
                                                  onItemSelected={this.onItemSelected.bind(this)} />
                                 </div>
-                                <LogoMenu svgref={this.logo} apiurl={this.logoPostUrl}
+                                <LogoMenu svgref={this.logo} apiurl={this.logoPostUrl} hidecopy={ppm && alphabet && (ppm.length * alphabet.length > 220)}
                                           logoinfo={this._format_logoinfo(this.state.selected)} />
                               </React.Fragment>
                           )}
