@@ -17,10 +17,12 @@ import { WorkspaceEditorTabs } from './editor';
 
 export const getImageData = (svgref, canvas, extension, callback) => {
     const image = new Image();
-    image.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(_svgdata(ReactDOM.findDOMNode(svgref)));
+    const data = _svgdata(ReactDOM.findDOMNode(svgref));
+    image.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(data);
     image.onload = () => {
-        canvas.width = image.width;
-        canvas.height = image.height;
+        const p = data.split('viewBox="0 0 ')[1].split('"')[0].split(' ');
+        canvas.width = +p[0];
+        canvas.height = +p[1];
         const context = canvas.getContext('2d');
         context.clearRect(0, 0, image.width, image.height);
         context.drawImage(image, 0, 0);
@@ -271,7 +273,7 @@ class UploadWorkspace extends React.Component {
         });
     }
 
-    async downloadStatic(extension) {
+    downloadStatic(extension) {
         const zip = new SVGZip();
         const folders = [];
         const canvas = this.canvas.current;
