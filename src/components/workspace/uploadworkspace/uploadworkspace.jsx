@@ -1,5 +1,6 @@
 import React from 'react';
-import { Grid, Menu, Dropdown, Button, Icon } from 'semantic-ui-react';
+import ReactDOM from 'react-dom';
+import { Grid, Menu, Dropdown, Button, Icon, Modal } from 'semantic-ui-react';
 import { embedLogo, embedLogoWithNegatives, Logo, INFORMATION_CONTENT, LogoWithNegatives } from 'logosj-react';
 
 import { _svgdata } from '../../svgdownload/utils';
@@ -14,6 +15,51 @@ import PasteModal from './pastemodal';
 import { fastaToPPM } from './parsers/fasta';
 import { WorkspaceEditorTabs } from './editor';
 
+export const getImageData = (svgref, canvas, extension, callback) => {
+    const image = new Image();
+    image.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(_svgdata(ReactDOM.findDOMNode(svgref)));
+    image.onload = () => {
+        canvas.width = image.width;
+        canvas.height = image.height;
+        const context = canvas.getContext('2d');
+        context.clearRect(0, 0, image.width, image.height);
+        context.drawImage(image, 0, 0);
+        callback( canvas.toDataURL("image/" + extension).split(',')[1] );
+    };
+}
+
+const DownloadModal = ({ open, onVectorDownload, onStaticDownload, onClose }) => (
+    <Modal open={open} onClose={onClose} style={{ marginTop: '0px' }}>
+        <Modal.Header><h2>Select a file format:</h2></Modal.Header>
+        <Modal.Content>
+            <Grid>
+                <Grid.Row>
+                    <Grid.Column width={2} />
+                    <Grid.Column width={3}>
+                        <Button style={{ fontSize: "20pt" }} onClick={() => onVectorDownload()}>SVG</Button>
+                    </Grid.Column>
+                    <Grid.Column width={1} />
+                    <Grid.Column width={2}>
+                        <Button style={{ fontSize: "20pt" }} onClick={() => onStaticDownload("jpeg")}>JPEG</Button>
+                    </Grid.Column>
+                    <Grid.Column width={1} />
+                    <Grid.Column width={2}>
+                        <Button style={{ fontSize: "20pt" }} onClick={() => onStaticDownload("png")}>PNG</Button>
+                    </Grid.Column>
+                    <Grid.Column width={1} />
+                    <Grid.Column width={2}>
+                        <Button style={{ fontSize: "20pt" }} onClick={() => onStaticDownload("webp")}>WEBP</Button>
+                    </Grid.Column>
+                    <Grid.Column width={2} />
+                </Grid.Row>
+            </Grid>
+        </Modal.Content>
+        <Modal.Actions>
+            <Button onClick={onClose}><Icon className="check" />Done</Button>
+        </Modal.Actions>
+    </Modal>
+);
+
 class UploadWorkspace extends React.Component {
 
     constructor(props) {
@@ -21,12 +67,14 @@ class UploadWorkspace extends React.Component {
         this.logo = React.createRef();
         this.hiddenLogo = React.createRef();
         this.fileInput = React.createRef();
+        this.canvas = React.createRef();
         this.state = {
             logoSets: [],
             errors: [],
             total: 0,
             remaining: 0,
-            pasteModalShown: false
+            pasteModalShown: false,
+            downloadModalShown: false
         };
     }
 
@@ -89,11 +137,6 @@ class UploadWorkspace extends React.Component {
                 ...logoSet,
                 logos: nLogos
             };
-        });
-        console.log({
-            logoSets: nSets,
-            selected: nSets[this.state.selectedIndex.file][this.state.selectedIndex.motif],
-            selectedFile: nSets[this.state.selectedIndex.file]
         });
         this.setState({
             logoSets: nSets,
@@ -228,6 +271,36 @@ class UploadWorkspace extends React.Component {
         });
     }
 
+    async downloadStatic(extension) {
+        const zip = new SVGZip();
+        const folders = [];
+        const canvas = this.canvas.current;
+        const hiddenLogo = this.hiddenLogo.current;
+        const state = this.state;
+        const callbacks = [ imageData => {
+            folders[0].file((state.logoSets[0].logos[0].name || "motif_1") + "." + extension, imageData, { base64: true });
+            hiddenLogo.innerHTML = "";
+            zip.download("motifs.zip");
+        } ];
+        let previous = this.state.logoSets[0].logos[0];
+        this.state.logoSets.forEach( (logoSet, j) => {
+            folders.push(zip.folder(logoSet.name || logoSet.file.name));
+            logoSet.logos.forEach( (logo, i) => {
+                if (i === 0 && j === 0) return;
+                const lc = callbacks[callbacks.length - 1];
+                const pc = { ...previous };
+                callbacks.push( imageData => {
+                    folders[j].file((logo.name || "motif_" + i) + "." + extension, imageData, { base64: true });
+                    hasNegatives(pc.ppm || pc.values) ? embedLogoWithNegatives(hiddenLogo, { ...pc, values: pc.ppm || pc.values }) : embedLogo(hiddenLogo, pc);
+                    getImageData(hiddenLogo, canvas, extension, lc);
+                } );
+                previous = logo;
+            });
+        });
+        hasNegatives(previous.ppm || previous.values) ? embedLogoWithNegatives(hiddenLogo, { ...previous, values: previous.ppm || previous.values }) : embedLogo(hiddenLogo, previous);
+        getImageData(hiddenLogo, canvas, extension, callbacks[callbacks.length - 1]);
+    }
+
     async download() {
         let zip = new SVGZip();
         this.state.logoSets.forEach( logoSet => {
@@ -328,6 +401,12 @@ class UploadWorkspace extends React.Component {
         
 	return (
 	    <React.Fragment>
+          <DownloadModal
+              open={this.state.downloadModalShown}
+              onVectorDownload={this.download.bind(this)}
+              onStaticDownload={this.downloadStatic.bind(this)}
+              onClose={() => { this.setState({ downloadModalShown: false }); }}
+          />
 	      <PasteModal open={this.state.pasteModalShown} onClose={this.pasteModalClosed.bind(this)} />
               <Grid className="centered" style={{ width: "90%", marginLeft: "5%", height: "100%" }}>
                 <Grid.Row />
@@ -393,7 +472,7 @@ class UploadWorkspace extends React.Component {
                                     </Dropdown.Menu>
                                   </Dropdown>
                                   <Menu.Item className="floated right">
-                                    <span style={{ cursor: "pointer" }} onClick={this.download.bind(this)}>
+                                    <span style={{ cursor: "pointer" }} onClick={() => { this.setState({ downloadModalShown: true }); }}>
                                       <Icon name="download" />&nbsp;download all as ZIP
                                     </span>
                                     <span style={{ width: '2em' }} />
@@ -416,6 +495,7 @@ class UploadWorkspace extends React.Component {
                               </React.Fragment>
                           )}
                           <div ref={this.hiddenLogo} style={{ display: "none" }} />
+                          <canvas ref={this.canvas} style={{ display: "none" }} />
                           <div ref={this.logo}
                                style={{ maxHeight: "500px", height: "20%", textAlign: "center" }}>
                             { isdone && (

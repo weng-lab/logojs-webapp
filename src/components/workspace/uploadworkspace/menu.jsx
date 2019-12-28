@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { LogoMenu, LogoSVGDownloadButton, EmbedButton,
-	 LogoSVGCopyButton, PermalinkButton } from '../menu/index';
+	 LogoSVGCopyButton, PermalinkButton, ImageDownloadButton } from '../menu/index';
 import { jsCodestring } from '../../../common/codestrings';
 import { hasNegatives } from '../../../common/utils';
 
@@ -53,8 +53,11 @@ ${logoinfo.alphabet.map(x => "      " + JSON.stringify({ regex: x.regex, color: 
 const UploadLogoMenu = ({ svgref, apiurl, logoinfo }) => (
     <LogoMenu width="100%">
       <LogoSVGDownloadButton {...ITEMSTYLE}
-			     labeltext="save" svgref={svgref.current}
+			     labeltext="save (SVG)" svgref={svgref.current}
 			     filename="logo.svg" />
+      <ImageDownloadButton {...ITEMSTYLE}
+      			     labeltext="save (non-vector)" svgref={svgref.current}
+      			     filename="logo" />
       <LogoSVGCopyButton {...ITEMSTYLE}
 			 labeltext="copy SVG code" svgref={svgref.current} />
       <PermalinkButton {...ITEMSTYLE} labeltext="permalink"

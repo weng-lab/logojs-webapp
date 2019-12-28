@@ -173,7 +173,6 @@ class MEMEParser {
         motifTags.forEach( motif => {
             let parsed = this.parseMotif(motif);
             let alphabet = this.makeAlphabet(parsed, this.alphabet);
-            console.log(this.collapseBackgroundFrequencies(this.backgroundFrequencies, alphabet));
             results.push({
                 alphabet,
                 backgroundFrequencies: this.collapseBackgroundFrequencies(this.backgroundFrequencies, alphabet),
