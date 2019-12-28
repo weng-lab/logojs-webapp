@@ -9,7 +9,9 @@ export const _svgdata = _svgnode => {
     svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     let preface = '<?xml version="1.0" standalone="no"?>';
     const p = svg.outerHTML.split('viewBox="0 0 ')[1].split('"')[0].split(' ');
-    return preface + svg.outerHTML.replace(/\n/g, "").replace(/[ ]{8}/g, "").replace(/<svg/g, "<svg width='" + p[0] + "' height='" + p[1] + "' style='background-color:white'");
+    return preface + svg.outerHTML.replace(/\n/g, "").replace(/[ ]{8}/g, "").replace(/width="[0-9]+%"/g, "").replace(
+        /height="[0-9]+%"/g, ""
+    ).replace(/<svg/g, "<svg width='" + p[0] + "' height='" + p[1] + "' style='background-color:white'");
 };
 
 export const downloadSVG = (_svg, filename) => {
