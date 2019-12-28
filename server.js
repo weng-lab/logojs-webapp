@@ -57,6 +57,98 @@ const hasNegatives = values => {
     return r;
 };
 
+const agroup = (a, n) => {
+    const p = a.split(',').map(x => +x);
+    const r = [], limit = Math.floor(p.length / n);
+    for (let i = 0; i < limit; ++i) {
+        const rr = [];
+        for (let j = 0; j < n; ++j)
+            rr.push(p[i * n + j]);
+        r.push(rr);
+    }
+    return r;
+};
+
+const sendLogo = (res, element) => (
+    res.status(200).send(
+    	ReactDOMServer.renderToStaticMarkup(
+    	    element
+    	).replace(
+    	    /svg/, 'svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"'
+    	).replace(
+      	    /width="1"/, ''
+    	).replace(
+      	    /height="1"/, ''
+    	)
+    )
+);
+
+app.get('/dnalogo', (req, res) => {
+    const params = {
+        ...req.query,
+        ppm: req.query.ppm && agroup(req.query.ppm, 4),
+        pfm: req.query.pfm && agroup(req.query.pfm, 4),
+        backgroundFrequencies: req.query.backgroundFrequencies && req.query.backgroundFrequencies.split(',').map( x => +x )
+    };
+    res.setHeader('Content-Type', 'image/svg+xml');
+    return sendLogo(res, React.createElement(logos.DNALogo, params));
+});
+
+app.get('/rnalogo', (req, res) => {
+    const params = {
+        ...req.query,
+        ppm: req.query.ppm && agroup(req.query.ppm, 4),
+        pfm: req.query.pfm && agroup(req.query.pfm, 4),
+        backgroundFrequencies: req.query.backgroundFrequencies && req.query.backgroundFrequencies.split(',').map( x => +x )
+    };
+    res.setHeader('Content-Type', 'image/svg+xml');
+    return sendLogo(res, React.createElement(logos.RNALogo, params));
+});
+
+app.get('/proteinlogo', (req, res) => {
+    const params = {
+        ...req.query,
+        ppm: req.query.ppm && agroup(req.query.ppm, 22),
+        pfm: req.query.pfm && agroup(req.query.pfm, 22),
+        backgroundFrequencies: req.query.backgroundFrequencies && req.query.backgroundFrequencies.split(',').map( x => +x )
+    };
+    res.setHeader('Content-Type', 'image/svg+xml');
+    return sendLogo(res, React.createElement(logos.ProteinLogo, params));
+});
+
+app.get('/logo', (req, res) => {
+    const alphabet = req.query.symbols.split(',');
+    const colors = req.query.colors && req.query.colors.split(';').map( x => x.split(',') );
+    const params = {
+        ...req.query,
+        ppm: req.query.ppm && agroup(req.query.ppm, alphabet.length),
+        pfm: req.query.pfm && agroup(req.query.pfm, alphabet.length),
+        alphabet: alphabet.map( (symbol, i) => ({
+            regex: symbol,
+            color: colors[i]
+        })),
+        backgroundFrequencies: req.query.backgroundFrequencies && req.query.backgroundFrequencies.split(',').map( x => +x )
+    };
+    res.setHeader('Content-Type', 'image/svg+xml');
+    return sendLogo(res, React.createElement(logos.Logo, params));
+});
+
+app.get('/logowithnegatives', (req, res) => {
+    const alphabet = req.query.symbols.split(',');
+    const colors = req.query.colors && req.query.colors.split(';').map( x => x.split(',') );
+    const params = {
+        ...req.query,
+        values: req.query.values && agroup(req.query.values, alphabet.length),
+        alphabet: alphabet.map( (symbol, i) => ({
+            regex: symbol,
+            color: colors[i]
+        })),
+        backgroundFrequencies: req.query.backgroundFrequencies && req.query.backgroundFrequencies.split(',').map( x => +x )
+    };
+    res.setHeader('Content-Type', 'image/svg+xml');
+    return sendLogo(res, React.createElement(logos.LogoWithNegatives, params));
+});
+
 app.get('/svg/:s', (req, res) => {
 
     const logo = decodeSvg(req.params.s);
