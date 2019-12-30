@@ -62,6 +62,6 @@ spec:
     serviceName: logosj-webapp-service
     servicePort: 80
   tls:
-  - secretName: logosj-webapp-tls
+  - secretName: logosj-webapp-tls-secret
     hosts:
     - logosj.wenglab.org
