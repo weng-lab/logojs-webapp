@@ -9,7 +9,7 @@ const ExtendedAlphabetGallery = () => (
       <p style={{ fontSize: "1.5em" }}>
         This gallery illustrates the use of custom alphabets in logos. RNA logos
         can be rendered with 1-2 lines of code, and custom alphabets can be created with
-        just a few more. LogosJ uses a custom font which supports upper case letters,
+        just a few more. LogoJS uses a custom font which supports upper case letters,
         lower case letters, and the digits 0-9, but you can design custom glyphs and use
         them in your logos too.
       </p>

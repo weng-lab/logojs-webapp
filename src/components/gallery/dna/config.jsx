@@ -1,5 +1,5 @@
 import React from 'react';
-import { CompleteAlphabet, DNAAlphabet } from 'logosj-react';
+import { CompleteAlphabet, DNAAlphabet } from 'logojs-react';
 
 import SyntaxHighlighter from '../syntax';
 import { INTRON_PPM, CAP_PPM, CTCF_PPM } from '../constants';
@@ -12,11 +12,11 @@ const CAP_PPM = ${formatPPM(CAP_PPM)};
 
 export const CAP_CODESTRING_JS = jsCodestring(`
 ${CAP_PPM_CODE}
-logosj.embedDNALogo(document.getElementById("logo"), { ppm: CAP_PPM });
+logojs.embedDNALogo(document.getElementById("logo"), { ppm: CAP_PPM });
 `);
 
 export const CAP_CODESTRING_REACT = `
-import { DNALogo } from 'logosj-react';
+import { DNALogo } from 'logojs-react';
 ${CAP_PPM_CODE}
 export const CAPLogo = props => (
     <DNALogo ppm={CAP_PPM} />
@@ -28,7 +28,7 @@ const CTCF_PPM = ${formatPPM(CTCF_PPM)};
 `;
 
 export const CTCF_CODESTRING_REACT = `
-import { DNALogo } from 'logosj-react';
+import { DNALogo } from 'logojs-react';
 ${CTCF_PPM_CODE}
 export const CTCFLogo = props => (
     <DNALogo ppm={CTCF_PPM} mode="FREQUENCY" />
@@ -37,7 +37,7 @@ export const CTCFLogo = props => (
 
 export const CTCF_CODESTRING_JS = jsCodestring(`
 ${CTCF_PPM_CODE}
-logosj.embedDNALogo(document.getElementById("logo"), { ppm: CTCF_PPM, mode: "FREQUENCY" });
+logojs.embedDNALogo(document.getElementById("logo"), { ppm: CTCF_PPM, mode: "FREQUENCY" });
 `);
 
 const INTRON_PPM_CODE = `
@@ -45,7 +45,7 @@ const INTRON_PPM = ${formatPPM(INTRON_PPM)};
 `;
 
 export const INTRON_CODESTRING_REACT = `
-import { DNALogo } from 'logosj-react';
+import { DNALogo } from 'logojs-react';
 ${INTRON_PPM_CODE}
 export const IntronLogo = props => (
     <DNALogo ppm={INTRON_PPM} startpos={-18} />
@@ -54,7 +54,7 @@ export const IntronLogo = props => (
 
 export const INTRON_CODESTRING_JS = jsCodestring(`
 ${INTRON_PPM_CODE}
-logosj.embedDNALogo(document.getElementById("logo"), { ppm: INTRON_PPM, startpos: -18 });
+logojs.embedDNALogo(document.getElementById("logo"), { ppm: INTRON_PPM, startpos: -18 });
 `);
 
 export const LOWERCASE_CONSTANTS = `
@@ -76,7 +76,7 @@ const LOWERCASE_ALPHABET = [
 `;
 
 export const LOWERCASE_CODESTRING_REACT = `
-import { Logo } from 'logosj-react';
+import { Logo } from 'logojs-react';
 ${LOWERCASE_CONSTANTS}
 export const LowercaseLogo = props => (
     <Logo alphabet={LOWERCASE_ALPHABET} ppm={LOWERCASE_PPM} />
@@ -85,7 +85,7 @@ export const LowercaseLogo = props => (
 
 export const LOWERCASE_CODESTRING_JS = jsCodestring(`
 ${LOWERCASE_CONSTANTS}
-logosj.embedLogo(document.getElementById("logo"), {
+logojs.embedLogo(document.getElementById("logo"), {
   ppm: LOWERCASE_PPM,
   alphabet: LOWERCASE_ALPHABET
 });
@@ -167,7 +167,7 @@ const PPM = [
 `;
 
 export const NOAXIS_CODESTRING_REACT = `
-import { RawLogo, DNAAlphabet } from 'logosj-react';
+import { RawLogo, DNAAlphabet } from 'logojs-react';
 ${NOAXIS_CONSTANTS}
 export const NoAxisLogo = props => (
   <svg viewBox="0 0 1900 100">
@@ -178,9 +178,9 @@ export const NoAxisLogo = props => (
 
 const NOAXIS_JS = `
 ${NOAXIS_CONSTANTS}
-logosj.embedRawLogo(document.getElementById("logo"), {
+logojs.embedRawLogo(document.getElementById("logo"), {
   values: PPM,
-  alphabet: logosj.DNAAlphabet,
+  alphabet: logojs.DNAAlphabet,
   glyphWidth: 100,
   stackHeight: 100
 });
@@ -190,7 +190,7 @@ export const NOAXIS_CODESTRING_JS = `
 <!doctype html>
 <html>
   <body>
-    <script src="http://bundle.logosj.wenglab.org/bundle.js" type="text/javascript"></script>
+    <script src="http://bundle.logojs.wenglab.org/bundle.js" type="text/javascript"></script>
     <div style="width:500px">
       <svg viewBox="0 0 1900 100">
         <g id="logo"></g>

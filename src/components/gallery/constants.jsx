@@ -1,4 +1,4 @@
-import { CompleteAlphabet, DNAAlphabet, disymbolAlphabet } from "logosj-react";
+import { CompleteAlphabet, DNAAlphabet, disymbolAlphabet } from "logojs-react";
 
 export const DNA_PROTEIN_PPM = [
     [ 0.2, 0, 0, 0.2 ],

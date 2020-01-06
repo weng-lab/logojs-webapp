@@ -12,7 +12,7 @@ const MainMasthead = ({ children }) => (
       </Container>
       <Container>
         <Header inverted style={{ fontSize: "4em", marginTop: "2.5em" }}>
-          LogosJ
+          LogoJS
         </Header>
         <Header inverted as="h2" style={{ fontWeight: "normal" }}>
           Embeddable, customizable, and interactive sequence logos, all in Javascript.
@@ -20,7 +20,7 @@ const MainMasthead = ({ children }) => (
         <Button as={Link} to="/gallery/" primary className="huge">
           Examples
         </Button>
-        <Button as="a" href="https://weng-lab.github.io/logosj-package/" primary className="huge">
+        <Button as="a" href="https://weng-lab.github.io/logojs-package/" primary className="huge">
           Documentation
         </Button>
       </Container>

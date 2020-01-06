@@ -1,5 +1,5 @@
 import React from 'react';
-import { RawLogo, DNAAlphabet, ProteinAlphabet } from 'logosj-react';
+import { RawLogo, DNAAlphabet, ProteinAlphabet } from 'logojs-react';
 
 import { formatPPM, formatAlphabet } from '../../../common/codestrings';
 import { indentCode } from '../../../common/utils';
@@ -14,7 +14,7 @@ const ANNOTATED_ALPHABET = ${formatAlphabet(ANNOTATED_ALPHABET)};
 
 export const ANNOTATED_JS = `
 ${ANNOTATED_CONSTANTS}
-logosj.embedRawLogo(document.getElementById("logo"), {
+logojs.embedRawLogo(document.getElementById("logo"), {
   values: ANNOTATED_PPM,
   alphabet: ANNOTATED_ALPHABET,
   glyphWidth: 100,
@@ -26,7 +26,7 @@ export const ANNOTATED_CODESTRING_JS = `
 <!doctype html>
 <html>
   <body>
-    <script src="http://bundle.logosj.wenglab.org/bundle.js" type="text/javascript"></script>
+    <script src="http://bundle.logojs.wenglab.org/bundle.js" type="text/javascript"></script>
     <div style="width:500px">
       <svg viewBox="0 0 1530 330">
         <g transform="translate(20,-40)" id="logo"></g>
@@ -42,7 +42,7 @@ ${indentCode(ANNOTATED_JS, "      ")}
 `.substring(1);
 
 export const ANNOTATED_CODESTRING_REACT = `
-import { RawLogo } from 'logosj-react';
+import { RawLogo } from 'logojs-react';
 ${ANNOTATED_CONSTANTS}
 export const AnnotatedLogo = props => (
   <svg viewBox="0 0 1530 330">
@@ -86,15 +86,15 @@ const REFERENCE_PPM = ${formatPPM(SNP_REF_PPM)};
 
 export const SNP_JS = `
 ${SNP_CONSTANTS}
-logosj.embedRawLogo(document.getElementById("motiflogo"), {
+logojs.embedRawLogo(document.getElementById("motiflogo"), {
   values: SNP_PPM,
-  alphabet: logosj.DNAAlphabet,
+  alphabet: logojs.DNAAlphabet,
   glyphWidth: 100,
   stackHeight: 200
 });
-logosj.embedRawLogo(document.getElementById("reflogo"), {
+logojs.embedRawLogo(document.getElementById("reflogo"), {
   values: REFERENCE_PPM,
-  alphabet: logosj.DNAAlphabet,
+  alphabet: logojs.DNAAlphabet,
   glyphWidth: 100,
   stackHeight: 200
 });
@@ -104,7 +104,7 @@ export const SNP_CODESTRING_JS = `
 <!doctype html>
 <html>
   <body>
-    <script src="http://bundle.logosj.wenglab.org/bundle.js" type="text/javascript"></script>
+    <script src="http://bundle.logojs.wenglab.org/bundle.js" type="text/javascript"></script>
     <div style="width:500px">
       <svg viewBox="0 0 1100 420">
         <rect x="600" width="100" height="420" fill="#bbbbbb"></rect>
@@ -122,7 +122,7 @@ ${indentCode(SNP_JS, "      ")}
 `.substring(1);
 
 export const SNP_CODESTRING_REACT = `
-import { RawLogo, DNAAlphabet } from 'logosj-react';
+import { RawLogo, DNAAlphabet } from 'logojs-react';
 ${SNP_CONSTANTS}
 export const SNPLogo = props => (
   <svg viewBox="0 0 1100 420">
@@ -174,15 +174,15 @@ const PROTEIN_DNA_PPM = ${formatPPM(PROTEIN_DNA_PPM)};
 
 export const INTERACTION_JS = `
 ${INTERACTION_CONSTANTS}
-logosj.embedRawLogo(document.getElementById("dnalogo"), {
+logojs.embedRawLogo(document.getElementById("dnalogo"), {
   values: DNA_PROTEIN_PPM,
-  alphabet: logosj.DNAAlphabet,
+  alphabet: logojs.DNAAlphabet,
   glyphWidth: 100,
   stackHeight: 200
 });
-logosj.embedRawLogo(document.getElementById("proteinlogo"), {
+logojs.embedRawLogo(document.getElementById("proteinlogo"), {
   values: PROTEIN_DNA_PPM,
-  alphabet: logosj.ProteinAlphabet,
+  alphabet: logojs.ProteinAlphabet,
   glyphWidth: 100,
   stackHeight: 400
 });
@@ -192,7 +192,7 @@ export const INTERACTION_CODESTRING_JS = `
 <!doctype html>
 <html>
   <body>
-    <script src="http://bundle.logosj.wenglab.org/bundle.js" type="text/javascript"></script>
+    <script src="http://bundle.logojs.wenglab.org/bundle.js" type="text/javascript"></script>
     <div style="width:500px">
       <svg viewBox="0 0 2600 920">
         <g id="dnalogo"></g>
@@ -210,7 +210,7 @@ ${indentCode(INTERACTION_JS, "      ")}
 `.substring(1);
 
 export const INTERACTION_CODESTRING_REACT = `
-import { RawLogo, DNAAlphabet, ProteinAlphabet } from 'logosj-react';
+import { RawLogo, DNAAlphabet, ProteinAlphabet } from 'logojs-react';
 ${INTERACTION_CONSTANTS}
 export const SNPLogo = props => (
   <svg viewBox={"0 0 2600 920"}>

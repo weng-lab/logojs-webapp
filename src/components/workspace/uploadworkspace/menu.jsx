@@ -11,7 +11,7 @@ const ITEMSTYLE = {
 };
 
 const reactCode = logoinfo => `
-import { Logo${hasNegatives(logoinfo.ppm) ? "WithNegatives" : ""}, loadGlyphComponents } from 'logosj-react';
+import { Logo${hasNegatives(logoinfo.ppm) ? "WithNegatives" : ""}, loadGlyphComponents } from 'logojs-react';
 const myLogoProps = {
     startpos: ${logoinfo.startpos},
     ${hasNegatives(logoinfo.ppm) ? "values" : "ppm"}: [
@@ -39,14 +39,14 @@ window.onload = function() {
 ${logoinfo.ppm.map(x => "      " + JSON.stringify(x)).join(",\n")}
     ],
     backgroundFrequencies: ${JSON.stringify(logoinfo.backgroundFrequencies)},
-    alphabet: logosj.loadGlyphComponents([
+    alphabet: logojs.loadGlyphComponents([
 ${logoinfo.alphabet.map(x => "      " + JSON.stringify({ regex: x.regex, color: x.color })).join(",\n")}
     ]),
     yAxisMax: ${logoinfo.yAxisMax},
     negativealpha: ${logoinfo.negativealpha},
     inverted: ${logoinfo.inverted}
   };
-  logosj.embedLogo${hasNegatives(logoinfo.ppm) ? "WithNegatives" : ""}(document.getElementById("logo"), logoProps);
+  logojs.embedLogo${hasNegatives(logoinfo.ppm) ? "WithNegatives" : ""}(document.getElementById("logo"), logoProps);
 }
 `);
 

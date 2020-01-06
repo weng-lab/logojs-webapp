@@ -1,4 +1,4 @@
-import { DNAAlphabet, RNAAlphabet, ProteinAlphabet } from 'logosj-react';
+import { DNAAlphabet, RNAAlphabet, ProteinAlphabet } from 'logojs-react';
 import { glyphsymbols } from '../../../../common/utils';
 
 let GLYPHSYMBOLS = glyphsymbols();

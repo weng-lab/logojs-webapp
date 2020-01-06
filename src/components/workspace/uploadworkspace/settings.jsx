@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Button, Header, Form, Radio, Input } from 'semantic-ui-react';
-import { FREQUENCY } from 'logosj-react';
+import { FREQUENCY } from 'logojs-react';
 
 import { ModeDropdown, GlyphList, ColoredInput } from '../settings/index';
 

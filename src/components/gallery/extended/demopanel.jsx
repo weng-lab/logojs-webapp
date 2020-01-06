@@ -1,6 +1,6 @@
 import React from 'react';
 import { Segment, Grid, Header } from 'semantic-ui-react';
-import { RNALogo, Logo } from 'logosj-react';
+import { RNALogo, Logo } from 'logojs-react';
 
 import CodeAccordion from '../code';
 

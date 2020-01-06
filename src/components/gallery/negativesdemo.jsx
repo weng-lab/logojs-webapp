@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Segment, Header, Button } from 'semantic-ui-react';
-import { LogoWithNegatives, ProteinAlphabet, DNAAlphabet } from 'logosj-react';
+import { LogoWithNegatives, ProteinAlphabet, DNAAlphabet } from 'logojs-react';
 
 import { AA_PPM, DNA_NEGATIVE_PPM, DNA_NEGATIVE_PPM2 } from './constants';
 

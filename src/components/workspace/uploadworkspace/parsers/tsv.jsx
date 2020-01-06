@@ -1,5 +1,5 @@
 import * as os from 'os';
-import { DNAAlphabet, ProteinAlphabet } from 'logosj-react';
+import { DNAAlphabet, ProteinAlphabet } from 'logojs-react';
 
 const alphabets = {
     4: DNAAlphabet,

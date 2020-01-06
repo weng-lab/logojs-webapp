@@ -4,7 +4,7 @@ const path = require('path');
 const compression = require('compression');
 const hsts = require('hsts');
 
-const logos = require('logosj-react');
+const logos = require('logojs-react');
 const ReactDOMServer = require('react-dom/server');
 const React = require('react');
 

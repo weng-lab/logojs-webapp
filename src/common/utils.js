@@ -1,5 +1,5 @@
 import namedColors from 'color-name-list';
-import { CompleteAlphabet } from 'logosj-react';
+import { CompleteAlphabet } from 'logojs-react';
 
 export const hasNegatives = (ppm) => {
     let r = false;

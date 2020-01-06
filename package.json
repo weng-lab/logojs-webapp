@@ -1,5 +1,5 @@
 {
-  "name": "logosj-webapp",
+  "name": "logojs-webapp",
   "version": "1.5.1",
   "license": "MIT",
   "author": "Henry Pratt",
@@ -11,7 +11,7 @@
     "copy-to-clipboard": "^3.2.0",
     "hsts": "^2.2.0",
     "jszip": "^3.2.2",
-    "logosj-react": "^1.4.7",
+    "logojs-react": "^2.0.4",
     "pretty": "^2.0.0",
     "prismjs": "^1.17.1",
     "react": "^16.8.6",

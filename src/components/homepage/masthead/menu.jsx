@@ -26,7 +26,7 @@ const MenuContent = ({ items, active }) => (
           )
       ))}
       <Menu.Item position="right">
-        <a href="https://www.github.com/weng-lab/logosj-package">
+        <a href="https://www.github.com/weng-lab/logojs-package">
           <span style={{ verticalAlign: "middle" }}>
             <Icon className="github" style={{ fontSize: "1.5em" }} />&nbsp;GitHub
           </span>

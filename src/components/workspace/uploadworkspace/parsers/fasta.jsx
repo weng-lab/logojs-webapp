@@ -1,5 +1,5 @@
 import * as os from 'os';
-import { xrange } from 'logosj-react';
+import { xrange } from 'logojs-react';
 
 import { inferAlphabet } from '../../../../utilities/inferalphabet';
 

@@ -12,7 +12,7 @@ const Embedding = props => (
           Gallery: examples of flexible, customizable embedded logos
         </Header>
         <p style={{ fontSize: "1.33em" }}>
-          LogosJ renders highly customizable logos as vector graphics. You can layer
+          LogoJS renders highly customizable logos as vector graphics. You can layer
           custom annotations onto the logos, or combine logos together to show biological
           interactions. Our visual gallery provides visual samples along with the code
           required to create them.

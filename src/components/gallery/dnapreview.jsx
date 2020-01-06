@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Segment, Header, Button } from 'semantic-ui-react';
-import { DNALogo } from 'logosj-react';
+import { DNALogo } from 'logojs-react';
 
 import { CTCF_PPM, CAP_PPM, INTRON_PPM } from './constants';
 

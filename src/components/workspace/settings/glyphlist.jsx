@@ -1,6 +1,6 @@
 import React from 'react';
 import { Label, Icon, Button } from 'semantic-ui-react';
-import { DNAAlphabet, RNAAlphabet, ProteinAlphabet } from 'logosj-react';
+import { DNAAlphabet, RNAAlphabet, ProteinAlphabet } from 'logojs-react';
 
 import { colorNameFromHex, foregroundColor } from '../../../common/utils';
 import { ColorPickerModal } from '../modalcolorpicker/index';

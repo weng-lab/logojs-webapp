@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Grid, Menu, Dropdown, Button, Icon, Modal } from 'semantic-ui-react';
-import { embedLogo, embedLogoWithNegatives, Logo, INFORMATION_CONTENT, LogoWithNegatives } from 'logosj-react';
+import { embedLogo, embedLogoWithNegatives, Logo, INFORMATION_CONTENT, LogoWithNegatives } from 'logojs-react';
 
 import { _svgdata } from '../../svgdownload/utils';
 import SVGZip from '../../../utilities/zipfile';

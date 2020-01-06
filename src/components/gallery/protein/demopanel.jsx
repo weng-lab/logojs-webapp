@@ -1,6 +1,6 @@
 import React from 'react';
 import { Segment, Grid, Header } from 'semantic-ui-react';
-import { ProteinLogo } from 'logosj-react';
+import { ProteinLogo } from 'logojs-react';
 
 import CodeAccordion from '../code';
 

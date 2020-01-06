@@ -12,11 +12,11 @@ const GalleryPage = ({ children }) => (
     <GalleryPageW>
       <p style={{ fontSize: "1.5em" }}>
         This gallery illustrates several common and advanced use cases
-        for LogosJ, along with code samples. Click the <strong>see more</strong>&nbsp;
+        for LogoJS, along with code samples. Click the <strong>see more</strong>&nbsp;
         buttons to see how to adjust a particular logo and embed it in your site.<br /><br />
-        LogosJ can accommodate use cases beyond the ones shown here.
+        LogoJS can accommodate use cases beyond the ones shown here.
         Full documentation is available at our&nbsp;
-        <a href="https://www.github.com/weng-lab/logosj-package">GitHub</a>.<br /><br />
+        <a href="https://www.github.com/weng-lab/logojs-package">GitHub</a>.<br /><br />
       </p>
       <DNAPreview />
       <ProteinPreview />

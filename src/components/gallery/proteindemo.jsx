@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Segment, Header, Button } from 'semantic-ui-react';
-import { ProteinLogo } from 'logosj-react';
+import { ProteinLogo } from 'logojs-react';
 
 import { PROTEIN_PPM, ALT_PROTEIN_PPM } from './constants';
 

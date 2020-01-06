@@ -7,7 +7,7 @@ import { DINUCLEOTIDE_DEMO, TRINUCLEOTIDE_DEMO, MULTINUMBER_DEMO } from './confi
 const DinucleotideGallery = () => (
     <GalleryPageW>
       <p style={{ fontSize: "1.5em" }}>
-        LogosJ supports the use of arbitrary numbers of letters at each position in a logo.
+        LogoJS supports the use of arbitrary numbers of letters at each position in a logo.
         You can build a custom alphabet with two, three, four, or more letters per symbol.
         To display longer symbols, the glyph width can be adjusted with a built-in property.
         Multiple symbol logos are not restricted to DNA logos; any combination of letters

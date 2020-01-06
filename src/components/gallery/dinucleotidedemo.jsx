@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Segment, Header, Button } from 'semantic-ui-react';
-import { Logo } from 'logosj-react';
+import { Logo } from 'logojs-react';
 
 import { DINUCLEOTIDE_ALPHABET, DINUCLEOTIDE_PPM, MULTINUMBER_ALPHABET,
          TRINUCLEOTIDE_ALPHABET, TRINUCLEOTIDE_PPM } from './constants';

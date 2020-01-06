@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: logosj-webapp-deployment
+  name: logojs-webapp-deployment
   labels:
-    app: logosj-webapp
+    app: logojs-webapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: logosj-webapp
+      app: logojs-webapp
   template:
     metadata:
       labels:
-        app: logosj-webapp
+        app: logojs-webapp
     spec:
       containers:
-      - name: logosj-webapp
-        image: gcr.io/devenv-215523/logosj-webapp
+      - name: logojs-webapp
+        image: gcr.io/devenv-215523/logojs-webapp
         env:
         - name: ENVIRONMENT
           value: staging
@@ -36,9 +36,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: logosj-webapp-service
+  name: logojs-webapp-service
   labels:
-    app: logosj-webapp
+    app: logojs-webapp
 spec:
   type: NodePort
   ports:
@@ -46,22 +46,22 @@ spec:
     protocol: TCP
     targetPort: 80
   selector:
-    app: logosj-webapp
+    app: logojs-webapp
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: logosj-webapp-ingress
+  name: logojs-webapp-ingress
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: "logosj-webapp-external-ip"
+    kubernetes.io/ingress.global-static-ip-name: "logojs-webapp-external-ip"
     cert-manager.io/cluster-issuer: letsencrypt
     cert-manager.io/issue-temporary-certificate: "true"
     acme.cert-manager.io/http01-edit-in-place: "true"
 spec:
   backend:
-    serviceName: logosj-webapp-service
+    serviceName: logojs-webapp-service
     servicePort: 80
   tls:
-  - secretName: logosj-webapp-tls-secret
+  - secretName: logojs-webapp-tls-secret
     hosts:
-    - logosj.wenglab.org
+    - logojs.wenglab.org

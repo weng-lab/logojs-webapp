@@ -9,14 +9,14 @@ const DINUCLEOTIDE_ALPHABET = ${formatAlphabet(DINUCLEOTIDE_ALPHABET())};
 
 export const DINUCLEOTIDE_CODESTRING_JS = jsCodestring(`
 ${DINUCLEOTIDE_CONSTANTS}
-logosj.embedLogo(document.getElementById("logo"), {
+logojs.embedLogo(document.getElementById("logo"), {
   ppm: DINUCLEOTIDE_PPM,
   alphabet: DINUCLEOTIDE_ALPHABET
 });
 `);
 
 export const DINUCLEOTIDE_CODESTRING_REACT = `
-import { Logo } from 'logosj-react';
+import { Logo } from 'logojs-react';
 ${DINUCLEOTIDE_CONSTANTS}
 export const DinucleotideLogo = props => (
     <Logo ppm={DINUCLEOTIDE_PPM} alphabet={DINUCLEOTIDE_ALPHABET} />
@@ -47,7 +47,7 @@ const TRINUCLEOTIDE_ALPHABET = ${formatAlphabet(TRINUCLEOTIDE_ALPHABET)};
 
 export const TRINUCLEOTIDE_CODESTRING_JS = jsCodestring(`
 ${TRINUCLEOTIDE_CONSTANTS}
-logosj.embedLogo(document.getElementById("logo"), {
+logojs.embedLogo(document.getElementById("logo"), {
   ppm: TRINUCLEOTIDE_PPM,
   alphabet: TRINUCLEOTIDE_ALPHABET,
   glyphwidth: 1.5
@@ -55,7 +55,7 @@ logosj.embedLogo(document.getElementById("logo"), {
 `);
 
 export const TRINUCLEOTIDE_CODESTRING_REACT = `
-import { Logo } from 'logosj-react';
+import { Logo } from 'logojs-react';
 ${TRINUCLEOTIDE_CONSTANTS}
 export const TrinucleotideLogo = props => (
     <Logo ppm={TRINUCLEOTIDE_PPM} alphabet={TRINUCLEOTIDE_ALPHABET} glyphwidth={1.5} />
@@ -91,7 +91,7 @@ const CUSTOM_ALPHABET = ${formatAlphabet(MULTINUMBER_ALPHABET)};
 
 export const MULTINUMBER_CODESTRING_JS = jsCodestring(`
 ${MULTINUMBER_CONSTANTS}
-logosj.embedLogo(document.getElementById("logo"), {
+logojs.embedLogo(document.getElementById("logo"), {
   ppm: CUSTOM_PPM,
   alphabet: CUSTOM_ALPHABET,
   glyphwidth: 1.5
@@ -99,7 +99,7 @@ logosj.embedLogo(document.getElementById("logo"), {
 `);
 
 export const MULTINUMBER_CODESTRING_REACT = `
-import { Logo } from 'logosj-react';
+import { Logo } from 'logojs-react';
 ${MULTINUMBER_CONSTANTS}
 export const MyLogo = props => (
     <Logo ppm={CUSTOM_PPM} alphabet={CUSTOM_ALPHABET} glyphwidth={1.5} />

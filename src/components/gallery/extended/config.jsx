@@ -1,4 +1,4 @@
-import { CompleteAlphabet } from 'logosj-react';
+import { CompleteAlphabet } from 'logojs-react';
 
 import { jsCodestring, formatPPM, formatAlphabet } from '../../../common/codestrings';
 import { METHYL_PPM, METHYL_ALPHABET, RNA_PPM, HEX_PPM, HEX_ALPHABET } from '../constants';
@@ -10,14 +10,14 @@ const METHYL_ALPHABET = ${formatAlphabet(METHYL_ALPHABET)};
 
 export const METHYL_CODESTRING_JS = jsCodestring(`
 ${METHYL_CONSTANTS}
-logosj.embedLogo(document.getElementById("logo"), {
+logojs.embedLogo(document.getElementById("logo"), {
   ppm: METHYL_PPM,
   alphabet: METHYL_ALPHABET
 });
 `);
 
 export const METHYL_CODESTRING_REACT = `
-import { Logo } from 'logosj-react';
+import { Logo } from 'logojs-react';
 ${METHYL_CONSTANTS}
 export const MethylLogo = props => (
     <Logo ppm={METHYL_PPM} alphabet={METHYL_ALPHABET} />
@@ -50,13 +50,13 @@ const RNA_PPM = ${formatPPM(RNA_PPM)};
 
 export const RNA_CODESTRING_JS = jsCodestring(`
 ${RNA_CONSTANTS}
-logosj.embedRNALogo(document.getElementById("logo"), {
+logojs.embedRNALogo(document.getElementById("logo"), {
   ppm: RNA_PPM
 });
 `);
 
 export const RNA_CODESTRING_REACT = `
-import { RNALogo } from 'logosj-react';
+import { RNALogo } from 'logojs-react';
 ${RNA_CONSTANTS}
 export const MyRNALogo = props => (
     <RNALogo ppm={RNA_PPM} />
@@ -64,7 +64,7 @@ export const MyRNALogo = props => (
 `.substring(1);
 
 export const RNA_LONG_DESCRIPTION = `
-LogosJ supports RNA logos by default as shown here. The default coloring mimics that of DNA,
+LogoJS supports RNA logos by default as shown here. The default coloring mimics that of DNA,
 and the matrix order in the code is alphabetical (A, C, G, U).
 `;
 
@@ -87,14 +87,14 @@ const CUSTOM_ALPHABET = ${formatAlphabet(HEX_ALPHABET)};
 
 export const HEX_CODESTRING_JS = jsCodestring(`
 ${HEX_CONSTANTS}
-logosj.embedLogo(document.getElementById("logo"), {
+logojs.embedLogo(document.getElementById("logo"), {
   ppm: CUSTOM_PPM,
   alphabet: CUSTOM_ALPHABET
 });
 `);
 
 export const HEX_CODESTRING_REACT = `
-import { Logo } from 'logosj-react';
+import { Logo } from 'logojs-react';
 ${HEX_CONSTANTS}
 export const CustomLogo = props => (
     <Logo ppm={CUSTOM_PPM} alphabet={CUSTOM_ALPHABET} />
@@ -102,7 +102,7 @@ export const CustomLogo = props => (
 `.substring(1);
 
 export const HEX_LONG_DESCRIPTION = `
-LogosJ supports all the letters of the English alphabet, both upper case and lower case, as well
+LogoJS supports all the letters of the English alphabet, both upper case and lower case, as well
 as the digits 0-9. You can use any combination of these symbols in your logos by defining custom
 alphabets.
 `;
@@ -144,14 +144,14 @@ const CUSTOM_ALPHABET = ${formatAlphabet(DUPLICATE_ALPHABET)};
 
 export const DUPLICATE_CODESTRING_JS = jsCodestring(`
 ${DUPLICATE_CONSTANTS}
-logosj.embedLogo(document.getElementById("logo"), {
+logojs.embedLogo(document.getElementById("logo"), {
   ppm: CUSTOM_PPM,
   alphabet: CUSTOM_ALPHABET
 });
 `);
 
 export const DUPLICATE_CODESTRING_REACT = `
-import { Logo } from 'logosj-react';
+import { Logo } from 'logojs-react';
 ${DUPLICATE_CONSTANTS}
 export const ALogo = props => (
     <Logo ppm={CUSTOM_PPM} alphabet={CUSTOM_ALPHABET} />

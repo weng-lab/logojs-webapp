@@ -62,7 +62,7 @@ class PasteModal extends React.Component {
         	                <Message negative>
         	                    <Header as="h3">We didn't find any logos in the pasted input.</Header>
         	                    Check that the format is valid and try again. If you think this is an error, open an
-        	                    issue on our <a href="https://www.github.com/weng-lab/logosj-webapp">GitHub</a>.
+        	                    issue on our <a href="https://www.github.com/weng-lab/logojs-webapp">GitHub</a>.
         	                </Message>
         	            )
         	        )}

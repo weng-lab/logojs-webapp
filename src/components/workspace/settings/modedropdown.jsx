@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dropdown, Grid } from 'semantic-ui-react';
-import { INFORMATION_CONTENT, FREQUENCY } from 'logosj-react';
+import { INFORMATION_CONTENT, FREQUENCY } from 'logojs-react';
 
 import Collapsible from './collapsible';
 

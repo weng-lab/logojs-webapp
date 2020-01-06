@@ -1,6 +1,6 @@
 import React from 'react';
 import { Segment, Grid, Header } from 'semantic-ui-react';
-import { LogoWithNegatives } from 'logosj-react';
+import { LogoWithNegatives } from 'logojs-react';
 
 import CodeAccordion from '../code';
 
