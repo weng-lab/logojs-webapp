@@ -62,6 +62,6 @@ spec:
     serviceName: logojs-webapp-service
     servicePort: 80
   tls:
-  - secretName: logojs-web-app-tls-secret
+  - secretName: logojs-webapp-tls-secret
     hosts:
     - logojs.wenglab.org

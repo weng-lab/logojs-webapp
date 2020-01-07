@@ -5603,9 +5603,10 @@ loglevel@^1.6.4:
   version "1.6.6"
   resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.6.6.tgz#0ee6300cc058db6b3551fa1c4bf73b83bb771312"
 
-logojs-react@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/logojs-react/-/logojs-react-2.0.4.tgz#a5bb3e0c86b0597d6de0e06bd350aef5bd1a135d"
+logojs-react@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/logojs-react/-/logojs-react-2.0.7.tgz#1250eb69bbf619becdf10a9dfef7133a86e6054a"
+  integrity sha512-QZLGWiSF2qinKUkpYo4fx5OZ4w8adUB4dNFNwVSQHejEoSWO/2FMz+So0FAq3ll84NPmkMuNEwPUb/BdnEp2pQ==
   dependencies:
     react "^16.3.1"
     react-dom "^16.3.1"
