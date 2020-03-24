@@ -393,6 +393,7 @@ class UploadWorkspace extends React.Component {
         let selectedPPMs = this.state.selectedFile && this.state.selectedFile.logos;
         const selectedProps = this.state.selected ? { ...this.state.selected } : {};
         if (selectedProps && selectedProps.yAxisAuto) selectedProps.yAxisMax = null;
+        if (selectedProps.fasta) delete selectedProps.fasta;
         
         const defaultMax = this.state.selected && (
             this.state.selected.backgroundFrequencies
