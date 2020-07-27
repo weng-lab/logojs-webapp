@@ -48,20 +48,24 @@ spec:
   selector:
     app: logojs-webapp
 ---
+apiVersion: networking.gke.io/v1beta2
+kind: ManagedCertificate
+metadata:
+  name: logosjs-app-cert
+spec:
+  domains:
+    - logojs.wenglab.org
+---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: logojs-webapp-ingress
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "logojs-webapp-external-ip"
-    cert-manager.io/cluster-issuer: letsencrypt
-    cert-manager.io/issue-temporary-certificate: "true"
-    acme.cert-manager.io/http01-edit-in-place: "true"
+    kubernetes.io/ingress.allow-http: "true"
+    networking.gke.io/managed-certificates: "logosjs-app-cert"
 spec:
   backend:
     serviceName: logojs-webapp-service
     servicePort: 80
-  tls:
-  - secretName: logojs-webapp-tls-secret
-    hosts:
-    - logojs.wenglab.org
+
