@@ -13,7 +13,7 @@
     "jszip": "^3.2.2",
     "logojs-react": "^2.1.1",
     "pretty": "^2.0.0",
-    "prismjs": "^1.17.1",
+    "prismjs": "^1.21.0",
     "react": "^16.8.6",
     "react-ace": "^7.0.2",
     "react-color": "^2.17.3",
